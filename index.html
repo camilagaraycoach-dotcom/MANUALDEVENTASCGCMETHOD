@@ -495,6 +495,19 @@
   .info-banner.red { background: #FFF5F5; border: 1px solid #FFD0D0; color: #7A1A1A; }
   .info-banner-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
 
+  /* ── WIZARD ── */
+  .wz-step { animation: wzFade 0.2s ease; }
+  @keyframes wzFade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .wz-btn:hover { border-color: var(--red) !important; background: var(--accent-pale) !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(232,48,42,0.12); }
+  .wz-opt-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: #fff; border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 12px 16px;
+    cursor: pointer; text-align: left; width: 100%;
+    transition: all 0.15s;
+  }
+  .wz-opt-btn:hover { border-color: var(--red); background: var(--accent-pale); transform: translateX(4px); }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .sidebar { display: none; }
@@ -573,6 +586,47 @@
 <div class="layout">
 <main class="main">
 
+  <!-- META DEL MES -->
+  <div style="background:linear-gradient(135deg,#1A1A1A 0%,#2A0A0A 55%,#1A0A2A 100%);border-radius:16px;padding:28px 32px;margin-bottom:20px;color:#fff">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px">
+      <div style="flex:1;min-width:220px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:6px">🎯 Meta del mes — Julio 2026</div>
+        <div style="font-size:40px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1">S/26,000</div>
+        <div style="font-size:13px;color:#CCC;margin-top:8px">Si llegan a la meta:<br><strong style="color:#fff;font-size:14px">Carlos y Ariana reciben un bono del 15% de su sueldo 🎉</strong></div>
+      </div>
+      <div style="text-align:center;flex-shrink:0">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#666;margin-bottom:8px">⏳ Tiempo restante</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums" id="cd-days">--</div><div style="font-size:10px;color:#666;margin-top:2px">días</div></div>
+          <div style="color:#444;font-size:20px;font-weight:300">:</div>
+          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums" id="cd-hours">--</div><div style="font-size:10px;color:#666;margin-top:2px">horas</div></div>
+          <div style="color:#444;font-size:20px;font-weight:300">:</div>
+          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums" id="cd-mins">--</div><div style="font-size:10px;color:#666;margin-top:2px">min</div></div>
+          <div style="color:#444;font-size:20px;font-weight:300">:</div>
+          <div style="background:rgba(232,48,42,0.2);border:1px solid rgba(232,48,42,0.4);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:var(--red);font-variant-numeric:tabular-nums" id="cd-secs">--</div><div style="font-size:10px;color:#666;margin-top:2px">seg</div></div>
+        </div>
+        <div style="font-size:11px;color:#555;margin-top:6px">Vence el 31 de julio de 2026</div>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div style="font-size:12px;color:#888">Progreso de ventas del mes</div>
+        <div style="font-size:12px;color:#CCC">S/<span id="ventas-display">0</span> de S/26,000 — <span id="pct-display">0</span>%</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);border-radius:20px;height:12px;overflow:hidden;margin-bottom:10px">
+        <div id="progress-fill" style="background:var(--grad);height:100%;border-radius:20px;width:0%;transition:width 0.6s ease"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="font-size:12px;color:#888">Actualizar ventas acumuladas:</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-size:14px;color:#aaa;font-weight:600">S/</span>
+          <input type="number" id="ventas-input" placeholder="0" min="0" max="50000" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:5px 10px;color:#fff;font-size:14px;font-weight:600;width:110px;outline:none" oninput="updateProgress(this.value)" />
+        </div>
+        <span id="meta-badge" style="display:none;background:linear-gradient(90deg,#2E7D32,#43A047);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px">🎉 ¡META ALCANZADA!</span>
+      </div>
+    </div>
+  </div>
+
   <!-- HERO -->
   <div class="hero">
     <div class="hero-label">Manual Operativo · Uso interno</div>
@@ -599,114 +653,85 @@
   </div>
 
   <!-- ──────────────────────────────── -->
-  <!-- GUÍA RÁPIDA -->
+  <!-- WIZARD INTERACTIVO -->
   <!-- ──────────────────────────────── -->
   <div class="section" id="guia-rapida" style="scroll-margin-top:80px">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
       <div style="background:var(--grad-btn);border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚡</div>
       <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA">Uso rápido</div>
-        <div style="font-size:18px;font-weight:800;color:var(--dark)">¿Qué recomendar según el objetivo del lead?</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA">Asesor rápido</div>
+        <div style="font-size:18px;font-weight:800;color:var(--dark)">¿Qué le recomiedo al lead?</div>
       </div>
     </div>
 
-    <!-- PASO 1: UBICACIÓN -->
-    <div style="margin-bottom:16px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA;margin-bottom:8px">Paso 1 — ¿Dónde está?</div>
+    <!-- Indicadores de paso -->
+    <div style="display:flex;gap:6px;margin-bottom:20px;align-items:center">
+      <div id="wz-ind-1" style="background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;transition:all 0.2s">1 · Ubicación</div>
+      <div style="color:#CCC;font-size:12px">→</div>
+      <div id="wz-ind-2" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;transition:all 0.2s">2 · Objetivo</div>
+      <div style="color:#CCC;font-size:12px">→</div>
+      <div id="wz-ind-3" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;transition:all 0.2s">3 · Recomendación</div>
+    </div>
+
+    <!-- STEP 1: Ubicación -->
+    <div id="wz-step-1" class="wz-step">
+      <div style="font-size:13px;color:var(--gray);margin-bottom:12px">¿Dónde está el lead?</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px">
-          <span style="font-size:20px">🇵🇪</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;color:var(--dark)">Lima, Perú</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Preguntar si quiere <strong>presencial o virtual</strong>. Si es meta específica/urgente → 1:1 presencial en Acroflex.</div>
-          </div>
-        </div>
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:10px">
-          <span style="font-size:20px">🌎</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;color:var(--dark)">Provincia / Otro país</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Todo es <strong>virtual por Zoom</strong>. Grupales si quiere mejorar progresivamente. 1:1 virtual si es meta puntual.</div>
-          </div>
-        </div>
+        <button onclick="wzLocation('lima')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:12px;padding:18px 16px;cursor:pointer;text-align:left;transition:all 0.15s">
+          <div style="font-size:26px;margin-bottom:8px">🇵🇪</div>
+          <div style="font-size:15px;font-weight:700;color:var(--dark)">Lima, Perú</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:4px">Puede ser presencial o virtual</div>
+        </button>
+        <button onclick="wzLocation('exterior')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:12px;padding:18px 16px;cursor:pointer;text-align:left;transition:all 0.15s">
+          <div style="font-size:26px;margin-bottom:8px">🌎</div>
+          <div style="font-size:15px;font-weight:700;color:var(--dark)">Fuera de Lima / Exterior</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:4px">Todo virtual por Zoom</div>
+        </button>
       </div>
     </div>
 
-    <!-- PASO 2: OBJETIVO -->
-    <div style="margin-bottom:16px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA;margin-bottom:8px">Paso 2 — ¿Qué quiere lograr?</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Split · Apertura · Levantar pierna · Líneas</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Flexibilidad de piernas</div>
-          </div>
-          <a href="#powersplit" style="background:linear-gradient(135deg,#C040A0,#4A7FD4);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">→ PowerSplit</a>
-        </div>
-
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Arco · Puente · Escorpión · Needle · Chin stand</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Flexibilidad de espalda</div>
-          </div>
-          <a href="#arcos360" style="background:linear-gradient(135deg,#F07820,#C040A0);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">→ Arcos360</a>
-        </div>
-
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Fuerza · Giros · Saltos · Equilibrios · Puntas</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Fuerza y técnica de bailarín/gimnasta</div>
-          </div>
-          <a href="#prepa-fisica" style="background:linear-gradient(135deg,#E8302A,#F07820);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">→ Prepa Física</a>
-        </div>
-
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad general completa</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Piernas + espalda</div>
-          </div>
-          <a href="#combinaciones" style="background:linear-gradient(135deg,#8B4FC8,#E8302A);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">→ PowerSplit + Arcos360</a>
-        </div>
-
-        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Mejorar todo como bailarín/gimnasta</div>
-            <div style="font-size:12px;color:var(--gray);margin-top:2px">Piernas + espalda + técnica completa</div>
-          </div>
-          <a href="#combinaciones" style="background:linear-gradient(135deg,#4A7FD4,#8B4FC8);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">→ PS + A360 + Prepa</a>
-        </div>
-
-        <div style="background:var(--accent-pale);border:1px solid #FFCDD2;border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Meta puntual · Competencia · Rutina · Acrobacia · Técnica específica</div>
-            <div style="font-size:12px;color:var(--red);margin-top:2px;font-weight:600">⭐ Siempre directamente con Cami</div>
-          </div>
-          <a href="#cuando-1a1" style="background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">→ Clase 1:1</a>
-        </div>
-
+    <!-- STEP 2: Objetivo -->
+    <div id="wz-step-2" class="wz-step" style="display:none">
+      <div style="font-size:13px;color:var(--gray);margin-bottom:12px">¿Qué quiere lograr?</div>
+      <div style="display:flex;flex-direction:column;gap:8px" id="wz-objetivos">
+        <button onclick="wzRecommend('powersplit')" class="wz-opt-btn">
+          <span style="font-size:18px">🦵</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Split · Apertura · Levantar pierna · Líneas</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Flexibilidad de piernas</div></div>
+          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+        </button>
+        <button onclick="wzRecommend('arcos360')" class="wz-opt-btn">
+          <span style="font-size:18px">🌙</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Arco · Puente · Escorpión · Needle · Chin stand</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Flexibilidad de espalda</div></div>
+          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+        </button>
+        <button onclick="wzRecommend('prepa')" class="wz-opt-btn">
+          <span style="font-size:18px">💪</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Fuerza · Giros · Saltos · Equilibrios · Puntas</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Técnica y potencia</div></div>
+          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+        </button>
+        <button onclick="wzRecommend('ps-a360')" class="wz-opt-btn">
+          <span style="font-size:18px">🔥</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad completa · Piernas + espalda</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Quiere trabajar todo</div></div>
+          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+        </button>
+        <button onclick="wzRecommend('completo')" class="wz-opt-btn">
+          <span style="font-size:18px">⭐</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Mejorar como bailarín/gimnasta de forma integral</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Flexibilidad + fuerza + técnica completa</div></div>
+          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+        </button>
+        <button onclick="wzRecommend('1a1')" class="wz-opt-btn" style="border-color:#FFCDD2;background:var(--accent-pale)">
+          <span style="font-size:18px">🎯</span>
+          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Meta puntual · Competencia · Rutina · Acrobacia</div><div style="font-size:11px;color:var(--red);margin-top:2px;font-weight:600">Objetivo específico o urgente → siempre con Cami</div></div>
+          <span style="margin-left:auto;color:var(--red);font-size:16px">→</span>
+        </button>
       </div>
+      <button onclick="wzReset()" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver al inicio</button>
     </div>
 
-    <!-- PASO 3: PAQUETE -->
-    <div>
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA;margin-bottom:8px">Paso 3 — ¿Sesión puntual o proceso?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-        <a href="#paquetes-grupales" style="text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:block">
-          <div style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Grupales</div>
-          <div style="font-size:13px;font-weight:700;color:var(--dark)">1, 4, 8, 12, 20 o 32 clases</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:2px">Desde $15 USD / S/45</div>
-        </a>
-        <a href="#paquetes-1a1" style="text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:block">
-          <div style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">1:1 Sesión suelta</div>
-          <div style="font-size:13px;font-weight:700;color:var(--dark)">Sesión estratégica</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:2px">$60 USD</div>
-        </a>
-        <a href="#paquetes-1a1" style="text-decoration:none;background:var(--accent-pale);border:1px solid #FFCDD2;border-radius:10px;padding:12px 14px;display:block">
-          <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">1:1 Proceso CGC Elite</div>
-          <div style="font-size:13px;font-weight:700;color:var(--dark)">Standard o Premium</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:2px">$459 – $799 USD</div>
-        </a>
-      </div>
+    <!-- STEP 3: Resultado -->
+    <div id="wz-step-3" class="wz-step" style="display:none">
+      <div id="wz-result"></div>
+      <button onclick="wzReset()" style="margin-top:14px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--gray);font-size:12px;cursor:pointer;padding:7px 16px;font-weight:600">← Nueva consulta</button>
     </div>
   </div>
 
@@ -1913,6 +1938,106 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
 </div>
 
 <script>
+  /* ── COUNTDOWN ── */
+  function updateCountdown() {
+    const target = new Date('2026-07-31T23:59:59-05:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = '00'; });
+      return;
+    }
+    const pad = n => String(Math.floor(n)).padStart(2,'0');
+    document.getElementById('cd-days').textContent  = pad(diff / 86400000);
+    document.getElementById('cd-hours').textContent = pad((diff % 86400000) / 3600000);
+    document.getElementById('cd-mins').textContent  = pad((diff % 3600000) / 60000);
+    document.getElementById('cd-secs').textContent  = pad((diff % 60000) / 1000);
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  /* ── PROGRESO ── */
+  function updateProgress(val) {
+    const v = Math.max(0, Math.min(parseFloat(val) || 0, 100000));
+    const pct = Math.min(100, Math.round((v / 26000) * 100));
+    document.getElementById('ventas-display').textContent = v.toLocaleString('es-PE');
+    document.getElementById('pct-display').textContent = pct;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    const badge = document.getElementById('meta-badge');
+    if (badge) badge.style.display = pct >= 100 ? 'inline-block' : 'none';
+    try { localStorage.setItem('cgc_ventas', v); } catch(e) {}
+  }
+  (function() {
+    try {
+      const saved = localStorage.getItem('cgc_ventas');
+      if (saved) { const inp = document.getElementById('ventas-input'); if(inp) { inp.value = saved; updateProgress(saved); } }
+    } catch(e) {}
+  })();
+
+  /* ── WIZARD ── */
+  const WZ_DATA = {
+    powersplit: { icon:'🦵', name:'PowerSplit', color:'linear-gradient(135deg,#C040A0,#4A7FD4)', section:'#powersplit', msg:'msg-06' },
+    arcos360:  { icon:'🌙', name:'Arcos360',   color:'linear-gradient(135deg,#F07820,#C040A0)', section:'#arcos360',  msg:'msg-07' },
+    prepa:     { icon:'💪', name:'Preparación Física', color:'linear-gradient(135deg,#E8302A,#F07820)', section:'#prepa-fisica', msg:'msg-08' },
+    'ps-a360': { icon:'🔥', name:'PowerSplit + Arcos360', color:'linear-gradient(135deg,#8B4FC8,#E8302A)', section:'#combinaciones', msg:'msg-09' },
+    completo:  { icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física', color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', section:'#combinaciones', msg:'msg-10' },
+    '1a1':     { icon:'🎯', name:'Clase 1:1 directamente con Cami', color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msg:'msg-14' }
+  };
+  let wzIsLima = false;
+
+  function wzSetStep(n) {
+    [1,2,3].forEach(i => {
+      const s = document.getElementById('wz-step-'+i);
+      if(s) s.style.display = i === n ? 'block' : 'none';
+      const ind = document.getElementById('wz-ind-'+i);
+      if(ind) {
+        if(i < n)  { ind.style.background='#2E7D32'; ind.style.color='#fff'; }
+        else if(i===n) { ind.style.background='var(--red)'; ind.style.color='#fff'; }
+        else       { ind.style.background='#E8E8E8'; ind.style.color='#AAA'; }
+      }
+    });
+  }
+
+  function wzLocation(loc) {
+    wzIsLima = loc === 'lima';
+    wzSetStep(2);
+  }
+
+  function wzRecommend(key) {
+    const r = WZ_DATA[key];
+    let extra = '';
+    if (key === '1a1') {
+      extra = wzIsLima
+        ? '<div style="background:#E8F4FD;border-radius:8px;padding:10px 14px;font-size:12px;color:#1A3A7A;margin-top:10px">📍 <strong>Está en Lima</strong> — puede ser presencial en Acroflex, Jesús María o virtual por Zoom.</div>'
+        : '<div style="background:#E8F4FD;border-radius:8px;padding:10px 14px;font-size:12px;color:#1A3A7A;margin-top:10px">🌎 <strong>Fuera de Lima</strong> — clase 1:1 virtual por Zoom con Cami.</div>';
+    }
+    document.getElementById('wz-result').innerHTML = `
+      <div style="background:${r.color};border-radius:14px;padding:22px;color:#fff;text-align:center;margin-bottom:14px">
+        <div style="font-size:40px;margin-bottom:8px">${r.icon}</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;margin-bottom:6px">Recomendación</div>
+        <div style="font-size:20px;font-weight:800">${r.name}</div>
+      </div>
+      ${extra}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+        <a href="${r.section}" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px;text-decoration:none;color:var(--dark);font-size:13px;font-weight:600">📖 Ver sección</a>
+        <button onclick="wzCopyMsg('${r.msg}', this)" style="display:flex;align-items:center;justify-content:center;gap:6px;background:var(--red);border:none;border-radius:10px;padding:11px;color:#fff;font-size:13px;font-weight:600;cursor:pointer">📋 Copiar mensaje</button>
+      </div>
+    `;
+    wzSetStep(3);
+  }
+
+  function wzCopyMsg(id, btn) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    navigator.clipboard.writeText((el.innerText || el.textContent).trim()).then(() => {
+      btn.textContent = '✅ ¡Copiado!';
+      btn.style.background = '#2E7D32';
+      setTimeout(() => { btn.innerHTML = '📋 Copiar mensaje'; btn.style.background = 'var(--red)'; }, 2000);
+    });
+  }
+
+  function wzReset() { wzIsLima = false; wzSetStep(1); }
+
   function setCurrency(cur) {
     const isUsd = cur === 'usd';
     document.querySelectorAll('.price-usd').forEach(el => el.style.display = isUsd ? 'inline-block' : 'none');
