@@ -543,6 +543,7 @@
   <a href="#objetivo-lead">Lead cuenta su objetivo</a>
 
   <div class="sidebar-section-title">Parte 2 · Clases Grupales</div>
+  <a href="#flexipower" style="color:#2E7D32;font-weight:600">🏋️ FlexiPower (Lima presencial)</a>
   <a href="#cuando-grupales">Cuándo recomendar grupales</a>
   <a href="#powersplit">PowerSplit</a>
   <a href="#arcos360">Arcos360</a>
@@ -755,6 +756,19 @@
           </div>
           <span style="flex-shrink:0;background:linear-gradient(135deg,#4A7FD4,#8B4FC8);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Combinación</span>
         </button>
+        <!-- FlexiPower: solo aparece si eligió Lima -->
+        <div id="wz-flexipower-wrap" style="display:none">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin:6px 0 4px">📍 Opción presencial en Lima</div>
+          <button onclick="wzRecommend('flexipower')" class="wz-opt-btn" style="border-color:#C3E6CB;background:#F0FFF4">
+            <span style="font-size:22px">🏋️</span>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad presencial en Lima · Adultos</div>
+              <div style="font-size:11px;color:#2E7D32;margin-top:3px;font-weight:600">Clases grupales en Acroflex — diseñado por Cami, dictado por sus entrenadores</div>
+            </div>
+            <span style="flex-shrink:0;background:linear-gradient(135deg,#2E7D32,#43A047);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">FlexiPower</span>
+          </button>
+        </div>
+
         <button onclick="wzRecommend('1a1')" class="wz-opt-btn" style="border-color:#FFCDD2;background:var(--accent-pale)">
           <span style="font-size:22px">🎯</span>
           <div style="flex:1">
@@ -1072,6 +1086,57 @@ Va a ser un gusto acompañarla/lo en este proceso 🔥</div>
     <div class="info-banner gold">
       <div class="info-banner-icon">💡</div>
       <div>Después del pago, el proceso es el mismo: Carlos o Ariana entran para formulario, guía de bienvenida, vigencia y agendamiento. El formulario lo completa la mamá o papá si el alumno es menor de edad.</div>
+    </div>
+  </div>
+
+  <!-- FLEXIPOWER -->
+  <div class="section" id="flexipower" style="scroll-margin-top:80px">
+    <div style="background:linear-gradient(135deg,#1B5E20,#2E7D32);border-radius:14px;padding:20px 24px;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:16px">
+      <div style="font-size:36px">🏋️</div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;margin-bottom:4px">Solo para Lima · Presencial</div>
+        <div style="font-size:20px;font-weight:800">FlexiPower</div>
+        <div style="font-size:13px;opacity:0.9;margin-top:4px">Clases grupales presenciales en Acroflex · Diseñado por Cami · Dictado por sus entrenadores</div>
+      </div>
+    </div>
+
+    <div class="info-banner blue" style="margin-bottom:14px">
+      <div class="info-banner-icon">💡</div>
+      <div>Recomendar cuando el lead está en Lima, es adulto/a y quiere mejorar flexibilidad de forma presencial. <strong>Para coordinar horarios e inscripción, derivar al WhatsApp de Acroflex.</strong></div>
+    </div>
+
+    <!-- Mensaje recomendación FlexiPower -->
+    <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Recomendar FlexiPower:</div>
+    <div class="msg-box" style="margin-bottom:14px">
+      <div class="msg-header">
+        <div class="msg-label">💬 Recomendar FlexiPower</div>
+        <div class="msg-who">Cami</div>
+      </div>
+      <div class="msg-content" id="msg-fp">Como estás en Lima, también te recomendaría muchísimo FlexiPower 💛
+
+Es mi curso grupal presencial de flexibilidad dictado en Acroflex, diseñado por mí y dictado por mi equipo de entrenadores. Es un curso muy completo para trabajar flexibilidad de forma progresiva, técnica y segura.
+
+Es perfecto si buscas entrenar presencialmente en Lima con correcciones en vivo ✨
+
+Para conocer los horarios y más detalles, te paso el contacto de Acroflex donde puedes escribir directamente:
+
+📲 +51 993 813 336</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-fp', this)">📋 Copiar mensaje</button></div>
+    </div>
+
+    <!-- Mensaje cierre / derivación -->
+    <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Cuando ya tiene interés y quiere inscribirse:</div>
+    <div class="msg-box">
+      <div class="msg-header">
+        <div class="msg-label">💬 Derivar a Acroflex</div>
+        <div class="msg-who">Equipo CGC</div>
+      </div>
+      <div class="msg-content" id="msg-fp-cierre">Genial 💛 Para coordinar tu inscripción y horarios en FlexiPower, escríbele directamente al equipo de Acroflex por WhatsApp:
+
+📲 +51 993 813 336
+
+Ellos te darán toda la información de horarios, valores y disponibilidad ✨</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-fp-cierre', this)">📋 Copiar mensaje</button></div>
     </div>
   </div>
 
@@ -2166,7 +2231,8 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
     prepa:     { icon:'💪', name:'Preparación Física',                  color:'linear-gradient(135deg,#E8302A,#F07820)', section:'#prepa-fisica',   msgAlumna:'msg-08', msgMama:'msg-m03' },
     'ps-a360': { icon:'🔥', name:'PowerSplit + Arcos360',               color:'linear-gradient(135deg,#8B4FC8,#E8302A)', section:'#combinaciones',  msgAlumna:'msg-09', msgMama:'msg-m03' },
     completo:  { icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física', color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', section:'#combinaciones',  msgAlumna:'msg-10', msgMama:'msg-m03' },
-    '1a1':     { icon:'🎯', name:'Clase 1:1 directamente con Cami',      color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msgAlumna:'msg-14', msgMama:'msg-m04' }
+    '1a1':       { icon:'🎯', name:'Clase 1:1 directamente con Cami',      color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msgAlumna:'msg-14', msgMama:'msg-m04' },
+    'flexipower': { icon:'🏋️', name:'FlexiPower — Presencial en Acroflex', color:'linear-gradient(135deg,#2E7D32,#43A047)',   section:'#flexipower',     msgAlumna:'msg-fp',  msgMama:'msg-fp' }
   };
 
   let wzState = { isMama: false, isLima: false };
@@ -2196,14 +2262,16 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
 
   function wzLocation(loc) {
     wzState.isLima = loc === 'lima';
+    const fpWrap = document.getElementById('wz-flexipower-wrap');
+    if (fpWrap) fpWrap.style.display = wzState.isLima ? 'block' : 'none';
     wzSetStep(3);
   }
 
   function wzBuildFlow(key) {
-    const isMama = wzState.isMama, isLima = wzState.isLima, is1a1 = key === '1a1';
-    const recMsgId = { powersplit:'msg-06', arcos360:'msg-07', prepa:'msg-08', 'ps-a360':'msg-09', completo:'msg-10', '1a1':'msg-14' };
-    const recMsgMama = { powersplit:'msg-m03', arcos360:'msg-m03', prepa:'msg-m03', 'ps-a360':'msg-m03', completo:'msg-m03', '1a1':'msg-m04' };
-    const recNotes = { powersplit:'Adaptar mencionando PowerSplit', arcos360:'Adaptar mencionando Arcos360', prepa:'Adaptar mencionando Prepa Física', 'ps-a360':'Adaptar: PowerSplit + Arcos360', completo:'Adaptar: PowerSplit + Arcos360 + Prepa Física', '1a1':null };
+    const isMama = wzState.isMama, isLima = wzState.isLima, is1a1 = key === '1a1', isFP = key === 'flexipower';
+    const recMsgId = { powersplit:'msg-06', arcos360:'msg-07', prepa:'msg-08', 'ps-a360':'msg-09', completo:'msg-10', '1a1':'msg-14', flexipower:'msg-fp' };
+    const recMsgMama = { powersplit:'msg-m03', arcos360:'msg-m03', prepa:'msg-m03', 'ps-a360':'msg-m03', completo:'msg-m03', '1a1':'msg-m04', flexipower:'msg-fp' };
+    const recNotes = { powersplit:'Adaptar mencionando PowerSplit', arcos360:'Adaptar mencionando Arcos360', prepa:'Adaptar mencionando Prepa Física', 'ps-a360':'Adaptar: PowerSplit + Arcos360', completo:'Adaptar: PowerSplit + Arcos360 + Prepa Física', '1a1':null, flexipower:null };
     const steps = [];
 
     // 1 - Primer mensaje
@@ -2216,10 +2284,13 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
     steps.push({ num: steps.length+1, who:'Cami', label:'Cami entra con la recomendación', id: isMama ? 'msg-m02' : 'msg-04', note:null });
 
     // 4 - Recomendación de curso
-    steps.push({ num: steps.length+1, who:'Cami', label: is1a1 ? 'Recomendar clase 1:1' : 'Recomendar curso', id: isMama ? recMsgMama[key] : recMsgId[key], note: isMama && !is1a1 ? recNotes[key] : null });
+    steps.push({ num: steps.length+1, who:'Cami', label: is1a1 ? 'Recomendar clase 1:1' : isFP ? 'Recomendar FlexiPower (presencial Acroflex)' : 'Recomendar curso', id: isMama ? recMsgMama[key] : recMsgId[key], note: isMama && !is1a1 && !isFP ? recNotes[key] : null });
 
-    if (!is1a1) {
-      // Flujo grupales
+    if (isFP) {
+      // Flujo FlexiPower — derivar a Acroflex
+      steps.push({ num: steps.length+1, who:'Equipo CGC', label:'Derivar al WhatsApp de Acroflex para horarios e inscripción', id:'msg-fp-cierre', note:'Número de Acroflex: +51 993 813 336' });
+    } else if (!is1a1) {
+      // Flujo grupales virtuales
       steps.push({ num: steps.length+1, who:'Cami', label:'Enviar horarios y valores', id:'msg-11', note:null });
       steps.push({ num: steps.length+1, who:'Cami', label:'Reforzar beneficios antes del cierre', id:'msg-12', note:null });
       steps.push({ num: steps.length+1, who:'Cami', label:'Lead elige paquete → datos de pago', id: isMama ? 'msg-m05' : 'msg-13', note:null });
