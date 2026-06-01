@@ -536,7 +536,8 @@
   <a href="#roles">Roles del equipo</a>
 
   <div class="sidebar-section-title">Parte 1 · Primer Contacto</div>
-  <a href="#primer-mensaje">Primer mensaje</a>
+  <a href="#primer-mensaje">👤 Escribe la alumna/o</a>
+  <a href="#flujo-mamas">👩‍👧 Escribe una mamá o papá</a>
   <a href="#incompleto">Lead responde incompleto</a>
   <a href="#peru">Lead está en Perú</a>
   <a href="#objetivo-lead">Lead cuenta su objetivo</a>
@@ -665,73 +666,111 @@
     </div>
 
     <!-- Indicadores de paso -->
-    <div style="display:flex;gap:6px;margin-bottom:20px;align-items:center">
-      <div id="wz-ind-1" style="background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;transition:all 0.2s">1 · Ubicación</div>
+    <div style="display:flex;gap:6px;margin-bottom:20px;align-items:center;flex-wrap:wrap">
+      <div id="wz-ind-1" style="background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">1 · ¿Quién escribe?</div>
       <div style="color:#CCC;font-size:12px">→</div>
-      <div id="wz-ind-2" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;transition:all 0.2s">2 · Objetivo</div>
+      <div id="wz-ind-2" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">2 · Ubicación</div>
       <div style="color:#CCC;font-size:12px">→</div>
-      <div id="wz-ind-3" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;transition:all 0.2s">3 · Recomendación</div>
+      <div id="wz-ind-3" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">3 · Objetivo</div>
+      <div style="color:#CCC;font-size:12px">→</div>
+      <div id="wz-ind-4" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">4 · Recomendación</div>
     </div>
 
-    <!-- STEP 1: Ubicación -->
+    <!-- STEP 1: ¿Quién escribe? -->
     <div id="wz-step-1" class="wz-step">
-      <div style="font-size:13px;color:var(--gray);margin-bottom:12px">¿Dónde está el lead?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <button onclick="wzLocation('lima')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:12px;padding:18px 16px;cursor:pointer;text-align:left;transition:all 0.15s">
-          <div style="font-size:26px;margin-bottom:8px">🇵🇪</div>
-          <div style="font-size:15px;font-weight:700;color:var(--dark)">Lima, Perú</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:4px">Puede ser presencial o virtual</div>
+      <div style="font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px">¿Quién nos está escribiendo?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <button onclick="wzWho('alumna')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
+          <div style="font-size:36px;margin-bottom:10px">🙋‍♀️</div>
+          <div style="font-size:15px;font-weight:800;color:var(--dark)">La alumna / el alumno</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Escribe directamente la persona que va a tomar las clases</div>
         </button>
-        <button onclick="wzLocation('exterior')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:12px;padding:18px 16px;cursor:pointer;text-align:left;transition:all 0.15s">
-          <div style="font-size:26px;margin-bottom:8px">🌎</div>
-          <div style="font-size:15px;font-weight:700;color:var(--dark)">Fuera de Lima / Exterior</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:4px">Todo virtual por Zoom</div>
+        <button onclick="wzWho('mama')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
+          <div style="font-size:36px;margin-bottom:10px">👩‍👧</div>
+          <div style="font-size:15px;font-weight:800;color:var(--dark)">Una mamá o papá</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Busca clases para su hija o hijo</div>
         </button>
       </div>
     </div>
 
-    <!-- STEP 2: Objetivo -->
+    <!-- STEP 2: Ubicación -->
     <div id="wz-step-2" class="wz-step" style="display:none">
-      <div style="font-size:13px;color:var(--gray);margin-bottom:12px">¿Qué quiere lograr?</div>
-      <div style="display:flex;flex-direction:column;gap:8px" id="wz-objetivos">
+      <div id="wz-ubicacion-label" style="font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px">¿Dónde está?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <button onclick="wzLocation('lima')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
+          <div style="font-size:36px;margin-bottom:10px">🇵🇪</div>
+          <div style="font-size:15px;font-weight:800;color:var(--dark)">Lima, Perú</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Puede tomar clases presenciales o virtuales</div>
+        </button>
+        <button onclick="wzLocation('exterior')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
+          <div style="font-size:36px;margin-bottom:10px">🌎</div>
+          <div style="font-size:15px;font-weight:800;color:var(--dark)">Fuera de Lima o de Perú</div>
+          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Todo online en vivo por Zoom</div>
+        </button>
+      </div>
+      <button onclick="wzSetStep(1)" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver</button>
+    </div>
+
+    <!-- STEP 3: Objetivo -->
+    <div id="wz-step-3" class="wz-step" style="display:none">
+      <div id="wz-objetivo-label" style="font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px">¿Qué quiere lograr?</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
         <button onclick="wzRecommend('powersplit')" class="wz-opt-btn">
-          <span style="font-size:18px">🦵</span>
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Split · Apertura · Levantar pierna · Líneas</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Flexibilidad de piernas</div></div>
-          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+          <span style="font-size:22px">🦵</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Split · Apertura · Levantar más la pierna · Líneas</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:3px">Flexibilidad de piernas</div>
+          </div>
+          <span style="flex-shrink:0;background:linear-gradient(135deg,#C040A0,#4A7FD4);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">PowerSplit</span>
         </button>
         <button onclick="wzRecommend('arcos360')" class="wz-opt-btn">
-          <span style="font-size:18px">🌙</span>
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Arco · Puente · Escorpión · Needle · Chin stand</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Flexibilidad de espalda</div></div>
-          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+          <span style="font-size:22px">🌙</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Arco · Puente · Escorpión · Needle · Chin stand</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:3px">Flexibilidad de espalda</div>
+          </div>
+          <span style="flex-shrink:0;background:linear-gradient(135deg,#F07820,#C040A0);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Arcos360</span>
         </button>
         <button onclick="wzRecommend('prepa')" class="wz-opt-btn">
-          <span style="font-size:18px">💪</span>
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Fuerza · Giros · Saltos · Equilibrios · Puntas</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Técnica y potencia</div></div>
-          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+          <span style="font-size:22px">💪</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Fuerza · Giros · Saltos · Equilibrios · Puntas</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:3px">Técnica y potencia física</div>
+          </div>
+          <span style="flex-shrink:0;background:linear-gradient(135deg,#E8302A,#F07820);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Prepa Física</span>
         </button>
         <button onclick="wzRecommend('ps-a360')" class="wz-opt-btn">
-          <span style="font-size:18px">🔥</span>
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad completa · Piernas + espalda</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Quiere trabajar todo</div></div>
-          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+          <span style="font-size:22px">🔥</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad general completa · Piernas + espalda</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:3px">Quiere trabajar todo</div>
+          </div>
+          <span style="flex-shrink:0;background:linear-gradient(135deg,#8B4FC8,#E8302A);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">PS + Arcos360</span>
         </button>
         <button onclick="wzRecommend('completo')" class="wz-opt-btn">
-          <span style="font-size:18px">⭐</span>
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Mejorar como bailarín/gimnasta de forma integral</div><div style="font-size:11px;color:var(--gray);margin-top:2px">Flexibilidad + fuerza + técnica completa</div></div>
-          <span style="margin-left:auto;color:#CCC;font-size:16px">→</span>
+          <span style="font-size:22px">⭐</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Mejorar como bailarín/gimnasta de forma integral</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:3px">Flexibilidad + fuerza + técnica completa</div>
+          </div>
+          <span style="flex-shrink:0;background:linear-gradient(135deg,#4A7FD4,#8B4FC8);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Combinación</span>
         </button>
         <button onclick="wzRecommend('1a1')" class="wz-opt-btn" style="border-color:#FFCDD2;background:var(--accent-pale)">
-          <span style="font-size:18px">🎯</span>
-          <div><div style="font-size:13px;font-weight:700;color:var(--dark)">Meta puntual · Competencia · Rutina · Acrobacia</div><div style="font-size:11px;color:var(--red);margin-top:2px;font-weight:600">Objetivo específico o urgente → siempre con Cami</div></div>
-          <span style="margin-left:auto;color:var(--red);font-size:16px">→</span>
+          <span style="font-size:22px">🎯</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Meta puntual · Competencia · Rutina · Acrobacia · Técnica específica</div>
+            <div style="font-size:11px;color:var(--red);margin-top:3px;font-weight:600">Objetivo urgente o muy específico → siempre directo con Cami</div>
+          </div>
+          <span style="flex-shrink:0;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Clase 1:1</span>
         </button>
       </div>
-      <button onclick="wzReset()" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver al inicio</button>
+      <button onclick="wzSetStep(2)" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver</button>
     </div>
 
-    <!-- STEP 3: Resultado -->
-    <div id="wz-step-3" class="wz-step" style="display:none">
+    <!-- STEP 4: Resultado -->
+    <div id="wz-step-4" class="wz-step" style="display:none">
       <div id="wz-result"></div>
-      <button onclick="wzReset()" style="margin-top:14px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--gray);font-size:12px;cursor:pointer;padding:7px 16px;font-weight:600">← Nueva consulta</button>
+      <button onclick="wzReset()" style="margin-top:14px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--gray);font-size:13px;cursor:pointer;padding:8px 18px;font-weight:600">↩ Nueva consulta</button>
     </div>
   </div>
 
@@ -930,6 +969,112 @@ Será un gusto poder asesorarte para que elijas la mejor opción según tu objet
   </div>
 
   <!-- ──────────────────────────────── -->
+  <!-- ──────────────────────────────── -->
+  <!-- FLUJO MAMÁS -->
+  <!-- ──────────────────────────────── -->
+  <div class="part-header" style="margin-top:32px">
+    <div class="part-icon">👩‍👧</div>
+    <h2><span>Parte 1b</span>Cuando escribe una mamá o papá</h2>
+  </div>
+
+  <div class="section" id="flujo-mamas">
+    <div class="info-banner blue" style="margin-bottom:20px">
+      <div class="info-banner-icon">💡</div>
+      <div>Cuando escribe una mamá o papá, <strong>el tono cambia</strong>: hablamos de "su hija/hijo", usamos "usted" o "tú" según cómo escriban, y las recomendaciones se enfocan en el progreso del menor. El flujo es el mismo, pero los mensajes están adaptados.</div>
+    </div>
+
+    <!-- Primer mensaje mamá -->
+    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M1</span> Primer mensaje — mamá o papá escribe</h3>
+    <div class="msg-box" style="margin-bottom:20px">
+      <div class="msg-header">
+        <div class="msg-label">💬 Primer contacto</div>
+        <div class="msg-who">Equipo CGC</div>
+      </div>
+      <div class="msg-content" id="msg-m01">Holaa 💛 Somos CGC Method ✨
+Con gusto le ayudamos a encontrar la mejor opción para su hija/hijo.
+
+Por favor cuéntenos:
+
+1. Nombre y edad de su hija/hijo
+2. País y ciudad
+3. ¿A qué se dedica? (ballet, gimnasia, danza, otro deporte, etc.)
+4. ¿Qué le gustaría que lograra?
+
+Así podemos asesorarle mejor y recomendarle la opción ideal según el objetivo de su hija/hijo 🤗</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m01', this)">📋 Copiar mensaje</button></div>
+    </div>
+
+    <!-- Cami entra -->
+    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M2</span> Entra Cami con la recomendación</h3>
+    <div class="msg-box" style="margin-bottom:20px">
+      <div class="msg-header">
+        <div class="msg-label">💬 Cami entra</div>
+        <div class="msg-who">Cami</div>
+      </div>
+      <div class="msg-content" id="msg-m02">Holaa, te escribe Cami 💛
+Será un gusto poder asesorarte para encontrar la mejor opción para tu hija/hijo según su objetivo ✨</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m02', this)">📋 Copiar mensaje</button></div>
+    </div>
+
+    <!-- Recomendar clases grupales a mamá -->
+    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M3</span> Recomendar clases grupales virtuales</h3>
+    <div class="msg-box" style="margin-bottom:20px">
+      <div class="msg-header">
+        <div class="msg-label">💬 Grupales para la hija/hijo</div>
+        <div class="msg-who">Cami</div>
+      </div>
+      <div class="msg-content" id="msg-m03">Por lo que me cuentas, para tu hija/hijo le recomendaría mucho nuestras clases grupales virtuales en vivo por Zoom 💛
+
+Son clases basadas en mi método y dictadas por mí o por mi equipo de entrenadores CGC, todos capacitados para corregirla/lo y guiarla/lo con técnica y seguridad.
+
+Son perfectas si está fuera de Lima o en otro país, porque puede entrenar desde casa con correcciones reales en clase y seguimiento de sus avances.
+
+Además, hacemos seguimiento por fotos y este mes regalamos acceso a nuestra biblioteca de +100 clases grabadas 🔥
+
+¿Te gustaría que te envíe un video para que veas cómo trabajamos, junto con horarios y valores?</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m03', this)">📋 Copiar mensaje</button></div>
+    </div>
+
+    <!-- Recomendar 1:1 a mamá -->
+    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M4</span> Recomendar clase 1:1</h3>
+    <div class="msg-box" style="margin-bottom:20px">
+      <div class="msg-header">
+        <div class="msg-label">💬 1:1 para la hija/hijo</div>
+        <div class="msg-who">Cami</div>
+      </div>
+      <div class="msg-content" id="msg-m04">Por lo que me cuentas, para el objetivo de tu hija/hijo te recomendaría una clase 1:1 conmigo directamente 💛
+
+A diferencia de las clases grupales, las 1:1 son siempre conmigo. Puedo verla/lo directamente, corregirla/lo según su nivel y darle ejercicios exactos según su meta.
+
+Es ideal cuando el objetivo es específico: mejorar una pirueta, revisar una rutina, trabajar puntas, una figura de flexibilidad o prepararse para una competencia ✨
+
+¿Deseas que te cuente cómo funciona y los valores?</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m04', this)">📋 Copiar mensaje</button></div>
+    </div>
+
+    <!-- Cierre con mamá -->
+    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M5</span> Cuando elige e inscribe</h3>
+    <div class="msg-box" style="margin-bottom:12px">
+      <div class="msg-header">
+        <div class="msg-label">💬 Cierre e inscripción</div>
+        <div class="msg-who">Cami</div>
+      </div>
+      <div class="msg-content" id="msg-m05">Perfecto 💛 Entonces podemos avanzar con la inscripción de tu hija/hijo.
+
+Te envío los datos de pago para separar el cupo ✨
+
+Apenas realices el abono, me envías tu comprobante por aquí y seguimos con el siguiente paso.
+
+Va a ser un gusto acompañarla/lo en este proceso 🔥</div>
+      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m05', this)">📋 Copiar mensaje</button></div>
+    </div>
+
+    <div class="info-banner gold">
+      <div class="info-banner-icon">💡</div>
+      <div>Después del pago, el proceso es el mismo: Carlos o Ariana entran para formulario, guía de bienvenida, vigencia y agendamiento. El formulario lo completa la mamá o papá si el alumno es menor de edad.</div>
+    </div>
+  </div>
+
   <!-- PARTE 2 -->
   <!-- ──────────────────────────────── -->
   <div class="part-header">
@@ -2016,67 +2161,84 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
 
   /* ── WIZARD ── */
   const WZ_DATA = {
-    powersplit: { icon:'🦵', name:'PowerSplit', color:'linear-gradient(135deg,#C040A0,#4A7FD4)', section:'#powersplit', msg:'msg-06' },
-    arcos360:  { icon:'🌙', name:'Arcos360',   color:'linear-gradient(135deg,#F07820,#C040A0)', section:'#arcos360',  msg:'msg-07' },
-    prepa:     { icon:'💪', name:'Preparación Física', color:'linear-gradient(135deg,#E8302A,#F07820)', section:'#prepa-fisica', msg:'msg-08' },
-    'ps-a360': { icon:'🔥', name:'PowerSplit + Arcos360', color:'linear-gradient(135deg,#8B4FC8,#E8302A)', section:'#combinaciones', msg:'msg-09' },
-    completo:  { icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física', color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', section:'#combinaciones', msg:'msg-10' },
-    '1a1':     { icon:'🎯', name:'Clase 1:1 directamente con Cami', color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msg:'msg-14' }
+    powersplit: { icon:'🦵', name:'PowerSplit',                          color:'linear-gradient(135deg,#C040A0,#4A7FD4)', section:'#powersplit',    msgAlumna:'msg-06', msgMama:'msg-m03' },
+    arcos360:  { icon:'🌙', name:'Arcos360',                            color:'linear-gradient(135deg,#F07820,#C040A0)', section:'#arcos360',       msgAlumna:'msg-07', msgMama:'msg-m03' },
+    prepa:     { icon:'💪', name:'Preparación Física',                  color:'linear-gradient(135deg,#E8302A,#F07820)', section:'#prepa-fisica',   msgAlumna:'msg-08', msgMama:'msg-m03' },
+    'ps-a360': { icon:'🔥', name:'PowerSplit + Arcos360',               color:'linear-gradient(135deg,#8B4FC8,#E8302A)', section:'#combinaciones',  msgAlumna:'msg-09', msgMama:'msg-m03' },
+    completo:  { icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física', color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', section:'#combinaciones',  msgAlumna:'msg-10', msgMama:'msg-m03' },
+    '1a1':     { icon:'🎯', name:'Clase 1:1 directamente con Cami',      color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msgAlumna:'msg-14', msgMama:'msg-m04' }
   };
-  let wzIsLima = false;
+
+  let wzState = { isMama: false, isLima: false };
 
   function wzSetStep(n) {
-    [1,2,3].forEach(i => {
+    [1,2,3,4].forEach(i => {
       const s = document.getElementById('wz-step-'+i);
-      if(s) s.style.display = i === n ? 'block' : 'none';
+      if (s) { s.style.display = i === n ? 'block' : 'none'; if(i===n) s.style.animation='wzFade 0.2s ease'; }
       const ind = document.getElementById('wz-ind-'+i);
-      if(ind) {
-        if(i < n)  { ind.style.background='#2E7D32'; ind.style.color='#fff'; }
-        else if(i===n) { ind.style.background='var(--red)'; ind.style.color='#fff'; }
-        else       { ind.style.background='#E8E8E8'; ind.style.color='#AAA'; }
+      if (ind) {
+        if (i < n)      { ind.style.background='#2E7D32'; ind.style.color='#fff'; }
+        else if (i===n) { ind.style.background='var(--red)'; ind.style.color='#fff'; }
+        else            { ind.style.background='#E8E8E8'; ind.style.color='#AAA'; }
       }
     });
   }
 
-  function wzLocation(loc) {
-    wzIsLima = loc === 'lima';
+  function wzWho(who) {
+    wzState.isMama = who === 'mama';
+    // Adaptar label de ubicación y objetivo según quién escribe
+    const locLabel = document.getElementById('wz-ubicacion-label');
+    const objLabel = document.getElementById('wz-objetivo-label');
+    if (locLabel) locLabel.textContent = wzState.isMama ? '¿Dónde está su hija/hijo?' : '¿Dónde está?';
+    if (objLabel) objLabel.textContent = wzState.isMama ? '¿Qué quiere lograr su hija/hijo?' : '¿Qué quiere lograr?';
     wzSetStep(2);
+  }
+
+  function wzLocation(loc) {
+    wzState.isLima = loc === 'lima';
+    wzSetStep(3);
   }
 
   function wzRecommend(key) {
     const r = WZ_DATA[key];
-    let extra = '';
+    const msgId = wzState.isMama ? r.msgMama : r.msgAlumna;
+    const sectionLink = wzState.isMama && key !== '1a1' ? '#flujo-mamas' : r.section;
+
+    let badge = '';
+    if (wzState.isMama) badge = '<div style="background:#E8F4FD;border-radius:8px;padding:8px 14px;font-size:12px;color:#1A3A7A;margin-bottom:12px">👩‍👧 <strong>Escribe una mamá/papá</strong> — usa los mensajes adaptados de la Parte 1b.</div>';
+
+    let ubicInfo = '';
     if (key === '1a1') {
-      extra = wzIsLima
-        ? '<div style="background:#E8F4FD;border-radius:8px;padding:10px 14px;font-size:12px;color:#1A3A7A;margin-top:10px">📍 <strong>Está en Lima</strong> — puede ser presencial en Acroflex, Jesús María o virtual por Zoom.</div>'
-        : '<div style="background:#E8F4FD;border-radius:8px;padding:10px 14px;font-size:12px;color:#1A3A7A;margin-top:10px">🌎 <strong>Fuera de Lima</strong> — clase 1:1 virtual por Zoom con Cami.</div>';
+      ubicInfo = wzState.isLima
+        ? '<div style="background:#E8F4FD;border-radius:8px;padding:8px 14px;font-size:12px;color:#1A3A7A;margin-top:8px">📍 <strong>Está en Lima</strong> — puede ser presencial en Acroflex o virtual por Zoom.</div>'
+        : '<div style="background:#EEF4FF;border-radius:8px;padding:8px 14px;font-size:12px;color:#1A3A7A;margin-top:8px">🌎 <strong>Fuera de Lima</strong> — clase 1:1 virtual por Zoom con Cami.</div>';
     }
+
     document.getElementById('wz-result').innerHTML = `
-      <div style="background:${r.color};border-radius:14px;padding:22px;color:#fff;text-align:center;margin-bottom:14px">
-        <div style="font-size:40px;margin-bottom:8px">${r.icon}</div>
+      <div style="background:${r.color};border-radius:14px;padding:24px;color:#fff;text-align:center;margin-bottom:14px">
+        <div style="font-size:42px;margin-bottom:8px">${r.icon}</div>
         <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;margin-bottom:6px">Recomendación</div>
         <div style="font-size:20px;font-weight:800">${r.name}</div>
       </div>
-      ${extra}
+      ${badge}${ubicInfo}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-        <a href="${r.section}" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px;text-decoration:none;color:var(--dark);font-size:13px;font-weight:600">📖 Ver sección</a>
-        <button onclick="wzCopyMsg('${r.msg}', this)" style="display:flex;align-items:center;justify-content:center;gap:6px;background:var(--red);border:none;border-radius:10px;padding:11px;color:#fff;font-size:13px;font-weight:600;cursor:pointer">📋 Copiar mensaje</button>
+        <a href="${sectionLink}" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;text-decoration:none;color:var(--dark);font-size:13px;font-weight:600">📖 Ver sección</a>
+        <button onclick="wzCopyMsg('${msgId}',this)" style="display:flex;align-items:center;justify-content:center;gap:6px;background:var(--red);border:none;border-radius:10px;padding:12px;color:#fff;font-size:13px;font-weight:600;cursor:pointer">📋 Copiar mensaje</button>
       </div>
     `;
-    wzSetStep(3);
+    wzSetStep(4);
   }
 
   function wzCopyMsg(id, btn) {
     const el = document.getElementById(id);
     if (!el) return;
     navigator.clipboard.writeText((el.innerText || el.textContent).trim()).then(() => {
-      btn.textContent = '✅ ¡Copiado!';
-      btn.style.background = '#2E7D32';
-      setTimeout(() => { btn.innerHTML = '📋 Copiar mensaje'; btn.style.background = 'var(--red)'; }, 2000);
+      btn.innerHTML = '✅ ¡Copiado!'; btn.style.background = '#2E7D32';
+      setTimeout(() => { btn.innerHTML = '📋 Copiar mensaje'; btn.style.background = 'var(--red)'; }, 2200);
     });
   }
 
-  function wzReset() { wzIsLima = false; wzSetStep(1); }
+  function wzReset() { wzState = { isMama:false, isLima:false }; wzSetStep(1); }
 
   function setCurrency(cur) {
     const isUsd = cur === 'usd';
