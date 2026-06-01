@@ -2199,34 +2199,102 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
     wzSetStep(3);
   }
 
+  function wzBuildFlow(key) {
+    const isMama = wzState.isMama, isLima = wzState.isLima, is1a1 = key === '1a1';
+    const recMsgId = { powersplit:'msg-06', arcos360:'msg-07', prepa:'msg-08', 'ps-a360':'msg-09', completo:'msg-10', '1a1':'msg-14' };
+    const recMsgMama = { powersplit:'msg-m03', arcos360:'msg-m03', prepa:'msg-m03', 'ps-a360':'msg-m03', completo:'msg-m03', '1a1':'msg-m04' };
+    const recNotes = { powersplit:'Adaptar mencionando PowerSplit', arcos360:'Adaptar mencionando Arcos360', prepa:'Adaptar mencionando Prepa Física', 'ps-a360':'Adaptar: PowerSplit + Arcos360', completo:'Adaptar: PowerSplit + Arcos360 + Prepa Física', '1a1':null };
+    const steps = [];
+
+    // 1 - Primer mensaje
+    steps.push({ num:1, who:'Equipo CGC', label:'Saludo y pedido de datos', id: isMama ? 'msg-m01' : 'msg-01', note:null });
+
+    // 2 - Si alumna en Lima, preguntar Lima/provincia
+    if (!isMama && isLima) steps.push({ num:2, who:'Equipo CGC', label:'¿Lima o provincia?', id:'msg-03', note:null });
+
+    // 3 - Cami entra
+    steps.push({ num: steps.length+1, who:'Cami', label:'Cami entra con la recomendación', id: isMama ? 'msg-m02' : 'msg-04', note:null });
+
+    // 4 - Recomendación de curso
+    steps.push({ num: steps.length+1, who:'Cami', label: is1a1 ? 'Recomendar clase 1:1' : 'Recomendar curso', id: isMama ? recMsgMama[key] : recMsgId[key], note: isMama && !is1a1 ? recNotes[key] : null });
+
+    if (!is1a1) {
+      // Flujo grupales
+      steps.push({ num: steps.length+1, who:'Cami', label:'Enviar horarios y valores', id:'msg-11', note:null });
+      steps.push({ num: steps.length+1, who:'Cami', label:'Reforzar beneficios antes del cierre', id:'msg-12', note:null });
+      steps.push({ num: steps.length+1, who:'Cami', label:'Lead elige paquete → datos de pago', id: isMama ? 'msg-m05' : 'msg-13', note:null });
+      steps.push({ num: steps.length+1, who:'Cami', label:'Confirmar pago y pasar a Carlos/Ariana', id:'msg-27', note:null });
+    } else {
+      // Flujo 1:1
+      if (isLima) steps.push({ num: steps.length+1, who:'Cami', label:'Modalidad presencial (Lima)', id:'msg-15', note:'Mencionar también la opción virtual si lo prefiere.' });
+      else steps.push({ num: steps.length+1, who:'Cami', label:'Modalidad virtual por Zoom', id:'msg-16', note:null });
+      steps.push({ num: steps.length+1, who:'Cami', label:'Preguntar antes de cerrar', id:'msg-18', note:null });
+      steps.push({ num: steps.length+1, who:'Cami', label:'Lead elige → datos de pago', id: isMama ? 'msg-m05' : 'msg-19', note:null });
+      steps.push({ num: steps.length+1, who:'Cami', label:'Confirmar pago y pasar a Carlos/Ariana', id:'msg-30', note:null });
+    }
+    return steps;
+  }
+
   function wzRecommend(key) {
     const r = WZ_DATA[key];
-    const msgId = wzState.isMama ? r.msgMama : r.msgAlumna;
-    const sectionLink = wzState.isMama && key !== '1a1' ? '#flujo-mamas' : r.section;
+    const steps = wzBuildFlow(key);
+    const isMama = wzState.isMama, isLima = wzState.isLima;
 
-    let badge = '';
-    if (wzState.isMama) badge = '<div style="background:#E8F4FD;border-radius:8px;padding:8px 14px;font-size:12px;color:#1A3A7A;margin-bottom:12px">👩‍👧 <strong>Escribe una mamá/papá</strong> — usa los mensajes adaptados de la Parte 1b.</div>';
+    // Context chips
+    const whoChip  = isMama ? '👩‍👧 Mamá / Papá' : '🙋‍♀️ Alumna/o';
+    const locChip  = isLima ? '📍 Lima' : '🌎 Fuera de Lima';
+    const recChip  = r.icon + ' ' + r.name;
 
-    let ubicInfo = '';
-    if (key === '1a1') {
-      ubicInfo = wzState.isLima
-        ? '<div style="background:#E8F4FD;border-radius:8px;padding:8px 14px;font-size:12px;color:#1A3A7A;margin-top:8px">📍 <strong>Está en Lima</strong> — puede ser presencial en Acroflex o virtual por Zoom.</div>'
-        : '<div style="background:#EEF4FF;border-radius:8px;padding:8px 14px;font-size:12px;color:#1A3A7A;margin-top:8px">🌎 <strong>Fuera de Lima</strong> — clase 1:1 virtual por Zoom con Cami.</div>';
-    }
+    // Render each step
+    const stepsHtml = steps.map((s, i) => {
+      const el = document.getElementById(s.id);
+      const msgText = el ? (el.innerText || el.textContent).trim() : '(mensaje no encontrado)';
+      const whoColor = s.who === 'Cami' ? '#FDECEA' : '#F0F4FF';
+      const whoTextColor = s.who === 'Cami' ? 'var(--red-dark)' : '#1A3A7A';
+      const noteHtml = s.note ? `<div style="background:#FFF8F0;border:1px solid #FFD0A0;border-radius:6px;padding:6px 10px;font-size:11px;color:#8A4A00;margin-bottom:8px">💡 ${s.note}</div>` : '';
+      return `
+        <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px">
+          <div style="background:${whoColor};display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="background:var(--grad-btn);color:#fff;font-size:11px;font-weight:800;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${s.num}</div>
+              <span style="font-size:12px;font-weight:700;color:${whoTextColor}">${s.label}</span>
+            </div>
+            <span style="font-size:10px;font-weight:600;color:${whoTextColor};opacity:0.7">${s.who}</span>
+          </div>
+          <div style="padding:12px 14px">
+            ${noteHtml}
+            <div style="font-size:13px;color:var(--dark);white-space:pre-line;line-height:1.65;max-height:100px;overflow:hidden;position:relative" id="wz-msg-${i}">${msgText}</div>
+            <button onclick="document.getElementById('wz-msg-${i}').style.maxHeight='none';this.style.display='none'" style="background:none;border:none;color:#AAA;font-size:11px;cursor:pointer;padding:4px 0;display:block">Ver más ↓</button>
+          </div>
+          <div style="padding:6px 10px 10px;display:flex;justify-content:flex-end">
+            <button onclick="wzCopyDirect(\`${msgText.replace(/`/g,'\\`')}\`,this)" style="background:var(--red);border:none;border-radius:8px;padding:7px 16px;color:#fff;font-size:12px;font-weight:700;cursor:pointer">📋 Copiar</button>
+          </div>
+        </div>`;
+    }).join('');
 
     document.getElementById('wz-result').innerHTML = `
-      <div style="background:${r.color};border-radius:14px;padding:24px;color:#fff;text-align:center;margin-bottom:14px">
-        <div style="font-size:42px;margin-bottom:8px">${r.icon}</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;margin-bottom:6px">Recomendación</div>
-        <div style="font-size:20px;font-weight:800">${r.name}</div>
+      <div style="background:${r.color};border-radius:12px;padding:16px 20px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:14px">
+        <div style="font-size:32px">${r.icon}</div>
+        <div>
+          <div style="font-size:11px;opacity:0.8;font-weight:600;text-transform:uppercase;letter-spacing:1px">Guía de conversación</div>
+          <div style="font-size:17px;font-weight:800">${r.name}</div>
+          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+            <span style="background:rgba(255,255,255,0.2);font-size:11px;padding:2px 10px;border-radius:20px">${whoChip}</span>
+            <span style="background:rgba(255,255,255,0.2);font-size:11px;padding:2px 10px;border-radius:20px">${locChip}</span>
+          </div>
+        </div>
       </div>
-      ${badge}${ubicInfo}
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-        <a href="${sectionLink}" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;text-decoration:none;color:var(--dark);font-size:13px;font-weight:600">📖 Ver sección</a>
-        <button onclick="wzCopyMsg('${msgId}',this)" style="display:flex;align-items:center;justify-content:center;gap:6px;background:var(--red);border:none;border-radius:10px;padding:12px;color:#fff;font-size:13px;font-weight:600;cursor:pointer">📋 Copiar mensaje</button>
-      </div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA;margin-bottom:10px">Enviar en este orden 👇</div>
+      ${stepsHtml}
     `;
     wzSetStep(4);
+  }
+
+  function wzCopyDirect(text, btn) {
+    navigator.clipboard.writeText(text.trim()).then(() => {
+      btn.innerHTML = '✅ Copiado'; btn.style.background = '#2E7D32';
+      setTimeout(() => { btn.innerHTML = '📋 Copiar'; btn.style.background = 'var(--red)'; }, 2200);
+    });
   }
 
   function wzCopyMsg(id, btn) {
