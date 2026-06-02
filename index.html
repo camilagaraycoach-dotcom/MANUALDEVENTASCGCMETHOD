@@ -1186,6 +1186,15 @@ Ellos te darán toda la información de horarios, valores y disponibilidad ✨</
     </div>
   </div>
 
+  <!-- MENSAJES DE VIDEO (usados por el wizard, no son sección visible) -->
+  <div style="display:none">
+    <span id="msg-vid-ps">Acá te comparto el video de PowerSplit para que veas cómo son las clases y conozcas el método 💛🎥</span>
+    <span id="msg-vid-arcos">Acá te comparto el video de Arcos360 para que veas cómo trabajamos la flexibilidad de espalda 💛🎥</span>
+    <span id="msg-vid-prepa">Acá te comparto el video de Preparación Física para que veas cómo son las clases 💛🎥</span>
+    <span id="msg-vid-1a1v">Acá te comparto el video de las clases 1:1 virtuales para que veas cómo funcionan y cómo trabajo directamente con cada alumna/o 💛🎥</span>
+    <span id="msg-vid-1a1p">Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo trabajo directamente contigo 💛🎥</span>
+  </div>
+
   <!-- PARTE 2 -->
   <!-- ──────────────────────────────── -->
   <div class="part-header">
@@ -2331,6 +2340,21 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
 
     // 4 - Recomendación de curso
     steps.push({ num: steps.length+1, who:'Cami', label: is1a1 ? 'Recomendar clase 1:1' : isFP ? 'Recomendar FlexiPower (presencial Acroflex)' : 'Recomendar curso', id: isMama ? recMsgMama[key] : recMsgId[key], note: isMama && !is1a1 && !isFP ? recNotes[key] : null });
+
+    // Paso de video — siempre después de recomendar (excepto FlexiPower)
+    if (!isFP) {
+      const videoMap = {
+        powersplit: [{ id:'msg-vid-ps', label:'📹 Enviar video de PowerSplit' }],
+        arcos360:   [{ id:'msg-vid-arcos', label:'📹 Enviar video de Arcos360' }],
+        prepa:      [{ id:'msg-vid-prepa', label:'📹 Enviar video de Preparación Física' }],
+        'ps-a360':  [{ id:'msg-vid-ps', label:'📹 Enviar video de PowerSplit' }, { id:'msg-vid-arcos', label:'📹 Enviar video de Arcos360' }],
+        completo:   [{ id:'msg-vid-ps', label:'📹 Enviar video de PowerSplit' }, { id:'msg-vid-arcos', label:'📹 Enviar video de Arcos360' }, { id:'msg-vid-prepa', label:'📹 Enviar video de Preparación Física' }],
+        '1a1':      [{ id: isLima ? 'msg-vid-1a1p' : 'msg-vid-1a1v', label: isLima ? '📹 Enviar video de clases 1:1 presenciales' : '📹 Enviar video de clases 1:1 virtuales' }]
+      };
+      (videoMap[key] || []).forEach(v => {
+        steps.push({ num: steps.length+1, who:'Cami', label: v.label, id: v.id, note:'📎 Adjuntar el video correspondiente al enviar este mensaje' });
+      });
+    }
 
     if (isFP) {
       // Flujo FlexiPower — derivar a Acroflex
