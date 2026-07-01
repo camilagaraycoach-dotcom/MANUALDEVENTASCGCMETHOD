@@ -567,7 +567,7 @@
   <a href="#acrobacias">Acrobacias online</a>
   <a href="#menor-edad">Menor de edad</a>
   <a href="#papa-mama">Mamá o papá</a>
-  <a href="#clase-gratis">Clase gratis</a>
+  <a href="#clase-gratis">🎁 Clase de prueba gratuita</a>
   <a href="#lo-pienso">«Lo voy a pensar»</a>
   <a href="#pagos">Pagos</a>
 
@@ -813,6 +813,15 @@
             <div style="font-size:11px;color:var(--red);margin-top:3px;font-weight:600">Objetivo urgente o muy específico → siempre directo con Cami</div>
           </div>
           <span style="flex-shrink:0;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Clase 1:1</span>
+        </button>
+
+        <button onclick="wzRecommend('prueba')" class="wz-opt-btn" style="border-color:#C3E6CB;background:#F0FFF4">
+          <span style="font-size:22px">🎁</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--dark)">Quiere probar antes de comprar · No conoce el método · Duda si es para su nivel</div>
+            <div style="font-size:11px;color:#2E7D32;margin-top:3px;font-weight:600">Lead nuevo o frío → ofrecer clase de prueba gratuita</div>
+          </div>
+          <span style="flex-shrink:0;background:linear-gradient(135deg,#2E7D32,#43A047);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Clase prueba</span>
         </button>
       </div>
       <button onclick="wzSetStep(2)" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver</button>
@@ -2336,24 +2345,59 @@ Según su objetivo, puedo recomendar una clase grupal virtual si busca mejorar f
   </div>
 
   <div class="section" id="clase-gratis">
-    <h3><span class="num">27</span> Clase gratis</h3>
-    <div class="info-banner red">
-      <div class="info-banner-icon">🚫</div>
-      <div><strong>No ofrecer clases gratuitas.</strong> Redireccionar a YouTube y luego a la oferta de clases en vivo.</div>
+    <h3><span class="num">27</span> Clase de prueba gratuita</h3>
+    <div class="info-banner" style="background:#F0FFF4;border:1.5px solid #2E7D3250">
+      <div class="info-banner-icon">🎁</div>
+      <div><strong>Sí ofrecemos una clase de prueba gratuita en vivo por Zoom.</strong> El lead elige el curso (PowerSplit, Arcos360 o Prepa Física) y se coordina el horario por WhatsApp según su disponibilidad.</div>
     </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div style="background:#F0FFF4;border:1px solid #C3E6CB;border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:8px">✅ Cuándo ofrecerla</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#4A4A4A">
+          <div>• Lead nuevo que no conoce el método</div>
+          <div>• Lead que duda si es para su nivel</div>
+          <div>• Lead frío que necesita vivir la experiencia antes de comprar</div>
+        </div>
+      </div>
+      <div style="background:#FFF8F0;border:1px solid #F4792040;border-radius:10px;padding:14px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#F47920;margin-bottom:8px">⚡ Cómo funciona</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#4A4A4A">
+          <div>• Clase en vivo por Zoom</div>
+          <div>• Elige el curso que quiere probar</div>
+          <div>• Se coordina el horario por WhatsApp</div>
+          <div>• Al final, Cami o el equipo hace el seguimiento</div>
+        </div>
+      </div>
+    </div>
+
     <div class="msg-box">
       <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
+        <div class="msg-label">💬 Cuando el lead pide una clase gratis o quiere probar primero</div>
         <div class="msg-who">Equipo CGC</div>
       </div>
-      <div class="msg-content" id="msg-23">Por ahora no contamos con clases gratuitas 💛
+      <div class="msg-content" id="msg-23">¡Sí tenemos clase de prueba gratuita en vivo por Zoom! 💛
 
-Pero puedes practicar con el contenido gratuito de Cami en YouTube:
-https://www.youtube.com/@camilagaray_coach
+Puedes elegir el curso que más se adapte a tu objetivo: PowerSplit, Arcos360 o Preparación Física.
 
-Y si quieres avanzar con correcciones reales y seguimiento, ahí sí te recomendaría tomar una clase en vivo ✨</div>
+La coordinamos según tu disponibilidad. ¿Cuál te interesa probar y en qué horario te acomoda más: mañana, tarde o noche?</div>
       <div class="msg-footer">
         <button class="copy-btn" onclick="copyMsg('msg-23', this)">📋 Copiar mensaje</button>
+      </div>
+    </div>
+
+    <div class="msg-box" style="margin-top:12px">
+      <div class="msg-header">
+        <div class="msg-label">💬 Seguimiento después de la clase de prueba</div>
+        <div class="msg-who">Cami / Equipo</div>
+      </div>
+      <div class="msg-content" id="msg-23b">¿Cómo te fue en la clase de prueba? 💛
+
+Me encantaría saber qué te pareció y cómo te sentiste. Si quieres seguir avanzando con correcciones reales y seguimiento constante, podemos armar tu plan ideal.
+
+¿Quieres que te cuente las opciones disponibles? 🔥</div>
+      <div class="msg-footer">
+        <button class="copy-btn" onclick="copyMsg('msg-23b', this)">📋 Copiar mensaje</button>
       </div>
     </div>
   </div>
@@ -2747,7 +2791,8 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
     'ps-a360': { icon:'🔥', name:'PowerSplit + Arcos360',               color:'linear-gradient(135deg,#8B4FC8,#E8302A)', section:'#combinaciones',  msgAlumna:'msg-09', msgMama:'msg-m03' },
     completo:  { icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física', color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', section:'#combinaciones',  msgAlumna:'msg-10', msgMama:'msg-m03' },
     '1a1':       { icon:'🎯', name:'Clase 1:1 directamente con Cami',      color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msgAlumna:'msg-14', msgMama:'msg-m04' },
-    'flexipower': { icon:'🏋️', name:'FlexiPower — Presencial en Acroflex', color:'linear-gradient(135deg,#2E7D32,#43A047)',   section:'#flexipower',     msgAlumna:'msg-fp',  msgMama:'msg-fp' }
+    'flexipower': { icon:'🏋️', name:'FlexiPower — Presencial en Acroflex', color:'linear-gradient(135deg,#2E7D32,#43A047)',   section:'#flexipower',     msgAlumna:'msg-fp',  msgMama:'msg-fp' },
+    'prueba':     { icon:'🎁', name:'Clase de prueba gratuita',             color:'linear-gradient(135deg,#2E7D32,#43A047)',   section:'#clase-gratis',   msgAlumna:'msg-23',  msgMama:'msg-23' }
   };
 
   let wzState = { isMama: false, isLima: false };
@@ -2783,11 +2828,19 @@ Qué emoción acompañarte. Vamos con todo 🔥</div>
   }
 
   function wzBuildFlow(key) {
-    const isMama = wzState.isMama, isLima = wzState.isLima, is1a1 = key === '1a1', isFP = key === 'flexipower';
-    const recMsgId = { powersplit:'msg-06', arcos360:'msg-07', prepa:'msg-08', 'ps-a360':'msg-09', completo:'msg-10', '1a1':'msg-14', flexipower:'msg-fp' };
-    const recMsgMama = { powersplit:'msg-m03', arcos360:'msg-m03', prepa:'msg-m03', 'ps-a360':'msg-m03', completo:'msg-m03', '1a1':'msg-m04', flexipower:'msg-fp' };
-    const recNotes = { powersplit:'Adaptar mencionando PowerSplit', arcos360:'Adaptar mencionando Arcos360', prepa:'Adaptar mencionando Prepa Física', 'ps-a360':'Adaptar: PowerSplit + Arcos360', completo:'Adaptar: PowerSplit + Arcos360 + Prepa Física', '1a1':null, flexipower:null };
+    const isMama = wzState.isMama, isLima = wzState.isLima, is1a1 = key === '1a1', isFP = key === 'flexipower', isPrueba = key === 'prueba';
+    const recMsgId = { powersplit:'msg-06', arcos360:'msg-07', prepa:'msg-08', 'ps-a360':'msg-09', completo:'msg-10', '1a1':'msg-14', flexipower:'msg-fp', prueba:'msg-23' };
+    const recMsgMama = { powersplit:'msg-m03', arcos360:'msg-m03', prepa:'msg-m03', 'ps-a360':'msg-m03', completo:'msg-m03', '1a1':'msg-m04', flexipower:'msg-fp', prueba:'msg-23' };
+    const recNotes = { powersplit:'Adaptar mencionando PowerSplit', arcos360:'Adaptar mencionando Arcos360', prepa:'Adaptar mencionando Prepa Física', 'ps-a360':'Adaptar: PowerSplit + Arcos360', completo:'Adaptar: PowerSplit + Arcos360 + Prepa Física', '1a1':null, flexipower:null, prueba:null };
     const steps = [];
+
+    // Flujo clase de prueba — directo, sin pasos innecesarios
+    if (isPrueba) {
+      steps.push({ num:1, who:'Equipo CGC', label:'Saludo y pedido de datos', id:'msg-01', note:null });
+      steps.push({ num:2, who:'Equipo CGC', label:'Ofrecer clase de prueba gratuita', id:'msg-23', note:'Coordinar horario según disponibilidad del lead. Elige el curso: PowerSplit, Arcos360 o Prepa Física.' });
+      steps.push({ num:3, who:'Cami / Equipo', label:'Seguimiento después de la clase de prueba', id:'msg-23b', note:'Enviar dentro de las 24h siguientes a la clase de prueba.' });
+      return steps;
+    }
 
     // 1 - Primer mensaje
     steps.push({ num:1, who:'Equipo CGC', label:'Saludo y pedido de datos', id: isMama ? 'msg-m01' : 'msg-01', note:null });
