@@ -3,3042 +3,676 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Manual Operativo CGC Method – WhatsApp</title>
+<title>Guía de Asesoría – CGC METHOD</title>
 <style>
-  :root {
-    --red: #E8302A;
-    --red-dark: #C0201A;
-    --orange: #F07820;
-    --purple: #8B4FC8;
-    --blue: #4A7FD4;
-    --grad: linear-gradient(90deg, #F07820 0%, #C040A0 50%, #4A7FD4 100%);
-    --grad-btn: linear-gradient(135deg, #E8302A 0%, #C040A0 60%, #4A7FD4 100%);
-    --accent: #E8302A;
-    --accent-light: #FDECEA;
-    --accent-pale: #FFF5F4;
-    --dark: #1A1A1A;
-    --gray: #4A4A4A;
-    --gray-light: #F5F5F7;
-    --border: #E5E0E0;
-    --white: #FFFFFF;
-    --sidebar-w: 280px;
-    --success: #2E7D32;
-  }
+:root {
+  --red:#E8302A; --orange:#F07820; --pink:#C040A0; --purple:#8B4FC8; --blue:#4A7FD4;
+  --green:#2E7D32;
+  --grad:linear-gradient(90deg,#F07820 0%,#C040A0 50%,#4A7FD4 100%);
+  --grad-btn:linear-gradient(135deg,#E8302A 0%,#C040A0 60%,#4A7FD4 100%);
+  --dark:#1A1A1A; --gray:#4A4A4A; --gray-light:#F5F5F7; --border:#E5E0E0; --white:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#EDEAF0;min-height:100vh}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:52px;background:#111;display:flex;align-items:center;padding:0 20px;z-index:300;gap:10px}
+.tb-logo{font-weight:800;font-size:15px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tb-sep{color:#444;font-size:16px}
+.tb-sub{font-size:12px;color:#777}
+.tb-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tb-countdown{font-size:11px;color:#aaa;background:rgba(255,255,255,0.07);padding:4px 10px;border-radius:20px}
+.tb-countdown b{color:var(--orange)}
+.btn-prices{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;cursor:pointer;transition:background .15s}
+.btn-prices:hover{background:rgba(255,255,255,0.18)}
 
-  body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: var(--dark);
-    background: var(--gray-light);
-    line-height: 1.65;
-  }
+/* META BANNER */
+.meta{margin-top:52px;background:linear-gradient(135deg,#1A1A1A,#2A0A0A 60%,#1A0A2A);padding:12px 22px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap}
+.meta-goal{font-size:18px;font-weight:800;color:#fff;white-space:nowrap}
+.meta-goal b{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.meta-bar-wrap{flex:1;min-width:160px}
+.meta-track{background:rgba(255,255,255,0.12);border-radius:20px;height:7px;overflow:hidden}
+.meta-fill{height:100%;border-radius:20px;background:var(--grad);transition:width .5s ease}
+.meta-pct{font-size:11px;color:#777;margin-top:3px}
+.meta-pct b{color:var(--orange)}
+.meta-inp-wrap{display:flex;align-items:center;gap:6px}
+.meta-inp-lbl{font-size:11px;color:#666;white-space:nowrap}
+.meta-inp{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;color:#fff;font-size:13px;font-weight:600;width:100px;outline:none}
+.meta-bonus{font-size:11px;color:#777;white-space:nowrap}
+.meta-bonus b{color:var(--orange)}
 
-  /* ── TOP BAR ── */
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 60px;
-    background: var(--dark);
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    z-index: 200;
-    gap: 12px;
-  }
-  .topbar-logo {
-    font-weight: 800;
-    font-size: 17px;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 0.5px;
-  }
-  .topbar-logo span { -webkit-text-fill-color: var(--white); color: var(--white); font-weight: 400; }
-  .topbar-badge {
-    background: var(--red);
-    color: var(--white);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .topbar-right {
-    margin-left: auto;
-    font-size: 12px;
-    color: #888;
-  }
+/* MAIN */
+.main{min-height:calc(100vh - 52px - 48px);display:flex;align-items:flex-start;justify-content:center;padding:28px 14px 80px}
+.wizard{width:100%;max-width:640px}
 
-  /* ── LAYOUT ── */
-  .layout {
-    display: flex;
-    margin-top: 60px;
-    min-height: calc(100vh - 60px);
-  }
+/* START SCREEN */
+.start-screen{background:var(--white);border-radius:20px;padding:48px 36px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.start-icon{font-size:52px;margin-bottom:14px}
+.start-title{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
+.start-title b{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-desc{font-size:15px;color:var(--gray);margin-bottom:30px;line-height:1.6}
+.btn-start{background:var(--grad-btn);color:#fff;font-size:16px;font-weight:700;padding:13px 38px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(232,48,42,.3);transition:transform .15s,box-shadow .15s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,48,42,.4)}
+.start-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.chip{background:var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gray)}
 
-  /* ── SIDEBAR ── */
-  .sidebar {
-    width: var(--sidebar-w);
-    position: fixed;
-    top: 60px;
-    bottom: 0;
-    left: 0;
-    overflow-y: auto;
-    background: var(--white);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    z-index: 100;
-  }
-  .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+/* STEP */
+.step-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.btn-back{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:all .15s}
+.btn-back:hover{background:var(--gray-light)}
+.step-dots{display:flex;gap:6px;flex:1;justify-content:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .2s}
+.dot.done{background:var(--pink)}
+.dot.active{background:var(--red);width:22px;border-radius:4px}
+.step-card{background:var(--white);border-radius:20px;padding:34px 32px 38px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.step-num{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.step-q{font-size:22px;font-weight:800;line-height:1.25;margin-bottom:8px}
+.step-sub{font-size:14px;color:#888;margin-bottom:26px}
+.opt{width:100%;text-align:left;background:var(--white);border:2px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.opt:hover{border-color:var(--red);background:#FFF5F4;transform:translateX(3px)}
+.opt:last-child{margin-bottom:0}
+.opt-icon{font-size:26px;flex-shrink:0}
+.opt-txt{flex:1}
+.opt-lbl{font-size:15px;font-weight:700;color:var(--dark)}
+.opt-dsc{font-size:13px;color:#888;margin-top:2px;line-height:1.4}
+.opt-arr{font-size:18px;color:#ccc;flex-shrink:0}
 
-  .sidebar-section-title {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: #AAA;
-    padding: 12px 20px 4px;
-  }
-  .sidebar a {
-    display: block;
-    padding: 7px 20px;
-    font-size: 13px;
-    color: var(--gray);
-    text-decoration: none;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
-    line-height: 1.35;
-  }
-  .sidebar a:hover {
-    color: var(--dark);
-    background: var(--accent-pale);
-    border-left-color: var(--red);
-  }
-  .sidebar a.active {
-    color: var(--dark);
-    font-weight: 600;
-    background: var(--accent-pale);
-    border-left-color: var(--red);
-  }
+/* RESULT */
+.res-profile{background:var(--white);border-radius:16px;padding:18px 22px;margin-bottom:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.res-profile-icon{font-size:30px;flex-shrink:0}
+.res-profile-lbl{font-size:15px;font-weight:700;margin-bottom:6px}
+.res-tags{display:flex;gap:6px;flex-wrap:wrap}
+.res-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--gray-light);color:var(--gray)}
+.rec-banner{border-radius:16px;padding:20px 22px;margin-bottom:16px;color:#fff;display:flex;align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.rec-icon{font-size:34px;flex-shrink:0}
+.rec-lbl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.8;margin-bottom:4px}
+.rec-name{font-size:19px;font-weight:800;line-height:1.2}
+.rec-note{font-size:12px;opacity:.85;margin-top:4px}
+.fp-bonus{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #A5D6A7;border-radius:14px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:flex-start;gap:12px}
+.fp-icon{font-size:22px}
+.fp-txt{font-size:13px;color:#2E7D32;font-weight:600;line-height:1.5}
+.fp-txt span{display:block;font-weight:400;color:#4A7A4A;font-size:12px;margin-top:2px}
+.msgs-title{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#999;margin-bottom:10px;padding:0 4px}
+.msg-step{background:var(--white);border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.msg-head{display:flex;align-items:center;gap:10px;padding:11px 15px 10px;border-bottom:1px solid var(--border)}
+.msg-num{width:22px;height:22px;border-radius:50%;background:var(--grad-btn);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-lbl{font-size:13px;font-weight:700;flex:1}
+.msg-who{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.who-cami{background:#FDECEA;color:var(--red)}
+.who-team{background:#E8F4FD;color:#1565C0}
+.msg-body{padding:13px 15px}
+.msg-txt{font-size:14px;color:var(--gray);line-height:1.65;white-space:pre-line;background:var(--gray-light);border-radius:10px;padding:11px 13px;margin-bottom:9px}
+.msg-note{font-size:12px;color:var(--orange);font-weight:600;background:#FFF8F0;border-radius:8px;padding:7px 11px;margin-bottom:9px;display:flex;align-items:flex-start;gap:5px}
+.msg-action{font-size:13px;color:var(--purple);font-weight:600;background:#F5F0FF;border-radius:10px;padding:12px 14px}
+.copy-btn{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:7px 15px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:#333}
+.copy-btn.ok{background:var(--green)}
+.msg-attach{font-size:12px;color:#888;font-style:italic;border-top:1px dashed var(--border);padding:8px 15px;display:flex;align-items:center;gap:5px}
+.res-actions{text-align:center;margin-top:22px;padding-bottom:40px}
+.btn-restart{background:var(--white);border:2px solid var(--border);border-radius:12px;padding:11px 26px;font-size:14px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s}
+.btn-restart:hover{border-color:var(--red);color:var(--red);background:#FFF5F4}
 
-  /* ── MAIN ── */
-  .main {
-    margin-left: var(--sidebar-w);
-    flex: 1;
-    padding: 40px 48px 80px;
-    max-width: 900px;
-  }
+/* PRICING DRAWER */
+.p-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;opacity:0;pointer-events:none;transition:opacity .25s}
+.p-overlay.open{opacity:1;pointer-events:all}
+.p-drawer{position:fixed;top:0;right:0;bottom:0;width:460px;max-width:95vw;background:var(--white);z-index:500;overflow-y:auto;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.15)}
+.p-drawer.open{transform:translateX(0)}
+.p-head{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);padding:15px 18px;display:flex;align-items:center;gap:12px;z-index:10}
+.p-title{font-size:16px;font-weight:800;flex:1}
+.btn-close{background:var(--gray-light);border:none;border-radius:8px;width:30px;height:30px;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray)}
+.p-body{padding:18px}
+.p-sec{margin-bottom:26px}
+.p-sec-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#888;margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.cur-toggle{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.cur-toggle span{font-size:13px;color:var(--gray);font-weight:600}
+.tog{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:var(--white);color:var(--gray);transition:all .15s}
+.tog.on{border-color:var(--red);background:var(--red);color:#fff}
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pc{border-radius:12px;padding:13px;color:#fff}
+.pc-name{font-size:11px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.4px}
+.pc-cl{font-size:10px;opacity:.7;margin-bottom:6px}
+.pc-price{font-size:23px;font-weight:800;line-height:1.1;margin-bottom:2px}
+.pc-per{font-size:11px;opacity:.8}
+.pc-save{font-size:11px;opacity:.85;font-weight:600;margin-top:4px}
+.t1a1{width:100%;border-collapse:collapse;font-size:13px}
+.t1a1 th{text-align:left;padding:7px 9px;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)}
+.t1a1 td{padding:9px;border-bottom:1px solid var(--border);color:var(--gray)}
+.t1a1 td:first-child{font-weight:600;color:var(--dark)}
+.t1a1 td:last-child{font-weight:700;color:var(--red)}
+.t1a1 tr:last-child td{border-bottom:none}
+.info-box{font-size:12px;border-radius:8px;padding:10px 12px;margin-top:10px}
 
-  /* ── HERO ── */
-  .hero {
-    background: linear-gradient(135deg, #1A1A1A 0%, #2A0A0A 50%, #1A0A2A 100%);
-    border-radius: 16px;
-    padding: 48px 40px;
-    margin-bottom: 48px;
-    color: var(--white);
-  }
-  .hero-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 10px;
-  }
-  .hero h1 {
-    font-size: 32px;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-  .hero h1 span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero p {
-    color: #CCC;
-    font-size: 15px;
-    max-width: 520px;
-  }
-  .hero-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 28px;
-    flex-wrap: wrap;
-  }
-  .hero-stat {
-    text-align: center;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 12px 20px;
-  }
-  .hero-stat-num {
-    font-size: 22px;
-    font-weight: 800;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-stat-label {
-    font-size: 11px;
-    color: #999;
-    margin-top: 2px;
-  }
-
-  /* ── PART HEADER ── */
-  .part-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 48px 0 24px;
-    padding-bottom: 16px;
-    border-bottom: 3px solid transparent;
-    border-image: var(--grad) 1;
-  }
-  .part-header:first-of-type { margin-top: 0; }
-  .part-icon {
-    width: 44px; height: 44px;
-    background: var(--grad-btn);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .part-header h2 {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--dark);
-  }
-  .part-header h2 span {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 2px;
-  }
-
-  /* ── SECTION ── */
-  .section {
-    margin-bottom: 36px;
-    scroll-margin-top: 80px;
-  }
-  .section h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--dark);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section h3 .num {
-    background: var(--accent-pale);
-    border: 1px solid #FFBDBB;
-    color: var(--red);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 1px 7px;
-    border-radius: 20px;
-  }
-
-  /* ── CARDS ── */
-  .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 16px;
-  }
-  .card p, .card li { font-size: 14px; color: var(--gray); margin-bottom: 6px; }
-  .card ul, .card ol { padding-left: 20px; margin-top: 6px; }
-  .card li { margin-bottom: 4px; }
-  .card strong { color: var(--dark); }
-
-  /* ── ROLE CARDS ── */
-  .roles-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  .role-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-  }
-  .role-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  .role-avatar {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .role-avatar.cami { background: #FDECEA; color: var(--red); }
-  .role-avatar.team { background: #E8F4FD; color: #1976D2; }
-  .role-name { font-weight: 700; font-size: 15px; }
-  .role-sub { font-size: 12px; color: #888; }
-  .role-card ul { padding-left: 16px; }
-  .role-card li { font-size: 13px; color: var(--gray); margin-bottom: 5px; }
-
-  /* ── TONE GRID ── */
-  .tone-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .tone-block {
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .tone-block.avoid { background: #FFF5F5; border: 1px solid #FFD0D0; }
-  .tone-block.use { background: #F0FFF4; border: 1px solid #C3E6CB; }
-  .tone-block-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .tone-block.avoid .tone-block-title { color: #C62828; }
-  .tone-block.use .tone-block-title { color: #2E7D32; }
-  .tone-tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    margin: 3px 3px 3px 0;
-  }
-  .tone-block.avoid .tone-tag { background: #FFEBEE; color: #C62828; }
-  .tone-block.use .tone-tag { background: #E8F5E9; color: #2E7D32; }
-
-  /* ── MESSAGE BOX ── */
-  .msg-box {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-  .msg-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-    background: var(--accent-pale);
-    border-bottom: 1px solid #FFCDD2;
-  }
-  .msg-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--red-dark);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .msg-who {
-    font-size: 11px;
-    color: #888;
-    font-weight: 500;
-  }
-  .msg-content {
-    padding: 16px 18px;
-    font-size: 14px;
-    color: var(--dark);
-    white-space: pre-line;
-    line-height: 1.7;
-  }
-  .msg-footer {
-    display: flex;
-    justify-content: flex-end;
-    padding: 8px 14px;
-    border-top: 1px solid var(--border);
-    background: #FAFAFA;
-  }
-  .copy-btn {
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 5px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gray);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .copy-btn:hover {
-    background: var(--accent-pale);
-    border-color: var(--red);
-    color: var(--dark);
-  }
-  .copy-btn.copied {
-    background: #E8F5E9;
-    border-color: #81C784;
-    color: var(--success);
-  }
-
-  /* ── TRIGGERS ── */
-  .triggers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .trigger-tag {
-    background: var(--accent-pale);
-    border: 1px solid #FFCDD2;
-    color: var(--red-dark);
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-
-  /* ── FLOW ── */
-  .flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-bottom: 16px;
-  }
-  .flow-step {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  .flow-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-  }
-  .flow-dot {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: var(--grad-btn);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-    flex-shrink: 0;
-  }
-  .flow-connector {
-    width: 2px;
-    flex: 1;
-    min-height: 24px;
-    background: linear-gradient(180deg, #E8302A, #C040A0);
-    margin: 2px 0;
-  }
-  .flow-body {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 16px;
-    flex: 1;
-    margin-bottom: 8px;
-  }
-  .flow-body strong { font-size: 14px; color: var(--dark); }
-  .flow-body p { font-size: 13px; color: var(--gray); margin-top: 3px; }
-
-  /* ── VIGENCIA TABLE ── */
-  .vigencia-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-  .vigencia-table th {
-    background: var(--dark);
-    color: var(--orange);
-    padding: 10px 16px;
-    text-align: left;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-  }
-  .vigencia-table td {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  .vigencia-table tr:last-child td { border-bottom: none; }
-  .vigencia-table tr:nth-child(even) td { background: var(--accent-pale); }
-
-  /* ── INFO BANNER ── */
-  .info-banner {
-    border-radius: 10px;
-    padding: 14px 18px;
-    margin-bottom: 16px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 14px;
-  }
-  .info-banner.gold { background: #FFF8F0; border: 1px solid #FFCC99; color: #7A3A00; }
-  .info-banner.blue { background: #EEF4FF; border: 1px solid #BDD0FF; color: #1A3A7A; }
-  .info-banner.red { background: #FFF5F5; border: 1px solid #FFD0D0; color: #7A1A1A; }
-  .info-banner-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-
-  /* ── WIZARD ── */
-  .wz-step { animation: wzFade 0.2s ease; }
-  @keyframes wzFade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-  .wz-btn:hover { border-color: var(--red) !important; background: var(--accent-pale) !important; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(232,48,42,0.12); }
-  .wz-opt-btn {
-    display: flex; align-items: center; gap: 12px;
-    background: #fff; border: 1.5px solid var(--border);
-    border-radius: 10px; padding: 12px 16px;
-    cursor: pointer; text-align: left; width: 100%;
-    transition: all 0.15s;
-  }
-  .wz-opt-btn:hover { border-color: var(--red); background: var(--accent-pale); transform: translateX(4px); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .sidebar { display: none; }
-    .main { margin-left: 0; padding: 24px 20px 60px; }
-    .roles-grid, .tone-grid { grid-template-columns: 1fr; }
-  }
+@media(max-width:580px){
+  .main{padding:14px 10px 60px}
+  .step-card{padding:22px 18px 26px}
+  .start-screen{padding:36px 20px}
+  .price-grid{grid-template-columns:1fr}
+  .meta-inp-wrap,.meta-bonus{display:none}
+}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
-  <div class="topbar-logo">CGC METHOD <span>— Manual Operativo</span></div>
-  <div class="topbar-badge">WhatsApp</div>
-  <div class="topbar-right">Solo para uso interno del equipo</div>
+  <div class="tb-logo">CGC METHOD</div>
+  <div class="tb-sep">|</div>
+  <div class="tb-sub">Guía de Asesoría</div>
+  <div class="tb-right">
+    <div class="tb-countdown">⏱ <b id="cd">--</b></div>
+    <button class="btn-prices" onclick="openP()">💰 Ver precios</button>
+  </div>
 </div>
 
-<!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-section-title">⚡ Inicio rápido</div>
-  <a href="#guia-rapida" style="font-weight:700;color:var(--red)">¿Qué recomendar? → Árbol</a>
-
-  <div class="sidebar-section-title">Introducción</div>
-  <a href="#objetivo">Objetivo del manual</a>
-  <a href="#tono">Tono de comunicación</a>
-  <a href="#roles">Roles del equipo</a>
-
-  <div class="sidebar-section-title">Parte 1 · Primer Contacto</div>
-  <a href="#primer-mensaje">👤 Escribe la alumna/o</a>
-  <a href="#flujo-mamas">👩‍👧 Escribe una mamá o papá</a>
-  <a href="#incompleto">Lead responde incompleto</a>
-  <a href="#peru">Lead está en Perú</a>
-  <a href="#objetivo-lead">Lead cuenta su objetivo</a>
-
-  <div class="sidebar-section-title">Parte 2 · Clases Grupales</div>
-  <a href="#flexipower" style="color:#2E7D32;font-weight:600">🏋️ FlexiPower (Lima presencial)</a>
-  <a href="#cuando-grupales">Cuándo recomendar grupales</a>
-  <a href="#powersplit">PowerSplit</a>
-  <a href="#arcos360">Arcos360</a>
-  <a href="#prepa-fisica">Preparación Física</a>
-  <a href="#combinaciones">Combinaciones</a>
-  <a href="#horarios-valores">Horarios y valores</a>
-  <a href="#paquetes-grupales">Paquetes y precios grupales</a>
-  <a href="#reforzar-cierre">Reforzar antes del cierre</a>
-  <a href="#elige-grupal">Lead elige paquete grupal</a>
-
-  <div class="sidebar-section-title">Parte 3 · Clases 1:1</div>
-  <a href="#cuando-1a1">Cuándo recomendar 1:1</a>
-  <a href="#recomendar-1a1">Mensaje para recomendar</a>
-  <a href="#modalidades-1a1">Modalidades 1:1</a>
-  <a href="#valores-1a1">Valores 1:1</a>
-  <a href="#paquetes-1a1">Paquetes y precios 1:1</a>
-  <a href="#antes-cerrar-1a1">Antes de cerrar</a>
-  <a href="#elige-1a1">Lead elige 1:1</a>
-
-  <div class="sidebar-section-title">Parte 4 · Casos Especiales</div>
-  <a href="#acrobacias">Acrobacias online</a>
-  <a href="#menor-edad">Menor de edad</a>
-  <a href="#papa-mama">Mamá o papá</a>
-  <a href="#clase-gratis">🎁 Clase de prueba gratuita</a>
-  <a href="#lo-pienso">«Lo voy a pensar»</a>
-  <a href="#pagos">Pagos</a>
-
-  <div class="sidebar-section-title">Parte 5 · Después del Pago</div>
-  <a href="#post-pago-grupal">Post-pago grupales</a>
-  <a href="#mensaje-carlos-ariana">Mensaje Carlos / Ariana</a>
-  <a href="#vigencia">Vigencia de paquetes</a>
-  <a href="#post-pago-1a1">Post-pago 1:1</a>
-
-  <div class="sidebar-section-title">Parte 6 · Flujo</div>
-  <a href="#flujo-completo">Flujo completo</a>
-
-  <div class="sidebar-section-title">Parte 7 · Regla Final</div>
-  <a href="#enfoque-venta">Enfoque de venta</a>
+<!-- META -->
+<div class="meta">
+  <div>
+    <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Meta de junio</div>
+    <div class="meta-goal"><b>S/26,000</b></div>
+  </div>
+  <div class="meta-bar-wrap">
+    <div class="meta-track"><div class="meta-fill" id="mfill" style="width:0%"></div></div>
+    <div class="meta-pct" id="mpct">S/0 de S/26,000 — <b>0%</b></div>
+  </div>
+  <div class="meta-inp-wrap">
+    <span class="meta-inp-lbl">S/ vendido:</span>
+    <input type="number" id="minp" class="meta-inp" placeholder="0" min="0" oninput="updMeta(this.value)" />
+  </div>
+  <div class="meta-bonus">🎯 Meta = <b>+15% bono</b> Carlos y Ari</div>
 </div>
 
 <!-- MAIN -->
-<div class="layout">
-<main class="main">
+<div class="main">
+  <div class="wizard" id="wiz">
 
-  <!-- META DEL MES -->
-  <div style="background:linear-gradient(135deg,#1A1A1A 0%,#2A0A0A 55%,#1A0A2A 100%);border-radius:16px;padding:28px 32px;margin-bottom:20px;color:#fff">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px">
-      <div style="flex:1;min-width:220px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:6px">🎯 Meta del mes — Junio 2026</div>
-        <div style="font-size:40px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1">S/26,000</div>
-        <div style="font-size:13px;color:#CCC;margin-top:8px">Si llegan a la meta:<br><strong style="color:#fff;font-size:14px">Carlos y Ariana reciben un bono del 15% de su sueldo 🎉</strong></div>
-      </div>
-      <div style="text-align:center;flex-shrink:0">
-        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#666;margin-bottom:8px">⏳ Tiempo restante</div>
-        <div style="display:flex;gap:6px;align-items:center">
-          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums" id="cd-days">--</div><div style="font-size:10px;color:#666;margin-top:2px">días</div></div>
-          <div style="color:#444;font-size:20px;font-weight:300">:</div>
-          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums" id="cd-hours">--</div><div style="font-size:10px;color:#666;margin-top:2px">horas</div></div>
-          <div style="color:#444;font-size:20px;font-weight:300">:</div>
-          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums" id="cd-mins">--</div><div style="font-size:10px;color:#666;margin-top:2px">min</div></div>
-          <div style="color:#444;font-size:20px;font-weight:300">:</div>
-          <div style="background:rgba(232,48,42,0.2);border:1px solid rgba(232,48,42,0.4);border-radius:10px;padding:10px 14px;min-width:54px;text-align:center"><div style="font-size:26px;font-weight:800;color:var(--red);font-variant-numeric:tabular-nums" id="cd-secs">--</div><div style="font-size:10px;color:#666;margin-top:2px">seg</div></div>
+    <div id="sc-start">
+      <div class="start-screen">
+        <div class="start-icon">🎯</div>
+        <div class="start-title">Guía de <b>Asesoría CGC</b></div>
+        <div class="start-desc">Responde las preguntas sobre el lead y te damos el guión exacto de mensajes para cerrar la venta paso a paso.</div>
+        <button class="btn-start" onclick="start()">➕ Nueva asesoría</button>
+        <div class="start-chips">
+          <span class="chip">👧 Niños y adultos</span>
+          <span class="chip">🌎 Perú y exterior</span>
+          <span class="chip">💪 Con o sin experiencia</span>
+          <span class="chip">📋 Mensajes listos para copiar</span>
         </div>
-        <div style="font-size:11px;color:#555;margin-top:6px">Vence el 30 de junio de 2026</div>
       </div>
     </div>
-    <div style="margin-top:20px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-        <div style="font-size:12px;color:#888">Progreso de ventas del mes</div>
-        <div style="font-size:12px;color:#CCC">S/<span id="ventas-display">0</span> de S/26,000 — <span id="pct-display">0</span>%</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:20px;height:12px;overflow:hidden;margin-bottom:10px">
-        <div id="progress-fill" style="background:var(--grad);height:100%;border-radius:20px;width:0%;transition:width 0.6s ease"></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <span style="font-size:12px;color:#888">Actualizar ventas acumuladas:</span>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="font-size:14px;color:#aaa;font-weight:600">S/</span>
-          <input type="number" id="ventas-input" placeholder="0" min="0" max="50000" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:5px 10px;color:#fff;font-size:14px;font-weight:600;width:110px;outline:none" oninput="updateProgress(this.value)" />
-        </div>
-        <span id="meta-badge" style="display:none;background:linear-gradient(90deg,#2E7D32,#43A047);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px">🎉 ¡META ALCANZADA!</span>
-      </div>
-    </div>
+
+    <div id="sc-step" style="display:none"></div>
+    <div id="sc-result" style="display:none"></div>
+
   </div>
+</div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-label">Manual Operativo · Uso interno</div>
-    <h1>Manual de Ventas<br><span>CGC Method WhatsApp</span></h1>
-    <p>Guía completa para atención al lead, recomendación de cursos, cierre y derivación post-pago. Todo el equipo, un mismo flujo.</p>
-    <div class="hero-meta">
-      <div class="hero-stat">
-        <div class="hero-stat-num">7</div>
-        <div class="hero-stat-label">Partes</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">35</div>
-        <div class="hero-stat-label">Secciones</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">3</div>
-        <div class="hero-stat-label">Roles del equipo</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">💛</div>
-        <div class="hero-stat-label">Tono cálido</div>
-      </div>
-    </div>
+<!-- PRICING -->
+<div class="p-overlay" id="pov" onclick="closeP()"></div>
+<div class="p-drawer" id="pdraw">
+  <div class="p-head">
+    <div class="p-title">💰 Precios y paquetes</div>
+    <button class="btn-close" onclick="closeP()">✕</button>
   </div>
+  <div class="p-body">
 
-  <!-- TEASER ASESOR RÁPIDO (la herramienta vive en el modal flotante) -->
-  <div class="section" id="guia-rapida" style="scroll-margin-top:80px">
-    <button onclick="wzOpenModal()" style="width:100%;background:linear-gradient(135deg,#1A1A1A 0%,#2A0A0A 50%,#1A0A2A 100%);border:none;border-radius:16px;padding:28px 32px;cursor:pointer;text-align:left;position:relative;overflow:hidden;transition:transform 0.15s,box-shadow 0.15s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(232,48,42,0.25)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-      <div style="position:absolute;top:0;right:0;bottom:0;width:180px;background:linear-gradient(90deg,transparent,rgba(232,48,42,0.08));pointer-events:none"></div>
-      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:8px">⚡ Herramienta del equipo</div>
-      <div style="font-size:26px;font-weight:800;color:#fff;margin-bottom:6px">Asesor Rápido</div>
-      <div style="font-size:14px;color:#AAA;margin-bottom:20px">3 clics y obtienes el guión completo con los mensajes en orden</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
-        <span style="background:rgba(255,255,255,0.08);color:#CCC;font-size:12px;padding:4px 12px;border-radius:20px">¿Quién escribe?</span>
-        <span style="color:#555;font-size:12px">→</span>
-        <span style="background:rgba(255,255,255,0.08);color:#CCC;font-size:12px;padding:4px 12px;border-radius:20px">¿Dónde está?</span>
-        <span style="color:#555;font-size:12px">→</span>
-        <span style="background:rgba(255,255,255,0.08);color:#CCC;font-size:12px;padding:4px 12px;border-radius:20px">¿Qué quiere?</span>
-        <span style="color:#555;font-size:12px">→</span>
-        <span style="background:var(--red);color:#fff;font-size:12px;padding:4px 12px;border-radius:20px;font-weight:700">Guión listo ✓</span>
+    <div class="p-sec">
+      <div class="p-sec-title">Grupales virtuales — PowerSplit · Arcos360 · Prepa Física</div>
+      <div class="cur-toggle">
+        <span>Mostrar en:</span>
+        <button class="tog on" id="tb-usd" onclick="setCur('usd')">USD $</button>
+        <button class="tog" id="tb-sol" onclick="setCur('sol')">Soles S/</button>
       </div>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:var(--grad-btn);color:#fff;font-size:14px;font-weight:700;padding:12px 24px;border-radius:30px">
-        ⚡ Abrir asesor
-        <span style="font-size:16px">→</span>
+      <div class="price-grid">
+        <div class="pc" style="background:linear-gradient(135deg,#C040A0,#4A7FD4)">
+          <div class="pc-name">Básico</div><div class="pc-cl">1 clase/sem · 4/mes</div>
+          <div class="pc-price"><span class="cu-u">$15</span><span class="cu-s" style="display:none">S/45</span></div>
+          <div class="pc-per">por mes</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#F07820,#C040A0)">
+          <div class="pc-name">Intensivo</div><div class="pc-cl">3 clases/sem · 12/mes</div>
+          <div class="pc-price"><span class="cu-u">$45</span><span class="cu-s" style="display:none">S/140</span></div>
+          <div class="pc-per">por mes</div>
+          <div class="pc-save cu-u">Solo $11.25/clase</div>
+          <div class="pc-save cu-s" style="display:none">Solo S/35/clase</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#9A7010,#C09020)">
+          <div class="pc-name">Pack 12 clases</div><div class="pc-cl">Válido 3 meses</div>
+          <div class="pc-price"><span class="cu-u">$80</span><span class="cu-s" style="display:none">S/250</span></div>
+          <div class="pc-save cu-u">💰 Ahorras $40</div>
+          <div class="pc-save cu-s" style="display:none">💰 Ahorras S/80</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#8B4FC8,#E8302A)">
+          <div class="pc-name">Pack 24 clases</div><div class="pc-cl">Válido 6 meses</div>
+          <div class="pc-price"><span class="cu-u">$105</span><span class="cu-s" style="display:none">S/330</span></div>
+          <div class="pc-save cu-u">💰 Ahorras $75</div>
+          <div class="pc-save cu-s" style="display:none">💰 Ahorras S/210</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#1A1A1A,#3A1A3A);border:2px solid #C040A0">
+          <div class="pc-name">Pack 36 clases</div><div class="pc-cl">Válido 9 meses</div>
+          <div class="pc-price"><span class="cu-u">$165</span><span class="cu-s" style="display:none">S/520</span></div>
+          <div class="pc-save cu-u">💰 Ahorras $135</div>
+          <div class="pc-save cu-s" style="display:none">💰 Ahorras S/380</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#E8302A,#F07820)">
+          <div class="pc-name">Pack 48 clases</div><div class="pc-cl">Válido 12 meses</div>
+          <div class="pc-price"><span class="cu-u">$245</span><span class="cu-s" style="display:none">S/770</span></div>
+          <div class="pc-save cu-u">Solo $7.65/clase</div>
+          <div class="pc-save cu-s" style="display:none">Solo S/24/clase</div>
+        </div>
       </div>
-    </button>
+      <div class="info-box" style="background:#f9f9f9;color:#666">💡 El alumno puede combinar PowerSplit + Arcos360 + Prepa Física en el mismo paquete. El precio es la suma de los cursos en la modalidad elegida.</div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-sec-title">Clases 1:1 con Cami Garay</div>
+      <table class="t1a1">
+        <tr><th>Paquete</th><th>Incluye</th><th>Precio</th></tr>
+        <tr><td>Sesión suelta</td><td>1 clase 1:1 · 60 min</td><td>$60 USD</td></tr>
+        <tr><td>CGC ELITE Standard</td><td>8 vivo + 2 grabadas + 2 informes</td><td>$350 USD</td></tr>
+        <tr><td>CGC ELITE Premium</td><td>8 vivo + 4 grabadas + 4 informes</td><td>$500 USD</td></tr>
+      </table>
+      <div class="info-box" style="background:#FFF5F4;color:var(--red);border-left:3px solid var(--red)">⭐ Las clases 1:1 son <strong>siempre directamente con Cami</strong>. No las dicta el equipo.</div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-sec-title">FlexiPower — Presencial en Acroflex (solo Lima)</div>
+      <div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border-radius:12px;padding:15px;border:1px solid #A5D6A7">
+        <div style="font-size:14px;font-weight:700;color:#2E7D32;margin-bottom:5px">🏋️ FlexiPower</div>
+        <div style="font-size:13px;color:#4A7A4A;line-height:1.6">Clases grupales presenciales en Acroflex, Jesús María. Diseñado por Cami, dictadas por sus entrenadores.</div>
+        <div style="margin-top:10px;font-size:13px;font-weight:700;color:#2E7D32">📱 WhatsApp: <span style="font-family:monospace">+51 993 813 336</span></div>
+      </div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-sec-title">Métodos de pago</div>
+      <div style="font-size:13px;color:var(--gray);line-height:1.8">
+        🌎 <strong>Internacional:</strong> Link de pago (tarjeta)<br>
+        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles<br>
+        📋 <strong>Siempre:</strong> Pedir comprobante antes de confirmar
+      </div>
+    </div>
+
   </div>
-
-  <!-- MODAL WIZARD (oculto, se abre con el botón) -->
-  <div id="wz-modal-overlay" onclick="if(event.target===this)wzCloseModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;backdrop-filter:blur(4px)">
-    <div id="wz-modal-panel" style="position:absolute;right:0;top:0;bottom:0;width:480px;max-width:100vw;background:var(--gray-light);overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;display:flex;flex-direction:column">
-      <!-- Modal header -->
-      <div style="background:linear-gradient(135deg,#1A1A1A,#2A0A0A);padding:20px 24px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10">
-        <div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange)">⚡ Asesor Rápido</div>
-          <div style="font-size:17px;font-weight:800;color:#fff;margin-top:2px">¿Qué le recomiendo al lead?</div>
-        </div>
-        <button onclick="wzCloseModal()" style="background:rgba(255,255,255,0.1);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">✕</button>
-      </div>
-
-      <!-- Indicadores de paso -->
-      <div style="background:#fff;padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;gap:5px;align-items:center;flex-wrap:wrap">
-        <div id="wz-ind-1" style="background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;transition:all 0.2s">1 · ¿Quién escribe?</div>
-        <div style="color:#CCC;font-size:11px">→</div>
-        <div id="wz-ind-2" style="background:#E8E8E8;color:#AAA;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;transition:all 0.2s">2 · Ubicación</div>
-        <div style="color:#CCC;font-size:11px">→</div>
-        <div id="wz-ind-3" style="background:#E8E8E8;color:#AAA;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;transition:all 0.2s">3 · Objetivo</div>
-        <div style="color:#CCC;font-size:11px">→</div>
-        <div id="wz-ind-4" style="background:#E8E8E8;color:#AAA;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;transition:all 0.2s">4 · Guión</div>
-      </div>
-
-      <!-- Wizard content -->
-      <div style="padding:20px;flex:1">
-
-    <!-- STEP 1: ¿Quién escribe? -->
-    <div style="display:flex;gap:6px;margin-bottom:20px;align-items:center;flex-wrap:wrap">
-      <div id="wz-ind-1" style="background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">1 · ¿Quién escribe?</div>
-      <div style="color:#CCC;font-size:12px">→</div>
-      <div id="wz-ind-2" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">2 · Ubicación</div>
-      <div style="color:#CCC;font-size:12px">→</div>
-      <div id="wz-ind-3" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">3 · Objetivo</div>
-      <div style="color:#CCC;font-size:12px">→</div>
-      <div id="wz-ind-4" style="background:#E8E8E8;color:#AAA;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;transition:all 0.2s">4 · Recomendación</div>
-    </div>
-
-    <!-- STEP 1: ¿Quién escribe? -->
-    <div id="wz-step-1" class="wz-step">
-      <div style="font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px">¿Quién nos está escribiendo?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <button onclick="wzWho('alumna')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
-          <div style="font-size:36px;margin-bottom:10px">🙋‍♀️</div>
-          <div style="font-size:15px;font-weight:800;color:var(--dark)">La alumna / el alumno</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Escribe directamente la persona que va a tomar las clases</div>
-        </button>
-        <button onclick="wzWho('mama')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
-          <div style="font-size:36px;margin-bottom:10px">👩‍👧</div>
-          <div style="font-size:15px;font-weight:800;color:var(--dark)">Una mamá o papá</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Busca clases para su hija o hijo</div>
-        </button>
-      </div>
-    </div>
-
-    <!-- STEP 2: Ubicación -->
-    <div id="wz-step-2" class="wz-step" style="display:none">
-      <div id="wz-ubicacion-label" style="font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px">¿Dónde está?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <button onclick="wzLocation('lima')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
-          <div style="font-size:36px;margin-bottom:10px">🇵🇪</div>
-          <div style="font-size:15px;font-weight:800;color:var(--dark)">Lima, Perú</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Puede tomar clases presenciales o virtuales</div>
-        </button>
-        <button onclick="wzLocation('exterior')" class="wz-btn" style="background:#fff;border:2px solid var(--border);border-radius:14px;padding:20px 16px;cursor:pointer;text-align:center;transition:all 0.15s">
-          <div style="font-size:36px;margin-bottom:10px">🌎</div>
-          <div style="font-size:15px;font-weight:800;color:var(--dark)">Fuera de Lima o de Perú</div>
-          <div style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.4">Todo online en vivo por Zoom</div>
-        </button>
-      </div>
-      <button onclick="wzSetStep(1)" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver</button>
-    </div>
-
-    <!-- STEP 3: Objetivo -->
-    <div id="wz-step-3" class="wz-step" style="display:none">
-      <div id="wz-objetivo-label" style="font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px">¿Qué quiere lograr?</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button onclick="wzRecommend('powersplit')" class="wz-opt-btn">
-          <span style="font-size:22px">🦵</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Split · Apertura · Levantar más la pierna · Líneas</div>
-            <div style="font-size:11px;color:var(--gray);margin-top:3px">Flexibilidad de piernas</div>
-          </div>
-          <span style="flex-shrink:0;background:linear-gradient(135deg,#C040A0,#4A7FD4);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">PowerSplit</span>
-        </button>
-        <button onclick="wzRecommend('arcos360')" class="wz-opt-btn">
-          <span style="font-size:22px">🌙</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Arco · Puente · Escorpión · Needle · Chin stand</div>
-            <div style="font-size:11px;color:var(--gray);margin-top:3px">Flexibilidad de espalda</div>
-          </div>
-          <span style="flex-shrink:0;background:linear-gradient(135deg,#F07820,#C040A0);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Arcos360</span>
-        </button>
-        <button onclick="wzRecommend('prepa')" class="wz-opt-btn">
-          <span style="font-size:22px">💪</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Fuerza · Giros · Saltos · Equilibrios · Puntas</div>
-            <div style="font-size:11px;color:var(--gray);margin-top:3px">Técnica y potencia física</div>
-          </div>
-          <span style="flex-shrink:0;background:linear-gradient(135deg,#E8302A,#F07820);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Prepa Física</span>
-        </button>
-        <button onclick="wzRecommend('ps-a360')" class="wz-opt-btn">
-          <span style="font-size:22px">🔥</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad general completa · Piernas + espalda</div>
-            <div style="font-size:11px;color:var(--gray);margin-top:3px">Quiere trabajar todo</div>
-          </div>
-          <span style="flex-shrink:0;background:linear-gradient(135deg,#8B4FC8,#E8302A);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">PS + Arcos360</span>
-        </button>
-        <button onclick="wzRecommend('completo')" class="wz-opt-btn">
-          <span style="font-size:22px">⭐</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Mejorar como bailarín/gimnasta de forma integral</div>
-            <div style="font-size:11px;color:var(--gray);margin-top:3px">Flexibilidad + fuerza + técnica completa</div>
-          </div>
-          <span style="flex-shrink:0;background:linear-gradient(135deg,#4A7FD4,#8B4FC8);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Combinación</span>
-        </button>
-        <!-- FlexiPower: solo aparece si eligió Lima -->
-        <div id="wz-flexipower-wrap" style="display:none">
-          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin:6px 0 4px">📍 Opción presencial en Lima</div>
-          <button onclick="wzRecommend('flexipower')" class="wz-opt-btn" style="border-color:#C3E6CB;background:#F0FFF4">
-            <span style="font-size:22px">🏋️</span>
-            <div style="flex:1">
-              <div style="font-size:13px;font-weight:700;color:var(--dark)">Flexibilidad presencial en Lima · Adultos</div>
-              <div style="font-size:11px;color:#2E7D32;margin-top:3px;font-weight:600">Clases grupales en Acroflex — diseñado por Cami, dictado por sus entrenadores</div>
-            </div>
-            <span style="flex-shrink:0;background:linear-gradient(135deg,#2E7D32,#43A047);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">FlexiPower</span>
-          </button>
-        </div>
-
-        <button onclick="wzRecommend('1a1')" class="wz-opt-btn" style="border-color:#FFCDD2;background:var(--accent-pale)">
-          <span style="font-size:22px">🎯</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Meta puntual · Competencia · Rutina · Acrobacia · Técnica específica</div>
-            <div style="font-size:11px;color:var(--red);margin-top:3px;font-weight:600">Objetivo urgente o muy específico → siempre directo con Cami</div>
-          </div>
-          <span style="flex-shrink:0;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Clase 1:1</span>
-        </button>
-
-        <button onclick="wzRecommend('prueba')" class="wz-opt-btn" style="border-color:#C3E6CB;background:#F0FFF4">
-          <span style="font-size:22px">🎁</span>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:700;color:var(--dark)">Quiere probar antes de comprar · No conoce el método · Duda si es para su nivel</div>
-            <div style="font-size:11px;color:#2E7D32;margin-top:3px;font-weight:600">Lead nuevo o frío → ofrecer clase de prueba gratuita</div>
-          </div>
-          <span style="flex-shrink:0;background:linear-gradient(135deg,#2E7D32,#43A047);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap">Clase prueba</span>
-        </button>
-      </div>
-      <button onclick="wzSetStep(2)" style="margin-top:12px;background:none;border:none;color:#AAA;font-size:12px;cursor:pointer;padding:6px 0">← Volver</button>
-    </div>
-
-    <!-- STEP 4: Resultado -->
-    <div id="wz-step-4" class="wz-step" style="display:none">
-      <div id="wz-result"></div>
-      <button onclick="wzReset()" style="margin-top:14px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--gray);font-size:13px;cursor:pointer;padding:8px 18px;font-weight:600">↩ Nueva consulta</button>
-    </div>
-
-      </div><!-- /wizard content -->
-    </div><!-- /modal panel -->
-  </div><!-- /modal overlay -->
-
-  <!-- BOTÓN FLOTANTE SIEMPRE VISIBLE -->
-  <button id="wz-fab" onclick="wzOpenModal()" style="position:fixed;bottom:28px;right:28px;z-index:900;background:var(--grad-btn);border:none;border-radius:50px;padding:14px 22px;color:#fff;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,0.4);display:flex;align-items:center;gap:8px;transition:all 0.2s;letter-spacing:0.3px" onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 10px 32px rgba(232,48,42,0.55)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 24px rgba(232,48,42,0.4)'">
-    <span style="font-size:18px">⚡</span>
-    <span>Asesor Rápido</span>
-  </button>
-
-  <!-- ──────────────────────────────── -->
-  <!-- INTRODUCCIÓN -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">🎯</div>
-    <h2><span>Introducción</span>Objetivo, tono y roles</h2>
-  </div>
-
-  <div class="section" id="objetivo">
-    <h3><span class="num">01</span> Objetivo del manual</h3>
-    <div class="card">
-      <p>Este manual guía la atención por WhatsApp de CGC Method para que todo el equipo siga el mismo flujo:</p>
-      <ol>
-        <li>Recibir al lead.</li>
-        <li>Pedir datos importantes.</li>
-        <li>Entender su objetivo.</li>
-        <li>Dar paso a la recomendación de Cami.</li>
-        <li>Enviar información, horarios, valores y beneficios.</li>
-        <li>Guiar el cierre.</li>
-        <li>Después del pago, derivar a Carlos o Ariana para formulario, guía de bienvenida, vigencia del paquete y agendamiento.</li>
-      </ol>
-      <br>
-      <p><strong>La venta debe sentirse como una asesoría personalizada, no como un mensaje automático.</strong></p>
-    </div>
-  </div>
-
-  <div class="section" id="tono">
-    <h3><span class="num">02</span> Tono de comunicación</h3>
-    <div class="card" style="margin-bottom:12px">
-      <p>Responder siempre de forma <strong>cálida, humana, motivadora, clara, profesional y cercana.</strong></p>
-      <p style="margin-top:8px">Usar emojis naturales: 💛✨🔥🤗 &nbsp;· &nbsp;Evitar sonar robótico.</p>
-    </div>
-    <div class="tone-grid">
-      <div class="tone-block avoid">
-        <div class="tone-block-title">🚫 Evitar</div>
-        <span class="tone-tag">precio</span>
-        <span class="tone-tag">lindaaa</span>
-        <span class="tone-tag">hermosaaa</span>
-        <span class="tone-tag">holii</span>
-        <span class="tone-tag">expresiones argentinas</span>
-      </div>
-      <div class="tone-block use">
-        <div class="tone-block-title">✅ Usar</div>
-        <span class="tone-tag">valor</span>
-        <span class="tone-tag">valores</span>
-        <span class="tone-tag">inversión</span>
-        <span class="tone-tag">paquete</span>
-        <span class="tone-tag">Holaa 💛</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="roles">
-    <h3><span class="num">03 – 04</span> Roles del equipo</h3>
-    <div class="info-banner gold">
-      <div class="info-banner-icon">⚠️</div>
-      <div><strong>Regla sobre clases grupales:</strong> Las clases grupales virtuales pueden ser dictadas por Cami o por el equipo de entrenadores CGC. <strong>Las clases 1:1 sí son siempre directamente con Cami.</strong> Aclarar esto de forma natural para que el alumno tenga expectativas claras desde el inicio.</div>
-    </div>
-    <div class="roles-grid">
-      <div class="role-card">
-        <div class="role-card-header">
-          <div class="role-avatar cami">C</div>
-          <div>
-            <div class="role-name">Cami</div>
-            <div class="role-sub">Diagnóstico y recomendación</div>
-          </div>
-        </div>
-        <ul>
-          <li>Diagnosticar el objetivo del lead.</li>
-          <li>Recomendar grupal o 1:1.</li>
-          <li>Recomendar PowerSplit, Arcos360, Prepa Física o combinación.</li>
-          <li>Explicar por qué esa opción conviene.</li>
-          <li>Preguntar si desea horarios y valores.</li>
-          <li>Ayudar a elegir paquete o plan.</li>
-          <li>Guiar el cierre antes del pago.</li>
-        </ul>
-      </div>
-      <div class="role-card">
-        <div class="role-card-header">
-          <div class="role-avatar team">CA</div>
-          <div>
-            <div class="role-name">Carlos y Ariana</div>
-            <div class="role-sub">Operativo · solo post-pago</div>
-          </div>
-        </div>
-        <ul>
-          <li>Datos de pago.</li>
-          <li>Comprobante.</li>
-          <li>Formulario de inscripción.</li>
-          <li>Registro del alumno.</li>
-          <li>Guía de bienvenida.</li>
-          <li>Recordatorio de vigencia.</li>
-          <li>Agendamiento y coordinación de fechas.</li>
-        </ul>
-        <div style="margin-top:10px; padding:8px 12px; background:#FDECEA; border-radius:8px; font-size:12px; color:#C0201A; border:1px solid #FFCDD2;">
-          ⚠️ <strong>No recomiendan cursos ni planes.</strong> Solo entran después del pago.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 1 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">👋</div>
-    <h2><span>Parte 1</span>Primer Contacto</h2>
-  </div>
-
-  <div class="section" id="primer-mensaje">
-    <h3><span class="num">05</span> Primer mensaje</h3>
-    <div class="triggers">
-      <span class="trigger-tag">Hola</span>
-      <span class="trigger-tag">Info</span>
-      <span class="trigger-tag">Quiero información</span>
-      <span class="trigger-tag">Me interesa</span>
-      <span class="trigger-tag">Buenas</span>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-01">Holaa 💛 Somos CGC Method ✨
-En un momento te atendemos para ayudarte a elegir la mejor opción según tu objetivo.
-
-Por favor cuéntanos:
-
-1. Nombre y edad
-2. País
-3. ¿Qué te gustaría lograr con tu cuerpo?
-
-Así podremos asesorarte mejor y decirte si te conviene una clase grupal con el equipo CGC o una clase 1:1 directamente con Cami 🤗</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-01', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="incompleto">
-    <h3><span class="num">06</span> Si el lead responde incompleto</h3>
-    <div class="info-banner gold"><div class="info-banner-icon">💡</div><div>Pedir <strong>solo el dato que falta</strong>: edad / país / objetivo.</div></div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-02">Holaa 💛 Para poder ayudarte mejor, me faltaría saber:
-
-[edad / país / objetivo]
-
-Así podemos recomendarte la mejor opción según tu meta ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-02', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="peru">
-    <h3><span class="num">07</span> Si el lead está en Perú</h3>
-    <div class="info-banner gold"><div class="info-banner-icon">💡</div><div>Siempre preguntar si está en <strong>Lima o provincia</strong> para saber si puede ser presencial.</div></div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-03">Perfecto 💛 ¿Estás en Lima o en provincia?
-
-Te pregunto porque si estás en Lima podemos evaluar opciones presenciales, y si estás en provincia te recomendaría las clases virtuales en vivo por Zoom ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-03', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="objetivo-lead">
-    <h3><span class="num">08</span> Cuando el lead ya cuenta su objetivo</h3>
-    <div class="info-banner blue">
-      <div class="info-banner-icon">👤</div>
-      <div>Aquí entra <strong>Cami</strong> con la recomendación personalizada.</div>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-04">Holaa, te escribe Cami 💛
-Será un gusto poder asesorarte para que elijas la mejor opción según tu objetivo ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-04', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- ──────────────────────────────── -->
-  <!-- FLUJO MAMÁS -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header" style="margin-top:32px">
-    <div class="part-icon">👩‍👧</div>
-    <h2><span>Parte 1b</span>Cuando escribe una mamá o papá</h2>
-  </div>
-
-  <div class="section" id="flujo-mamas">
-    <div class="info-banner blue" style="margin-bottom:20px">
-      <div class="info-banner-icon">💡</div>
-      <div>Cuando escribe una mamá o papá, <strong>el tono cambia</strong>: hablamos de "su hija/hijo", usamos "usted" o "tú" según cómo escriban, y las recomendaciones se enfocan en el progreso del menor. El flujo es el mismo, pero los mensajes están adaptados.</div>
-    </div>
-
-    <!-- Primer mensaje mamá -->
-    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M1</span> Primer mensaje — mamá o papá escribe</h3>
-    <div class="msg-box" style="margin-bottom:20px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Primer contacto</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-m01">Holaa 💛 Somos CGC Method ✨
-Con gusto le ayudamos a encontrar la mejor opción para su hija/hijo.
-
-Por favor cuéntenos:
-
-1. Nombre y edad de su hija/hijo
-2. País y ciudad
-3. ¿A qué se dedica? (ballet, gimnasia, danza, otro deporte, etc.)
-4. ¿Qué le gustaría que lograra?
-
-Así podemos asesorarle mejor y recomendarle la opción ideal según el objetivo de su hija/hijo 🤗</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m01', this)">📋 Copiar mensaje</button></div>
-    </div>
-
-    <!-- Cami entra -->
-    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M2</span> Entra Cami con la recomendación</h3>
-    <div class="msg-box" style="margin-bottom:20px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cami entra</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-m02">Holaa, te escribe Cami 💛
-Será un gusto poder asesorarte para encontrar la mejor opción para tu hija/hijo según su objetivo ✨</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m02', this)">📋 Copiar mensaje</button></div>
-    </div>
-
-    <!-- Recomendar clases grupales a mamá -->
-    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M3</span> Recomendar clases grupales virtuales</h3>
-    <div class="msg-box" style="margin-bottom:20px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Grupales para la hija/hijo</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-m03">Por lo que me cuentas, para tu hija/hijo le recomendaría mucho nuestras clases grupales virtuales en vivo por Zoom 💛
-
-Son clases basadas en mi método y dictadas por mí o por mi equipo de entrenadores CGC, todos capacitados para corregirla/lo y guiarla/lo con técnica y seguridad.
-
-Son perfectas si está fuera de Lima o en otro país, porque puede entrenar desde casa con correcciones reales en clase y seguimiento de sus avances.
-
-Además, hacemos seguimiento por fotos y este mes regalamos acceso a nuestra biblioteca de +100 clases grabadas 🔥
-
-¿Te gustaría que te envíe un video para que veas cómo trabajamos, junto con horarios y valores?</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m03', this)">📋 Copiar mensaje</button></div>
-    </div>
-
-    <!-- Recomendar 1:1 a mamá -->
-    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M4</span> Recomendar clase 1:1</h3>
-    <div class="msg-box" style="margin-bottom:20px">
-      <div class="msg-header">
-        <div class="msg-label">💬 1:1 para la hija/hijo</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-m04">Por lo que me cuentas, para el objetivo de tu hija/hijo te recomendaría una clase 1:1 conmigo directamente 💛
-
-A diferencia de las clases grupales, las 1:1 son siempre conmigo. Puedo verla/lo directamente, corregirla/lo según su nivel y darle ejercicios exactos según su meta.
-
-Es ideal cuando el objetivo es específico: mejorar una pirueta, revisar una rutina, trabajar puntas, una figura de flexibilidad o prepararse para una competencia ✨
-
-¿Deseas que te cuente cómo funciona y los valores?</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m04', this)">📋 Copiar mensaje</button></div>
-    </div>
-
-    <!-- Cierre con mamá -->
-    <h3 style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="num">M5</span> Cuando elige e inscribe</h3>
-    <div class="msg-box" style="margin-bottom:12px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cierre e inscripción</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-m05">Perfecto 💛 Entonces podemos avanzar con la inscripción de tu hija/hijo.
-
-Te envío los datos de pago para separar el cupo ✨
-
-Apenas realices el abono, me envías tu comprobante por aquí y seguimos con el siguiente paso.
-
-Va a ser un gusto acompañarla/lo en este proceso 🔥</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-m05', this)">📋 Copiar mensaje</button></div>
-    </div>
-
-    <div class="info-banner gold">
-      <div class="info-banner-icon">💡</div>
-      <div>Después del pago, el proceso es el mismo: Carlos o Ariana entran para formulario, guía de bienvenida, vigencia y agendamiento. El formulario lo completa la mamá o papá si el alumno es menor de edad.</div>
-    </div>
-  </div>
-
-  <!-- FLEXIPOWER -->
-  <div class="section" id="flexipower" style="scroll-margin-top:80px">
-    <div style="background:linear-gradient(135deg,#1B5E20,#2E7D32);border-radius:14px;padding:20px 24px;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:16px">
-      <div style="font-size:36px">🏋️</div>
-      <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;margin-bottom:4px">Solo para Lima · Presencial</div>
-        <div style="font-size:20px;font-weight:800">FlexiPower</div>
-        <div style="font-size:13px;opacity:0.9;margin-top:4px">Clases grupales presenciales en Acroflex · Diseñado por Cami · Dictado por sus entrenadores</div>
-      </div>
-    </div>
-
-    <div class="info-banner blue" style="margin-bottom:14px">
-      <div class="info-banner-icon">💡</div>
-      <div>Recomendar cuando el lead está en Lima, es adulto/a y quiere mejorar flexibilidad de forma presencial. <strong>Para coordinar horarios e inscripción, derivar al WhatsApp de Acroflex.</strong></div>
-    </div>
-
-    <!-- Mensaje recomendación FlexiPower -->
-    <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Recomendar FlexiPower:</div>
-    <div class="msg-box" style="margin-bottom:14px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Recomendar FlexiPower</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-fp">Como estás en Lima, también te recomendaría muchísimo FlexiPower 💛
-
-Es mi curso grupal presencial de flexibilidad dictado en Acroflex, diseñado por mí y dictado por mi equipo de entrenadores. Es un curso muy completo para trabajar flexibilidad de forma progresiva, técnica y segura.
-
-Es perfecto si buscas entrenar presencialmente en Lima con correcciones en vivo ✨
-
-Para conocer los horarios y más detalles, te paso el contacto de Acroflex donde puedes escribir directamente:
-
-📲 +51 993 813 336</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-fp', this)">📋 Copiar mensaje</button></div>
-    </div>
-
-    <!-- Mensaje cierre / derivación -->
-    <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Cuando ya tiene interés y quiere inscribirse:</div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Derivar a Acroflex</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-fp-cierre">Genial 💛 Para coordinar tu inscripción y horarios en FlexiPower, escríbele directamente al equipo de Acroflex por WhatsApp:
-
-📲 +51 993 813 336
-
-Ellos te darán toda la información de horarios, valores y disponibilidad ✨</div>
-      <div class="msg-footer"><button class="copy-btn" onclick="copyMsg('msg-fp-cierre', this)">📋 Copiar mensaje</button></div>
-    </div>
-  </div>
-
-  <!-- MENSAJES DE VIDEO (usados por el wizard, no son sección visible) -->
-  <div style="display:none">
-    <span id="msg-vid-ps">Acá te comparto el video de PowerSplit para que veas cómo son las clases y conozcas el método 💛🎥</span>
-    <span id="msg-vid-arcos">Acá te comparto el video de Arcos360 para que veas cómo trabajamos la flexibilidad de espalda 💛🎥</span>
-    <span id="msg-vid-prepa">Acá te comparto el video de Preparación Física para que veas cómo son las clases 💛🎥</span>
-    <span id="msg-vid-1a1v">Acá te comparto el video de las clases 1:1 virtuales para que veas cómo funcionan y cómo trabajo directamente con cada alumna/o 💛🎥</span>
-    <span id="msg-vid-1a1p">Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo trabajo directamente contigo 💛🎥</span>
-  </div>
-
-  <!-- PARTE 2 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">🧘</div>
-    <h2><span>Parte 2</span>Clases Grupales Virtuales</h2>
-  </div>
-
-  <div class="section" id="cuando-grupales">
-    <h3><span class="num">09</span> Cuándo recomendar grupales virtuales</h3>
-    <div class="triggers">
-      <span class="trigger-tag">Fuera de Lima</span>
-      <span class="trigger-tag">En provincia</span>
-      <span class="trigger-tag">En otro país</span>
-      <span class="trigger-tag">Entrenar desde casa</span>
-      <span class="trigger-tag">Mejorar flexibilidad</span>
-      <span class="trigger-tag">Lograr splits</span>
-      <span class="trigger-tag">Mejorar arcos</span>
-      <span class="trigger-tag">Fuerza</span>
-      <span class="trigger-tag">Líneas</span>
-      <span class="trigger-tag">Giros o saltos</span>
-      <span class="trigger-tag">Avanzar progresivamente</span>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje general</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-05">Por lo que me cuentas, te recomendaría muchísimo nuestras clases grupales virtuales en vivo por Zoom 💛
-
-Son clases basadas en mi método y dictadas por mí o por mi equipo de entrenadores CGC, todos capacitados para corregirte y guiarte con técnica y seguridad.
-
-Son perfectas si estás fuera de Lima o en otro país, porque puedes entrenar desde casa con correcciones reales en clase y seguimiento de tus avances.
-
-Todas son 100% en vivo por Zoom, así podemos verte, corregirte y ayudarte a avanzar de forma progresiva 🔥
-
-Además, hacemos seguimiento por fotos y este mes regalamos acceso a nuestra biblioteca de +100 clases grabadas para practicar en casa ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-05', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="powersplit">
-    <h3><span class="num">11</span> PowerSplit</h3>
-    <div class="triggers">
-      <span class="trigger-tag">Split / Espagat</span>
-      <span class="trigger-tag">Flexibilidad de piernas</span>
-      <span class="trigger-tag">Apertura</span>
-      <span class="trigger-tag">Extensiones</span>
-      <span class="trigger-tag">Levantar la pierna</span>
-      <span class="trigger-tag">Mejorar líneas</span>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-06">Para tu objetivo, te recomendaría PowerSplit 💛
-
-Es mi curso para ganar flexibilidad de piernas de forma técnica y progresiva, dictado por mí o por mi equipo de entrenadores CGC bajo mi método.
-
-Trabajamos split sagital, split frontal, apertura de caderas, extensiones y elevaciones sin forzar el cuerpo.
-
-Es ideal si quieres lograr tus splits, levantar más la pierna o mejorar tus líneas ✨
-
-Te envío un video para que veas cómo trabajamos. ¿Te gustaría que también te envíe horarios según tu país y valores?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-06', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="arcos360">
-    <h3><span class="num">12</span> Arcos360</h3>
-    <div class="triggers">
-      <span class="trigger-tag">Flexibilidad de espalda</span>
-      <span class="trigger-tag">Arco / Puente</span>
-      <span class="trigger-tag">Brazos estirados en arco</span>
-      <span class="trigger-tag">Escorpión</span>
-      <span class="trigger-tag">Needle</span>
-      <span class="trigger-tag">Chin stand</span>
-      <span class="trigger-tag">Llevar pierna atrás</span>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-07">Para tu objetivo, te recomendaría Arcos360 💛
-
-Es mi curso especializado en movilidad y flexibilidad de espalda, dictado por mí o por mi equipo de entrenadores CGC bajo mi método.
-
-Trabajamos progresivamente arco, puente, apertura de pecho, brazos en el arco y figuras como chin stand, escorpión o needle ✨
-
-¿Te gustaría que te envíe horarios y valores?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-07', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="prepa-fisica">
-    <h3><span class="num">13</span> Preparación Física para Bailarines</h3>
-    <div class="triggers">
-      <span class="trigger-tag">Fuerza / Control</span>
-      <span class="trigger-tag">Giros / Saltos</span>
-      <span class="trigger-tag">Líneas</span>
-      <span class="trigger-tag">Elevaciones</span>
-      <span class="trigger-tag">Equilibrios / Puntas</span>
-      <span class="trigger-tag">Mejorar como bailarín/gimnasta</span>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
-      <span style="background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:12px;color:var(--gray)">Elevación piernas adelante/costado</span>
-      <span style="background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:12px;color:var(--gray)">Elevación piernas atrás</span>
-      <span style="background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:12px;color:var(--gray)">Equilibrios y puntas</span>
-      <span style="background:#F0F0F0;border-radius:20px;padding:4px 12px;font-size:12px;color:var(--gray)">Prep. física para giros</span>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-08">Para tu objetivo, también te puede ayudar muchísimo Prepa Física 💛
-
-Es un curso completo para mejorar fuerza, estabilidad, control y líneas, dictado por mí o por mi equipo de entrenadores CGC bajo mi método.
-
-Trabajamos elevaciones, equilibrios, puntas y giros. Es perfecto para bailarines y gimnastas que quieren mejorar sus capacidades físicas 🔥
-
-¿Te gustaría que te envíe horarios y valores?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-08', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="combinaciones">
-    <h3><span class="num">14</span> Combinaciones recomendadas</h3>
-
-    <div class="card" style="margin-bottom:12px">
-      <p><strong>Si quiere flexibilidad general:</strong> PowerSplit + Arcos360</p>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 PowerSplit + Arcos360</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-09">Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛
-
-Así trabajas flexibilidad de piernas y espalda de forma más completa y progresiva.
-
-PowerSplit te ayudará con splits, apertura y elevaciones.
-Arcos360 te ayudará con arco, movilidad de espalda, escorpión, needle y figuras de flexibilidad posterior ✨
-
-Ambos son cursos grupales virtuales basados en mi método y dictados por mí o por mi equipo CGC.
-
-Te envío los videos para que veas cómo trabajamos. ¿Te gustaría que también te envíe horarios y valores?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-09', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:12px; margin-top:16px">
-      <p><strong>Si quiere mejorar completo como bailarín/gimnasta:</strong> PowerSplit + Arcos360 + Prepa Física</p>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Combinación completa</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-10">Por lo que me cuentas, te recomendaría combinar PowerSplit, Arcos360 y Prepa Física 💛
-
-Así trabajas flexibilidad de piernas, espalda, fuerza, control, giros, elevaciones y líneas de forma más completa.
-
-Es una combinación ideal si quieres mejorar tu potencial como bailarín/gimnasta 🔥
-
-Estos cursos son grupales virtuales, basados en mi método y dictados por mí o por mi equipo de entrenadores CGC.
-
-Te envío los videos para que veas cómo trabajamos. ¿Te gustaría que también te envíe horarios y valores?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-10', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="horarios-valores">
-    <h3><span class="num">15</span> Horarios y valores</h3>
-
-    <!-- PASO IMAGEN 1: si el lead aún no tiene claro el curso -->
-    <div style="border:2px dashed #F47920;border-radius:12px;padding:16px;margin-bottom:20px;background:#FFFBF5">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <div style="background:#F47920;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.5px">📦 PASO OPCIONAL · Imagen 1</div>
-        <div style="font-size:12px;font-weight:700;color:#F47920">«1 Paquete, 3 Cursos»</div>
-      </div>
-      <div style="font-size:13px;color:#4A4A4A;margin-bottom:12px"><strong>Solo si el lead aún no tiene claro qué curso elegir.</strong> Envía esta imagen primero, antes de los horarios, para que vea las 3 opciones y elija con criterio.</div>
-      <div class="msg-box" style="margin:0">
-        <div class="msg-header">
-          <div class="msg-label">💬 Texto con la imagen</div>
-          <div class="msg-who">Equipo CGC</div>
-        </div>
-        <div class="msg-content" id="msg-img1">Antes de los valores, te mando estas dos imágenes 💛
-
-Así ves cómo funciona el método y todo lo que incluye tu paquete.
-
-Acá van los horarios y valores 👇</div>
-        <div class="msg-footer">
-          <button class="copy-btn" onclick="copyMsg('msg-img1', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- PASO IMAGEN 3: SIEMPRE antes de enviar precios -->
-    <div style="border:2px solid #E8302A;border-radius:12px;padding:16px;margin-bottom:20px;background:#FFF5F4">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <div style="background:#E8302A;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.5px">✅ PASO OBLIGATORIO · Imagen 3</div>
-        <div style="font-size:12px;font-weight:700;color:#E8302A">«¿Qué incluye tu paquete?»</div>
-      </div>
-      <div style="font-size:13px;color:#4A4A4A;margin-bottom:12px"><strong>Envía SIEMPRE esta imagen antes de los precios.</strong> Sin excepción. Muestra el valor primero para que el lead no vea solo el número.</div>
-      <div class="msg-box" style="margin:0">
-        <div class="msg-header">
-          <div class="msg-label">💬 Texto con la imagen</div>
-          <div class="msg-who">Equipo CGC</div>
-        </div>
-        <div class="msg-content" id="msg-img3">Antes de los valores, quiero que veas bien qué incluye tu paquete 💛
-
-No es solo una clase: tienes clases en vivo con correcciones, clases grabadas para repasar y seguimiento real de tu avance.
-
-Ahora sí, acá van los valores y horarios disponibles 👇</div>
-        <div class="msg-footer">
-          <button class="copy-btn" onclick="copyMsg('msg-img3', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cuando confirma que sí quiere horarios y valores</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-11">Claro 💛 Te envío horarios según tu país y valores ✨
-
-¿Cuál de estos horarios se acomoda mejor a tu rutina?
-
-Así puedo ayudarte a elegir el paquete ideal para que empieces esta semana y no sigas postergando tu objetivo.</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-11', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PAQUETES GRUPALES ── -->
-  <div class="section" id="paquetes-grupales">
-    <h3><span class="num">15b</span> Paquetes y precios — Clases grupales virtuales</h3>
-
-    <div class="info-banner blue" style="margin-bottom:20px">
-      <div class="info-banner-icon">ℹ️</div>
-      <div>Aplica para <strong>PowerSplit, Arcos360 y Preparación Física</strong>. El alumno puede elegir y combinar entre los tres cursos en el mismo paquete.</div>
-    </div>
-
-    <!-- CURRENCY TOGGLE -->
-    <div style="display:flex;gap:8px;margin-bottom:20px;align-items:center">
-      <span style="font-size:13px;color:var(--gray);font-weight:600">Mostrar precios en:</span>
-      <button id="btn-usd" onclick="setCurrency('usd')" style="padding:6px 16px;border-radius:20px;border:2px solid var(--red);background:var(--red);color:#fff;font-size:12px;font-weight:700;cursor:pointer">USD $</button>
-      <button id="btn-sol" onclick="setCurrency('sol')" style="padding:6px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;color:var(--gray);font-size:12px;font-weight:700;cursor:pointer">Soles S/</button>
-    </div>
-
-    <!-- GRUPO 1: básicos -->
-    <div style="margin-bottom:10px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#AAA;margin-bottom:10px">Paquetes básicos</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-
-        <!-- 1 clase -->
-        <div style="background:linear-gradient(160deg,#C040A0,#4A7FD4);border-radius:14px;padding:20px;color:#fff;position:relative">
-          <div style="font-size:22px;font-weight:800;line-height:1.1">1 clase<br>en vivo</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800" class="price-usd">$15</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800;display:none" class="price-sol">S/45</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:8px">ℹ️ Conoce el método y siente la diferencia desde la primera sesión</div>
-          <div style="border-top:1px solid rgba(255,255,255,0.3);padding-top:8px;font-size:12px;font-weight:700">📅 Vigencia: 1 semana</div>
-        </div>
-
-        <!-- 4 clases -->
-        <div style="background:linear-gradient(160deg,#F07820,#C040A0);border-radius:14px;padding:20px;color:#fff;position:relative">
-          <div style="font-size:22px;font-weight:800;line-height:1.1">4 clases<br>en vivo</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800" class="price-usd">$45</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800;display:none" class="price-sol">S/140</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px" class="price-usd">Solo $11.25 por clase</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px;display:none" class="price-sol">Solo S/35 por clase</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">📋 Deja de entrenar sin dirección y empieza con estructura</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:8px">🎁 10% de descuento al renovar antes de que culmine</div>
-          <div style="border-top:1px solid rgba(255,255,255,0.3);padding-top:8px;font-size:12px;font-weight:700">📅 Vigencia: 1 mes</div>
-        </div>
-
-        <!-- 8 clases MÁS ELEGIDO -->
-        <div style="background:linear-gradient(160deg,#9A7010,#C09020);border-radius:14px;padding:20px;color:#fff;position:relative">
-          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#D4A017;color:#1A1A1A;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;letter-spacing:0.5px">⭐ MÁS ELEGIDO</div>
-          <div style="font-size:22px;font-weight:800;line-height:1.1;margin-top:8px">8 clases<br>en vivo</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800" class="price-usd">$80</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800;display:none" class="price-sol">S/250</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px" class="price-usd">💰 Ahorras $40 frente a clases sueltas</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px;display:none" class="price-sol">💰 Ahorras S/80 frente a clases sueltas</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">😊 Tu flexibilidad empieza a cambiar de verdad</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">✅ Recomendado si entrenas 2 veces por semana</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:8px">🎁 10% de descuento al renovar antes de que culmine</div>
-          <div style="border-top:1px solid rgba(255,255,255,0.3);padding-top:8px;font-size:12px;font-weight:700">📅 Vigencia: 1 mes</div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- GRUPO 2: intensivos -->
-    <div style="margin-bottom:16px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#AAA;margin:16px 0 10px">Paquetes intensivos — Para quienes entrenan en serio</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-
-        <!-- 12 clases -->
-        <div style="background:linear-gradient(160deg,#8B4FC8,#E8302A);border-radius:14px;padding:20px;color:#fff">
-          <div style="font-size:22px;font-weight:800;line-height:1.1">12 clases<br>en vivo</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800" class="price-usd">$105</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800;display:none" class="price-sol">S/330</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px" class="price-usd">💰 Ahorras $75</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px;display:none" class="price-sol">💰 Ahorras S/210</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">🔥 Entrena 3 veces por semana y acelera tu progreso</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px" class="price-usd">Solo $8.75 por clase</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px;display:none" class="price-sol">Solo S/27.50 por clase</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:8px">🎁 20% de descuento al renovar antes de que culmine</div>
-          <div style="border-top:1px solid rgba(255,255,255,0.3);padding-top:8px;font-size:12px;font-weight:700">📅 Vigencia: 2 meses</div>
-        </div>
-
-        <!-- 20 clases MÁS RECOMENDADO -->
-        <div style="background:linear-gradient(160deg,#1A1A1A,#3A1A3A);border-radius:14px;padding:20px;color:#fff;position:relative;border:2px solid #C040A0">
-          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#F07820,#C040A0);color:#fff;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;letter-spacing:0.5px">⭐ MÁS RECOMENDADO</div>
-          <div style="font-size:22px;font-weight:800;line-height:1.1;margin-top:8px">20 clases<br>en vivo</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800" class="price-usd">$165</div>
-          <div style="background:#E8302A;border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800;display:none" class="price-sol">S/520</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px" class="price-usd">💰 Ahorras $135</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px;display:none" class="price-sol">💰 Ahorras S/380</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">😊 Tu técnica cambia cuando tu disciplina cambia</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">😊 Perfecto si entrenas 3–4 veces por semana y quieres asegurar resultados en 2 meses</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:8px">🎁 20% de descuento al renovar antes de que culmine</div>
-          <div style="border-top:1px solid rgba(255,255,255,0.3);padding-top:8px;font-size:12px;font-weight:700">📅 Vigencia: 2 meses</div>
-        </div>
-
-        <!-- 32 clases -->
-        <div style="background:linear-gradient(160deg,#E8302A,#F07820);border-radius:14px;padding:20px;color:#fff">
-          <div style="font-size:22px;font-weight:800;line-height:1.1">32 clases<br>en vivo</div>
-          <div style="background:rgba(0,0,0,0.3);border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800" class="price-usd">$245</div>
-          <div style="background:rgba(0,0,0,0.3);border-radius:30px;padding:6px 14px;display:inline-block;margin:12px 0;font-size:20px;font-weight:800;display:none" class="price-sol">S/770</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px" class="price-usd">Solo $7.65 por clase</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px;display:none" class="price-sol">Solo S/24 por clase</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">🔥 Aquí tu cuerpo realmente evoluciona</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:4px">💰 El menor costo por clase y el mayor impacto en tu progreso</div>
-          <div style="font-size:12px;opacity:0.9;margin-bottom:8px">🎁 20% de descuento al renovar antes de que culmine</div>
-          <div style="border-top:1px solid rgba(255,255,255,0.3);padding-top:8px;font-size:12px;font-weight:700">📅 Vigencia: 3 meses</div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Tabla resumen -->
-    <table class="vigencia-table" style="margin-top:8px">
-      <thead>
-        <tr>
-          <th>Paquete</th>
-          <th>USD $</th>
-          <th>Soles S/</th>
-          <th>Vigencia</th>
-          <th>Descuento renovación</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1 clase</td><td>$15</td><td>S/45</td><td>1 semana</td><td>—</td></tr>
-        <tr><td>4 clases</td><td>$45</td><td>S/140</td><td>1 mes</td><td>10%</td></tr>
-        <tr><td>8 clases ⭐</td><td>$80</td><td>S/250</td><td>1 mes</td><td>10%</td></tr>
-        <tr><td>12 clases</td><td>$105</td><td>S/330</td><td>2 meses</td><td>20%</td></tr>
-        <tr><td>20 clases ⭐</td><td>$165</td><td>S/520</td><td>2 meses</td><td>20%</td></tr>
-        <tr><td>32 clases</td><td>$245</td><td>S/770</td><td>3 meses</td><td>20%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section" id="reforzar-cierre">
-    <h3><span class="num">16</span> Reforzar antes del cierre</h3>
-    <div class="info-banner gold"><div class="info-banner-icon">💡</div><div>Recalcar: en vivo por Zoom · correcciones reales · seguimiento por fotos · biblioteca +100 grabadas de regalo este mes.</div></div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-12">Recuerda que todas nuestras clases grupales son en vivo por Zoom 🎥
-
-No es solo seguir una rutina: podemos verte, corregirte y ayudarte a entrenar con técnica y seguridad.
-
-Las clases pueden ser dictadas por mí o por mi equipo de entrenadores CGC, siempre bajo mi método y estructura de entrenamiento.
-
-Además, hacemos seguimiento por fotos y este mes tienes acceso de regalo a nuestra biblioteca de +100 clases grabadas para practicar en casa 💛</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-12', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="elige-grupal">
-    <h3><span class="num">17</span> Cuando el lead elige paquete grupal</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-13">Perfecto 💛 Entonces podemos avanzar con tu inscripción.
-
-Te envío los datos de pago para separar tu cupo ✨
-
-Apenas realices el abono, me envías tu comprobante por aquí para ayudarte con el siguiente paso.</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-13', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 3 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">⭐</div>
-    <h2><span>Parte 3</span>Clases 1:1 con Cami</h2>
-  </div>
-
-  <div class="section" id="cuando-1a1">
-    <h3><span class="num">18</span> Cuándo recomendar 1:1</h3>
-    <div class="info-banner gold">
-      <div class="info-banner-icon">💡</div>
-      <div>Recomendar cuando el objetivo es <strong>específico, técnico, urgente o personalizado</strong>, o cuando hay una fecha cercana de competencia/presentación.</div>
-    </div>
-    <div class="triggers">
-      <span class="trigger-tag">Mejorar pirueta o giro</span>
-      <span class="trigger-tag">Revisar rutina de gimnasia</span>
-      <span class="trigger-tag">Revisar rutina de baile</span>
-      <span class="trigger-tag">Trabajar puntas</span>
-      <span class="trigger-tag">Lograr una figura específica</span>
-      <span class="trigger-tag">Trabajar una acrobacia</span>
-      <span class="trigger-tag">Meta concreta</span>
-      <span class="trigger-tag">Quieren que Cami vea directamente</span>
-    </div>
-  </div>
-
-  <div class="section" id="recomendar-1a1">
-    <h3><span class="num">19</span> Mensaje para recomendar 1:1</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-14">Por lo que me cuentas, en tu caso sí te recomendaría una clase 1:1 conmigo 💛
-
-A diferencia de las clases grupales, las clases 1:1 sí son siempre directamente conmigo.
-
-Tu objetivo es bastante específico y necesitaría verte con más detalle para corregirte de forma personalizada.
-
-Las 1:1 son ideales para trabajar una meta puntual como mejorar una pirueta, revisar una rutina, trabajar puntas, una figura de flexibilidad o una acrobacia.
-
-Puedo evaluarte directamente, corregirte según tu nivel y darte ejercicios exactos para avanzar con seguridad y claridad ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-14', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="modalidades-1a1">
-    <h3><span class="num">20</span> Modalidades 1:1</h3>
-    <div class="roles-grid">
-      <div class="role-card">
-        <div class="role-card-header">
-          <div class="role-avatar cami">🏢</div>
-          <div>
-            <div class="role-name">Presencial</div>
-            <div class="role-sub">Para alumnos en Lima</div>
-          </div>
-        </div>
-        <div id="msg-15" style="font-size:14px; color:var(--gray); line-height:1.6">Si estás en Lima, te recomendaría la clase 1:1 presencial conmigo en Acroflex, Jesús María 💛
-
-Así puedo verte directamente, corregirte con más precisión y trabajar tu objetivo de forma personalizada ✨</div>
-        <div style="margin-top:10px">
-          <button class="copy-btn" onclick="copyMsg('msg-15', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-      <div class="role-card">
-        <div class="role-card-header">
-          <div class="role-avatar team">🎥</div>
-          <div>
-            <div class="role-name">Virtual por Zoom</div>
-            <div class="role-sub">Provincia / Exterior</div>
-          </div>
-        </div>
-        <div id="msg-16" style="font-size:14px; color:var(--gray); line-height:1.6">Si estás fuera de Lima o en otro país, puedes tomar la clase 1:1 virtual por Zoom conmigo 💛
-
-Aunque sea online, puedo verte, corregirte en vivo y darte ejercicios personalizados según tu objetivo ✨</div>
-        <div style="margin-top:10px">
-          <button class="copy-btn" onclick="copyMsg('msg-16', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="valores-1a1">
-    <h3><span class="num">21</span> Valores 1:1</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cuando piden valores</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-17">Tenemos clases sueltas y planes más completos para seguimiento constante ✨
-
-Clase suelta 1:1: 60 USD, ideal para una sesión puntual.
-
-También tenemos plan estándar y plan premium, con clases 1:1 conmigo, informes de avance mes a mes y acceso complementario a clases grupales en vivo o grabadas.
-
-La mejor opción depende de tu objetivo, disponibilidad y qué tan rápido quieres avanzar ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-17', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PAQUETES 1:1 ── -->
-  <div class="section" id="paquetes-1a1">
-    <h3><span class="num">21b</span> Paquetes y precios — Programa 1:1 con Cami</h3>
-
-    <div style="background:linear-gradient(90deg,#E8302A,#F07820);border-radius:10px;padding:12px 20px;margin-bottom:20px;text-align:center">
-      <span style="color:#fff;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase">🔥 CUPOS LIMITADOS — SOLO 5 PLAZAS MENSUALES</span>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
-
-      <!-- SESIÓN ÚNICA -->
-      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;position:relative">
-        <div style="background:#8B4FC8;color:#fff;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:14px;letter-spacing:0.5px">SESIÓN ÚNICA</div>
-        <div style="font-size:28px;margin-bottom:8px">🎯</div>
-        <div style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:4px">Sesión Estratégica 1:1 de 1hr</div>
-        <div style="font-size:13px;color:var(--gray);margin-bottom:14px">Una hora de dirección estratégica personalizada</div>
-        <div style="margin-bottom:16px">
-          <span style="font-size:36px;font-weight:800;color:var(--dark)">$60</span>
-          <span style="font-size:14px;color:var(--gray);margin-left:4px">USD</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-          <div style="color:var(--dark)">✅ 1 sesión en vivo</div>
-          <div style="color:var(--dark)">✅ Formulario detallado</div>
-          <div style="color:#CCC">— Entrevista estratégica</div>
-          <div style="color:#CCC">— Planificación semanal</div>
-          <div style="color:#CCC">— Clases grupales</div>
-          <div style="color:#CCC">— Informes de avance</div>
-          <div style="border-top:1px solid var(--border);padding-top:10px;color:var(--purple);font-weight:600">💜 Descuento si pasas a Elite</div>
-        </div>
-      </div>
-
-      <!-- CGC ELITE STANDARD -->
-      <div style="background:#fff;border:2px solid #4A7FD4;border-radius:14px;padding:22px;position:relative">
-        <div style="background:linear-gradient(90deg,#8B4FC8,#4A7FD4);color:#fff;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:14px;letter-spacing:0.5px">⭐ RECOMENDADO</div>
-        <div style="font-size:28px;margin-bottom:8px">🚀</div>
-        <div style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:4px">CGC Elite Standard</div>
-        <div style="font-size:13px;color:var(--gray);margin-bottom:14px">Proceso estructurado hacia tus metas</div>
-        <div style="margin-bottom:16px;display:flex;align-items:baseline;gap:8px">
-          <span style="font-size:36px;font-weight:800;color:#4A7FD4">$459</span>
-          <span style="font-size:14px;color:var(--gray)">USD</span>
-          <span style="font-size:14px;color:#AAA;text-decoration:line-through">$499</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-          <div style="color:var(--dark)">✅ 4 sesiones en vivo</div>
-          <div style="color:var(--dark)">✅ Formulario detallado</div>
-          <div style="color:var(--dark)">✅ Entrevista estratégica inicial</div>
-          <div style="color:var(--dark)">✅ Planificación semanal</div>
-          <div style="color:var(--dark)">✅ 4 clases grupales al mes</div>
-          <div style="color:var(--dark)">✅ 4 informes de avance</div>
-          <div style="color:var(--dark)">✅ Seguimiento continuo</div>
-        </div>
-      </div>
-
-      <!-- CGC ELITE PREMIUM -->
-      <div style="background:#fff;border:2px solid #D4A017;border-radius:14px;padding:22px;position:relative">
-        <div style="background:linear-gradient(90deg,#E8302A,#D4A017);color:#fff;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:14px;letter-spacing:0.5px">🏆 RESULTADOS EN MENOS TIEMPO</div>
-        <div style="font-size:28px;margin-bottom:8px">💎</div>
-        <div style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:4px">CGC Elite Premium</div>
-        <div style="font-size:13px;color:var(--gray);margin-bottom:14px">Transformación acelerada con acompañamiento prioritario</div>
-        <div style="margin-bottom:16px;display:flex;align-items:baseline;gap:8px">
-          <span style="font-size:36px;font-weight:800;color:#D4A017">$799</span>
-          <span style="font-size:14px;color:var(--gray)">USD</span>
-          <span style="font-size:14px;color:#AAA;text-decoration:line-through">$890</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-          <div style="color:var(--dark)">✅ 8 sesiones en vivo</div>
-          <div style="color:var(--dark)">✅ Formulario detallado</div>
-          <div style="color:var(--dark)">✅ Entrevista estratégica inicial</div>
-          <div style="color:var(--dark)">✅ Planificación semanal + más ajustes</div>
-          <div style="color:var(--dark)">✅ 4 clases grupales al mes</div>
-          <div style="color:var(--dark)">✅ 4 informes de avance</div>
-          <div style="color:var(--dark)">✅ Seguimiento <strong>prioritario</strong></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Tabla resumen -->
-    <table class="vigencia-table">
-      <thead>
-        <tr><th>Plan</th><th>Precio</th><th>Precio anterior</th><th>Sesiones 1:1</th><th>Incluye grupales</th><th>Informes</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Sesión única</td><td>$60 USD</td><td>—</td><td>1</td><td>No</td><td>No</td></tr>
-        <tr><td>CGC Elite Standard ⭐</td><td>$459 USD</td><td><s>$499</s></td><td>4</td><td>4 al mes</td><td>4</td></tr>
-        <tr><td>CGC Elite Premium 🏆</td><td>$799 USD</td><td><s>$890</s></td><td>8</td><td>4 al mes</td><td>4</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section" id="antes-cerrar-1a1">
-    <h3><span class="num">22</span> Antes de cerrar 1:1</h3>
-    <div class="info-banner gold"><div class="info-banner-icon">💡</div><div>Preguntar: ¿sesión puntual o proceso? · ¿fecha importante próxima? · ¿virtual o presencial? · ¿objetivo exacto?</div></div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-18">Para recomendarte la mejor opción, dime algo más 💛
-
-¿Buscas una sesión puntual para corregir algo específico o quieres un proceso más constante con seguimiento?
-
-También cuéntame si tienes alguna competencia, presentación, audición o fecha importante cerca ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-18', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="elige-1a1">
-    <h3><span class="num">23</span> Cuando elige 1:1</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-19">Perfecto 💛 Entonces podemos avanzar con tu inscripción para la clase 1:1 conmigo.
-
-Te envío los datos de pago para separar tu cupo ✨
-
-Apenas realices el abono, me envías tu comprobante por aquí y seguimos con el agendamiento.</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-19', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 4 (placeholder removed) -->
-  <!-- ──────────────────────────────── -->
-
-  <!-- [sección separada eliminada — imágenes integradas en el flujo grupal] -->
-  <div style="display:none">
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px">
-      <div style="background:#fff;border:2px solid #F47920;border-radius:12px;padding:16px;text-align:center">
-        <div style="font-size:28px;margin-bottom:8px">📦</div>
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#F47920;margin-bottom:6px">Imagen 1</div>
-        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:4px">1 Paquete, 3 Cursos</div>
-        <div style="font-size:11px;color:#666">Cuando no sabe qué curso elegir</div>
-      </div>
-      <div style="background:#fff;border:2px solid #4A7FD4;border-radius:12px;padding:16px;text-align:center">
-        <div style="font-size:28px;margin-bottom:8px">⭐</div>
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#4A7FD4;margin-bottom:6px">Imagen 2</div>
-        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:4px">Resultados Reales</div>
-        <div style="font-size:11px;color:#666">Cuando duda, posterga o no cree poder</div>
-      </div>
-      <div style="background:#fff;border:2px solid #E8302A;border-radius:12px;padding:16px;text-align:center">
-        <div style="font-size:28px;margin-bottom:8px">✅</div>
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#E8302A;margin-bottom:6px">Imagen 3</div>
-        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:4px">¿Qué incluye tu paquete?</div>
-        <div style="font-size:11px;color:#666">Justo ANTES de enviar precios</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- IMAGEN 1 -->
-  <div class="section" id="img-bundle">
-    <h3><span class="num" style="background:linear-gradient(135deg,#F47920,#E8302A)">1</span> Imagen 1 · «1 Paquete, 3 Cursos»</h3>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
-      <div style="background:#FFF8F0;border:1px solid #F4792040;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#F47920;margin-bottom:10px">✅ Enviarla cuando…</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4A4A4A">
-          <div>• El lead no sabe cuál curso elegir</div>
-          <div>• Está entre 2 o más cursos</div>
-          <div>• Pregunta "¿qué incluye cada curso?"</div>
-          <div>• Viene sin objetivo claro</div>
-        </div>
-      </div>
-      <div style="background:#FFF0F0;border:1px solid #E8302A40;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#E8302A;margin-bottom:10px">❌ NO enviarla cuando…</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4A4A4A">
-          <div>• El lead ya sabe qué curso quiere</div>
-          <div>• Ya le recomendaste y aceptó</div>
-          <div>• Está a punto de pagar</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="info-banner gold"><div class="info-banner-icon">📍</div><div><strong>Momento exacto:</strong> Después del diagnóstico y tu recomendación, si el lead todavía no tiene claro qué curso le conviene.</div></div>
-
-    <div class="msg-box" style="margin-top:16px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Texto para enviar CON la imagen</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-img1-a">Para que elijas bien sin perder tiempo, acá ves las 3 rutas del método y qué trabaja cada una 💛
-
-Con un mismo paquete puedes ir al curso que más se alinee a tu objetivo.
-
-¿Cuál de estos tres te interesa más ahora: splits, arcos o preparación física?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img1-a', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <div class="msg-box" style="margin-top:12px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Versión alternativa (si el lead está entre 2 cursos)</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-img1-b">Sé que a veces abruma no saber por dónde empezar 💛 Por eso te mando esta guía visual: así eliges según tu objetivo y no al azar.
-
-Dime, ¿qué te gustaría lograr primero?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img1-b', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- IMAGEN 2 -->
-  <div class="section" id="img-resultados">
-    <h3><span class="num" style="background:linear-gradient(135deg,#4A7FD4,#8B4FC8)">2</span> Imagen 2 · «Resultados Reales»</h3>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
-      <div style="background:#F0F4FF;border:1px solid #4A7FD440;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#4A7FD4;margin-bottom:10px">✅ Enviarla cuando…</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4A4A4A">
-          <div>• Dice "lo voy a pensar"</div>
-          <div>• "No sé si soy para esto"</div>
-          <div>• "No sé si soy muy principiante"</div>
-          <div>• "¿Funciona realmente?"</div>
-          <div>• Lleva días sin responder (reactivación)</div>
-          <div>• Después del precio si hay silencio</div>
-        </div>
-      </div>
-      <div style="background:#FFF0F0;border:1px solid #E8302A40;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#E8302A;margin-bottom:10px">❌ NO enviarla cuando…</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4A4A4A">
-          <div>• El lead acaba de escribir por primera vez</div>
-          <div>• Todavía no sabe nada del método</div>
-          <div>• Está caliente y listo para pagar</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="info-banner gold"><div class="info-banner-icon">📍</div><div><strong>Momento exacto:</strong> Cuando el lead frena, duda o posterga. Esta imagen construye la confianza que le falta para decidir. También funciona muy bien como primer mensaje de reactivación si llevan más de 24h sin responder.</div></div>
-
-    <div class="msg-box" style="margin-top:16px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Texto para enviar CON la imagen (cuando dice "lo pienso")</div>
-        <div class="msg-who">Cami / Equipo</div>
-      </div>
-      <div class="msg-content" id="msg-img2-a">Entiendo perfectamente 💛 Antes de que lo pienses demasiado, quiero que veas algo importante.
-
-Estos son resultados reales de alumnas de distintos niveles. No necesitas llegar "lista", entras para empezar el proceso con guía real.
-
-Si después quieres, retomamos desde horarios o desde valores 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img2-a', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <div class="msg-box" style="margin-top:12px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Texto para enviar CON la imagen (reactivación — si no respondió en +24h)</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-img2-b">Holaa 💛 Quedamos pendientes con tu opción en CGC Method.
-
-Antes de que lo dejemos pasar, te comparto resultados reales de alumnas que empezaron igual que tú.
-
-¿Quieres que retomemos desde horarios o desde valores?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img2-b', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <div class="msg-box" style="margin-top:12px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Texto cuando duda de su nivel</div>
-        <div class="msg-who">Cami / Equipo</div>
-      </div>
-      <div class="msg-content" id="msg-img2-c">Es una duda súper común 💛 En CGC trabajamos multinivel, así que no necesitas llegar con un nivel específico. Entras y empezamos desde donde estás.
-
-Acá te mando resultados reales para que veas el tipo de avance que logramos. Si quieres, te cuento cómo sería tu punto de partida 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img2-c', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- IMAGEN 3 -->
-  <div class="section" id="img-incluye">
-    <h3><span class="num" style="background:linear-gradient(135deg,#E8302A,#C040A0)">3</span> Imagen 3 · «¿Qué incluye tu paquete?»</h3>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
-      <div style="background:#FFF0F4;border:1px solid #E8302A40;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#E8302A;margin-bottom:10px">✅ Enviarla cuando…</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4A4A4A">
-          <div>• Justo ANTES de enviar precios (siempre)</div>
-          <div>• Cuando pregunta "¿qué incluye?"</div>
-          <div>• Cuando dice "está caro" tras ver el precio</div>
-          <div>• Cuando no sabe qué recibe exactamente</div>
-        </div>
-      </div>
-      <div style="background:#FFF0F0;border:1px solid #E8302A40;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#E8302A;margin-bottom:10px">❌ NO enviarla cuando…</div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4A4A4A">
-          <div>• Después del precio (llega tarde)</div>
-          <div>• El lead ya está comprando</div>
-          <div>• Ya la enviaste antes en esa conversación</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="info-banner" style="background:#FFF0F4;border:1.5px solid #E8302A50"><div class="info-banner-icon">📍</div><div><strong>Momento exacto:</strong> Esta imagen va SIEMPRE antes de enviar valores. Sin excepción. Muestra el valor antes del precio para que el lead no vea solo el número sino todo lo que recibe.</div></div>
-
-    <div class="msg-box" style="margin-top:16px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Texto para enviar CON la imagen (antes de valores)</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-img3-a">Antes de enviarte los valores, quiero que veas bien qué incluye tu paquete 💛
-
-No es solo una clase: incluye clases en vivo con correcciones, clases grabadas para practicar y seguimiento real de tu avance.
-
-¿Quieres que te envíe las opciones disponibles?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img3-a', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <div class="msg-box" style="margin-top:12px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Texto cuando dice "está caro" después del precio</div>
-        <div class="msg-who">Cami / Equipo</div>
-      </div>
-      <div class="msg-content" id="msg-img3-b">Te entiendo 💛 Por eso me gusta siempre mostrar bien qué incluye el paquete antes del precio.
-
-No es solo una clase suelta: es un proceso con correcciones en vivo, clases grabadas para repasar y seguimiento real de tu avance.
-
-Si quieres, te digo cuál opción te daría mejor relación inversión/avance según tu objetivo 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-img3-b', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLUJO SEGÚN TIPO DE LEAD -->
-  <div class="section" id="img-flujo">
-    <h3><span class="num">📊</span> Flujo según tipo de lead</h3>
-
-    <div style="display:flex;flex-direction:column;gap:16px">
-
-      <!-- Lead caliente -->
-      <div style="background:#F0FFF4;border:1.5px solid #2E7D3250;border-radius:12px;padding:18px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-          <div style="background:#2E7D32;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:1px">🔥 LEAD CALIENTE</div>
-          <div style="font-size:12px;color:#4A4A4A">Pregunta por precio, horarios o inicio directamente</div>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;font-weight:700">
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">1. Diagnóstico breve</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">2. Recomendación</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#FFF8F0;border:1px solid #F47920;border-radius:8px;padding:6px 10px;color:#F47920">📦 Img 1 (solo si hay duda)</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">3. Horarios</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#FFF0F4;border:1px solid #E8302A;border-radius:8px;padding:6px 10px;color:#E8302A">✅ Img 3</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">4. Valores</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#F0F4FF;border:1px solid #4A7FD4;border-radius:8px;padding:6px 10px;color:#4A7FD4">⭐ Img 2 (solo si frena)</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#E8F5E9;border:1px solid #2E7D32;border-radius:8px;padding:6px 10px;color:#2E7D32">💰 Cierre</div>
-        </div>
-      </div>
-
-      <!-- Lead tibio -->
-      <div style="background:#FFFBF0;border:1.5px solid #F9B23350;border-radius:12px;padding:18px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-          <div style="background:#F9B233;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:1px">🌤 LEAD TIBIO</div>
-          <div style="font-size:12px;color:#4A4A4A">Tiene interés pero compara, no sabe qué elegir</div>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;font-weight:700">
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">1. Diagnóstico</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">2. Recomendación</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#FFF8F0;border:1px solid #F47920;border-radius:8px;padding:6px 10px;color:#F47920">📦 Img 1</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">3. Horarios</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#FFF0F4;border:1px solid #E8302A;border-radius:8px;padding:6px 10px;color:#E8302A">✅ Img 3</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">4. Valores</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#F0F4FF;border:1px solid #4A7FD4;border-radius:8px;padding:6px 10px;color:#4A7FD4">⭐ Img 2 (si duda)</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#E8F5E9;border:1px solid #2E7D32;border-radius:8px;padding:6px 10px;color:#2E7D32">💰 Cierre</div>
-        </div>
-      </div>
-
-      <!-- Lead frío -->
-      <div style="background:#F5F5F5;border:1.5px solid #99999950;border-radius:12px;padding:18px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-          <div style="background:#666;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:1px">❄️ LEAD FRÍO</div>
-          <div style="font-size:12px;color:#4A4A4A">Viene por curiosidad, responde lento, no declara urgencia</div>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;font-weight:700">
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">1. Diagnóstico</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#F0F4FF;border:1px solid #4A7FD4;border-radius:8px;padding:6px 10px;color:#4A7FD4">⭐ Img 2</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#FFF8F0;border:1px solid #F47920;border-radius:8px;padding:6px 10px;color:#F47920">📦 Img 1 (según objeción)</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">2. Pregunta de horario</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#FFF0F4;border:1px solid #E8302A;border-radius:8px;padding:6px 10px;color:#E8302A">✅ Img 3</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 10px">3. Valores</div>
-          <div style="color:#aaa">→</div>
-          <div style="background:#E8F5E9;border:1px solid #2E7D32;border-radius:8px;padding:6px 10px;color:#2E7D32">💰 Cierre</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="info-banner gold" style="margin-top:18px"><div class="info-banner-icon">⏱️</div><div><strong>Timing entre mensajes:</strong> Después de enviar una imagen, espera 40–120 segundos antes del siguiente mensaje. Que no parezca un bot. Dale tiempo real al lead para ver la imagen.</div></div>
-  </div>
-
-  <!-- OBJECIONES + IMAGEN -->
-  <div class="section" id="img-objeciones">
-    <h3><span class="num">💬</span> Objeciones frecuentes: qué imagen usar y qué decir</h3>
-
-    <div style="display:flex;flex-direction:column;gap:12px">
-
-      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-        <div style="background:#FFF8F0;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #F4792030">
-          <div style="font-size:13px;font-weight:700;color:#F47920">📦 Imagen 1</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A">«No sé cuál curso me conviene»</div>
-        </div>
-        <div class="msg-box" style="margin:12px;border:none;box-shadow:none;background:#F9F9F9">
-          <div class="msg-content" id="msg-obj1">Te entiendo 💛 Justamente por eso te mando esta guía visual.
-
-Con un mismo paquete puedes ir al curso que más se adapte a tu objetivo. Si me dices qué quieres lograr primero, te digo cuál te conviene priorizar para avanzar más rápido sin dispersarte.</div>
-          <div class="msg-footer" style="margin-top:8px">
-            <button class="copy-btn" onclick="copyMsg('msg-obj1', this)">📋 Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-        <div style="background:#F5F5FF;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #4A7FD430">
-          <div style="font-size:13px;font-weight:700;color:#4A7FD4">⭐ Imagen 2</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A">«No sé si soy muy principiante»</div>
-        </div>
-        <div class="msg-box" style="margin:12px;border:none;box-shadow:none;background:#F9F9F9">
-          <div class="msg-content" id="msg-obj2">Es una duda súper común 💛 En CGC trabajamos multinivel, así que no necesitas llegar "lista": entras para empezar el proceso con guía real.
-
-Acá te comparto resultados de alumnas de distintos niveles para que veas el tipo de avance que logramos. Si quieres, te digo cómo sería tu punto de partida.</div>
-          <div class="msg-footer" style="margin-top:8px">
-            <button class="copy-btn" onclick="copyMsg('msg-obj2', this)">📋 Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-        <div style="background:#FFF0F4;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E8302A30">
-          <div style="font-size:13px;font-weight:700;color:#E8302A">✅ Imagen 3</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A">«Está caro» / «¿Solo son clases?»</div>
-        </div>
-        <div class="msg-box" style="margin:12px;border:none;box-shadow:none;background:#F9F9F9">
-          <div class="msg-content" id="msg-obj3">Te entiendo 💛 Por eso me gusta que veas bien qué incluye antes del precio.
-
-No es solo una clase suelta, es un proceso completo: clases en vivo con correcciones, clases grabadas para repasar, y seguimiento de tu avance.
-
-Si quieres, te indico cuál opción te da mejor relación inversión/avance para tu objetivo 🔥</div>
-          <div class="msg-footer" style="margin-top:8px">
-            <button class="copy-btn" onclick="copyMsg('msg-obj3', this)">📋 Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-        <div style="background:#F5F5FF;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #4A7FD430">
-          <div style="font-size:13px;font-weight:700;color:#4A7FD4">⭐ Imagen 2</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A">«Lo voy a pensar» / Silencio +24h</div>
-        </div>
-        <div class="msg-box" style="margin:12px;border:none;box-shadow:none;background:#F9F9F9">
-          <div class="msg-content" id="msg-obj4">Claro, tómate tu tiempo 💛
-
-Antes de que lo dejes ir, quiero que veas algo: estos son resultados reales de alumnas que empezaron con las mismas dudas que tú.
-
-Cuando quieras retomar, estoy aquí. ¿Prefieres que volvamos desde horarios o desde valores? 🔥</div>
-          <div class="msg-footer" style="margin-top:8px">
-            <button class="copy-btn" onclick="copyMsg('msg-obj4', this)">📋 Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-        <div style="background:#FFF0F4;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E8302A30">
-          <div style="font-size:13px;font-weight:700;color:#E8302A">✅ Imagen 3</div>
-          <div style="font-size:13px;font-weight:700;color:#1A1A1A">«No tengo tiempo» / «¿Solo son clases en vivo?»</div>
-        </div>
-        <div class="msg-box" style="margin:12px;border:none;box-shadow:none;background:#F9F9F9">
-          <div class="msg-content" id="msg-obj5">Justamente una de las ventajas es que no dependes solo de las clases en vivo 💛
-
-Tu paquete incluye clases grabadas que puedes ver cuando puedas, más distintas opciones de horario según tu zona horaria.
-
-Si me dices tu disponibilidad real, te digo si te conviene entrar ya o esperar otra franja 🔥</div>
-          <div class="msg-footer" style="margin-top:8px">
-            <button class="copy-btn" onclick="copyMsg('msg-obj5', this)">📋 Copiar</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  </div><!-- /hidden old section -->
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 4 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">⚡</div>
-    <h2><span>Parte 4</span>Casos Especiales</h2>
-  </div>
-
-  <div class="section" id="acrobacias">
-    <h3><span class="num">24</span> Acrobacias online</h3>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-      <div style="background:#F0FFF4;border:1px solid #C3E6CB;border-radius:10px;padding:16px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:10px">✅ SÍ se enseñan online — 1:1 con Cami</div>
-        <div style="display:flex;flex-direction:column;gap:7px">
-          <div style="font-size:13px;color:#1A1A1A;display:flex;gap:8px;align-items:flex-start"><span>🤸</span><span><strong>Parada de manos</strong> y todas sus variaciones</span></div>
-          <div style="font-size:13px;color:#1A1A1A;display:flex;gap:8px;align-items:flex-start"><span>🌀</span><span><strong>Aspas / Rueda de carro</strong> con 2 manos o con 1 mano<br><span style="font-size:11px;color:#888">(sin manos no se enseña online)</span></span></div>
-          <div style="font-size:13px;color:#1A1A1A;display:flex;gap:8px;align-items:flex-start"><span>⬆️</span><span><strong>Arco hacia adelante</strong> / Front walkover</span></div>
-          <div style="font-size:13px;color:#1A1A1A;display:flex;gap:8px;align-items:flex-start"><span>⬇️</span><span><strong>Arco hacia atrás</strong> / Back walkover</span></div>
-        </div>
-      </div>
-      <div style="background:#FFF5F5;border:1px solid #FFD0D0;border-radius:10px;padding:16px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#C62828;margin-bottom:10px">🚫 NO se enseñan online</div>
-        <div style="font-size:13px;color:#4A4A4A;display:flex;gap:8px;align-items:flex-start;margin-bottom:8px"><span>✈️</span><span><strong>Acrobacias de vuelo</strong> o más avanzadas</span></div>
-        <div style="font-size:12px;color:#888;background:#fff;border-radius:8px;padding:8px 12px;line-height:1.5">Requieren asistencia física y material especializado. Solo se trabajan presencialmente.</div>
-      </div>
-    </div>
-
-    <div class="info-banner red" style="margin-bottom:12px">
-      <div class="info-banner-icon">⚠️</div>
-      <div>Las acrobacias que sí se enseñan online son <strong>siempre en clase 1:1 con Cami</strong>, nunca grupal virtual.</div>
-    </div>
-
-    <!-- Mensaje: lead pide acrobacia que SÍ se puede -->
-    <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Si pide parada de manos, aspas, front o back walkover:</div>
-    <div class="msg-box" style="margin-bottom:14px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Acrobacia que SÍ enseño online</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-20">Sí puedo ayudarte con eso en una clase 1:1 conmigo online 💛
-
-Para ese tipo de acrobacia puedo verte directamente por Zoom, corregirte la técnica, darte progresiones adaptadas a tu nivel y avanzar de forma segura ✨
-
-¿Te gustaría que te cuente cómo funciona la clase 1:1?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-20', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <!-- Mensaje: lead pide acrobacia de vuelo u avanzada -->
-    <div style="font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Si pide acrobacia de vuelo o avanzada:</div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Acrobacia que NO enseño online</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-20b">Para ese tipo de acrobacia, lo más seguro es trabajarla de forma presencial 💛
-
-Las acrobacias de vuelo y las más avanzadas requieren asistencia física y material especializado, por eso no las trabajo online.
-
-Si estás en Lima, podemos coordinarlo en una clase presencial conmigo en Acroflex, Jesús María ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-20b', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="menor-edad">
-    <h3><span class="num">25</span> Menor de edad</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-21">Perfecto 💛 Como eres menor de edad, la inscripción y coordinación debe realizarla tu mamá, papá o apoderado.
-
-¿Podrías pedirle que nos escriba por aquí para brindarle toda la información? ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-21', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="papa-mama">
-    <h3><span class="num">26</span> Mamá o papá</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-22">Gracias por contarnos 💛
-
-En CGC Method trabajamos con un método progresivo y seguro, cuidando mucho la técnica para que su hija/o avance sin forzar su cuerpo.
-
-Según su objetivo, puedo recomendar una clase grupal virtual si busca mejorar flexibilidad o fuerza de forma progresiva, o una clase 1:1 conmigo si necesita algo más específico como rutina, puntas, acrobacia, figura o competencia ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-22', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="clase-gratis">
-    <h3><span class="num">27</span> Clase de prueba gratuita</h3>
-    <div class="info-banner" style="background:#F0FFF4;border:1.5px solid #2E7D3250">
-      <div class="info-banner-icon">🎁</div>
-      <div><strong>Sí ofrecemos una clase de prueba gratuita en vivo por Zoom.</strong> El lead elige el curso (PowerSplit, Arcos360 o Prepa Física) y se coordina el horario por WhatsApp según su disponibilidad.</div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
-      <div style="background:#F0FFF4;border:1px solid #C3E6CB;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#2E7D32;margin-bottom:8px">✅ Cuándo ofrecerla</div>
-        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#4A4A4A">
-          <div>• Lead nuevo que no conoce el método</div>
-          <div>• Lead que duda si es para su nivel</div>
-          <div>• Lead frío que necesita vivir la experiencia antes de comprar</div>
-        </div>
-      </div>
-      <div style="background:#FFF8F0;border:1px solid #F4792040;border-radius:10px;padding:14px">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#F47920;margin-bottom:8px">⚡ Cómo funciona</div>
-        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#4A4A4A">
-          <div>• Clase en vivo por Zoom</div>
-          <div>• Elige el curso que quiere probar</div>
-          <div>• Se coordina el horario por WhatsApp</div>
-          <div>• Al final, Cami o el equipo hace el seguimiento</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cuando el lead pide una clase gratis o quiere probar primero</div>
-        <div class="msg-who">Equipo CGC</div>
-      </div>
-      <div class="msg-content" id="msg-23">¡Sí tenemos clase de prueba gratuita en vivo por Zoom! 💛
-
-Puedes elegir el curso que más se adapte a tu objetivo: PowerSplit, Arcos360 o Preparación Física.
-
-La coordinamos según tu disponibilidad. ¿Cuál te interesa probar y en qué horario te acomoda más: mañana, tarde o noche?</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-23', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <div class="msg-box" style="margin-top:12px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Seguimiento después de la clase de prueba</div>
-        <div class="msg-who">Cami / Equipo</div>
-      </div>
-      <div class="msg-content" id="msg-23b">¿Cómo te fue en la clase de prueba? 💛
-
-Me encantaría saber qué te pareció y cómo te sentiste. Si quieres seguir avanzando con correcciones reales y seguimiento constante, podemos armar tu plan ideal.
-
-¿Quieres que te cuente las opciones disponibles? 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-23b', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="lo-pienso">
-    <h3><span class="num">28</span> «Lo voy a pensar»</h3>
-    <div class="info-banner gold"><div class="info-banner-icon">💡</div><div>Solo aplica para clases grupales virtuales (PowerSplit, Arcos360, Prepa Física). Para 1:1 o presenciales, usar solo el mensaje de texto.</div></div>
-    <div class="msg-box" style="margin-top:14px">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje base</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-24">Claro, te entiendo 💛
-
-Solo te recomiendo no dejar pasar mucho tiempo, porque cuando uno posterga su objetivo, también posterga su avance.
-
-Los cupos y horarios se separan según inscripción. Si de verdad quieres empezar, lo mejor es asegurar tu cupo y comenzar esta semana 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-24', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-
-    <!-- PASO IMAGEN 2: refuerzo de confianza -->
-    <div style="border:2px dashed #4A7FD4;border-radius:12px;padding:16px;margin-top:16px;background:#F5F8FF">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <div style="background:#4A7FD4;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.5px">⭐ SIGUIENTE PASO · Imagen 2</div>
-        <div style="font-size:12px;font-weight:700;color:#4A7FD4">«Resultados Reales»</div>
-      </div>
-      <div style="font-size:13px;color:#4A4A4A;margin-bottom:12px">Después del mensaje anterior, envía esta imagen de inmediato. Construye la confianza que le falta para decidir.</div>
-      <div class="msg-box" style="margin:0">
-        <div class="msg-header">
-          <div class="msg-label">💬 Texto con la imagen</div>
-          <div class="msg-who">Cami / Equipo</div>
-        </div>
-        <div class="msg-content" id="msg-img2">Mira estos resultados reales de alumnas que empezaron igual que tú 💛
-
-Distintos niveles, distintos países. Todas avanzaron porque el método es progresivo y con correcciones reales en cada clase.
-
-Los cupos se separan por orden de inscripción. Si quieres asegurar el tuyo, es ahora 🔥</div>
-        <div class="msg-footer">
-          <button class="copy-btn" onclick="copyMsg('msg-img2', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="pagos">
-    <h3><span class="num">29</span> Pagos</h3>
-    <div class="roles-grid">
-      <div class="role-card">
-        <div class="role-card-header">
-          <div class="role-avatar team">🌎</div>
-          <div>
-            <div class="role-name">Internacional</div>
-            <div class="role-sub">Fuera de Perú</div>
-          </div>
-        </div>
-        <div id="msg-25" style="font-size:14px; color:var(--gray); line-height:1.6">Para pagos internacionales trabajamos con link de pago 💛
-Puedes pagar con Visa, Mastercard o American Express.</div>
-        <div style="margin-top:10px">
-          <button class="copy-btn" onclick="copyMsg('msg-25', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-      <div class="role-card">
-        <div class="role-card-header">
-          <div class="role-avatar cami">🇵🇪</div>
-          <div>
-            <div class="role-name">Perú</div>
-            <div class="role-sub">Pagos locales</div>
-          </div>
-        </div>
-        <div id="msg-26" style="font-size:14px; color:var(--gray); line-height:1.6">Para pagos en Perú trabajamos con Yape, Plin o transferencia en soles 💛</div>
-        <div style="margin-top:10px">
-          <button class="copy-btn" onclick="copyMsg('msg-26', this)">📋 Copiar mensaje</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 5 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">✅</div>
-    <h2><span>Parte 5</span>Después del Pago</h2>
-  </div>
-
-  <div class="section" id="post-pago-grupal">
-    <h3><span class="num">30</span> Post-pago — Clases grupales</h3>
-    <div class="info-banner blue">
-      <div class="info-banner-icon">👥</div>
-      <div>Recién aquí entran <strong>Carlos o Ariana</strong>. No derivar antes del pago.</div>
-    </div>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cuando llega el comprobante</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-27">Perfecto, ya recibimos tu comprobante 💛
-
-Ahora te voy a pasar con mi asesor/a [Carlos/Ariana], quien te ayudará con el formulario, registro, guía de bienvenida y agendamiento de tus clases ✨
-
-Qué emoción acompañarte. Vamos con todo 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-27', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="mensaje-carlos-ariana">
-    <h3><span class="num">31</span> Mensaje de Carlos o Ariana (post-pago grupal)</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Mensaje de bienvenida operativo</div>
-        <div class="msg-who">Carlos / Ariana</div>
-      </div>
-      <div class="msg-content" id="msg-28">Holaa 💛 Cami ya dejó tu recomendación según tu objetivo ✨
-
-Ahora yo te ayudaré con tu inscripción, formulario, guía de bienvenida y agendamiento para que puedas empezar tus clases.
-
-Antes de agendar, es importante recordarte la vigencia de tu paquete:
-
-📌 1 clase: vigencia de 7 días
-📌 4 clases: vigencia de 30 días
-📌 8 clases: vigencia de 30 días
-📌 12 clases: vigencia de 2 meses
-📌 20 clases: vigencia de 2 meses
-
-La vigencia empieza a contar desde la fecha en que tomas tu primera clase o según la fecha de activación registrada en tu inscripción.
-
-Te enviaré la guía de bienvenida para que tengas toda la información sobre cómo funcionan las clases, qué necesitas preparar y cómo agendar tus horarios 💛</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-28', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="vigencia">
-    <h3><span class="num">31 – 32</span> Vigencia de paquetes</h3>
-    <table class="vigencia-table">
-      <thead>
-        <tr>
-          <th>Paquete</th>
-          <th>Vigencia</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1 clase</td><td>📌 1 semana</td></tr>
-        <tr><td>4 clases</td><td>📌 1 mes</td></tr>
-        <tr><td>8 clases</td><td>📌 1 mes</td></tr>
-        <tr><td>12 clases</td><td>📌 2 meses</td></tr>
-        <tr><td>20 clases</td><td>📌 2 meses</td></tr>
-        <tr><td>32 clases</td><td>📌 3 meses</td></tr>
-      </tbody>
-    </table>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Recordatorio corto de vigencia</div>
-        <div class="msg-who">Carlos / Ariana</div>
-      </div>
-      <div class="msg-content" id="msg-29">También te recuerdo que tu paquete de [cantidad de clases] tiene una vigencia de [vigencia correspondiente] 💛
-
-Te recomiendo agendar tus clases con anticipación para que puedas aprovecharlas dentro del tiempo establecido y mantener continuidad en tu avance ✨</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-29', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="post-pago-1a1">
-    <h3><span class="num">33</span> Post-pago — Clases 1:1</h3>
-    <div class="msg-box">
-      <div class="msg-header">
-        <div class="msg-label">💬 Cuando llega el comprobante</div>
-        <div class="msg-who">Cami</div>
-      </div>
-      <div class="msg-content" id="msg-30">Perfecto, ya recibimos tu comprobante 💛
-
-Ahora te voy a pasar con mi asesor/a [Carlos/Ariana], quien te ayudará con el formulario, registro y agendamiento de tu clase 1:1 conmigo ✨
-
-Qué emoción acompañarte. Vamos con todo 🔥</div>
-      <div class="msg-footer">
-        <button class="copy-btn" onclick="copyMsg('msg-30', this)">📋 Copiar mensaje</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 6 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">🔄</div>
-    <h2><span>Parte 6</span>Flujo Completo</h2>
-  </div>
-
-  <div class="section" id="flujo-completo">
-    <h3><span class="num">34</span> El flujo siempre es este orden</h3>
-    <div class="flow">
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">1</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Saludo y pedido de datos</strong>
-          <p>Nombre, edad, país y objetivo del lead.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">2</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Lead envía su objetivo</strong>
-          <p>Una vez que cuenta qué quiere lograr, entra Cami.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">3</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Entra Cami</strong>
-          <p>Diagnóstica y recomienda la opción correcta.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">4</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Cami recomienda grupal o 1:1</strong>
-          <p>PowerSplit, Arcos360, Prepa Física, combinación, o 1:1 directa con Cami.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">5</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Se envía video o información</strong>
-          <p>Material para que el lead vea cómo se trabaja.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">6</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Se envían horarios y valores</strong>
-          <p>Según el país del lead y el paquete recomendado.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">7</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Lead elige paquete o plan</strong>
-          <p>Cami ayuda a tomar la decisión.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">8</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Se envían datos de pago</strong>
-          <p>Link de pago (internacional) o Yape/Plin/transferencia (Perú).</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">9</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-body">
-          <strong>Lead envía comprobante</strong>
-          <p>Cami confirma recepción y deriva al equipo operativo.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-line">
-          <div class="flow-dot">10</div>
-        </div>
-        <div class="flow-body">
-          <strong>Entran Carlos o Ariana</strong>
-          <p>Formulario, guía de bienvenida, vigencia del paquete y agendamiento.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="info-banner red">
-      <div class="info-banner-icon">⚠️</div>
-      <div><strong>No derivar a Carlos o Ariana antes del pago.</strong> El flujo operativo siempre comienza con el comprobante confirmado.</div>
-    </div>
-  </div>
-
-  <!-- ──────────────────────────────── -->
-  <!-- PARTE 7 -->
-  <!-- ──────────────────────────────── -->
-  <div class="part-header">
-    <div class="part-icon">💛</div>
-    <h2><span>Parte 7</span>Regla Final</h2>
-  </div>
-
-  <div class="section" id="enfoque-venta">
-    <h3><span class="num">35</span> Enfoque de venta</h3>
-    <div class="card">
-      <p><strong>Cada respuesta debe sentirse como una asesoría personalizada.</strong></p>
-      <p style="margin-top:10px">Vender siempre desde la transformación:</p>
-      <ul style="margin-top:8px">
-        <li>Qué quiere lograr.</li>
-        <li>Por qué esa opción le conviene.</li>
-        <li>Cómo se sentirá al avanzar.</li>
-        <li>Qué cambio puede conseguir.</li>
-        <li>Por qué la corrección en vivo y el método importan.</li>
-      </ul>
-    </div>
-    <div style="background: linear-gradient(135deg, #1A1A1A 0%, #2A0A0A 50%, #1A0A2A 100%); border-radius: 14px; padding: 32px 28px; margin-top: 20px; text-align:center">
-      <div style="font-size:28px; margin-bottom:12px">💛</div>
-      <p style="background: linear-gradient(90deg,#F07820,#C040A0,#4A7FD4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-size: 18px; font-weight: 700; line-height: 1.5; max-width: 520px; margin: 0 auto;">
-        Con el método correcto, constancia y guía profesional, cualquier persona puede acercarse a eso que hoy siente imposible.
-      </p>
-    </div>
-  </div>
-
-</main>
 </div>
 
 <script>
-  /* ── COUNTDOWN ── */
-  function updateCountdown() {
-    const target = new Date('2026-06-30T23:59:59-05:00');
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) {
-      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = '00'; });
-      return;
-    }
-    const pad = n => String(Math.floor(n)).padStart(2,'0');
-    document.getElementById('cd-days').textContent  = pad(diff / 86400000);
-    document.getElementById('cd-hours').textContent = pad((diff % 86400000) / 3600000);
-    document.getElementById('cd-mins').textContent  = pad((diff % 3600000) / 60000);
-    document.getElementById('cd-secs').textContent  = pad((diff % 60000) / 1000);
-  }
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
+// ── COUNTDOWN ──────────────────────────────────────────
+const TARGET = new Date('2026-06-30T23:59:59-05:00');
+function tick() {
+  const d = TARGET - new Date(), el = document.getElementById('cd');
+  if (!el) return;
+  if (d <= 0) { el.textContent = 'Meta cerrada'; return; }
+  const dy = Math.floor(d/86400000), hr = Math.floor((d%86400000)/3600000), mn = Math.floor((d%3600000)/60000);
+  el.textContent = dy > 0 ? dy+'d '+hr+'h '+mn+'m para cerrar' : hr+'h '+mn+'m para cerrar';
+}
+tick(); setInterval(tick, 60000);
 
-  /* ── PROGRESO ── */
-  function updateProgress(val) {
-    const v = Math.max(0, Math.min(parseFloat(val) || 0, 100000));
-    const pct = Math.min(100, Math.round((v / 26000) * 100));
-    document.getElementById('ventas-display').textContent = v.toLocaleString('es-PE');
-    document.getElementById('pct-display').textContent = pct;
-    document.getElementById('progress-fill').style.width = pct + '%';
-    const badge = document.getElementById('meta-badge');
-    if (badge) badge.style.display = pct >= 100 ? 'inline-block' : 'none';
-    try { localStorage.setItem('cgc_ventas', v); } catch(e) {}
-  }
-  (function() {
-    try {
-      const saved = localStorage.getItem('cgc_ventas');
-      if (saved) { const inp = document.getElementById('ventas-input'); if(inp) { inp.value = saved; updateProgress(saved); } }
-    } catch(e) {}
-  })();
+// ── META ───────────────────────────────────────────────
+function updMeta(v) {
+  v = parseFloat(v) || 0;
+  const pct = Math.min(100, v/260);
+  document.getElementById('mfill').style.width = pct + '%';
+  document.getElementById('mpct').innerHTML = 'S/'+v.toLocaleString('es-PE')+' de S/26,000 — <b>'+pct.toFixed(1)+'%</b>';
+  localStorage.setItem('cgc_meta', v);
+}
+const sm = localStorage.getItem('cgc_meta');
+if (sm) { document.getElementById('minp').value = sm; updMeta(sm); }
 
-  /* ── WIZARD ── */
-  const WZ_DATA = {
-    powersplit: { icon:'🦵', name:'PowerSplit',                          color:'linear-gradient(135deg,#C040A0,#4A7FD4)', section:'#powersplit',    msgAlumna:'msg-06', msgMama:'msg-m03' },
-    arcos360:  { icon:'🌙', name:'Arcos360',                            color:'linear-gradient(135deg,#F07820,#C040A0)', section:'#arcos360',       msgAlumna:'msg-07', msgMama:'msg-m03' },
-    prepa:     { icon:'💪', name:'Preparación Física',                  color:'linear-gradient(135deg,#E8302A,#F07820)', section:'#prepa-fisica',   msgAlumna:'msg-08', msgMama:'msg-m03' },
-    'ps-a360': { icon:'🔥', name:'PowerSplit + Arcos360',               color:'linear-gradient(135deg,#8B4FC8,#E8302A)', section:'#combinaciones',  msgAlumna:'msg-09', msgMama:'msg-m03' },
-    completo:  { icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física', color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', section:'#combinaciones',  msgAlumna:'msg-10', msgMama:'msg-m03' },
-    '1a1':       { icon:'🎯', name:'Clase 1:1 directamente con Cami',      color:'linear-gradient(135deg,#E8302A,#C040A0)', section:'#recomendar-1a1', msgAlumna:'msg-14', msgMama:'msg-m04' },
-    'flexipower': { icon:'🏋️', name:'FlexiPower — Presencial en Acroflex', color:'linear-gradient(135deg,#2E7D32,#43A047)',   section:'#flexipower',     msgAlumna:'msg-fp',  msgMama:'msg-fp' },
-    'prueba':     { icon:'🎁', name:'Clase de prueba gratuita',             color:'linear-gradient(135deg,#2E7D32,#43A047)',   section:'#clase-gratis',   msgAlumna:'msg-23',  msgMama:'msg-23' }
+// ── PRICING ────────────────────────────────────────────
+function openP() { document.getElementById('pov').classList.add('open'); document.getElementById('pdraw').classList.add('open'); }
+function closeP() { document.getElementById('pov').classList.remove('open'); document.getElementById('pdraw').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeP(); });
+let cur = 'usd';
+function setCur(c) {
+  cur = c;
+  document.getElementById('tb-usd').classList.toggle('on', c==='usd');
+  document.getElementById('tb-sol').classList.toggle('on', c==='sol');
+  document.querySelectorAll('.cu-u').forEach(el => el.style.display = c==='usd'?'':'none');
+  document.querySelectorAll('.cu-s').forEach(el => el.style.display = c==='sol'?'':'none');
+  localStorage.setItem('cgc_cur', c);
+}
+const sc = localStorage.getItem('cgc_cur'); if (sc) setCur(sc);
+
+// ── STEPS DEFINITION ──────────────────────────────────
+const STEPS = [
+  {
+    id:'quien', q:'¿Quién nos está escribiendo?', sub:'Lo primero antes de responder',
+    opts:[
+      {v:'alumno', icon:'🙋', l:'El/la alumno/a', d:'La persona que quiere tomar clases'},
+      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',   d:'Escribe el padre o la madre por su hijo/a'}
+    ]
+  },
+  {
+    id:'edad', q:'¿Qué edad tiene el/la alumno/a?', sub:'Define el tipo de programa y el tono del mensaje',
+    opts:[
+      {v:'nino',   icon:'🧒', l:'Niño/a (hasta 14 años)', d:'Programa adaptado para niños y preadolescentes'},
+      {v:'adulto', icon:'🧑', l:'Joven o adulto/a (15+)', d:'Programa estándar para adolescentes y adultos'}
+    ]
+  },
+  {
+    id:'ubicacion', q:'¿Dónde está el/la alumno/a?', sub:'Define cursos disponibles y moneda de pago',
+    opts:[
+      {v:'lima',     icon:'📍', l:'Lima, Perú',           d:'Acceso a clases presenciales en Acroflex + online'},
+      {v:'peru',     icon:'🇵🇪', l:'Otra ciudad de Perú', d:'Solo online · precios en soles'},
+      {v:'exterior', icon:'🌎', l:'Fuera de Perú',        d:'Solo online · precios en dólares'}
+    ]
+  },
+  {
+    id:'experiencia', q:'¿Tiene experiencia en actividad física?', sub:'Adaptamos el mensaje y la recomendación',
+    opts:[
+      {v:'si', icon:'💪', l:'Sí, practica o practicó algo', d:'Tiene base en alguna disciplina o deporte'},
+      {v:'no', icon:'🌱', l:'No, está comenzando desde cero', d:'Sin experiencia previa en actividad física'}
+    ]
+  },
+  {
+    id:'disciplina', q:'¿Qué disciplina practica o practicó?', sub:'Afecta la recomendación y el mensaje de validación',
+    opts:[
+      {v:'gimnasia',       icon:'🤸', l:'Gimnasia artística',       d:'Compite o entrena gimnasia artística'},
+      {v:'danza',          icon:'🩰', l:'Danza / Ballet',           d:'Bailarina, estudiante de danza o ballet'},
+      {v:'artes_marciales',icon:'🥋', l:'Artes marciales',          d:'Karate, taekwondo, judo, capoeira, etc.'},
+      {v:'otra',           icon:'⚽', l:'Otra actividad / deporte', d:'Natación, crossfit, fútbol, atletismo, etc.'}
+    ]
+  },
+  {
+    id:'objetivo', q:'¿Qué busca principalmente?', sub:'Define el curso o programa a recomendar',
+    opts:[
+      {v:'flexibilidad', icon:'🦵', l:'Flexibilidad — splits y/o arcos',   d:'Apertura de piernas y/o flexibilidad de espalda'},
+      {v:'acrobacia',    icon:'🌀', l:'Fuerza y acrobacia',               d:'Fuerza funcional, base acrobática o movimientos específicos'},
+      {v:'todo',         icon:'⭐', l:'Todo completo — programa integral', d:'Flexibilidad + fuerza + acrobacia'}
+    ]
+  }
+];
+
+// ── WIZARD STATE ──────────────────────────────────────
+let state = {}, history = [], visSteps = [], stepIdx = 0;
+
+function getVis(s) {
+  return STEPS.filter(st => !(st.id==='disciplina' && s.experiencia==='no'));
+}
+
+function start() {
+  state = {}; history = []; stepIdx = 0;
+  visSteps = STEPS.filter(st => st.id !== 'disciplina');
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  renderStep(0);
+}
+
+function renderStep(idx) {
+  const step = visSteps[idx];
+  const total = visSteps.length;
+  const dots = visSteps.map((_,i) => `<div class="dot${i<idx?' done':i===idx?' active':''}"></div>`).join('');
+  const opts = step.opts.map(o =>
+    `<button class="opt" onclick="pick('${step.id}','${o.v}')">
+      <span class="opt-icon">${o.icon}</span>
+      <span class="opt-txt"><span class="opt-lbl">${o.l}</span><span class="opt-dsc">${o.d}</span></span>
+      <span class="opt-arr">›</span>
+    </button>`
+  ).join('');
+  document.getElementById('sc-step').innerHTML = `
+    <div class="step-header">
+      <button class="btn-back" onclick="goBack()">${idx===0?'✕ Cancelar':'← Volver'}</button>
+      <div class="step-dots">${dots}</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Paso ${idx+1} de ${total}</div>
+      <div class="step-q">${step.q}</div>
+      <div class="step-sub">${step.sub}</div>
+      ${opts}
+    </div>`;
+}
+
+function pick(id, val) {
+  state[id] = val;
+  history.push(stepIdx);
+  if (id === 'experiencia') visSteps = getVis(state);
+  stepIdx++;
+  if (stepIdx >= visSteps.length) { show('sc-step',false); buildResult(); show('sc-result',true); window.scrollTo({top:0,behavior:'smooth'}); }
+  else renderStep(stepIdx);
+}
+
+function goBack() {
+  if (history.length === 0) { show('sc-step',false); show('sc-start',true); return; }
+  stepIdx = history.pop();
+  delete state[visSteps[stepIdx].id];
+  visSteps = getVis(state);
+  renderStep(stepIdx);
+}
+
+function show(id, v) { document.getElementById(id).style.display = v?'':'none'; }
+
+// ── RECOMMENDATION ────────────────────────────────────
+function getRec() {
+  const {disciplina, edad, objetivo} = state;
+  if (objetivo==='acrobacia') {
+    if (disciplina==='gimnasia' || edad==='nino') return '1a1';
+    return 'prepa';
+  }
+  if (objetivo==='todo') {
+    if (disciplina==='gimnasia' && edad==='nino') return '1a1';
+    return 'completo';
+  }
+  return 'ps-a360'; // flexibilidad default
+}
+
+const REC = {
+  'ps-a360': {icon:'🔥', name:'PowerSplit + Arcos360',                   color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Se pueden tomar juntos o separados.'},
+  'completo': {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',    color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática.'},
+  '1a1':      {icon:'🎯', name:'Clase 1:1 directamente con Cami',         color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
+  'prepa':    {icon:'💪', name:'Preparación Física',                      color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática. Puede combinarse con PowerSplit o Arcos360.'}
+};
+
+// ── BUILD MESSAGES ────────────────────────────────────
+function buildMsgs(rec) {
+  const {quien, edad, ubicacion, experiencia, disciplina} = state;
+  const isMama = quien==='mama', isNino = edad==='nino';
+  const isLima = ubicacion==='lima', isExt = ubicacion==='exterior';
+  const steps = [];
+
+  // 1. SALUDO
+  steps.push({who:'team', lbl:'Saludo inicial',
+    txt: isMama
+      ? `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que nos hayas contactado.\nCuéntame un poquito más, ¿qué edad tiene tu hijo/a y qué es lo que busca trabajar? 🤗`
+      : `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que te hayas comunicado 😊\nCuéntame, ¿qué es lo que estás buscando trabajar? Y dime, ¿de dónde eres? 🌎`
+  });
+
+  // 2. VALIDACIÓN EXPERIENCIA
+  const discNom = {gimnasia:'gimnasia artística', danza:'danza/ballet', artes_marciales:'artes marciales', otra:'actividad física'}[disciplina] || 'su disciplina';
+  if (experiencia==='si') {
+    steps.push({who:'team', lbl:'Valorar la experiencia',
+      txt: isMama
+        ? `¡Qué bueno que tu hijo/a ya tiene experiencia en ${discNom}! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
+        : `¡Qué bacán que ya tienes experiencia en ${discNom}! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`
+    });
+  } else {
+    steps.push({who:'team', lbl:'Sin experiencia — tranquilizar',
+      txt: isMama
+        ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
+        : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`
+    });
+  }
+
+  // 3. VIDEO(S)
+  const vidMap = {
+    '1a1':     isLima ? [{t:`Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`, a:true}]
+                      : [{t:`Acá te comparto el video de las clases 1:1 virtuales por Zoom para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`, a:true}],
+    'prepa':   [{t:`Acá te comparto el video de Preparación Física para que veas cómo son las clases 💛🎥`, a:true}],
+    'ps-a360': [{t:`Acá te comparto el video de PowerSplit para que veas cómo son las clases 💛🎥`, a:true},
+                {t:`Y este es el video de Arcos360 para que veas cómo trabajamos la flexibilidad de espalda 💛🎥`, a:true}],
+    'completo':[{t:`Acá te comparto el video de PowerSplit 💛🎥`, a:true},
+                {t:`Y este es el video de Arcos360 — flexibilidad de espalda 💛🎥`, a:true},
+                {t:`Y por último Preparación Física para que veas el tipo de trabajo 💛🎥`, a:true}]
   };
+  (vidMap[rec]||[]).forEach((v,i) => steps.push({who:'team', lbl:`Enviar video${(vidMap[rec].length>1?' '+(i+1):'')}`, txt:v.t, attach:true}));
 
-  let wzState = { isMama: false, isLima: false };
+  // 4. RECOMENDACIÓN
+  let recTxt = '';
+  if (rec==='ps-a360') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nClases en vivo por Zoom con correcciones reales ✨ ¿Te cuento los horarios y valores?`
+    : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales ✨ ¿Te cuento los horarios y valores?`;
+  else if (rec==='completo') recTxt = isMama
+    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el más completo y tiene el mejor precio ✨ ¿Te cuento los horarios y valores?`
+    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el más completo y tiene el mejor precio ✨ ¿Te cuento los horarios y valores?`;
+  else if (rec==='prepa') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento.\n\n¿Te cuento los horarios y valores?`
+    : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja la condición necesaria para avanzar en cualquier disciplina.\n\n¿Te cuento los horarios y valores?`;
+  else if (rec==='1a1') recTxt = isMama
+    ? `Por lo que me cuentas, para el objetivo de tu hijo/a lo mejor sería una clase 1:1 directamente con Cami 💛\n\nA diferencia de las grupales, las 1:1 son siempre con Cami. Puede verle directamente, corregirle según su nivel y darle ejercicios exactos según su meta 🎯\n\n¿Te cuento cómo funciona y los valores?`
+    : `Por lo que me cuentas, en tu caso te recomendaría una clase 1:1 directamente conmigo 💛\n\nA diferencia de las grupales, las 1:1 son siempre conmigo. Puedo verte directamente, corregirte según tu nivel y darte ejercicios exactos según tu meta 🎯\n\n¿Te cuento cómo funciona y los valores?`;
 
-  function wzSetStep(n) {
-    [1,2,3,4].forEach(i => {
-      const s = document.getElementById('wz-step-'+i);
-      if (s) { s.style.display = i === n ? 'block' : 'none'; if(i===n) s.style.animation='wzFade 0.2s ease'; }
-      const ind = document.getElementById('wz-ind-'+i);
-      if (ind) {
-        if (i < n)      { ind.style.background='#2E7D32'; ind.style.color='#fff'; }
-        else if (i===n) { ind.style.background='var(--red)'; ind.style.color='#fff'; }
-        else            { ind.style.background='#E8E8E8'; ind.style.color='#AAA'; }
-      }
+  steps.push({who: rec==='1a1'?'cami':'team', lbl:'Recomendar curso', txt:recTxt,
+    note: rec==='1a1'?'Este paso siempre lo hace Cami, no el equipo.':null});
+
+  // 5. IMAGEN DE PRECIOS
+  steps.push({who:'team', lbl:'Enviar imagen de valores', isAction:true,
+    action:'📸 Enviar la imagen de precios ANTES de escribir los valores. Muestra el valor visual primero para que el lead no vea solo el número.'});
+
+  // 6. VALORES
+  let valTxt = '';
+  if (rec==='1a1') {
+    valTxt = `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
+  } else if (isExt) {
+    valTxt = `Los precios de nuestras clases grupales virtuales en vivo son:\n\n📅 Básico: $15/mes — 1 clase por semana\n🔥 Intensivo: $45/mes — 3 clases por semana\n📦 Pack 12 clases: $80 — válido 3 meses (ahorras $40)\n📦 Pack 24 clases: $105 — válido 6 meses (ahorras $75)\n📦 Pack 36 clases: $165 — válido 9 meses (ahorras $135)\n📦 Pack 48 clases: $245 — válido 12 meses\n\n¿Cuál te conviene más? ✨`;
+  } else {
+    valTxt = `Los precios de nuestras clases grupales virtuales en vivo son:\n\n📅 Básico: S/45/mes — 1 clase por semana\n🔥 Intensivo: S/140/mes — 3 clases por semana\n📦 Pack 12 clases: S/250 — válido 3 meses (ahorras S/80)\n📦 Pack 24 clases: S/330 — válido 6 meses (ahorras S/210)\n📦 Pack 36 clases: S/520 — válido 9 meses (ahorras S/380)\n📦 Pack 48 clases: S/770 — válido 12 meses\n\n¿Cuál te conviene más? ✨`;
+  }
+  steps.push({who: rec==='1a1'?'cami':'team', lbl:'Enviar valores', txt:valTxt});
+
+  // 7. FLEXIPOWER (bonus Lima adulto)
+  if (isLima && !isNino && rec!=='1a1') {
+    steps.push({who:'team', lbl:'Ofrecer FlexiPower — bonus Lima',
+      txt:`Como estás en Lima, también te recomendaría FlexiPower 🏋️💛\n\nSon clases grupales presenciales en Acroflex (Jesús María), diseñadas por Cami y dictadas por sus entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`,
+      note:'Si le interesa → enviar: 📱 WhatsApp Acroflex: +51 993 813 336 para coordinar horarios e inscripción'
     });
   }
 
-  function wzWho(who) {
-    wzState.isMama = who === 'mama';
-    // Adaptar label de ubicación y objetivo según quién escribe
-    const locLabel = document.getElementById('wz-ubicacion-label');
-    const objLabel = document.getElementById('wz-objetivo-label');
-    if (locLabel) locLabel.textContent = wzState.isMama ? '¿Dónde está su hija/hijo?' : '¿Dónde está?';
-    if (objLabel) objLabel.textContent = wzState.isMama ? '¿Qué quiere lograr su hija/hijo?' : '¿Qué quiere lograr?';
-    wzSetStep(2);
+  // 8. MENOR DE EDAD escribe él mismo
+  if (isNino && !isMama) {
+    steps.push({who:'team', lbl:'Pedir datos del apoderado (menor de edad)',
+      txt:`Perfecto 💛 Como eres menor de edad, la inscripción la tiene que hacer tu mamá, papá o apoderado.\n¿Me puedes pasar su contacto o pedirle que nos escriba? 😊`
+    });
   }
 
-  function wzLocation(loc) {
-    wzState.isLima = loc === 'lima';
-    const fpWrap = document.getElementById('wz-flexipower-wrap');
-    if (fpWrap) fpWrap.style.display = wzState.isLima ? 'block' : 'none';
-    wzSetStep(3);
+  // 9. DATOS DE PAGO
+  if (isExt) {
+    steps.push({who:'team', lbl:'Datos de pago — internacional',
+      txt:`Para pagos internacionales trabajamos con link de pago 💛\nTe lo enviamos ahora para que puedas separar tu cupo ✨`,
+      note:'Enviar el link de pago correspondiente.'
+    });
+  } else {
+    steps.push({who:'team', lbl:'Datos de pago — Perú',
+      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante me lo mandas y separamos tu cupo ✨`,
+      note:'Enviar los datos de Yape/Plin/cuenta.'
+    });
   }
 
-  function wzBuildFlow(key) {
-    const isMama = wzState.isMama, isLima = wzState.isLima, is1a1 = key === '1a1', isFP = key === 'flexipower', isPrueba = key === 'prueba';
-    const recMsgId = { powersplit:'msg-06', arcos360:'msg-07', prepa:'msg-08', 'ps-a360':'msg-09', completo:'msg-10', '1a1':'msg-14', flexipower:'msg-fp', prueba:'msg-23' };
-    const recMsgMama = { powersplit:'msg-m03', arcos360:'msg-m03', prepa:'msg-m03', 'ps-a360':'msg-m03', completo:'msg-m03', '1a1':'msg-m04', flexipower:'msg-fp', prueba:'msg-23' };
-    const recNotes = { powersplit:'Adaptar mencionando PowerSplit', arcos360:'Adaptar mencionando Arcos360', prepa:'Adaptar mencionando Prepa Física', 'ps-a360':'Adaptar: PowerSplit + Arcos360', completo:'Adaptar: PowerSplit + Arcos360 + Prepa Física', '1a1':null, flexipower:null, prueba:null };
-    const steps = [];
+  // 10. CONFIRMAR PAGO
+  steps.push({who:'team', lbl:'Confirmar pago recibido',
+    txt:`Perfecto, ya recibimos tu comprobante 💛\nTe paso con el equipo de CGC para que te envíen el formulario de bienvenida, la guía de acceso y coordinen tus clases ✨`
+  });
 
-    // Flujo clase de prueba — directo, sin pasos innecesarios
-    if (isPrueba) {
-      steps.push({ num:1, who:'Equipo CGC', label:'Saludo y pedido de datos', id:'msg-01', note:null });
-      steps.push({ num:2, who:'Equipo CGC', label:'Ofrecer clase de prueba gratuita', id:'msg-23', note:'Coordinar horario según disponibilidad del lead. Elige el curso: PowerSplit, Arcos360 o Prepa Física.' });
-      steps.push({ num:3, who:'Cami / Equipo', label:'Seguimiento después de la clase de prueba', id:'msg-23b', note:'Enviar dentro de las 24h siguientes a la clase de prueba.' });
-      return steps;
-    }
+  // 11. POST-PAGO equipo
+  steps.push({who:'carlos', lbl:'Post-pago — Carlos / Ariana entra',
+    txt:`Holaa 💛 Soy [tu nombre] del equipo de Cami Garay ✨\nCami me pasó toda tu info. Te voy a enviar el formulario de bienvenida para completar tus datos y coordinar el inicio de tus clases 🤗`,
+    note:'Verificar: ✅ formulario completado · ✅ acceso Zoom enviado · ✅ vigencia del paquete informada · ✅ clases agendadas'
+  });
 
-    // 1 - Primer mensaje
-    steps.push({ num:1, who:'Equipo CGC', label:'Saludo y pedido de datos', id: isMama ? 'msg-m01' : 'msg-01', note:null });
+  return steps;
+}
 
-    // 2 - Si alumna en Lima, preguntar Lima/provincia
-    if (!isMama && isLima) steps.push({ num:2, who:'Equipo CGC', label:'¿Lima o provincia?', id:'msg-03', note:null });
+// ── BUILD RESULT ──────────────────────────────────────
+function buildResult() {
+  const rec = getRec();
+  const ri = REC[rec];
+  const steps = buildMsgs(rec);
+  const {quien, edad, ubicacion, experiencia, disciplina} = state;
+  const isLima = ubicacion==='lima', isNino = edad==='nino';
 
-    // 3 - Cami entra
-    steps.push({ num: steps.length+1, who:'Cami', label:'Cami entra con la recomendación', id: isMama ? 'msg-m02' : 'msg-04', note:null });
+  const DISC_LBL = {gimnasia:'Gimnasia',danza:'Danza/Ballet',artes_marciales:'Artes marciales',otra:'Otra actividad'};
+  const OBJ_LBL = {flexibilidad:'🦵 Flexibilidad',acrobacia:'🌀 Acrobacia',todo:'⭐ Prog. completo'};
 
-    // 4 - Recomendación de curso
-    steps.push({ num: steps.length+1, who:'Cami', label: is1a1 ? 'Recomendar clase 1:1' : isFP ? 'Recomendar FlexiPower (presencial Acroflex)' : 'Recomendar curso', id: isMama ? recMsgMama[key] : recMsgId[key], note: isMama && !is1a1 && !isFP ? recNotes[key] : null });
+  const tags = [
+    quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
+    isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
+    isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
+    experiencia==='si'&&disciplina?'💪 '+DISC_LBL[disciplina]:experiencia==='si'?'💪 Con experiencia':'🌱 Desde cero',
+    OBJ_LBL[state.objetivo]
+  ].map(t=>`<span class="res-tag">${t}</span>`).join('');
 
-    // Paso de video — siempre después de recomendar (excepto FlexiPower)
-    if (!isFP) {
-      const videoMap = {
-        powersplit: [{ id:'msg-vid-ps', label:'📹 Enviar video de PowerSplit' }],
-        arcos360:   [{ id:'msg-vid-arcos', label:'📹 Enviar video de Arcos360' }],
-        prepa:      [{ id:'msg-vid-prepa', label:'📹 Enviar video de Preparación Física' }],
-        'ps-a360':  [{ id:'msg-vid-ps', label:'📹 Enviar video de PowerSplit' }, { id:'msg-vid-arcos', label:'📹 Enviar video de Arcos360' }],
-        completo:   [{ id:'msg-vid-ps', label:'📹 Enviar video de PowerSplit' }, { id:'msg-vid-arcos', label:'📹 Enviar video de Arcos360' }, { id:'msg-vid-prepa', label:'📹 Enviar video de Preparación Física' }],
-        '1a1':      [{ id: isLima ? 'msg-vid-1a1p' : 'msg-vid-1a1v', label: isLima ? '📹 Enviar video de clases 1:1 presenciales' : '📹 Enviar video de clases 1:1 virtuales' }]
-      };
-      (videoMap[key] || []).forEach(v => {
-        steps.push({ num: steps.length+1, who:'Cami', label: v.label, id: v.id, note:'📎 Adjuntar el video correspondiente al enviar este mensaje' });
-      });
-    }
-
-    if (isFP) {
-      // Flujo FlexiPower — derivar a Acroflex
-      steps.push({ num: steps.length+1, who:'Equipo CGC', label:'Derivar al WhatsApp de Acroflex para horarios e inscripción', id:'msg-fp-cierre', note:'Número de Acroflex: +51 993 813 336' });
-    } else if (!is1a1) {
-      // Flujo grupales virtuales
-      // Imagen 1 + Imagen 3 juntas — un solo mensaje antes de valores
-      steps.push({ num: steps.length+1, who:'Equipo CGC', label:'📦✅ Enviar Imagen 1 + Imagen 3 · «1 Paquete, 3 Cursos» y «¿Qué incluye tu paquete?»', id:'msg-img1', type:'image', note:'📸 Adjuntar AMBAS imágenes juntas: primero «1 Paquete, 3 Cursos» y luego «¿Qué incluye tu paquete?». Un solo mensaje antes de los valores.' });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Enviar horarios y valores', id:'msg-11', note:null });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Reforzar beneficios antes del cierre', id:'msg-12', note:null });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Lead elige paquete → datos de pago', id: isMama ? 'msg-m05' : 'msg-13', note:null });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Confirmar pago y pasar a Carlos/Ariana', id:'msg-27', note:null });
-      // Imagen 2 condicional: solo si el lead frena o posterga
-      steps.push({ num: steps.length+1, who:'Cami', label:'⭐ Imagen 2 · «Resultados Reales» — solo si dice "lo voy a pensar"', id:'msg-img2', type:'image', note:'📸 Solo si el lead frena, duda o posterga. Enviar inmediatamente después del mensaje anterior.' });
-    } else {
-      // Flujo 1:1
-      if (isLima) steps.push({ num: steps.length+1, who:'Cami', label:'Modalidad presencial (Lima)', id:'msg-15', note:'Mencionar también la opción virtual si lo prefiere.' });
-      else steps.push({ num: steps.length+1, who:'Cami', label:'Modalidad virtual por Zoom', id:'msg-16', note:null });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Preguntar antes de cerrar', id:'msg-18', note:null });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Lead elige → datos de pago', id: isMama ? 'msg-m05' : 'msg-19', note:null });
-      steps.push({ num: steps.length+1, who:'Cami', label:'Confirmar pago y pasar a Carlos/Ariana', id:'msg-30', note:null });
-    }
-    return steps;
-  }
-
-  function wzRecommend(key) {
-    const r = WZ_DATA[key];
-    const steps = wzBuildFlow(key);
-    const isMama = wzState.isMama, isLima = wzState.isLima;
-
-    // Context chips
-    const whoChip  = isMama ? '👩‍👧 Mamá / Papá' : '🙋‍♀️ Alumna/o';
-    const locChip  = isLima ? '📍 Lima' : '🌎 Fuera de Lima';
-    const recChip  = r.icon + ' ' + r.name;
-
-    // Render each step
-    const stepsHtml = steps.map((s, i) => {
-      const el = document.getElementById(s.id);
-      const msgText = el ? (el.innerText || el.textContent).trim() : '(mensaje no encontrado)';
-      const isImg = s.type === 'image';
-      const whoColor = isImg ? '#FFF8F0' : (s.who === 'Cami' ? '#FDECEA' : '#F0F4FF');
-      const whoTextColor = isImg ? '#A05000' : (s.who === 'Cami' ? 'var(--red-dark)' : '#1A3A7A');
-      const borderStyle = isImg ? 'border:2px dashed #F47920' : 'border:1px solid var(--border)';
-      const noteHtml = s.note ? `<div style="background:#FFF8F0;border:1px solid #FFD0A0;border-radius:6px;padding:6px 10px;font-size:11px;color:#8A4A00;margin-bottom:8px">💡 ${s.note}</div>` : '';
-      const whoLabel = isImg ? '🖼️ Imagen' : s.who;
-      return `
-        <div style="background:#fff;${borderStyle};border-radius:12px;overflow:hidden;margin-bottom:10px">
-          <div style="background:${whoColor};display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid ${isImg ? '#F4792040' : 'var(--border)'}">
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="background:${isImg ? 'linear-gradient(135deg,#F47920,#E8302A)' : 'var(--grad-btn)'};color:#fff;font-size:11px;font-weight:800;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${s.num}</div>
-              <span style="font-size:12px;font-weight:700;color:${whoTextColor}">${s.label}</span>
-            </div>
-            <span style="font-size:10px;font-weight:600;color:${whoTextColor};opacity:0.7">${whoLabel}</span>
-          </div>
-          <div style="padding:12px 14px">
-            ${noteHtml}
-            <div style="font-size:13px;color:var(--dark);white-space:pre-line;line-height:1.65;max-height:100px;overflow:hidden;position:relative" id="wz-msg-${i}">${msgText}</div>
-            <button onclick="document.getElementById('wz-msg-${i}').style.maxHeight='none';this.style.display='none'" style="background:none;border:none;color:#AAA;font-size:11px;cursor:pointer;padding:4px 0;display:block">Ver más ↓</button>
-          </div>
-          <div style="padding:6px 10px 10px;display:flex;justify-content:flex-end">
-            <button onclick="wzCopyDirect(\`${msgText.replace(/`/g,'\\`')}\`,this)" style="background:${isImg ? '#F47920' : 'var(--red)'};border:none;border-radius:8px;padding:7px 16px;color:#fff;font-size:12px;font-weight:700;cursor:pointer">📋 Copiar</button>
-          </div>
-        </div>`;
-    }).join('');
-
-    document.getElementById('wz-result').innerHTML = `
-      <div style="background:${r.color};border-radius:12px;padding:16px 20px;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:14px">
-        <div style="font-size:32px">${r.icon}</div>
-        <div>
-          <div style="font-size:11px;opacity:0.8;font-weight:600;text-transform:uppercase;letter-spacing:1px">Guía de conversación</div>
-          <div style="font-size:17px;font-weight:800">${r.name}</div>
-          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
-            <span style="background:rgba(255,255,255,0.2);font-size:11px;padding:2px 10px;border-radius:20px">${whoChip}</span>
-            <span style="background:rgba(255,255,255,0.2);font-size:11px;padding:2px 10px;border-radius:20px">${locChip}</span>
-          </div>
-        </div>
+  const fpBonus = isLima&&!isNino&&rec!=='1a1' ? `
+    <div class="fp-bonus">
+      <div class="fp-icon">🏋️</div>
+      <div class="fp-txt">Tip Lima: ofrecer también FlexiPower presencial en Acroflex
+        <span>Diseñado por Cami · dictado por sus entrenadores · Jesús María · +51 993 813 336</span>
       </div>
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#AAA;margin-bottom:10px">Enviar en este orden 👇</div>
-      ${stepsHtml}
-    `;
-    wzSetStep(4);
-  }
+    </div>` : '';
 
-  function wzCopyDirect(text, btn) {
-    navigator.clipboard.writeText(text.trim()).then(() => {
-      btn.innerHTML = '✅ Copiado'; btn.style.background = '#2E7D32';
-      setTimeout(() => { btn.innerHTML = '📋 Copiar'; btn.style.background = 'var(--red)'; }, 2200);
-    });
-  }
+  const stepsHtml = steps.map((s,i) => {
+    const whoHtml = s.who==='cami'
+      ? '<span class="msg-who who-cami">⭐ Cami</span>'
+      : s.who==='carlos'
+      ? '<span class="msg-who who-team">👥 Carlos / Ariana</span>'
+      : '<span class="msg-who who-team">💬 Equipo CGC</span>';
 
-  function wzCopyMsg(id, btn) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    navigator.clipboard.writeText((el.innerText || el.textContent).trim()).then(() => {
-      btn.innerHTML = '✅ ¡Copiado!'; btn.style.background = '#2E7D32';
-      setTimeout(() => { btn.innerHTML = '📋 Copiar mensaje'; btn.style.background = 'var(--red)'; }, 2200);
-    });
-  }
-
-  function wzReset() { wzState = { isMama:false, isLima:false }; wzSetStep(1); }
-
-  function wzOpenModal() {
-    const overlay = document.getElementById('wz-modal-overlay');
-    const panel   = document.getElementById('wz-modal-panel');
-    const fab     = document.getElementById('wz-fab');
-    if (!overlay) return;
-    overlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    if (fab) fab.style.display = 'none';
-    requestAnimationFrame(() => { panel.style.transform = 'translateX(0)'; });
-  }
-
-  function wzCloseModal() {
-    const overlay = document.getElementById('wz-modal-overlay');
-    const panel   = document.getElementById('wz-modal-panel');
-    const fab     = document.getElementById('wz-fab');
-    if (!overlay) return;
-    panel.style.transform = 'translateX(100%)';
-    document.body.style.overflow = '';
-    if (fab) fab.style.display = 'flex';
-    setTimeout(() => { overlay.style.display = 'none'; }, 300);
-  }
-
-  // Cerrar con Escape
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') wzCloseModal(); });
-
-  function setCurrency(cur) {
-    const isUsd = cur === 'usd';
-    document.querySelectorAll('.price-usd').forEach(el => el.style.display = isUsd ? 'inline-block' : 'none');
-    document.querySelectorAll('.price-sol').forEach(el => el.style.display = isUsd ? 'none' : 'inline-block');
-    const btnUsd = document.getElementById('btn-usd');
-    const btnSol = document.getElementById('btn-sol');
-    if (btnUsd && btnSol) {
-      btnUsd.style.background = isUsd ? 'var(--red)' : '#fff';
-      btnUsd.style.color = isUsd ? '#fff' : 'var(--gray)';
-      btnUsd.style.borderColor = isUsd ? 'var(--red)' : 'var(--border)';
-      btnSol.style.background = isUsd ? '#fff' : 'var(--red)';
-      btnSol.style.color = isUsd ? 'var(--gray)' : '#fff';
-      btnSol.style.borderColor = isUsd ? 'var(--border)' : 'var(--red)';
+    let body = '';
+    if (s.isAction) {
+      body = `<div class="msg-action">📸 ${esc(s.action)}</div>`;
+    } else {
+      body = `<div class="msg-txt">${esc(s.txt)}</div>`;
+      if (s.note) body += `<div class="msg-note">⚠️ ${esc(s.note)}</div>`;
+      body += `<button class="copy-btn" onclick="cp(this,${JSON.stringify(s.txt)})">📋 Copiar mensaje</button>`;
     }
-  }
+    const attach = s.attach ? `<div class="msg-attach">📎 Adjuntar el video correspondiente al enviar este mensaje</div>` : '';
 
-  function copyMsg(id, btn) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const text = el.innerText || el.textContent;
-    navigator.clipboard.writeText(text.trim()).then(() => {
-      btn.classList.add('copied');
-      btn.innerHTML = '✅ Copiado';
-      setTimeout(() => {
-        btn.classList.remove('copied');
-        btn.innerHTML = '📋 Copiar mensaje';
-      }, 2000);
-    });
-  }
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i+1}</div>
+        <div class="msg-lbl">${s.lbl}</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">${body}</div>
+      ${attach}
+    </div>`;
+  }).join('');
 
-  // Active sidebar link on scroll
-  const sections = document.querySelectorAll('.section[id]');
-  const links = document.querySelectorAll('.sidebar a');
+  document.getElementById('sc-result').innerHTML = `
+    <div class="res-profile">
+      <div class="res-profile-icon">${quien==='mama'?'👩‍👧':'🙋'}</div>
+      <div><div class="res-profile-lbl">Perfil del lead</div><div class="res-tags">${tags}</div></div>
+    </div>
+    <div class="rec-banner" style="background:${ri.color}">
+      <div class="rec-icon">${ri.icon}</div>
+      <div>
+        <div class="rec-lbl">✅ Recomendación</div>
+        <div class="rec-name">${ri.name}</div>
+        <div class="rec-note">${ri.nota}</div>
+      </div>
+    </div>
+    ${fpBonus}
+    <div class="msgs-title">Guión de mensajes en orden →</div>
+    ${stepsHtml}
+    <div class="res-actions">
+      <button class="btn-restart" onclick="restart()">🔄 Nueva asesoría</button>
+    </div>`;
+}
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
+function restart() {
+  show('sc-result',false); show('sc-start',true);
+  document.getElementById('sc-result').innerHTML='';
+  state={}; history=[]; visSteps=[]; stepIdx=0;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-  sections.forEach(s => observer.observe(s));
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function cp(btn, txt) {
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.textContent='✅ Copiado'; btn.classList.add('ok');
+    setTimeout(()=>{ btn.textContent='📋 Copiar mensaje'; btn.classList.remove('ok'); }, 2000);
+  });
+}
 </script>
 </body>
 </html>
