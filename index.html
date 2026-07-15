@@ -542,6 +542,8 @@ function buildMsgs(rec) {
       ? `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`
       : `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`;
     steps.push({who:'team', lbl:'Preguntar horarios/valores — con urgencia', txt: urgMsg});
+    // Pregunta de disponibilidad horaria antes de mostrar precios
+    steps.push({who:'team', lbl:'Preguntar disponibilidad horaria', txt:`¿En qué días y horarios tiene más disponibilidad ${isMama ? 'tu hijo/a' : 'para las clases'}? 📅\nAsí te recomiendo el mejor plan según su rutina.`});
   }
 
   // 5. FOTOS DE PRECIOS (grupales: 2 imágenes básicos + intensivos | 1:1: valores escritos)
