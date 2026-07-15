@@ -561,8 +561,9 @@ function buildMsgs(rec) {
     // Preguntar disponibilidad
     steps.push({who:'team', lbl:'Preguntar disponibilidad horaria', txt:`¿En qué días y horarios ${isMama ? 'tiene más disponibilidad tu hijo/a' : 'tienes más disponibilidad'}? 📅\nAsí te recomiendo el mejor plan según tu rutina.`});
     // Recomendar paquete personalizado según respuesta del lead
-    steps.push({who:'team', lbl:'Recomendar paquete personalizado', isAction:true,
-      action:`✍️ Según los días/horarios que dijo el lead, redactar: "Perfecto, con esos horarios te recomiendo el paquete de [X clases] — con el descuento de hoy te sale $[precio] USD / S/[precio] 🔥 ¿Lo separamos?" Consultar tabla de precios si es necesario.`});
+    steps.push({who:'team', lbl:'Recomendar paquete personalizado',
+      txt:`Perfecto, con esos horarios te recomiendo el paquete de [X clases] 💛\nCon el descuento de hoy te sale $[precio] USD / S/[precio] 🔥\n¿Lo separamos?`,
+      note:'✍️ Reemplaza [X clases] y [precio] según lo que eligió el lead. Consulta la tabla de precios si es necesario.'});
   }
 
   // 7. FLEXIPOWER (bonus Lima adulto)
