@@ -500,20 +500,7 @@ function buildMsgs(rec) {
     });
   }
 
-  // 3. VIDEO(S)
-  const vidMap = {
-    '1a1':     isLima ? [{t:`Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`, a:true}]
-                      : [{t:`Acá te comparto el video de las clases 1:1 virtuales por Zoom para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`, a:true}],
-    'prepa':   [{t:`Acá te comparto el video de Preparación Física para que veas cómo son las clases 💛🎥`, a:true}],
-    'ps-a360': [{t:`Acá te comparto el video de PowerSplit para que veas cómo son las clases 💛🎥`, a:true},
-                {t:`Y este es el video de Arcos360 para que veas cómo trabajamos la flexibilidad de espalda 💛🎥`, a:true}],
-    'completo':[{t:`Acá te comparto el video de PowerSplit 💛🎥`, a:true},
-                {t:`Y este es el video de Arcos360 — flexibilidad de espalda 💛🎥`, a:true},
-                {t:`Y por último Preparación Física para que veas el tipo de trabajo 💛🎥`, a:true}]
-  };
-  (vidMap[rec]||[]).forEach((v,i) => steps.push({who:'team', lbl:`Enviar video${(vidMap[rec].length>1?' '+(i+1):'')}`, txt:v.t, attach:true}));
-
-  // 4. RECOMENDACIÓN
+  // 3. RECOMENDACIÓN
   let recTxt = '';
   if (rec==='ps-a360') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nClases en vivo por Zoom con correcciones reales ✨ ¿Te cuento los horarios y valores?`
@@ -530,6 +517,24 @@ function buildMsgs(rec) {
 
   steps.push({who: rec==='1a1'?'cami':'team', lbl:'Recomendar curso', txt:recTxt,
     note: rec==='1a1'?'Este paso siempre lo hace Cami, no el equipo.':null});
+
+  // 4. VIDEO + IMÁGENES DE VALOR (después de la recomendación)
+  if (rec === '1a1') {
+    const vidTxt = isLima
+      ? `Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`
+      : `Acá te comparto el video de las clases 1:1 virtuales por Zoom para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`;
+    steps.push({who:'cami', lbl:'Enviar video 1:1', txt:vidTxt, attach:true});
+  } else {
+    steps.push({who:'team', lbl:'Enviar video de venta',
+      txt:`Te comparto más info para que veas todo lo que incluye 💛🎥`,
+      attach:true, attachNote:'📎 Adjuntar: VIDEO DE VENTA COMPRIMIDO.mp4'});
+    steps.push({who:'team', lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
+      action:'📸 Enviar imagen "¿Qué incluye tu paquete?" — 5 beneficios: clases en vivo, correcciones, grabadas, 3 cursos, multinivel.'});
+    steps.push({who:'team', lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
+      action:'📸 Enviar imagen "1 paquete, 3 cursos" — refuerza que con cualquier paquete puede combinar PowerSplit, Arcos360 y Prepa Física.'});
+    steps.push({who:'team', lbl:'Enviar imagen — Resultados Reales', isAction:true,
+      action:'📸 Enviar imagen "Resultados Reales" — testimonios de Manuel, Laura y Yailiza. Cierra el bloque de valor antes del precio.'});
+  }
 
   // 5. IMAGEN DE PRECIOS
   steps.push({who:'team', lbl:'Enviar imagen de valores', isAction:true,
