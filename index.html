@@ -542,17 +542,27 @@ function buildMsgs(rec) {
       ? `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`
       : `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`;
     steps.push({who:'team', lbl:'Preguntar horarios/valores — con urgencia', txt: urgMsg});
-    // Pregunta de disponibilidad horaria antes de mostrar precios
-    steps.push({who:'team', lbl:'Preguntar disponibilidad horaria', txt:`¿En qué días y horarios tiene más disponibilidad ${isMama ? 'tu hijo/a' : 'para las clases'}? 📅\nAsí te recomiendo el mejor plan según su rutina.`});
   }
 
-  // 5. FOTOS DE PRECIOS (grupales: 2 imágenes básicos + intensivos | 1:1: valores escritos)
+  // 5. FOTOS DE HORARIOS + PRECIOS (grupales) | valores escritos (1:1)
   if (rec==='1a1') {
     const valTxt = `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
     steps.push({who:'cami', lbl:'Enviar valores 1:1', txt:valTxt});
   } else {
+    // Foto de horarios según ubicación
+    const horarioAction = isLima
+      ? '📸 Enviar la imagen de horarios de Lima (clases presenciales y/o virtuales según corresponda).'
+      : isExt
+        ? '📸 Enviar la imagen de horarios internacionales (clases virtuales, con zonas horarias).'
+        : '📸 Enviar la imagen de horarios para Perú fuera de Lima (clases virtuales).';
+    steps.push({who:'team', lbl:'Enviar foto de horarios', isAction:true, action: horarioAction});
     steps.push({who:'team', lbl:'Enviar fotos de precios', isAction:true,
       action:'📸 Enviar las 2 imágenes de precios: primero "Básicos" (1, 4 y 8 clases) y luego "Intensivos" (12, 20 y 32 clases). Sin escribir los valores por texto — las imágenes lo dicen todo.'});
+    // Preguntar disponibilidad
+    steps.push({who:'team', lbl:'Preguntar disponibilidad horaria', txt:`¿En qué días y horarios ${isMama ? 'tiene más disponibilidad tu hijo/a' : 'tienes más disponibilidad'}? 📅\nAsí te recomiendo el mejor plan según tu rutina.`});
+    // Recomendar paquete personalizado según respuesta del lead
+    steps.push({who:'team', lbl:'Recomendar paquete personalizado', isAction:true,
+      action:`✍️ Según los días/horarios que dijo el lead, redactar: "Perfecto, con esos horarios te recomiendo el paquete de [X clases] — con el descuento de hoy te sale $[precio] USD / S/[precio] 🔥 ¿Lo separamos?" Consultar tabla de precios si es necesario.`});
   }
 
   // 7. FLEXIPOWER (bonus Lima adulto)
