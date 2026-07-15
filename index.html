@@ -217,50 +217,59 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 
     <div class="p-sec">
       <div class="p-sec-title">Grupales virtuales — PowerSplit · Arcos360 · Prepa Física</div>
+      <div style="background:linear-gradient(135deg,#E8302A,#F07820);border-radius:10px;padding:10px 14px;margin-bottom:12px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px">
+        🔥 20% DE DESCUENTO — Decirle al lead que es SOLO POR HOY para generar urgencia
+      </div>
       <div class="cur-toggle">
         <span>Mostrar en:</span>
         <button class="tog on" id="tb-usd" onclick="setCur('usd')">USD $</button>
         <button class="tog" id="tb-sol" onclick="setCur('sol')">Soles S/</button>
       </div>
-      <div class="price-grid">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:8px">Básicos</div>
+      <div class="price-grid" style="margin-bottom:12px">
+        <div class="pc" style="background:linear-gradient(135deg,#4A7FD4,#8B4FC8)">
+          <div class="pc-name">1 clase en vivo</div><div class="pc-cl">Vigencia: 1 semana</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$15</span><span class="cu-s" style="display:none">S/45</span></div>
+          <div class="pc-price"><span class="cu-u">$12</span><span class="cu-s" style="display:none">S/36</span></div>
+          <div class="pc-save">Conoce el método ✨</div>
+        </div>
         <div class="pc" style="background:linear-gradient(135deg,#C040A0,#4A7FD4)">
-          <div class="pc-name">Básico</div><div class="pc-cl">1 clase/sem · 4/mes</div>
-          <div class="pc-price"><span class="cu-u">$15</span><span class="cu-s" style="display:none">S/45</span></div>
-          <div class="pc-per">por mes</div>
+          <div class="pc-name">4 clases en vivo</div><div class="pc-cl">Vigencia: 1 mes</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$45</span><span class="cu-s" style="display:none">S/140</span></div>
+          <div class="pc-price"><span class="cu-u">$36</span><span class="cu-s" style="display:none">S/112</span></div>
+          <div class="pc-save">Constancia + resultados</div>
         </div>
-        <div class="pc" style="background:linear-gradient(135deg,#F07820,#C040A0)">
-          <div class="pc-name">Intensivo</div><div class="pc-cl">3 clases/sem · 12/mes</div>
-          <div class="pc-price"><span class="cu-u">$45</span><span class="cu-s" style="display:none">S/140</span></div>
-          <div class="pc-per">por mes</div>
-          <div class="pc-save cu-u">Solo $11.25/clase</div>
-          <div class="pc-save cu-s" style="display:none">Solo S/35/clase</div>
-        </div>
-        <div class="pc" style="background:linear-gradient(135deg,#9A7010,#C09020)">
-          <div class="pc-name">Pack 12 clases</div><div class="pc-cl">Válido 3 meses</div>
-          <div class="pc-price"><span class="cu-u">$80</span><span class="cu-s" style="display:none">S/250</span></div>
-          <div class="pc-save cu-u">💰 Ahorras $40</div>
-          <div class="pc-save cu-s" style="display:none">💰 Ahorras S/80</div>
-        </div>
-        <div class="pc" style="background:linear-gradient(135deg,#8B4FC8,#E8302A)">
-          <div class="pc-name">Pack 24 clases</div><div class="pc-cl">Válido 6 meses</div>
-          <div class="pc-price"><span class="cu-u">$105</span><span class="cu-s" style="display:none">S/330</span></div>
-          <div class="pc-save cu-u">💰 Ahorras $75</div>
-          <div class="pc-save cu-s" style="display:none">💰 Ahorras S/210</div>
-        </div>
-        <div class="pc" style="background:linear-gradient(135deg,#1A1A1A,#3A1A3A);border:2px solid #C040A0">
-          <div class="pc-name">Pack 36 clases</div><div class="pc-cl">Válido 9 meses</div>
-          <div class="pc-price"><span class="cu-u">$165</span><span class="cu-s" style="display:none">S/520</span></div>
-          <div class="pc-save cu-u">💰 Ahorras $135</div>
-          <div class="pc-save cu-s" style="display:none">💰 Ahorras S/380</div>
-        </div>
-        <div class="pc" style="background:linear-gradient(135deg,#E8302A,#F07820)">
-          <div class="pc-name">Pack 48 clases</div><div class="pc-cl">Válido 12 meses</div>
-          <div class="pc-price"><span class="cu-u">$245</span><span class="cu-s" style="display:none">S/770</span></div>
-          <div class="pc-save cu-u">Solo $7.65/clase</div>
-          <div class="pc-save cu-s" style="display:none">Solo S/24/clase</div>
+        <div class="pc" style="background:linear-gradient(135deg,#E8302A,#C040A0);grid-column:span 2;position:relative">
+          <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#F07820;color:#fff;font-size:10px;font-weight:800;padding:2px 10px;border-radius:10px;white-space:nowrap">⭐ MÁS ELEGIDO</div>
+          <div class="pc-name">8 clases en vivo</div><div class="pc-cl">Vigencia: 1 mes · 2 clases/semana</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$80</span><span class="cu-s" style="display:none">S/250</span></div>
+          <div class="pc-price"><span class="cu-u">$64</span><span class="cu-s" style="display:none">S/200</span></div>
+          <div class="pc-save">Tu flexibilidad empieza a cambiar de verdad 💪</div>
         </div>
       </div>
-      <div class="info-box" style="background:#f9f9f9;color:#666">💡 El alumno puede combinar PowerSplit + Arcos360 + Prepa Física en el mismo paquete. El precio es la suma de los cursos en la modalidad elegida.</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:8px">Intensivos — para quienes entrenan en serio</div>
+      <div class="price-grid">
+        <div class="pc" style="background:linear-gradient(135deg,#9A7010,#C09020)">
+          <div class="pc-name">12 clases en vivo</div><div class="pc-cl">Vigencia: 2 meses · 3 veces/sem</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$105</span><span class="cu-s" style="display:none">S/330</span></div>
+          <div class="pc-price"><span class="cu-u">$84</span><span class="cu-s" style="display:none">S/264</span></div>
+          <div class="pc-save">Acelera tu progreso 🔥</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#1A1A1A,#3A1A3A);border:2px solid #C040A0;position:relative">
+          <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#C040A0;color:#fff;font-size:10px;font-weight:800;padding:2px 10px;border-radius:10px;white-space:nowrap">⭐ MÁS RECOMENDADO</div>
+          <div class="pc-name">20 clases en vivo</div><div class="pc-cl">Vigencia: 2 meses · 3-4 veces/sem</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$165</span><span class="cu-s" style="display:none">S/520</span></div>
+          <div class="pc-price"><span class="cu-u">$132</span><span class="cu-s" style="display:none">S/416</span></div>
+          <div class="pc-save">Tu técnica cambia cuando tu disciplina cambia ✨</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#8B4FC8,#E8302A)">
+          <div class="pc-name">32 clases en vivo</div><div class="pc-cl">Vigencia: 3 meses</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$245</span><span class="cu-s" style="display:none">S/770</span></div>
+          <div class="pc-price"><span class="cu-u">$196</span><span class="cu-s" style="display:none">S/616</span></div>
+          <div class="pc-save">El menor costo por clase 💎</div>
+        </div>
+      </div>
+      <div class="info-box" style="background:#f9f9f9;color:#666;margin-top:10px">💡 El alumno puede combinar PowerSplit + Arcos360 + Prepa Física en el mismo paquete.</div>
     </div>
 
     <div class="p-sec">
@@ -531,9 +540,9 @@ function buildMsgs(rec) {
   if (rec==='1a1') {
     valTxt = `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
   } else if (isExt) {
-    valTxt = `Los precios de nuestras clases grupales virtuales en vivo son:\n\n📅 Básico: $15/mes — 1 clase por semana\n🔥 Intensivo: $45/mes — 3 clases por semana\n📦 Pack 12 clases: $80 — válido 3 meses (ahorras $40)\n📦 Pack 24 clases: $105 — válido 6 meses (ahorras $75)\n📦 Pack 36 clases: $165 — válido 9 meses (ahorras $135)\n📦 Pack 48 clases: $245 — válido 12 meses\n\n¿Cuál te conviene más? ✨`;
+    valTxt = `🔥 Tenemos 20% de descuento SOLO POR HOY:\n\n1 clase en vivo: ~$15~ → *$12* (vigencia 1 semana)\n4 clases en vivo: ~$45~ → *$36* (vigencia 1 mes)\n⭐ 8 clases en vivo: ~$80~ → *$64* (vigencia 1 mes) — ¡el más elegido!\n12 clases en vivo: ~$105~ → *$84* (vigencia 2 meses)\n⭐ 20 clases en vivo: ~$165~ → *$132* (vigencia 2 meses) — ¡el más recomendado!\n32 clases en vivo: ~$245~ → *$196* (vigencia 3 meses)\n\nTodos en USD 💛 Puedes elegir y combinar entre PowerSplit, Arcos360 y Prepa Física en el mismo paquete.\n\n¿Cuál te conviene más? ✨`;
   } else {
-    valTxt = `Los precios de nuestras clases grupales virtuales en vivo son:\n\n📅 Básico: S/45/mes — 1 clase por semana\n🔥 Intensivo: S/140/mes — 3 clases por semana\n📦 Pack 12 clases: S/250 — válido 3 meses (ahorras S/80)\n📦 Pack 24 clases: S/330 — válido 6 meses (ahorras S/210)\n📦 Pack 36 clases: S/520 — válido 9 meses (ahorras S/380)\n📦 Pack 48 clases: S/770 — válido 12 meses\n\n¿Cuál te conviene más? ✨`;
+    valTxt = `🔥 Tenemos 20% de descuento SOLO POR HOY:\n\n1 clase en vivo: ~S/45~ → *S/36* (vigencia 1 semana)\n4 clases en vivo: ~S/140~ → *S/112* (vigencia 1 mes)\n⭐ 8 clases en vivo: ~S/250~ → *S/200* (vigencia 1 mes) — ¡el más elegido!\n12 clases en vivo: ~S/330~ → *S/264* (vigencia 2 meses)\n⭐ 20 clases en vivo: ~S/520~ → *S/416* (vigencia 2 meses) — ¡el más recomendado!\n32 clases en vivo: ~S/770~ → *S/616* (vigencia 3 meses)\n\nTodos en soles 💛 Puedes elegir y combinar entre PowerSplit, Arcos360 y Prepa Física en el mismo paquete.\n\n¿Cuál te conviene más? ✨`;
   }
   steps.push({who: rec==='1a1'?'cami':'team', lbl:'Enviar valores', txt:valTxt});
 
