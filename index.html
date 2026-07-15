@@ -502,18 +502,19 @@ function buildMsgs(rec) {
 
   // 3. RECOMENDACIÓN
   let recTxt = '';
+  // Sin pregunta de horarios/valores al final — eso va después del video+imágenes
   if (rec==='ps-a360') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nClases en vivo por Zoom con correcciones reales ✨ ¿Te cuento los horarios y valores?`
-    : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales ✨ ¿Te cuento los horarios y valores?`;
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='completo') recTxt = isMama
-    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el más completo y tiene el mejor precio ✨ ¿Te cuento los horarios y valores?`
-    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el más completo y tiene el mejor precio ✨ ¿Te cuento los horarios y valores?`;
+    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
+    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo y con un solo paquete accedés a los 3 cursos ✨`;
   else if (rec==='prepa') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento.\n\n¿Te cuento los horarios y valores?`
-    : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja la condición necesaria para avanzar en cualquier disciplina.\n\n¿Te cuento los horarios y valores?`;
+    ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento ✨`
+    : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja exactamente la condición que necesitás para avanzar en tu disciplina ✨`;
   else if (rec==='1a1') recTxt = isMama
-    ? `Por lo que me cuentas, para el objetivo de tu hijo/a lo mejor sería una clase 1:1 directamente con Cami 💛\n\nA diferencia de las grupales, las 1:1 son siempre con Cami. Puede verle directamente, corregirle según su nivel y darle ejercicios exactos según su meta 🎯\n\n¿Te cuento cómo funciona y los valores?`
-    : `Por lo que me cuentas, en tu caso te recomendaría una clase 1:1 directamente conmigo 💛\n\nA diferencia de las grupales, las 1:1 son siempre conmigo. Puedo verte directamente, corregirte según tu nivel y darte ejercicios exactos según tu meta 🎯\n\n¿Te cuento cómo funciona y los valores?`;
+    ? `Por lo que me cuentas, para el objetivo de tu hijo/a lo mejor sería una clase 1:1 directamente con Cami 💛\n\nA diferencia de las grupales, las 1:1 son siempre con Cami. Puede verle directamente, corregirle según su nivel y darle ejercicios exactos según su meta 🎯`
+    : `Por lo que me cuentas, en tu caso te recomendaría una clase 1:1 directamente conmigo 💛\n\nA diferencia de las grupales, las 1:1 son siempre conmigo. Puedo verte directamente, corregirte según tu nivel y darte ejercicios exactos según tu meta 🎯`;
 
   steps.push({who: rec==='1a1'?'cami':'team', lbl:'Recomendar curso', txt:recTxt,
     note: rec==='1a1'?'Este paso siempre lo hace Cami, no el equipo.':null});
@@ -525,15 +526,22 @@ function buildMsgs(rec) {
       : `Acá te comparto el video de las clases 1:1 virtuales por Zoom para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`;
     steps.push({who:'cami', lbl:'Enviar video 1:1', txt:vidTxt, attach:true});
   } else {
-    steps.push({who:'team', lbl:'Enviar video de venta',
-      txt:`Te comparto más info para que veas todo lo que incluye 💛🎥`,
-      attach:true, attachNote:'📎 Adjuntar: VIDEO DE VENTA COMPRIMIDO.mp4'});
+    const vidMsg = isMama
+      ? `Te envío un video para que veas cómo funciona y todo lo que incluye cada paquete de clases 💛🎥`
+      : `Te envío un video para que veas cómo funciona y todo lo que incluye cada paquete de clases 💛🎥`;
+    steps.push({who:'team', lbl:'Mensaje + video de venta',
+      txt: vidMsg, attach:true, attachNote:'📎 Adjuntar: VIDEO DE VENTA COMPRIMIDO.mp4'});
     steps.push({who:'team', lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
       action:'📸 Enviar imagen "¿Qué incluye tu paquete?" — 5 beneficios: clases en vivo, correcciones, grabadas, 3 cursos, multinivel.'});
     steps.push({who:'team', lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
       action:'📸 Enviar imagen "1 paquete, 3 cursos" — refuerza que con cualquier paquete puede combinar PowerSplit, Arcos360 y Prepa Física.'});
     steps.push({who:'team', lbl:'Enviar imagen — Resultados Reales', isAction:true,
-      action:'📸 Enviar imagen "Resultados Reales" — testimonios de Manuel, Laura y Yailiza. Cierra el bloque de valor antes del precio.'});
+      action:'📸 Enviar imagen "Resultados Reales" — testimonios de Manuel, Laura y Yailiza.'});
+    // Pregunta de horarios/valores CON urgencia — después del bloque de valor
+    const urgMsg = isMama
+      ? `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`
+      : `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`;
+    steps.push({who:'team', lbl:'Preguntar horarios/valores — con urgencia', txt: urgMsg});
   }
 
   // 5. IMAGEN DE PRECIOS
