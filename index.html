@@ -544,20 +544,14 @@ function buildMsgs(rec) {
     steps.push({who:'team', lbl:'Preguntar horarios/valores — con urgencia', txt: urgMsg});
   }
 
-  // 5. IMAGEN DE PRECIOS
-  steps.push({who:'team', lbl:'Enviar imagen de valores', isAction:true,
-    action:'📸 Enviar la imagen de precios ANTES de escribir los valores. Muestra el valor visual primero para que el lead no vea solo el número.'});
-
-  // 6. VALORES
-  let valTxt = '';
+  // 5. FOTOS DE PRECIOS (grupales: 2 imágenes básicos + intensivos | 1:1: valores escritos)
   if (rec==='1a1') {
-    valTxt = `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
-  } else if (isExt) {
-    valTxt = `🔥 Tenemos 20% de descuento SOLO POR HOY:\n\n1 clase en vivo: ~$15~ → *$12* (vigencia 1 semana)\n4 clases en vivo: ~$45~ → *$36* (vigencia 1 mes)\n⭐ 8 clases en vivo: ~$80~ → *$64* (vigencia 1 mes) — ¡el más elegido!\n12 clases en vivo: ~$105~ → *$84* (vigencia 2 meses)\n⭐ 20 clases en vivo: ~$165~ → *$132* (vigencia 2 meses) — ¡el más recomendado!\n32 clases en vivo: ~$245~ → *$196* (vigencia 3 meses)\n\nTodos en USD 💛 Puedes elegir y combinar entre PowerSplit, Arcos360 y Prepa Física en el mismo paquete.\n\n¿Cuál te conviene más? ✨`;
+    const valTxt = `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
+    steps.push({who:'cami', lbl:'Enviar valores 1:1', txt:valTxt});
   } else {
-    valTxt = `🔥 Tenemos 20% de descuento SOLO POR HOY:\n\n1 clase en vivo: ~S/45~ → *S/36* (vigencia 1 semana)\n4 clases en vivo: ~S/140~ → *S/112* (vigencia 1 mes)\n⭐ 8 clases en vivo: ~S/250~ → *S/200* (vigencia 1 mes) — ¡el más elegido!\n12 clases en vivo: ~S/330~ → *S/264* (vigencia 2 meses)\n⭐ 20 clases en vivo: ~S/520~ → *S/416* (vigencia 2 meses) — ¡el más recomendado!\n32 clases en vivo: ~S/770~ → *S/616* (vigencia 3 meses)\n\nTodos en soles 💛 Puedes elegir y combinar entre PowerSplit, Arcos360 y Prepa Física en el mismo paquete.\n\n¿Cuál te conviene más? ✨`;
+    steps.push({who:'team', lbl:'Enviar fotos de precios', isAction:true,
+      action:'📸 Enviar las 2 imágenes de precios: primero "Básicos" (1, 4 y 8 clases) y luego "Intensivos" (12, 20 y 32 clases). Sin escribir los valores por texto — las imágenes lo dicen todo.'});
   }
-  steps.push({who: rec==='1a1'?'cami':'team', lbl:'Enviar valores', txt:valTxt});
 
   // 7. FLEXIPOWER (bonus Lima adulto)
   if (isLima && !isNino && rec!=='1a1') {
