@@ -386,9 +386,10 @@ const STEPS = [
   {
     id:'objetivo', q:'¿Qué busca principalmente?', sub:'Define el curso o programa a recomendar',
     opts:[
-      {v:'flexibilidad', icon:'🦵', l:'Flexibilidad — splits y/o arcos',   d:'Apertura de piernas y/o flexibilidad de espalda'},
-      {v:'acrobacia',    icon:'🌀', l:'Fuerza y acrobacia',               d:'Fuerza funcional, base acrobática o movimientos específicos'},
-      {v:'todo',         icon:'⭐', l:'Todo completo — programa integral', d:'Flexibilidad + fuerza + acrobacia'}
+      {v:'splits',        icon:'🦵', l:'Solo splits / apertura de piernas', d:'Quiere abrir más las piernas: split sagital, frontal, elevaciones'},
+      {v:'arcos',         icon:'🌙', l:'Solo arcos / flexibilidad de espalda', d:'Quiere mejorar su arco, puente, escorpión o figuras posteriores'},
+      {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
+      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'}
     ]
   }
 ];
@@ -453,22 +454,21 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 // ── RECOMMENDATION ────────────────────────────────────
 function getRec() {
   const {disciplina, edad, objetivo} = state;
-  if (objetivo==='acrobacia') {
-    if (disciplina==='gimnasia' || edad==='nino') return '1a1';
-    return 'prepa';
-  }
-  if (objetivo==='todo') {
-    if (disciplina==='gimnasia' && edad==='nino') return '1a1';
-    return 'completo';
-  }
-  return 'ps-a360'; // flexibilidad default
+  const isGimNino = disciplina==='gimnasia' && edad==='nino';
+  if (objetivo==='splits')       return isGimNino ? '1a1' : 'powersplit';
+  if (objetivo==='arcos')        return isGimNino ? '1a1' : 'arcos360';
+  if (objetivo==='flexibilidad') return isGimNino ? '1a1' : 'ps-a360';
+  if (objetivo==='todo')         return isGimNino ? '1a1' : 'completo';
+  return 'ps-a360';
 }
 
 const REC = {
-  'ps-a360': {icon:'🔥', name:'PowerSplit + Arcos360',                   color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Se pueden tomar juntos o separados.'},
-  'completo': {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',    color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática.'},
-  '1a1':      {icon:'🎯', name:'Clase 1:1 directamente con Cami',         color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
-  'prepa':    {icon:'💪', name:'Preparación Física',                      color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática. Puede combinarse con PowerSplit o Arcos360.'}
+  'powersplit': {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'El curso de splits y apertura de piernas de Cami.'},
+  'arcos360':   {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
+  'ps-a360':    {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
+  'completo':   {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',   color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
+  '1a1':        {icon:'🎯', name:'Clase 1:1 directamente con Cami',        color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
+  'prepa':      {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'}
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
@@ -504,7 +504,13 @@ function buildMsgs(rec) {
   // 3. RECOMENDACIÓN
   let recTxt = '';
   // Sin pregunta de horarios/valores al final — eso va después del video+imágenes
-  if (rec==='ps-a360') recTxt = isMama
+  if (rec==='powersplit') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por lo que me cuentas, te recomendaría PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+  else if (rec==='arcos360') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
+    : `Por lo que me cuentas, te recomendaría Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+  else if (rec==='ps-a360') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
     : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='completo') recTxt = isMama
@@ -618,7 +624,7 @@ function buildResult() {
   const isLima = ubicacion==='lima', isNino = edad==='nino';
 
   const DISC_LBL = {gimnasia:'Gimnasia',danza:'Danza/Ballet',artes_marciales:'Artes marciales',otra:'Otra actividad'};
-  const OBJ_LBL = {flexibilidad:'🦵 Flexibilidad',acrobacia:'🌀 Acrobacia',todo:'⭐ Prog. completo'};
+  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo'};
 
   const tags = [
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
