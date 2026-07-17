@@ -104,6 +104,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .msg-txt{font-size:14px;color:var(--gray);line-height:1.65;white-space:pre-line;background:var(--gray-light);border-radius:10px;padding:11px 13px;margin-bottom:9px}
 .msg-note{font-size:12px;color:var(--orange);font-weight:600;background:#FFF8F0;border-radius:8px;padding:7px 11px;margin-bottom:9px;display:flex;align-items:flex-start;gap:5px}
 .msg-action{font-size:13px;color:var(--purple);font-weight:600;background:#F5F0FF;border-radius:10px;padding:12px 14px}
+.img-preview{width:100%;max-width:340px;border-radius:10px;display:block;margin:10px auto 0;cursor:pointer}
+.img-preview:hover{opacity:.92}
 .copy-btn{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:7px 15px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
 .copy-btn:hover{background:#333}
 .copy-btn.ok{background:var(--green)}
@@ -539,11 +541,11 @@ function buildMsgs(rec) {
     steps.push({who:'team', lbl:'Mensaje + video de venta',
       txt: vidMsg, attach:true, attachNote:'📎 Adjuntar: VIDEO DE VENTA COMPRIMIDO.mp4'});
     steps.push({who:'team', lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar imagen "¿Qué incluye tu paquete?" — 5 beneficios: clases en vivo, correcciones, grabadas, 3 cursos, multinivel.'});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.webp']});
     steps.push({who:'team', lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar imagen "1 paquete, 3 cursos" — refuerza que con cualquier paquete puede combinar PowerSplit, Arcos360 y Prepa Física.'});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.jpg']});
     steps.push({who:'team', lbl:'Enviar imagen — Resultados Reales', isAction:true,
-      action:'📸 Enviar imagen "Resultados Reales" — testimonios de Manuel, Laura y Yailiza.'});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
     // Pregunta de horarios/valores CON urgencia — después del bloque de valor
     const urgMsg = isMama
       ? `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`
@@ -557,14 +559,16 @@ function buildMsgs(rec) {
     steps.push({who:'cami', lbl:'Enviar valores 1:1', txt:valTxt});
   } else {
     // Foto de horarios según ubicación
-    const horarioAction = isLima
-      ? '📸 Enviar la imagen de horarios de Lima (clases presenciales y/o virtuales según corresponda).'
-      : isExt
-        ? '📸 Enviar la imagen de horarios internacionales (clases virtuales, con zonas horarias).'
-        : '📸 Enviar la imagen de horarios para Perú fuera de Lima (clases virtuales).';
-    steps.push({who:'team', lbl:'Enviar foto de horarios', isAction:true, action: horarioAction});
+    const horImgs = (isLima || !isExt)
+      ? ['img/hor-peru.webp']
+      : ['img/hor-peru.webp','img/hor-argentina.webp','img/hor-cst.webp','img/hor-est.webp','img/hor-mexico.webp'];
+    const horNote = (isLima || !isExt)
+      ? '📸 Enviar esta imagen de horarios por WhatsApp:'
+      : '📸 Enviar la imagen del horario que corresponda según el país del lead:';
+    steps.push({who:'team', lbl:'Enviar foto de horarios', isAction:true, action: horNote, imgs: horImgs});
     steps.push({who:'team', lbl:'Enviar fotos de precios', isAction:true,
-      action:'📸 Enviar las 2 imágenes de precios: primero "Básicos" (1, 4 y 8 clases) y luego "Intensivos" (12, 20 y 32 clases). Sin escribir los valores por texto — las imágenes lo dicen todo.'});
+      action:'📸 Enviar primero "Básicos" y luego "Intensivos" por WhatsApp:',
+      imgs:['img/precios-basicos.jpg','img/precios-intensivos.jpg']});
     // Preguntar disponibilidad
     steps.push({who:'team', lbl:'Preguntar disponibilidad horaria', txt:`¿En qué días y horarios ${isMama ? 'tiene más disponibilidad tu hijo/a' : 'tienes más disponibilidad'}? 📅\nAsí te recomiendo el mejor plan según tu rutina.`});
     // Recomendar paquete personalizado según respuesta del lead
@@ -651,7 +655,8 @@ function buildResult() {
 
     let body = '';
     if (s.isAction) {
-      body = `<div class="msg-action">📸 ${esc(s.action)}</div>`;
+      const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
+      body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
     } else {
       body = `<div class="msg-txt">${esc(s.txt)}</div>`;
       if (s.note) body += `<div class="msg-note">⚠️ ${esc(s.note)}</div>`;
