@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guía de Asesoría – CGC METHOD</title>
+<style>
+:root {
+  --red:#E8302A; --orange:#F07820; --pink:#C040A0; --purple:#8B4FC8; --blue:#4A7FD4;
+  --green:#2E7D32;
+  --grad:linear-gradient(90deg,#F07820 0%,#C040A0 50%,#4A7FD4 100%);
+  --grad-btn:linear-gradient(135deg,#E8302A 0%,#C040A0 60%,#4A7FD4 100%);
+  --dark:#1A1A1A; --gray:#4A4A4A; --gray-light:#F5F5F7; --border:#E5E0E0; --white:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#EDEAF0;min-height:100vh}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:52px;background:#111;display:flex;align-items:center;padding:0 20px;z-index:300;gap:10px}
+.tb-logo{font-weight:800;font-size:15px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.tb-sep{color:#444;font-size:16px}
+.tb-sub{font-size:12px;color:#777}
+.tb-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tb-countdown{font-size:11px;color:#aaa;background:rgba(255,255,255,0.07);padding:4px 10px;border-radius:20px}
+.tb-countdown b{color:var(--orange)}
+.btn-prices{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;cursor:pointer;transition:background .15s}
+.btn-prices:hover{background:rgba(255,255,255,0.18)}
+
+/* META BANNER */
+.meta{margin-top:52px;background:linear-gradient(135deg,#1A1A1A,#2A0A0A 60%,#1A0A2A);padding:12px 22px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.08);flex-wrap:wrap}
+.meta-goal{font-size:18px;font-weight:800;color:#fff;white-space:nowrap}
+.meta-goal b{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.meta-bar-wrap{flex:1;min-width:160px}
+.meta-track{background:rgba(255,255,255,0.12);border-radius:20px;height:7px;overflow:hidden}
+.meta-fill{height:100%;border-radius:20px;background:var(--grad);transition:width .5s ease}
+.meta-pct{font-size:11px;color:#777;margin-top:3px}
+.meta-pct b{color:var(--orange)}
+.meta-inp-wrap{display:flex;align-items:center;gap:6px}
+.meta-inp-lbl{font-size:11px;color:#666;white-space:nowrap}
+.meta-inp{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;color:#fff;font-size:13px;font-weight:600;width:100px;outline:none}
+.meta-bonus{font-size:11px;color:#777;white-space:nowrap}
+.meta-bonus b{color:var(--orange)}
+
+/* MAIN */
+.main{min-height:calc(100vh - 52px - 48px);display:flex;align-items:flex-start;justify-content:center;padding:28px 14px 80px}
+.wizard{width:100%;max-width:640px}
+
+/* START SCREEN */
+.start-screen{background:var(--white);border-radius:20px;padding:48px 36px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.start-icon{font-size:52px;margin-bottom:14px}
+.start-title{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
+.start-title b{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-desc{font-size:15px;color:var(--gray);margin-bottom:30px;line-height:1.6}
+.btn-start{background:var(--grad-btn);color:#fff;font-size:16px;font-weight:700;padding:13px 38px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(232,48,42,.3);transition:transform .15s,box-shadow .15s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,48,42,.4)}
+.start-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.chip{background:var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gray)}
+
+/* STEP */
+.step-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.btn-back{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;transition:all .15s}
+.btn-back:hover{background:var(--gray-light)}
+.step-dots{display:flex;gap:6px;flex:1;justify-content:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .2s}
+.dot.done{background:var(--pink)}
+.dot.active{background:var(--red);width:22px;border-radius:4px}
+.step-card{background:var(--white);border-radius:20px;padding:34px 32px 38px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.step-num{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.step-q{font-size:22px;font-weight:800;line-height:1.25;margin-bottom:8px}
+.step-sub{font-size:14px;color:#888;margin-bottom:26px}
+.opt{width:100%;text-align:left;background:var(--white);border:2px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.opt:hover{border-color:var(--red);background:#FFF5F4;transform:translateX(3px)}
+.opt:last-child{margin-bottom:0}
+.opt-icon{font-size:26px;flex-shrink:0}
+.opt-txt{flex:1}
+.opt-lbl{font-size:15px;font-weight:700;color:var(--dark)}
+.opt-dsc{font-size:13px;color:#888;margin-top:2px;line-height:1.4}
+.opt-arr{font-size:18px;color:#ccc;flex-shrink:0}
+
+/* RESULT */
+.res-profile{background:var(--white);border-radius:16px;padding:18px 22px;margin-bottom:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.res-profile-icon{font-size:30px;flex-shrink:0}
+.res-profile-lbl{font-size:15px;font-weight:700;margin-bottom:6px}
+.res-tags{display:flex;gap:6px;flex-wrap:wrap}
+.res-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--gray-light);color:var(--gray)}
+.rec-banner{border-radius:16px;padding:20px 22px;margin-bottom:16px;color:#fff;display:flex;align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.rec-icon{font-size:34px;flex-shrink:0}
+.rec-lbl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.8;margin-bottom:4px}
+.rec-name{font-size:19px;font-weight:800;line-height:1.2}
+.rec-note{font-size:12px;opacity:.85;margin-top:4px}
+.fp-bonus{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #A5D6A7;border-radius:14px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:flex-start;gap:12px}
+.fp-icon{font-size:22px}
+.fp-txt{font-size:13px;color:#2E7D32;font-weight:600;line-height:1.5}
+.fp-txt span{display:block;font-weight:400;color:#4A7A4A;font-size:12px;margin-top:2px}
+.msgs-title{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#999;margin-bottom:10px;padding:0 4px}
+.msg-step{background:var(--white);border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.msg-head{display:flex;align-items:center;gap:10px;padding:11px 15px 10px;border-bottom:1px solid var(--border)}
+.msg-num{width:22px;height:22px;border-radius:50%;background:var(--grad-btn);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-lbl{font-size:13px;font-weight:700;flex:1}
+.msg-who{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.who-cami{background:#FDECEA;color:var(--red)}
+.who-team{background:#E8F4FD;color:#1565C0}
+.msg-body{padding:13px 15px}
+.msg-txt{font-size:14px;color:var(--gray);line-height:1.65;white-space:pre-line;background:var(--gray-light);border-radius:10px;padding:11px 13px;margin-bottom:9px}
+.msg-note{font-size:12px;color:var(--orange);font-weight:600;background:#FFF8F0;border-radius:8px;padding:7px 11px;margin-bottom:9px;display:flex;align-items:flex-start;gap:5px}
+.msg-action{font-size:13px;color:var(--purple);font-weight:600;background:#F5F0FF;border-radius:10px;padding:12px 14px}
+.img-preview{width:100%;max-width:340px;border-radius:10px;display:block;margin:10px auto 0;cursor:pointer}
+.img-preview:hover{opacity:.92}
+.copy-btn{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:7px 15px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:#333}
+.copy-btn.ok{background:var(--green)}
+.msg-attach{font-size:12px;color:#888;font-style:italic;border-top:1px dashed var(--border);padding:8px 15px;display:flex;align-items:center;gap:5px}
+.res-actions{text-align:center;margin-top:22px;padding-bottom:40px}
+.btn-restart{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:15px 36px;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.45);transition:box-shadow .15s,opacity .15s;letter-spacing:.3px;white-space:nowrap}
+.btn-restart:hover{box-shadow:0 8px 32px rgba(232,48,42,.6);opacity:.93}
+.res-actions{height:0;overflow:hidden}
+
+/* PRICING DRAWER */
+.p-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;opacity:0;pointer-events:none;transition:opacity .25s}
+.p-overlay.open{opacity:1;pointer-events:all}
+.p-drawer{position:fixed;top:0;right:0;bottom:0;width:460px;max-width:95vw;background:var(--white);z-index:500;overflow-y:auto;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.15)}
+.p-drawer.open{transform:translateX(0)}
+.p-head{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);padding:15px 18px;display:flex;align-items:center;gap:12px;z-index:10}
+.p-title{font-size:16px;font-weight:800;flex:1}
+.btn-close{background:var(--gray-light);border:none;border-radius:8px;width:30px;height:30px;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray)}
+.p-body{padding:18px}
+.p-sec{margin-bottom:26px}
+.p-sec-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#888;margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.cur-toggle{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.cur-toggle span{font-size:13px;color:var(--gray);font-weight:600}
+.tog{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:var(--white);color:var(--gray);transition:all .15s}
+.tog.on{border-color:var(--red);background:var(--red);color:#fff}
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pc{border-radius:12px;padding:13px;color:#fff}
+.pc-name{font-size:11px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.4px}
+.pc-cl{font-size:10px;opacity:.7;margin-bottom:6px}
+.pc-price{font-size:23px;font-weight:800;line-height:1.1;margin-bottom:2px}
+.pc-per{font-size:11px;opacity:.8}
+.pc-save{font-size:11px;opacity:.85;font-weight:600;margin-top:4px}
+.t1a1{width:100%;border-collapse:collapse;font-size:13px}
+.t1a1 th{text-align:left;padding:7px 9px;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)}
+.t1a1 td{padding:9px;border-bottom:1px solid var(--border);color:var(--gray)}
+.t1a1 td:first-child{font-weight:600;color:var(--dark)}
+.t1a1 td:last-child{font-weight:700;color:var(--red)}
+.t1a1 tr:last-child td{border-bottom:none}
+.info-box{font-size:12px;border-radius:8px;padding:10px 12px;margin-top:10px}
+
+@media(max-width:580px){
+  .main{padding:14px 10px 60px}
+  .step-card{padding:22px 18px 26px}
+  .start-screen{padding:36px 20px}
+  .price-grid{grid-template-columns:1fr}
+  .meta-inp-wrap,.meta-bonus{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-logo">CGC METHOD</div>
+  <div class="tb-sep">|</div>
+  <div class="tb-sub">Guía de Asesoría</div>
+  <div class="tb-right">
+    <div class="tb-countdown">⏱ <b id="cd">--</b></div>
+    <button class="btn-prices" onclick="openP()">💰 Ver precios</button>
+  </div>
+</div>
+
+<!-- META -->
+<div class="meta">
+  <div>
+    <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Meta de junio</div>
+    <div class="meta-goal"><b>S/26,000</b></div>
+  </div>
+  <div class="meta-bar-wrap">
+    <div class="meta-track"><div class="meta-fill" id="mfill" style="width:0%"></div></div>
+    <div class="meta-pct" id="mpct">S/0 de S/26,000 — <b>0%</b></div>
+  </div>
+  <div class="meta-inp-wrap">
+    <span class="meta-inp-lbl">S/ vendido:</span>
+    <input type="number" id="minp" class="meta-inp" placeholder="0" min="0" oninput="updMeta(this.value)" />
+  </div>
+  <div class="meta-bonus">🎯 Meta = <b>+15% bono</b> Carlos y Ari</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="wizard" id="wiz">
+
+    <div id="sc-start">
+      <div class="start-screen">
+        <div class="start-icon">🎯</div>
+        <div class="start-title">Guía de <b>Asesoría CGC</b></div>
+        <div class="start-desc">Responde las preguntas sobre el lead y te damos el guión exacto de mensajes para cerrar la venta paso a paso.</div>
+        <button class="btn-start" onclick="start()">➕ Nueva asesoría</button>
+        <div class="start-chips">
+          <span class="chip">👧 Niños y adultos</span>
+          <span class="chip">🌎 Perú y exterior</span>
+          <span class="chip">💪 Con o sin experiencia</span>
+          <span class="chip">📋 Mensajes listos para copiar</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="sc-step" style="display:none"></div>
+    <div id="sc-result" style="display:none"></div>
+
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="p-overlay" id="pov" onclick="closeP()"></div>
+<div class="p-drawer" id="pdraw">
+  <div class="p-head">
+    <div class="p-title">💰 Precios y paquetes</div>
+    <button class="btn-close" onclick="closeP()">✕</button>
+  </div>
+  <div class="p-body">
+
+    <div class="p-sec">
+      <div class="p-sec-title">Grupales virtuales — PowerSplit · Arcos360 · Prepa Física</div>
+      <div style="background:linear-gradient(135deg,#E8302A,#F07820);border-radius:10px;padding:10px 14px;margin-bottom:12px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px">
+        🔥 20% DE DESCUENTO — Decirle al lead que es SOLO POR HOY para generar urgencia
+      </div>
+      <div class="cur-toggle">
+        <span>Mostrar en:</span>
+        <button class="tog on" id="tb-usd" onclick="setCur('usd')">USD $</button>
+        <button class="tog" id="tb-sol" onclick="setCur('sol')">Soles S/</button>
+      </div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:8px">Básicos</div>
+      <div class="price-grid" style="margin-bottom:12px">
+        <div class="pc" style="background:linear-gradient(135deg,#4A7FD4,#8B4FC8)">
+          <div class="pc-name">1 clase en vivo</div><div class="pc-cl">Vigencia: 1 semana</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$15</span><span class="cu-s" style="display:none">S/45</span></div>
+          <div class="pc-price"><span class="cu-u">$12</span><span class="cu-s" style="display:none">S/36</span></div>
+          <div class="pc-save">Conoce el método ✨</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#C040A0,#4A7FD4)">
+          <div class="pc-name">4 clases en vivo</div><div class="pc-cl">Vigencia: 1 mes</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$45</span><span class="cu-s" style="display:none">S/140</span></div>
+          <div class="pc-price"><span class="cu-u">$36</span><span class="cu-s" style="display:none">S/112</span></div>
+          <div class="pc-save">Constancia + resultados</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#E8302A,#C040A0);grid-column:span 2;position:relative">
+          <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#F07820;color:#fff;font-size:10px;font-weight:800;padding:2px 10px;border-radius:10px;white-space:nowrap">⭐ MÁS ELEGIDO</div>
+          <div class="pc-name">8 clases en vivo</div><div class="pc-cl">Vigencia: 1 mes · 2 clases/semana</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$80</span><span class="cu-s" style="display:none">S/250</span></div>
+          <div class="pc-price"><span class="cu-u">$64</span><span class="cu-s" style="display:none">S/200</span></div>
+          <div class="pc-save">Tu flexibilidad empieza a cambiar de verdad 💪</div>
+        </div>
+      </div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#888;margin-bottom:8px">Intensivos — para quienes entrenan en serio</div>
+      <div class="price-grid">
+        <div class="pc" style="background:linear-gradient(135deg,#9A7010,#C09020)">
+          <div class="pc-name">12 clases en vivo</div><div class="pc-cl">Vigencia: 2 meses · 3 veces/sem</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$105</span><span class="cu-s" style="display:none">S/330</span></div>
+          <div class="pc-price"><span class="cu-u">$84</span><span class="cu-s" style="display:none">S/264</span></div>
+          <div class="pc-save">Acelera tu progreso 🔥</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#1A1A1A,#3A1A3A);border:2px solid #C040A0;position:relative">
+          <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#C040A0;color:#fff;font-size:10px;font-weight:800;padding:2px 10px;border-radius:10px;white-space:nowrap">⭐ MÁS RECOMENDADO</div>
+          <div class="pc-name">20 clases en vivo</div><div class="pc-cl">Vigencia: 2 meses · 3-4 veces/sem</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$165</span><span class="cu-s" style="display:none">S/520</span></div>
+          <div class="pc-price"><span class="cu-u">$132</span><span class="cu-s" style="display:none">S/416</span></div>
+          <div class="pc-save">Tu técnica cambia cuando tu disciplina cambia ✨</div>
+        </div>
+        <div class="pc" style="background:linear-gradient(135deg,#8B4FC8,#E8302A)">
+          <div class="pc-name">32 clases en vivo</div><div class="pc-cl">Vigencia: 3 meses</div>
+          <div style="font-size:12px;opacity:.7;text-decoration:line-through"><span class="cu-u">$245</span><span class="cu-s" style="display:none">S/770</span></div>
+          <div class="pc-price"><span class="cu-u">$196</span><span class="cu-s" style="display:none">S/616</span></div>
+          <div class="pc-save">El menor costo por clase 💎</div>
+        </div>
+      </div>
+      <div class="info-box" style="background:#f9f9f9;color:#666;margin-top:10px">💡 El alumno puede combinar PowerSplit + Arcos360 + Prepa Física en el mismo paquete.</div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-sec-title">Clases 1:1 con Cami Garay</div>
+      <table class="t1a1">
+        <tr><th>Paquete</th><th>Incluye</th><th>Precio</th></tr>
+        <tr><td>Sesión suelta</td><td>1 clase 1:1 · 60 min</td><td>$60 USD</td></tr>
+        <tr><td>CGC ELITE Standard</td><td>8 vivo + 2 grabadas + 2 informes</td><td>$350 USD</td></tr>
+        <tr><td>CGC ELITE Premium</td><td>8 vivo + 4 grabadas + 4 informes</td><td>$500 USD</td></tr>
+      </table>
+      <div class="info-box" style="background:#FFF5F4;color:var(--red);border-left:3px solid var(--red)">⭐ Las clases 1:1 son <strong>siempre directamente con Cami</strong>. No las dicta el equipo.</div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-sec-title">FlexiPower — Presencial en Acroflex (solo Lima)</div>
+      <div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border-radius:12px;padding:15px;border:1px solid #A5D6A7">
+        <div style="font-size:14px;font-weight:700;color:#2E7D32;margin-bottom:5px">🏋️ FlexiPower</div>
+        <div style="font-size:13px;color:#4A7A4A;line-height:1.6">Clases grupales presenciales en Acroflex, Jesús María. Diseñado por Cami, dictadas por sus entrenadores.</div>
+        <div style="margin-top:10px;font-size:13px;font-weight:700;color:#2E7D32">📱 WhatsApp: <span style="font-family:monospace">+51 993 813 336</span></div>
+      </div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-sec-title">Métodos de pago</div>
+      <div style="font-size:13px;color:var(--gray);line-height:1.8">
+        🌎 <strong>Internacional:</strong> Link de pago (tarjeta)<br>
+        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles<br>
+        📋 <strong>Siempre:</strong> Pedir comprobante antes de confirmar
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── COUNTDOWN ──────────────────────────────────────────
+const TARGET = new Date('2026-06-30T23:59:59-05:00');
+function tick() {
+  const d = TARGET - new Date(), el = document.getElementById('cd');
+  if (!el) return;
+  if (d <= 0) { el.textContent = 'Meta cerrada'; return; }
+  const dy = Math.floor(d/86400000), hr = Math.floor((d%86400000)/3600000), mn = Math.floor((d%3600000)/60000);
+  el.textContent = dy > 0 ? dy+'d '+hr+'h '+mn+'m para cerrar' : hr+'h '+mn+'m para cerrar';
+}
+tick(); setInterval(tick, 60000);
+
+// ── META ───────────────────────────────────────────────
+function updMeta(v) {
+  v = parseFloat(v) || 0;
+  const pct = Math.min(100, v/260);
+  document.getElementById('mfill').style.width = pct + '%';
+  document.getElementById('mpct').innerHTML = 'S/'+v.toLocaleString('es-PE')+' de S/26,000 — <b>'+pct.toFixed(1)+'%</b>';
+  localStorage.setItem('cgc_meta', v);
+}
+const sm = localStorage.getItem('cgc_meta');
+if (sm) { document.getElementById('minp').value = sm; updMeta(sm); }
+
+// ── PRICING ────────────────────────────────────────────
+function openP() { document.getElementById('pov').classList.add('open'); document.getElementById('pdraw').classList.add('open'); }
+function closeP() { document.getElementById('pov').classList.remove('open'); document.getElementById('pdraw').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeP(); });
+let cur = 'usd';
+function setCur(c) {
+  cur = c;
+  document.getElementById('tb-usd').classList.toggle('on', c==='usd');
+  document.getElementById('tb-sol').classList.toggle('on', c==='sol');
+  document.querySelectorAll('.cu-u').forEach(el => el.style.display = c==='usd'?'':'none');
+  document.querySelectorAll('.cu-s').forEach(el => el.style.display = c==='sol'?'':'none');
+  localStorage.setItem('cgc_cur', c);
+}
+const sc = localStorage.getItem('cgc_cur'); if (sc) setCur(sc);
+
+// ── STEPS DEFINITION ──────────────────────────────────
+const STEPS = [
+  {
+    id:'quien', q:'¿Quién nos está escribiendo?', sub:'Lo primero antes de responder',
+    opts:[
+      {v:'alumno', icon:'🙋', l:'El/la alumno/a', d:'La persona que quiere tomar clases'},
+      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',   d:'Escribe el padre o la madre por su hijo/a'}
+    ]
+  },
+  {
+    id:'edad', q:'¿Qué edad tiene el/la alumno/a?', sub:'Define el tipo de programa y el tono del mensaje',
+    opts:[
+      {v:'nino',   icon:'🧒', l:'Niño/a (hasta 14 años)', d:'Programa adaptado para niños y preadolescentes'},
+      {v:'adulto', icon:'🧑', l:'Joven o adulto/a (15+)', d:'Programa estándar para adolescentes y adultos'}
+    ]
+  },
+  {
+    id:'ubicacion', q:'¿Dónde está el/la alumno/a?', sub:'Define cursos disponibles y moneda de pago',
+    opts:[
+      {v:'lima',     icon:'📍', l:'Lima, Perú',           d:'Acceso a clases presenciales en Acroflex + online'},
+      {v:'peru',     icon:'🇵🇪', l:'Otra ciudad de Perú', d:'Solo online · precios en soles'},
+      {v:'exterior', icon:'🌎', l:'Fuera de Perú',        d:'Solo online · precios en dólares'}
+    ]
+  },
+  {
+    id:'experiencia', q:'¿Tiene experiencia en actividad física?', sub:'Adaptamos el mensaje y la recomendación',
+    opts:[
+      {v:'si', icon:'💪', l:'Sí, practica o practicó algo', d:'Tiene base en alguna disciplina o deporte'},
+      {v:'no', icon:'🌱', l:'No, está comenzando desde cero', d:'Sin experiencia previa en actividad física'}
+    ]
+  },
+  {
+    id:'disciplina', q:'¿Qué disciplina practica o practicó?', sub:'Afecta la recomendación y el mensaje de validación',
+    opts:[
+      {v:'gimnasia',       icon:'🤸', l:'Gimnasia artística',       d:'Compite o entrena gimnasia artística'},
+      {v:'danza',          icon:'🩰', l:'Danza / Ballet',           d:'Bailarina, estudiante de danza o ballet'},
+      {v:'artes_marciales',icon:'🥋', l:'Artes marciales',          d:'Karate, taekwondo, judo, capoeira, etc.'},
+      {v:'otra',           icon:'⚽', l:'Otra actividad / deporte', d:'Natación, crossfit, fútbol, atletismo, etc.'}
+    ]
+  },
+  {
+    id:'objetivo', q:'¿Qué busca principalmente?', sub:'Define el curso o programa a recomendar',
+    opts:[
+      {v:'splits',        icon:'🦵', l:'Solo splits / apertura de piernas', d:'Quiere abrir más las piernas: split sagital, frontal, elevaciones'},
+      {v:'arcos',         icon:'🌙', l:'Solo arcos / flexibilidad de espalda', d:'Quiere mejorar su arco, puente, escorpión o figuras posteriores'},
+      {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
+      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'}
+    ]
+  }
+];
+
+// ── WIZARD STATE ──────────────────────────────────────
+let state = {}, history = [], visSteps = [], stepIdx = 0;
+
+function getVis(s) {
+  return STEPS.filter(st => !(st.id==='disciplina' && s.experiencia==='no'));
+}
+
+function start() {
+  state = {}; history = []; stepIdx = 0;
+  visSteps = STEPS.filter(st => st.id !== 'disciplina');
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  renderStep(0);
+}
+
+function renderStep(idx) {
+  const step = visSteps[idx];
+  const total = visSteps.length;
+  const dots = visSteps.map((_,i) => `<div class="dot${i<idx?' done':i===idx?' active':''}"></div>`).join('');
+  const opts = step.opts.map(o =>
+    `<button class="opt" onclick="pick('${step.id}','${o.v}')">
+      <span class="opt-icon">${o.icon}</span>
+      <span class="opt-txt"><span class="opt-lbl">${o.l}</span><span class="opt-dsc">${o.d}</span></span>
+      <span class="opt-arr">›</span>
+    </button>`
+  ).join('');
+  document.getElementById('sc-step').innerHTML = `
+    <div class="step-header">
+      <button class="btn-back" onclick="goBack()">${idx===0?'✕ Cancelar':'← Volver'}</button>
+      <div class="step-dots">${dots}</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Paso ${idx+1} de ${total}</div>
+      <div class="step-q">${step.q}</div>
+      <div class="step-sub">${step.sub}</div>
+      ${opts}
+    </div>`;
+}
+
+function pick(id, val) {
+  state[id] = val;
+  history.push(stepIdx);
+  if (id === 'experiencia') visSteps = getVis(state);
+  stepIdx++;
+  if (stepIdx >= visSteps.length) { show('sc-step',false); buildResult(); show('sc-result',true); window.scrollTo({top:0,behavior:'smooth'}); }
+  else renderStep(stepIdx);
+}
+
+function goBack() {
+  if (history.length === 0) { show('sc-step',false); show('sc-start',true); return; }
+  stepIdx = history.pop();
+  delete state[visSteps[stepIdx].id];
+  visSteps = getVis(state);
+  renderStep(stepIdx);
+}
+
+function show(id, v) { document.getElementById(id).style.display = v?'':'none'; }
+
+// ── RECOMMENDATION ────────────────────────────────────
+function getRec() {
+  const {disciplina, edad, objetivo} = state;
+  const isGimNino = disciplina==='gimnasia' && edad==='nino';
+  if (objetivo==='splits')       return isGimNino ? '1a1' : 'powersplit';
+  if (objetivo==='arcos')        return isGimNino ? '1a1' : 'arcos360';
+  if (objetivo==='flexibilidad') return isGimNino ? '1a1' : 'ps-a360';
+  if (objetivo==='todo')         return isGimNino ? '1a1' : 'completo';
+  return 'ps-a360';
+}
+
+const REC = {
+  'powersplit': {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'El curso de splits y apertura de piernas de Cami.'},
+  'arcos360':   {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
+  'ps-a360':    {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
+  'completo':   {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',   color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
+  '1a1':        {icon:'🎯', name:'Clase 1:1 directamente con Cami',        color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
+  'prepa':      {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'}
+};
+
+// ── BUILD MESSAGES ────────────────────────────────────
+function buildMsgs(rec) {
+  const {quien, edad, ubicacion, experiencia, disciplina} = state;
+  const isMama = quien==='mama', isNino = edad==='nino';
+  const isLima = ubicacion==='lima', isExt = ubicacion==='exterior';
+  const steps = [];
+
+  // 1. SALUDO
+  steps.push({who:'team', lbl:'Saludo inicial',
+    txt: isMama
+      ? `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que nos hayas contactado.\nCuéntame un poquito más, ¿qué edad tiene tu hijo/a y qué es lo que busca trabajar? 🤗`
+      : `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que te hayas comunicado 😊\nCuéntame, ¿qué es lo que estás buscando trabajar? Y dime, ¿de dónde eres? 🌎`
+  });
+
+  // 1b. PREGUNTAR EXPERIENCIA (después del saludo, antes de valorar)
+  steps.push({who:'team', lbl:'Preguntar sobre experiencia',
+    txt: isMama
+      ? `Para poder recomendarle mejor a tu hijo/a... ¿practica o ha practicado alguna actividad física? (danza, gimnasia, yoga, artes marciales, deporte…) 💪\n¿O sería su primera vez entrenando?`
+      : `Para poder recomendarte mejor... ¿practicas o has practicado alguna actividad física? (danza, gimnasia, yoga, artes marciales, deporte…) 💪\n¿O sería tu primera vez entrenando?`,
+    note:'⏳ Esperar la respuesta del lead antes de continuar al siguiente paso.'
+  });
+
+  // 2. VALIDACIÓN EXPERIENCIA
+  const discNom = {gimnasia:'gimnasia artística', danza:'danza/ballet', artes_marciales:'artes marciales', otra:'actividad física'}[disciplina] || 'su disciplina';
+  if (experiencia==='si') {
+    steps.push({who:'team', lbl:'Valorar la experiencia',
+      txt: isMama
+        ? `¡Qué bueno que tu hijo/a ya tiene experiencia en ${discNom}! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
+        : `¡Qué bacán que ya tienes experiencia en ${discNom}! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`
+    });
+  } else {
+    steps.push({who:'team', lbl:'Sin experiencia — tranquilizar',
+      txt: isMama
+        ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
+        : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`
+    });
+  }
+
+  // 3. RECOMENDACIÓN
+  let recTxt = '';
+  // Sin pregunta de horarios/valores al final — eso va después del video+imágenes
+  if (rec==='powersplit') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por lo que me cuentas, te recomendaría PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+  else if (rec==='arcos360') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
+    : `Por lo que me cuentas, te recomendaría Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+  else if (rec==='ps-a360') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+  else if (rec==='completo') recTxt = isMama
+    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
+    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo y con un solo paquete accedés a los 3 cursos ✨`;
+  else if (rec==='prepa') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento ✨`
+    : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 Es el programa de fuerza funcional y base acrobática de Cami. Trabaja exactamente la condición que necesitás para avanzar en tu disciplina ✨`;
+  else if (rec==='1a1') recTxt = isMama
+    ? `Por lo que me cuentas, para el objetivo de tu hijo/a lo mejor sería una clase 1:1 directamente con Cami 💛\n\nA diferencia de las grupales, las 1:1 son siempre con Cami. Puede verle directamente, corregirle según su nivel y darle ejercicios exactos según su meta 🎯`
+    : `Por lo que me cuentas, en tu caso te recomendaría una clase 1:1 directamente conmigo 💛\n\nA diferencia de las grupales, las 1:1 son siempre conmigo. Puedo verte directamente, corregirte según tu nivel y darte ejercicios exactos según tu meta 🎯`;
+
+  steps.push({who: rec==='1a1'?'cami':'team', lbl:'Recomendar curso', txt:recTxt,
+    note: rec==='1a1'?'Este paso siempre lo hace Cami, no el equipo.':null});
+
+  // 4. VIDEO + IMÁGENES DE VALOR (después de la recomendación)
+  if (rec === '1a1') {
+    const vidTxt = isLima
+      ? `Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`
+      : `Acá te comparto el video de las clases 1:1 virtuales por Zoom para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`;
+    steps.push({who:'cami', lbl:'Enviar video 1:1', txt:vidTxt, attach:true});
+  } else {
+    const vidMsg = isMama
+      ? `Te envío un video para que veas cómo funciona y todo lo que incluye cada paquete de clases 💛🎥`
+      : `Te envío un video para que veas cómo funciona y todo lo que incluye cada paquete de clases 💛🎥`;
+    steps.push({who:'team', lbl:'Mensaje + video de venta',
+      txt: vidMsg, attach:true, attachNote:'📎 Adjuntar: VIDEO DE VENTA COMPRIMIDO.mp4'});
+    steps.push({who:'team', lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.webp']});
+    steps.push({who:'team', lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.jpg']});
+    steps.push({who:'team', lbl:'Enviar imagen — Resultados Reales', isAction:true,
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
+    // Pregunta de horarios/valores CON urgencia — después del bloque de valor
+    const urgMsg = isMama
+      ? `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`
+      : `¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`;
+    steps.push({who:'team', lbl:'Preguntar horarios/valores — con urgencia', txt: urgMsg});
+  }
+
+  // 5. FOTOS DE HORARIOS + PRECIOS (grupales) | valores escritos (1:1)
+  if (rec==='1a1') {
+    const valTxt = `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
+    steps.push({who:'cami', lbl:'Enviar valores 1:1', txt:valTxt});
+  } else {
+    // Foto de horarios según ubicación
+    const horImgs = (isLima || !isExt)
+      ? ['img/hor-peru.webp']
+      : ['img/hor-peru.webp','img/hor-argentina.webp','img/hor-cst.webp','img/hor-est.webp','img/hor-mexico.webp'];
+    const horNote = (isLima || !isExt)
+      ? '📸 Enviar esta imagen de horarios por WhatsApp:'
+      : '📸 Enviar la imagen del horario que corresponda según el país del lead:';
+    steps.push({who:'team', lbl:'Enviar foto de horarios', isAction:true, action: horNote, imgs: horImgs});
+    steps.push({who:'team', lbl:'Enviar fotos de precios', isAction:true,
+      action:'📸 Enviar primero "Básicos" y luego "Intensivos" por WhatsApp:',
+      imgs:['img/precios-basicos.jpg','img/precios-intensivos.jpg']});
+    // Preguntar disponibilidad
+    steps.push({who:'team', lbl:'Preguntar disponibilidad horaria', txt:`¿En qué días y horarios ${isMama ? 'tiene más disponibilidad tu hijo/a' : 'tienes más disponibilidad'}? 📅\nAsí te recomiendo el mejor plan según tu rutina.`});
+    // Recomendar paquete personalizado según respuesta del lead
+    steps.push({who:'team', lbl:'Recomendar paquete personalizado',
+      txt:`Perfecto, con esos horarios te recomiendo el paquete de [X clases] 💛\nCon el descuento de hoy te sale $[precio] USD / S/[precio] 🔥\n¿Lo separamos?`,
+      note:'✍️ Reemplaza [X clases] y [precio] según lo que eligió el lead. Consulta la tabla de precios si es necesario.'});
+  }
+
+  // 7. FLEXIPOWER (bonus Lima adulto)
+  if (isLima && !isNino && rec!=='1a1') {
+    steps.push({who:'team', lbl:'Ofrecer FlexiPower — bonus Lima',
+      txt:`Como estás en Lima, también te recomendaría FlexiPower 🏋️💛\n\nSon clases grupales presenciales en Acroflex (Jesús María), diseñadas por Cami y dictadas por sus entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`,
+      note:'Si le interesa → enviar: 📱 WhatsApp Acroflex: +51 993 813 336 para coordinar horarios e inscripción'
+    });
+  }
+
+  // 8. MENOR DE EDAD escribe él mismo
+  if (isNino && !isMama) {
+    steps.push({who:'team', lbl:'Pedir datos del apoderado (menor de edad)',
+      txt:`Perfecto 💛 Como eres menor de edad, la inscripción la tiene que hacer tu mamá, papá o apoderado.\n¿Me puedes pasar su contacto o pedirle que nos escriba? 😊`
+    });
+  }
+
+  // 9. DATOS DE PAGO
+  if (isExt) {
+    steps.push({who:'team', lbl:'Datos de pago — internacional',
+      txt:`Para pagos internacionales trabajamos con link de pago 💛\nTe lo enviamos ahora para que puedas separar tu cupo ✨`,
+      note:'Enviar el link de pago correspondiente.'
+    });
+  } else {
+    steps.push({who:'team', lbl:'Datos de pago — Perú',
+      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante me lo mandas y separamos tu cupo ✨`,
+      note:'Enviar los datos de Yape/Plin/cuenta.'
+    });
+  }
+
+  // 10. CONFIRMAR PAGO
+  steps.push({who:'team', lbl:'Confirmar pago recibido',
+    txt:`Perfecto, ya recibimos tu comprobante 💛\nTe paso con el equipo de CGC para que te envíen el formulario de bienvenida, la guía de acceso y coordinen tus clases ✨`
+  });
+
+  // 11. POST-PAGO equipo
+  steps.push({who:'carlos', lbl:'Post-pago — Carlos / Ariana entra',
+    txt:`Holaa 💛 Soy [tu nombre] del equipo de Cami Garay ✨\nCami me pasó toda tu info. Te voy a enviar el formulario de bienvenida para completar tus datos y coordinar el inicio de tus clases 🤗`,
+    note:'Verificar: ✅ formulario completado · ✅ acceso Zoom enviado · ✅ vigencia del paquete informada · ✅ clases agendadas'
+  });
+
+  return steps;
+}
+
+// ── BUILD RESULT ──────────────────────────────────────
+function buildResult() {
+  const rec = getRec();
+  const ri = REC[rec];
+  const steps = buildMsgs(rec);
+  const {quien, edad, ubicacion, experiencia, disciplina} = state;
+  const isLima = ubicacion==='lima', isNino = edad==='nino';
+
+  const DISC_LBL = {gimnasia:'Gimnasia',danza:'Danza/Ballet',artes_marciales:'Artes marciales',otra:'Otra actividad'};
+  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo'};
+
+  const tags = [
+    quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
+    isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
+    isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
+    experiencia==='si'&&disciplina?'💪 '+DISC_LBL[disciplina]:experiencia==='si'?'💪 Con experiencia':'🌱 Desde cero',
+    OBJ_LBL[state.objetivo]
+  ].map(t=>`<span class="res-tag">${t}</span>`).join('');
+
+  const fpBonus = isLima&&!isNino&&rec!=='1a1' ? `
+    <div class="fp-bonus">
+      <div class="fp-icon">🏋️</div>
+      <div class="fp-txt">Tip Lima: ofrecer también FlexiPower presencial en Acroflex
+        <span>Diseñado por Cami · dictado por sus entrenadores · Jesús María · +51 993 813 336</span>
+      </div>
+    </div>` : '';
+
+  const stepsHtml = steps.map((s,i) => {
+    const whoHtml = s.who==='cami'
+      ? '<span class="msg-who who-cami">⭐ Cami</span>'
+      : s.who==='carlos'
+      ? '<span class="msg-who who-team">👥 Carlos / Ariana</span>'
+      : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+
+    let body = '';
+    if (s.isAction) {
+      const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
+      body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
+    } else {
+      body = `<div class="msg-txt">${esc(s.txt)}</div>`;
+      if (s.note) body += `<div class="msg-note">⚠️ ${esc(s.note)}</div>`;
+      body += `<button class="copy-btn" onclick="cp(this,${JSON.stringify(s.txt)})">📋 Copiar mensaje</button>`;
+    }
+    const attach = s.attach ? `<div class="msg-attach">📎 Adjuntar el video correspondiente al enviar este mensaje</div>` : '';
+
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i+1}</div>
+        <div class="msg-lbl">${s.lbl}</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">${body}</div>
+      ${attach}
+    </div>`;
+  }).join('');
+
+  document.getElementById('sc-result').innerHTML = `
+    <div class="res-profile">
+      <div class="res-profile-icon">${quien==='mama'?'👩‍👧':'🙋'}</div>
+      <div><div class="res-profile-lbl">Perfil del lead</div><div class="res-tags">${tags}</div></div>
+    </div>
+    <div class="rec-banner" style="background:${ri.color}">
+      <div class="rec-icon">${ri.icon}</div>
+      <div>
+        <div class="rec-lbl">✅ Recomendación</div>
+        <div class="rec-name">${ri.name}</div>
+        <div class="rec-note">${ri.nota}</div>
+      </div>
+    </div>
+    ${fpBonus}
+    <div class="msgs-title">Guión de mensajes en orden →</div>
+    ${stepsHtml}
+    <div class="res-actions">
+      <button class="btn-restart" onclick="restart()">➕ Nueva asesoría</button>
+    </div>`;
+}
+
+function restart() {
+  show('sc-result',false); show('sc-start',true);
+  document.getElementById('sc-result').innerHTML='';
+  state={}; history=[]; visSteps=[]; stepIdx=0;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function cp(btn, txt) {
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.textContent='✅ Copiado'; btn.classList.add('ok');
+    setTimeout(()=>{ btn.textContent='📋 Copiar mensaje'; btn.classList.remove('ok'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
