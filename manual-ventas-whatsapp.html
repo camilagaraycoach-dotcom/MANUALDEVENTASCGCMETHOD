@@ -106,6 +106,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .msg-action{font-size:13px;color:var(--purple);font-weight:600;background:#F5F0FF;border-radius:10px;padding:12px 14px}
 .img-preview{width:100%;max-width:340px;border-radius:10px;display:block;margin:10px auto 0;cursor:pointer}
 .img-preview:hover{opacity:.92}
+.branch-q{font-size:13px;font-weight:700;color:var(--purple);margin-bottom:8px}
+.branch-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.branch-btn{border:2px solid var(--purple);background:#fff;color:var(--purple);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
+.branch-btn:hover{background:var(--purple);color:#fff}
+.branch-btn-active{background:var(--purple);color:#fff}
+.branch-opt{background:#F8F4FF;border-radius:10px;padding:12px;margin-top:4px}
 .copy-btn{background:var(--dark);color:#fff;border:none;border-radius:8px;padding:7px 15px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
 .copy-btn:hover{background:#333}
 .copy-btn.ok{background:var(--green)}
@@ -370,22 +376,6 @@ const STEPS = [
     ]
   },
   {
-    id:'experiencia', q:'¿Tiene experiencia en actividad física?', sub:'Adaptamos el mensaje y la recomendación',
-    opts:[
-      {v:'si', icon:'💪', l:'Sí, practica o practicó algo', d:'Tiene base en alguna disciplina o deporte'},
-      {v:'no', icon:'🌱', l:'No, está comenzando desde cero', d:'Sin experiencia previa en actividad física'}
-    ]
-  },
-  {
-    id:'disciplina', q:'¿Qué disciplina practica o practicó?', sub:'Afecta la recomendación y el mensaje de validación',
-    opts:[
-      {v:'gimnasia',       icon:'🤸', l:'Gimnasia artística',       d:'Compite o entrena gimnasia artística'},
-      {v:'danza',          icon:'🩰', l:'Danza / Ballet',           d:'Bailarina, estudiante de danza o ballet'},
-      {v:'artes_marciales',icon:'🥋', l:'Artes marciales',          d:'Karate, taekwondo, judo, capoeira, etc.'},
-      {v:'otra',           icon:'⚽', l:'Otra actividad / deporte', d:'Natación, crossfit, fútbol, atletismo, etc.'}
-    ]
-  },
-  {
     id:'objetivo', q:'¿Qué busca principalmente?', sub:'Define el curso o programa a recomendar',
     opts:[
       {v:'splits',        icon:'🦵', l:'Solo splits / apertura de piernas', d:'Quiere abrir más las piernas: split sagital, frontal, elevaciones'},
@@ -400,12 +390,12 @@ const STEPS = [
 let state = {}, history = [], visSteps = [], stepIdx = 0;
 
 function getVis(s) {
-  return STEPS.filter(st => !(st.id==='disciplina' && s.experiencia==='no'));
+  return STEPS.slice();
 }
 
 function start() {
   state = {}; history = []; stepIdx = 0;
-  visSteps = STEPS.filter(st => st.id !== 'disciplina');
+  visSteps = STEPS.slice();
   show('sc-start', false); show('sc-step', true); show('sc-result', false);
   renderStep(0);
 }
@@ -437,7 +427,6 @@ function renderStep(idx) {
 function pick(id, val) {
   state[id] = val;
   history.push(stepIdx);
-  if (id === 'experiencia') visSteps = getVis(state);
   stepIdx++;
   if (stepIdx >= visSteps.length) { show('sc-step',false); buildResult(); show('sc-result',true); window.scrollTo({top:0,behavior:'smooth'}); }
   else renderStep(stepIdx);
@@ -455,12 +444,11 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 
 // ── RECOMMENDATION ────────────────────────────────────
 function getRec() {
-  const {disciplina, edad, objetivo} = state;
-  const isGimNino = disciplina==='gimnasia' && edad==='nino';
-  if (objetivo==='splits')       return isGimNino ? '1a1' : 'powersplit';
-  if (objetivo==='arcos')        return isGimNino ? '1a1' : 'arcos360';
-  if (objetivo==='flexibilidad') return isGimNino ? '1a1' : 'ps-a360';
-  if (objetivo==='todo')         return isGimNino ? '1a1' : 'completo';
+  const {objetivo} = state;
+  if (objetivo==='splits')       return 'powersplit';
+  if (objetivo==='arcos')        return 'arcos360';
+  if (objetivo==='flexibilidad') return 'ps-a360';
+  if (objetivo==='todo')         return 'completo';
   return 'ps-a360';
 }
 
@@ -475,7 +463,7 @@ const REC = {
 
 // ── BUILD MESSAGES ────────────────────────────────────
 function buildMsgs(rec) {
-  const {quien, edad, ubicacion, experiencia, disciplina} = state;
+  const {quien, edad, ubicacion} = state;
   const isMama = quien==='mama', isNino = edad==='nino';
   const isLima = ubicacion==='lima', isExt = ubicacion==='exterior';
   const steps = [];
@@ -487,7 +475,7 @@ function buildMsgs(rec) {
       : `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que te hayas comunicado 😊\nCuéntame, ¿qué es lo que estás buscando trabajar? Y dime, ¿de dónde eres? 🌎`
   });
 
-  // 1b. PREGUNTAR EXPERIENCIA (después del saludo, antes de valorar)
+  // 1b. PREGUNTAR EXPERIENCIA
   steps.push({who:'team', lbl:'Preguntar sobre experiencia',
     txt: isMama
       ? `Para poder recomendarle mejor a tu hijo/a... ¿practica o ha practicado alguna actividad física? (danza, gimnasia, yoga, artes marciales, deporte…) 💪\n¿O sería su primera vez entrenando?`
@@ -495,21 +483,26 @@ function buildMsgs(rec) {
     note:'⏳ Esperar la respuesta del lead antes de continuar al siguiente paso.'
   });
 
-  // 2. VALIDACIÓN EXPERIENCIA
-  const discNom = {gimnasia:'gimnasia artística', danza:'danza/ballet', artes_marciales:'artes marciales', otra:'actividad física'}[disciplina] || 'su disciplina';
-  if (experiencia==='si') {
-    steps.push({who:'team', lbl:'Valorar la experiencia',
-      txt: isMama
-        ? `¡Qué bueno que tu hijo/a ya tiene experiencia en ${discNom}! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
-        : `¡Qué bacán que ya tienes experiencia en ${discNom}! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`
-    });
-  } else {
-    steps.push({who:'team', lbl:'Sin experiencia — tranquilizar',
-      txt: isMama
-        ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
-        : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`
-    });
-  }
+  // 2. BRANCH EXPERIENCIA — el asesor elige según lo que respondió el lead
+  steps.push({
+    type:'branch',
+    lbl:'¿Qué respondió el lead?',
+    opts:[
+      {
+        key:'si', label:'💪 Tiene experiencia física',
+        txt: isMama
+          ? `¡Qué bueno que tu hijo/a ya tiene experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
+          : `¡Qué bacán que ya tienes experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`,
+        note: isNino ? '🎯 Si practica gimnasia artística competitiva, considera recomendarle las clases 1:1 con Cami.' : null
+      },
+      {
+        key:'no', label:'🌱 Comenzando desde cero',
+        txt: isMama
+          ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
+          : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`
+      }
+    ]
+  });
 
   // 3. RECOMENDACIÓN
   let recTxt = '';
@@ -632,17 +625,15 @@ function buildResult() {
   const rec = getRec();
   const ri = REC[rec];
   const steps = buildMsgs(rec);
-  const {quien, edad, ubicacion, experiencia, disciplina} = state;
+  const {quien, edad, ubicacion} = state;
   const isLima = ubicacion==='lima', isNino = edad==='nino';
 
-  const DISC_LBL = {gimnasia:'Gimnasia',danza:'Danza/Ballet',artes_marciales:'Artes marciales',otra:'Otra actividad'};
   const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo'};
 
   const tags = [
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
     isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
     isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
-    experiencia==='si'&&disciplina?'💪 '+DISC_LBL[disciplina]:experiencia==='si'?'💪 Con experiencia':'🌱 Desde cero',
     OBJ_LBL[state.objetivo]
   ].map(t=>`<span class="res-tag">${t}</span>`).join('');
 
@@ -662,7 +653,18 @@ function buildResult() {
       : '<span class="msg-who who-team">💬 Equipo CGC</span>';
 
     let body = '';
-    if (s.isAction) {
+    if (s.type === 'branch') {
+      const optsHtml = s.opts.map(o => `
+        <div class="branch-opt" id="branch-${i}-${o.key}" style="display:none">
+          <div class="msg-txt">${esc(o.txt)}</div>
+          ${o.note ? `<div class="msg-note">⚠️ ${esc(o.note)}</div>` : ''}
+          <button class="copy-btn" onclick="cp(this,${JSON.stringify(o.txt)})">📋 Copiar mensaje</button>
+        </div>`).join('');
+      const btnsHtml = s.opts.map(o =>
+        `<button class="branch-btn" id="branchbtn-${i}-${o.key}" onclick="selectBranch(${i},'${o.key}')">${o.label}</button>`
+      ).join('');
+      body = `<div class="branch-q">¿Cómo respondió el lead?</div><div class="branch-btns">${btnsHtml}</div>${optsHtml}`;
+    } else if (s.isAction) {
       const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
     } else {
@@ -714,6 +716,15 @@ function restart() {
 function esc(s) {
   if (!s) return '';
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function selectBranch(idx, key) {
+  ['si','no'].forEach(k => {
+    const opt = document.getElementById(`branch-${idx}-${k}`);
+    const btn = document.getElementById(`branchbtn-${idx}-${k}`);
+    if (opt) opt.style.display = k===key ? '' : 'none';
+    if (btn) btn.classList.toggle('branch-btn-active', k===key);
+  });
 }
 
 function cp(btn, txt) {
