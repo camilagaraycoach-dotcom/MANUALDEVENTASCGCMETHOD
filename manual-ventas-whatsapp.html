@@ -647,6 +647,9 @@ function buildResult() {
       </div>
     </div>` : '';
 
+  window.__cpMsgs = [];
+  function storeMsg(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+
   const stepsHtml = steps.map((s,i) => {
     const whoHtml = s.who==='cami'
       ? '<span class="msg-who who-cami">⭐ Cami</span>'
@@ -656,12 +659,14 @@ function buildResult() {
 
     let body = '';
     if (s.type === 'branch') {
-      const optsHtml = s.opts.map(o => `
-        <div class="branch-opt" id="branch-${i}-${o.key}" style="display:none">
+      const optsHtml = s.opts.map(o => {
+        const mi = storeMsg(o.txt);
+        return `<div class="branch-opt" id="branch-${i}-${o.key}" style="display:none">
           <div class="msg-txt">${esc(o.txt)}</div>
           ${o.note ? `<div class="msg-note">⚠️ ${esc(o.note)}</div>` : ''}
-          <button class="copy-btn" onclick="cp(this,${JSON.stringify(o.txt)})">📋 Copiar mensaje</button>
-        </div>`).join('');
+          <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+        </div>`;
+      }).join('');
       const btnsHtml = s.opts.map(o =>
         `<button class="branch-btn" id="branchbtn-${i}-${o.key}" onclick="selectBranch(${i},'${o.key}')">${o.label}</button>`
       ).join('');
@@ -670,9 +675,10 @@ function buildResult() {
       const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
     } else {
+      const mi = storeMsg(s.txt);
       body = `<div class="msg-txt">${esc(s.txt)}</div>`;
       if (s.note) body += `<div class="msg-note">⚠️ ${esc(s.note)}</div>`;
-      body += `<button class="copy-btn" onclick="cp(this,${JSON.stringify(s.txt)})">📋 Copiar mensaje</button>`;
+      body += `<button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>`;
     }
     const attach = s.attach ? `<div class="msg-attach">📎 Adjuntar el video correspondiente al enviar este mensaje</div>` : '';
 
@@ -729,11 +735,24 @@ function selectBranch(idx, key) {
   });
 }
 
-function cp(btn, txt) {
-  navigator.clipboard.writeText(txt).then(() => {
-    btn.textContent='✅ Copiado'; btn.classList.add('ok');
-    setTimeout(()=>{ btn.textContent='📋 Copiar mensaje'; btn.classList.remove('ok'); }, 2000);
-  });
+function cpIdx(btn, idx) {
+  const txt = window.__cpMsgs[idx] || '';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => flash(btn)).catch(() => fallbackCopy(btn, txt));
+  } else {
+    fallbackCopy(btn, txt);
+  }
+}
+function fallbackCopy(btn, txt) {
+  const ta = document.createElement('textarea');
+  ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); flash(btn); } catch(e) {}
+  document.body.removeChild(ta);
+}
+function flash(btn) {
+  btn.textContent='✅ Copiado'; btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='📋 Copiar mensaje'; btn.classList.remove('ok'); }, 2000);
 }
 </script>
 </body>
