@@ -482,7 +482,15 @@ function buildMsgs(rec) {
       : `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que te hayas comunicado 😊\nCuéntame, ¿qué es lo que estás buscando trabajar? Y dime, ¿de dónde eres? 🌎`
   });
 
-  // 2. PREGUNTAR EXPERIENCIA
+  // 2. PREGUNTAR NOMBRE
+  steps.push({who:'team', lbl:'Preguntar su nombre',
+    txt: isMama
+      ? `¡Qué bueno que nos escribiste! 😊 ¿Cómo se llama tu hijo/a?`
+      : `¡Qué bueno que nos escribiste! 😊 ¿Cómo te llamas?`,
+    note:'⏳ Esperar respuesta antes de continuar.'
+  });
+
+  // 3. PREGUNTAR EXPERIENCIA
   steps.push({who:'team', lbl:'Preguntar sobre experiencia',
     txt: isMama
       ? `Para poder recomendarle mejor a tu hijo/a... ¿practica o ha practicado alguna actividad física? (danza, gimnasia, yoga, artes marciales, deporte…) 💪\n¿O sería su primera vez entrenando?`
@@ -757,4 +765,3 @@ function flash(btn) {
 </script>
 </body>
 </html>
-
