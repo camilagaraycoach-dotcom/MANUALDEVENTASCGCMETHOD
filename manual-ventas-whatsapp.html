@@ -537,18 +537,27 @@ function buildMsgs(rec) {
   steps.push({
     type:'branch',
     lbl:'¿Qué respondió el lead?',
+    who: tw,
     opts:[
       {
         key:'si', label:'💪 Tiene experiencia',
-        txt: isMama
-          ? `¡Qué bueno que tu hijo/a ya tiene experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
-          : `¡Qué bacán que ya tienes experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`
+        txt: isCami
+          ? (isMama
+              ? `¡Qué bueno que tu hijo/a ya tiene experiencia! Eso es una ventaja enorme 💪\nMi método complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
+              : `¡Qué bacán que ya tienes experiencia! Eso es una ventaja enorme 💪\nMi método complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`)
+          : (isMama
+              ? `¡Qué bueno que tu hijo/a ya tiene experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
+              : `¡Qué bacán que ya tienes experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`)
       },
       {
         key:'no', label:'🌱 Comenzando desde cero',
-        txt: isMama
-          ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
-          : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`
+        txt: isCami
+          ? (isMama
+              ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nMi método construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
+              : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nMi método construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`)
+          : (isMama
+              ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
+              : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`)
       }
     ]
   });
