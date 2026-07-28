@@ -356,8 +356,9 @@ const STEPS = [
   {
     id:'quien', q:'¿Quién nos está escribiendo?', sub:'Lo primero antes de responder',
     opts:[
-      {v:'alumno', icon:'🙋', l:'El/la alumno/a', d:'La persona que quiere tomar clases'},
-      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',   d:'Escribe el padre o la madre por su hijo/a'}
+      {v:'alumno', icon:'🙋', l:'El/la alumno/a',      d:'La persona que quiere tomar clases'},
+      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',        d:'Escribe el padre o la madre por su hijo/a'},
+      {v:'coach',  icon:'🏋️', l:'Coach / Entrenador/a', d:'Quiere aprender a enseñar splits — Masterclass'}
     ]
   },
   {
@@ -390,6 +391,7 @@ const STEPS = [
 let state = {}, history = [], visSteps = [], stepIdx = 0;
 
 function getVis(s) {
+  if (s.quien === 'coach') return STEPS.filter(st => st.id === 'quien');
   return STEPS.slice();
 }
 
@@ -427,6 +429,7 @@ function renderStep(idx) {
 function pick(id, val) {
   state[id] = val;
   history.push(stepIdx);
+  if (id === 'quien') visSteps = getVis(state);
   stepIdx++;
   if (stepIdx >= visSteps.length) { show('sc-step',false); buildResult(); show('sc-result',true); window.scrollTo({top:0,behavior:'smooth'}); }
   else renderStep(stepIdx);
@@ -444,7 +447,8 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 
 // ── RECOMMENDATION ────────────────────────────────────
 function getRec() {
-  const {objetivo} = state;
+  const {quien, objetivo} = state;
+  if (quien === 'coach') return 'masterclass';
   if (objetivo==='splits')       return 'powersplit';
   if (objetivo==='arcos')        return 'arcos360';
   if (objetivo==='flexibilidad') return 'ps-a360';
@@ -453,12 +457,13 @@ function getRec() {
 }
 
 const REC = {
-  'powersplit': {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'El curso de splits y apertura de piernas de Cami.'},
-  'arcos360':   {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
-  'ps-a360':    {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
-  'completo':   {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',   color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
-  '1a1':        {icon:'🎯', name:'Clase 1:1 directamente con Cami',        color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
-  'prepa':      {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'}
+  'powersplit':   {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'El curso de splits y apertura de piernas de Cami.'},
+  'arcos360':     {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
+  'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
+  'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',   color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
+  '1a1':          {icon:'🎯', name:'Clase 1:1 directamente con Cami',        color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
+  'prepa':        {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'},
+  'masterclass':  {icon:'🎓', name:'Masterclass Split Sagital',              color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Para coaches y entrenadores. 2h en vivo por Zoom · $59 USD · 30 cupos · 30 ago.'}
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
@@ -467,6 +472,28 @@ function buildMsgs(rec) {
   const isMama = quien==='mama', isNino = edad==='nino';
   const isLima = ubicacion==='lima', isExt = ubicacion==='exterior';
   const steps = [];
+
+  // ── FLUJO COACH / ENTRENADOR ──────────────────────────
+  if (quien === 'coach') {
+    steps.push({who:'team', lbl:'Saludo inicial — Coach',
+      txt:`Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que nos hayas contactado 🤗\n¿Eres coach, entrenador/a o profe de movimiento?`
+    });
+    steps.push({who:'team', lbl:'Presentar la Masterclass',
+      txt:`¡Perfecto! Entonces tengo algo que te va a encantar 🎓\n\nCami Garay está dando una *Masterclass: Domina la Enseñanza del Split Sagital* — 100% en vivo por Zoom.\n\n🦵 Aprenderás su metodología para enseñar splits de forma segura, las progresiones correctas según el nivel de cada alumno, cómo corregir errores técnicos y prevenir lesiones.\n\n📅 30 de agosto · 2 horas en vivo\n💰 $59 USD (precio regular $79)\n🔒 Solo 30 cupos disponibles\n\n¿Te interesa? ✨`
+    });
+    steps.push({who:'team', lbl:'Resolver dudas y cerrar',
+      txt:`Incluye:\n✅ 2 horas de clase en vivo con Cami\n✅ Grabación completa para repasar cuando quieras\n✅ Certificado digital de participación\n✅ Q&A en vivo para tus preguntas\n✅ Acceso a grupo de entrenadores post-clase\n\n¿Te gustaría reservar tu cupo? 🎓`
+    });
+    steps.push({who:'team', lbl:'Datos de pago — Coach',
+      txt:`¡Genial! Para reservar tu cupo:\n\n💳 Precio: $59 USD\n🔗 Puedes pagar por: Tarjeta, PayPal o transferencia\n\nCuando hagas el pago, envíame el comprobante por acá y te confirmo tu cupo de inmediato ✅`,
+      note:'Compartir link de pago correspondiente.'
+    });
+    steps.push({who:'carlos', lbl:'Post-pago — Confirmar cupo',
+      txt:`¡Listo! Cupo confirmado 🎉\nTe llegará el link de Zoom al correo antes del 30 de agosto.\n¡Nos vemos en la Masterclass! 🎓✨`,
+      note:'Verificar: ✅ pago recibido · ✅ email registrado · ✅ link Zoom enviado'
+    });
+    return steps;
+  }
 
   // 1. SALUDO
   steps.push({who:'team', lbl:'Saludo inicial',
