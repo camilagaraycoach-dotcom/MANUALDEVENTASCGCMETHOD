@@ -382,7 +382,8 @@ const STEPS = [
       {v:'splits',        icon:'🦵', l:'Solo splits / apertura de piernas', d:'Quiere abrir más las piernas: split sagital, frontal, elevaciones'},
       {v:'arcos',         icon:'🌙', l:'Solo arcos / flexibilidad de espalda', d:'Quiere mejorar su arco, puente, escorpión o figuras posteriores'},
       {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
-      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'}
+      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'},
+      {v:'1a1',           icon:'🎯', l:'Clase 1:1 directamente con Cami', d:'Quiere atención personalizada — siempre con Cami, no con el equipo'}
     ]
   }
 ];
@@ -449,6 +450,7 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 function getRec() {
   const {quien, objetivo} = state;
   if (quien === 'coach') return 'masterclass';
+  if (objetivo==='1a1')          return '1a1';
   if (objetivo==='splits')       return 'powersplit';
   if (objetivo==='arcos')        return 'arcos360';
   if (objetivo==='flexibilidad') return 'ps-a360';
@@ -495,20 +497,12 @@ function buildMsgs(rec) {
     return steps;
   }
 
-  // 1. SALUDO (el auto-mensaje ya se envió — este es el primer mensaje manual del asesor)
+  // 1. SALUDO MANUAL (el auto-mensaje ya fue enviado y el lead ya respondió con su info)
   steps.push({who:'team', lbl:'Saludo inicial',
     txt: isMama
-      ? `¡Hola! Un gusto 💛 Gracias por escribirnos.\nCon mucho gusto te ayudo a encontrar la mejor opción para tu hijo/a 🤗\n¿Cómo se llaman los dos?`
-      : `¡Hola! Un gusto 💛 Gracias por escribirnos.\nCon mucho gusto te ayudo a encontrar la mejor opción para ti 😊\n¿Cómo te llamas?`,
-    note:'⚡ El mensaje de bienvenida automático ya fue enviado. Este es el primer mensaje manual.'
-  });
-
-  // 2. CONECTAR CON EL LEAD
-  steps.push({who:'team', lbl:'Conectar — responder con su nombre',
-    txt: isMama
-      ? `¡Qué lindo nombre! 💛 Me da mucho gusto.\nYa vi lo que nos contaste — con gusto te ayudo a encontrar la mejor opción para tu hijo/a 🤗`
-      : `¡Qué lindo nombre! 💛 Me da mucho gusto.\nYa vi lo que nos contaste — con gusto te ayudo a encontrar la mejor opción para ti 🤗`,
-    note:'⏳ Esperar que respondan con el nombre antes de continuar.'
+      ? `¡Hola! 💛 Ya vi todo lo que nos compartieron — con mucho gusto les ayudo a encontrar la mejor opción para su hijo/a 🤗`
+      : `¡Hola [nombre]! 💛 Ya vi todo lo que nos contaste — con mucho gusto te ayudo a encontrar la mejor opción para ti 😊`,
+    note:'⚡ El mensaje de bienvenida automático ya fue enviado y el lead ya respondió con su info. Reemplaza [nombre] con el nombre real del lead.'
   });
 
   // 4. PREGUNTAR EXPERIENCIA (copyable)
@@ -663,7 +657,7 @@ function buildResult() {
   const {quien, edad, ubicacion} = state;
   const isLima = ubicacion==='lima', isNino = edad==='nino';
 
-  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo'};
+  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo','1a1':'🎯 Clase 1:1 con Cami'};
 
   const tags = [
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
