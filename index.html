@@ -476,7 +476,7 @@ function buildMsgs(rec) {
   // ── FLUJO COACH / ENTRENADOR ──────────────────────────
   if (quien === 'coach') {
     steps.push({who:'team', lbl:'Saludo inicial — Coach',
-      txt:`Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que nos hayas contactado 🤗\n¿Eres coach, entrenador/a o profe de movimiento?`
+      txt:`¡Hola! Un gusto 💛 Qué bueno que nos escribiste.\nCuéntanos más, ¿en qué área enseñas o entrenas? (gimnasia, danza, acrobacia, stretching, cheer...) 🎓`
     });
     steps.push({who:'team', lbl:'Presentar la Masterclass',
       txt:`¡Perfecto! Entonces tengo algo que te va a encantar 🎓\n\nCami Garay está dando una *Masterclass: Domina la Enseñanza del Split Sagital* — 100% en vivo por Zoom.\n\n🦵 Aprenderás su metodología para enseñar splits de forma segura, las progresiones correctas según el nivel de cada alumno, cómo corregir errores técnicos y prevenir lesiones.\n\n📅 30 de agosto · 2 horas en vivo\n💰 $59 USD (precio regular $79)\n🔒 Solo 30 cupos disponibles\n\n¿Te interesa? ✨`
@@ -495,27 +495,20 @@ function buildMsgs(rec) {
     return steps;
   }
 
-  // 1. SALUDO
+  // 1. SALUDO (el auto-mensaje ya se envió — este es el primer mensaje manual del asesor)
   steps.push({who:'team', lbl:'Saludo inicial',
     txt: isMama
-      ? `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que nos hayas contactado.\nCuéntame un poquito más, ¿qué edad tiene tu hijo/a y qué es lo que busca trabajar? 🤗`
-      : `Holaa 💛 Somos CGC Method ✨\nGracias por escribirnos, me alegra que te hayas comunicado 😊\nCuéntame, ¿qué es lo que estás buscando trabajar? Y dime, ¿de dónde eres? 🌎`
+      ? `¡Hola! Un gusto 💛 Gracias por escribirnos.\nCon mucho gusto te ayudo a encontrar la mejor opción para tu hijo/a 🤗\n¿Cómo se llaman los dos?`
+      : `¡Hola! Un gusto 💛 Gracias por escribirnos.\nCon mucho gusto te ayudo a encontrar la mejor opción para ti 😊\n¿Cómo te llamas?`,
+    note:'⚡ El mensaje de bienvenida automático ya fue enviado. Este es el primer mensaje manual.'
   });
 
-  // 2. PREGUNTAR NOMBRE
-  steps.push({who:'team', lbl:'Preguntar su nombre',
+  // 2. CONECTAR CON EL LEAD
+  steps.push({who:'team', lbl:'Conectar — responder con su nombre',
     txt: isMama
-      ? `¡Qué bueno que nos escribiste! 😊 ¿Cómo se llama tu hijo/a?`
-      : `¡Qué bueno que nos escribiste! 😊 ¿Cómo te llamas?`,
-    note:'⏳ Esperar respuesta antes de continuar.'
-  });
-
-  // 3. CONECTAR CON EL LEAD
-  steps.push({who:'team', lbl:'Conectar — calentar la conversación',
-    txt: isMama
-      ? `¡Qué lindo nombre! 💛 Me da mucho gusto.\nCon gusto te ayudo a encontrar la mejor opción para tu hijo/a 🤗`
-      : `¡Qué lindo nombre! 💛 Me da mucho gusto.\nCon gusto te ayudo a encontrar lo mejor para ti 🤗`,
-    note:'⏳ Esperar respuesta antes de continuar.'
+      ? `¡Qué lindo nombre! 💛 Me da mucho gusto.\nYa vi lo que nos contaste — con gusto te ayudo a encontrar la mejor opción para tu hijo/a 🤗`
+      : `¡Qué lindo nombre! 💛 Me da mucho gusto.\nYa vi lo que nos contaste — con gusto te ayudo a encontrar la mejor opción para ti 🤗`,
+    note:'⏳ Esperar que respondan con el nombre antes de continuar.'
   });
 
   // 4. PREGUNTAR EXPERIENCIA (copyable)
