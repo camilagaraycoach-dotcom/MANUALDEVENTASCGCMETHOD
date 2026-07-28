@@ -502,15 +502,13 @@ function buildMsgs(rec) {
         ? `Y además de las 2 horas en vivo conmigo, también incluye:\n\n📹 Grabación completa — para repasar cada vez que lo necesites\n❓ Q&A en vivo — me preguntas directamente a mí\n🏅 Certificado digital de participación\n👥 Acceso al grupo privado de entrenadores post-clase\n\nLa grabación sola ya vale los $59 — pero el valor real está en poder preguntarme en vivo 🙌\n\n¿Reservamos tu cupo ahora? Los últimos siempre se van rápido 🔥`
         : `Y además de las 2 horas en vivo con Cami, también incluye:\n\n📹 Grabación completa — para repasar cada vez que lo necesites\n❓ Q&A en vivo — le preguntas directamente a Cami\n🏅 Certificado digital de participación\n👥 Acceso al grupo privado de entrenadores post-clase\n\nLa grabación sola ya vale los $59 — pero el valor real está en poder preguntarle a Cami en vivo 🙌\n\n¿Reservamos tu cupo ahora? Los últimos siempre se van rápido 🔥`
     });
-    steps.push({who:tw, lbl:'Datos de pago — Coach',
-      txt:`¡Perfecto! El pago es súper simple 💛\n\n💳 $59 USD · Tarjeta, PayPal o transferencia\n🔗 Te envío el link ahora mismo para que lo hagas en 2 minutos\n\nEn cuanto me confirmes el comprobante, te reservo el cupo de inmediato ✅`,
-      note:'Enviar link de pago justo después de este mensaje.'
+    steps.push({who:tw, lbl:'Enviar link de pago',
+      txt:`¡Perfecto! Acá te dejo el link de pago para que reserves tu cupo ahora 💛\n\n💳 https://express.culqi.com/pago/72CA8CA83C\n\nSon $59 USD · acepta tarjeta de débito o crédito · se hace en 2 minutos ✅\n\nEn cuanto me confirmes el comprobante, te envío los siguientes pasos 🙌`,
+      note:'Enviar este mensaje y esperar la confirmación del pago.'
     });
-    steps.push({who: isCami ? 'cami' : 'carlos', lbl:'Post-pago — Confirmar cupo',
-      txt: isCami
-        ? `¡Cupo confirmado! 🎉🎓\nYa eres parte de mi Masterclass.\n\nTe llegará el link de Zoom al correo antes del 30 de agosto.\n¡Nos vemos ahí — va a ser increíble trabajar juntos! 💛✨`
-        : `¡Cupo confirmado! 🎉🎓\nYa eres parte de la Masterclass con Cami.\n\nTe llegará el link de Zoom al correo antes del 30 de agosto.\n¡Nos vemos ahí — va a ser increíble! 💛✨`,
-      note:'Verificar: ✅ pago recibido · ✅ email registrado · ✅ link Zoom enviado'
+    steps.push({who: isCami ? 'cami' : 'carlos', lbl:'Post-pago — Confirmar e instrucciones',
+      txt: `¡Cupo confirmado! 🎉🎓 Ya eres parte de la Masterclass.\n\nAhora hay dos pasos importantes para que todo quede listo:\n\n1️⃣ Únete al grupo oficial de WhatsApp\n👉 chat.whatsapp.com/IuTou6kJygEKUPML9YN0DJ\nAhí es donde te enviaremos el link de Zoom antes de la clase. Si no te unes al grupo, no podrás recibir el acceso.\n\n2️⃣ Completa el formulario de inscripción\n👉 forms.gle/4WEgxDVqHHXPNreD7\nNos ayuda a preparar mejor la clase y a enviarte tu certificado de participación.\n\nTu inscripción también incluye la grabación de la clase (por si no puedes conectarte en vivo) y tu certificado al finalizar 💛\n\n¡Nos vemos el 30 de agosto! ✨`,
+      note:'Verificar: ✅ pago recibido · ✅ unido al grupo de WA · ✅ forms completado · ✅ link Zoom enviado antes del 30 ago'
     });
     return steps;
   }
