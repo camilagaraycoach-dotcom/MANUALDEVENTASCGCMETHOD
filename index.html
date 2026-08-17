@@ -391,6 +391,7 @@ const STEPS = [
       {v:'arcos',         icon:'🌙', l:'Solo arcos / flexibilidad de espalda', d:'Quiere mejorar su arco, puente, escorpión o figuras posteriores'},
       {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
       {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'},
+      {v:'acrobases',     icon:'🤸', l:'Aprender acrobacias', d:'Parada de manos, rueda de carro, rodamientos — base acrobática'},
       {v:'1a1',           icon:'🎯', l:'Clase 1:1 directamente con Cami', d:'Quiere atención personalizada — siempre con Cami, no con el equipo'}
     ]
   }
@@ -459,6 +460,7 @@ function getRec() {
   const {quien, objetivo} = state;
   if (quien === 'coach') return 'masterclass';
   if (objetivo==='1a1')          return '1a1';
+  if (objetivo==='acrobases')    return 'acrobases';
   if (objetivo==='splits')       return 'powersplit';
   if (objetivo==='arcos')        return 'arcos360';
   if (objetivo==='flexibilidad') return 'ps-a360';
@@ -472,6 +474,7 @@ const REC = {
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',   color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
   '1a1':          {icon:'🎯', name:'Clase 1:1 directamente con Cami',        color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Trabajo personalizado. Las 1:1 son siempre con Cami, no con el equipo.'},
+  'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'},
   'prepa':        {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'},
   'masterclass':  {icon:'🎓', name:'Masterclass Split Sagital',              color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Para coaches y entrenadores. 2h en vivo por Zoom · $59 USD · 30 cupos · 30 ago.'}
 };
@@ -577,6 +580,13 @@ function buildMsgs(rec) {
   else if (rec==='completo') recTxt = isMama
     ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
     : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo y con un solo paquete accedés a los 3 cursos ✨`;
+  else if (rec==='acrobases') recTxt = isCami
+    ? (isMama
+        ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
+        : `Por lo que me cuentas, te recomendaría ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que tu cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`)
+    : (isMama
+        ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
+        : `Por lo que me cuentas, te recomendaría ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
   else if (rec==='prepa') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 ${isCami ? 'Es mi programa' : 'Es el programa'} de fuerza funcional y base acrobática. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento ✨`
     : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 ${isCami ? 'Es mi programa' : 'Es el programa'} de fuerza funcional y base acrobática. Trabaja exactamente la condición que necesitás para avanzar en tu disciplina ✨`;
@@ -696,7 +706,7 @@ function buildResult() {
   const {quien, edad, ubicacion} = state;
   const isLima = ubicacion==='lima', isNino = edad==='nino';
 
-  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo','1a1':'🎯 Clase 1:1 con Cami'};
+  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo',acrobases:'🤸 Acrobacias','1a1':'🎯 Clase 1:1 con Cami'};
 
   const modoTag = state.modo==='cami' ? '⭐ Responde Cami' : '💬 Responde equipo';
   const tags = [
