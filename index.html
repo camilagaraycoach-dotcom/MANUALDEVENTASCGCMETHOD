@@ -590,27 +590,48 @@ function buildMsgs(rec) {
   else if (rec==='prepa') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 ${isCami ? 'Es mi programa' : 'Es el programa'} de fuerza funcional y base acrobática. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento ✨`
     : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 ${isCami ? 'Es mi programa' : 'Es el programa'} de fuerza funcional y base acrobática. Trabaja exactamente la condición que necesitás para avanzar en tu disciplina ✨`;
-  else if (rec==='1a1') recTxt = isCami
-    ? (isMama
-        ? `Por lo que me cuentas, para el objetivo de tu hijo/a lo mejor sería una clase 1:1 conmigo directamente 💛\n\nA diferencia de las grupales, las 1:1 son siempre conmigo — puedo verle, corregirle según su nivel y darle ejercicios exactos según su meta 🎯`
-        : `Por lo que me cuentas, en tu caso te recomendaría una clase 1:1 conmigo directamente 💛\n\nA diferencia de las grupales, las 1:1 son siempre conmigo. Puedo verte, corregirte según tu nivel y darte ejercicios exactos según tu meta 🎯`)
-    : (isMama
-        ? `Por lo que me cuentas, para el objetivo de tu hijo/a lo mejor sería una clase 1:1 directamente con Cami 💛\n\nA diferencia de las grupales, las 1:1 son siempre con Cami. Puede verle directamente, corregirle según su nivel y darle ejercicios exactos según su meta 🎯`
-        : `Por lo que me cuentas, en tu caso te recomendaría una clase 1:1 directamente con Cami 💛\n\nA diferencia de las grupales, las 1:1 son siempre con Cami. Puede verte, corregirte según tu nivel y darte ejercicios exactos según tu meta 🎯`);
+  else if (rec==='1a1') recTxt = isMama
+    ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
+    : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
-  steps.push({who: rec==='1a1'||isCami ? 'cami' : 'team', lbl:'Recomendar curso', txt:recTxt,
-    note: rec==='1a1' && !isCami ? 'Este paso siempre lo hace Cami, no el equipo.' : null});
+  steps.push({who:tw, lbl:'Presentar clases 1:1 y coaches', txt:recTxt,
+    note:'⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.'});
+
+  // BRANCH — elegir coach 1:1
+  steps.push({
+    type:'branch3',
+    lbl:'¿Qué coach le recomendás?',
+    note:'Elige según lo que respondió el lead 👇',
+    opts:[
+      {
+        key:'cami', label:'⭐ Cami ($60)',
+        sublbl:'Splits, arcos, acrobacias, danza — todo',
+        txt: isMama
+          ? `¡Perfecto! En ese caso te recomendaría una clase directamente con *Cami Garay* 💛\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarle a tu hijo/a un plan exacto según su objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría reservar su primera clase? 🎯`
+          : `¡Perfecto! En ese caso te recomendaría una clase directamente con *Cami Garay* 💛\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarte un plan exacto según tu objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría reservar tu primera clase? 🎯`
+      },
+      {
+        key:'andrea', label:'💃 Andrea ($35)',
+        sublbl:'Gimnasia, acrobacias, trucos de danza',
+        txt: isMama
+          ? `¡Perfecto! Para ese objetivo te recomendaría a *Andrea* 💛\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Muy paciente con los niños — sabe exactamente cómo guiarlos paso a paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nTodas las coaches están formadas por Cami y siguen el mismo método CGC.\n\n¿Te gustaría reservar la primera clase con Andrea? 🎯`
+          : `¡Perfecto! Para ese objetivo te recomendaría a *Andrea* 💛\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Directa y cercana — te hace sentir acompañada en cada paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formada por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar tu primera clase con Andrea? 🎯`
+      },
+      {
+        key:'sebastian', label:'🩰 Sebastián ($35)',
+        sublbl:'Flexibilidad y técnica de danza',
+        txt: isMama
+          ? `¡Perfecto! Para ese objetivo te recomendaría a *Sebastián* 💛\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — le explica a tu hijo/a el porqué de cada movimiento para que entienda su cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar la primera clase con Sebastián? 🎯`
+          : `¡Perfecto! Para ese objetivo te recomendaría a *Sebastián* 💛\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — te explica el porqué de cada movimiento para que entiendas tu cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar tu primera clase con Sebastián? 🎯`
+      }
+    ]
+  });
 
   // 4. VIDEO + IMÁGENES DE VALOR (después de la recomendación)
   if (rec === '1a1') {
-    const vidTxt = isCami
-      ? (isLima
-          ? `Acá te comparto el video de mis clases 1:1 presenciales en Acroflex para que veas cómo trabajo directamente con cada alumno/a 💛🎥`
-          : `Acá te comparto el video de mis clases 1:1 virtuales por Zoom para que veas cómo trabajo directamente con cada alumno/a 💛🎥`)
-      : (isLima
-          ? `Acá te comparto el video de las clases 1:1 presenciales en Acroflex para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`
-          : `Acá te comparto el video de las clases 1:1 virtuales por Zoom para que veas cómo Cami trabaja directamente con cada alumno/a 💛🎥`);
-    steps.push({who:'cami', lbl:'Enviar video 1:1', txt:vidTxt, attach:true});
+    steps.push({who:tw, lbl:'Enviar video 1:1', attach:true,
+      txt:`Acá te comparto el video de las clases 1:1 para que veas cómo trabajamos directamente con cada alumno/a 💛🎥`,
+      attachNote:'📎 Adjuntar: video de clases 1:1'});
   } else {
     steps.push({who:tw, lbl:'Mensaje + video de venta',
       txt:`Te envío un video para que veas cómo funciona y todo lo que incluye cada paquete de clases 💛🎥`,
@@ -627,10 +648,8 @@ function buildMsgs(rec) {
 
   // 5. FOTOS DE HORARIOS + PRECIOS (grupales) | valores escritos (1:1)
   if (rec==='1a1') {
-    const valTxt = isCami
-      ? `Tengo clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min conmigo)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`
-      : `Tenemos clases sueltas y planes más completos para seguimiento constante ✨\n\n📌 Sesión suelta: $60 USD (60 min con Cami)\n⭐ CGC ELITE Standard: $350 USD → 8 clases en vivo + 2 grabadas + 2 informes\n💎 CGC ELITE Premium: $500 USD → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Cuál se ajusta más a lo que buscas?`;
-    steps.push({who:'cami', lbl:'Enviar valores 1:1', txt:valTxt});
+    const valTxt = `Tenemos dos opciones según el seguimiento que quieras 💛\n\n*Clases sueltas (sin compromiso):*\n⭐ Con Cami → $60 USD / clase\n💃 Con Andrea o Sebastián → $35 USD / clase\n\n*Paquetes CGC ELITE (con seguimiento):*\n📋 Standard → 8 clases en vivo + 2 grabadas + 2 informes\n💎 Premium → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Quieres que te comparta los precios de los paquetes según el coach que elijas?`;
+    steps.push({who:tw, lbl:'Enviar opciones y valores 1:1', txt:valTxt});
   } else {
     const horImgs = (isLima || !isExt)
       ? ['img/hor-peru.webp']
@@ -736,7 +755,8 @@ function buildResult() {
       : '<span class="msg-who who-team">💬 Equipo CGC</span>';
 
     let body = '';
-    if (s.type === 'branch') {
+    if (s.type === 'branch' || s.type === 'branch3') {
+      const keys = s.opts.map(o => o.key);
       const optsHtml = s.opts.map(o => {
         const mi = storeMsg(o.txt);
         return `<div class="branch-opt" id="branch-${i}-${o.key}" style="display:none">
@@ -746,9 +766,12 @@ function buildResult() {
         </div>`;
       }).join('');
       const btnsHtml = s.opts.map(o =>
-        `<button class="branch-btn" id="branchbtn-${i}-${o.key}" onclick="selectBranch(${i},'${o.key}')">${o.label}</button>`
+        `<button class="branch-btn" id="branchbtn-${i}-${o.key}" onclick="selectBranch(${i},${JSON.stringify(keys)},'${o.key}')">
+          ${o.label}${o.sublbl ? `<span style="display:block;font-size:10px;font-weight:400;opacity:.75;margin-top:2px">${o.sublbl}</span>` : ''}
+        </button>`
       ).join('');
-      body = `<div class="branch-q">¿Cómo respondió el lead?</div><div class="branch-btns">${btnsHtml}</div>${optsHtml}`;
+      const qLabel = s.note ? `<div class="branch-q">${esc(s.lbl)}</div><div class="msg-note" style="margin-bottom:8px">⚠️ ${esc(s.note)}</div>` : `<div class="branch-q">${esc(s.lbl)}</div>`;
+      body = `${qLabel}<div class="branch-btns">${btnsHtml}</div>${optsHtml}`;
     } else if (s.isAction) {
       const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
@@ -804,8 +827,8 @@ function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
 }
 
-function selectBranch(idx, key) {
-  ['si','no'].forEach(k => {
+function selectBranch(idx, keys, key) {
+  keys.forEach(k => {
     const opt = document.getElementById(`branch-${idx}-${k}`);
     const btn = document.getElementById(`branchbtn-${idx}-${k}`);
     if (opt) opt.style.display = k===key ? '' : 'none';
