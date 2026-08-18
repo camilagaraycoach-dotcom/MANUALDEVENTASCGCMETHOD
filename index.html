@@ -798,6 +798,9 @@ function buildResult() {
   }).join('');
 
   document.getElementById('sc-result').innerHTML = `
+    <div style="margin-bottom:12px">
+      <button class="btn-back-result" onclick="goBackFromResult()">← Volver</button>
+    </div>
     <div class="res-profile">
       <div class="res-profile-icon">${quien==='mama'?'👩‍👧':'🙋'}</div>
       <div><div class="res-profile-lbl">Perfil del lead</div><div class="res-tags">${tags}</div></div>
