@@ -118,8 +118,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .copy-btn.ok{background:var(--green)}
 .msg-attach{font-size:12px;color:#888;font-style:italic;border-top:1px dashed var(--border);padding:8px 15px;display:flex;align-items:center;gap:5px}
 .res-actions{text-align:center;margin-top:22px;padding-bottom:40px}
+.res-actions{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
 .btn-restart{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:15px 36px;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.45);transition:box-shadow .15s,opacity .15s;letter-spacing:.3px;white-space:nowrap}
 .btn-restart:hover{box-shadow:0 8px 32px rgba(232,48,42,.6);opacity:.93}
+.btn-back-result{background:var(--gray-light);color:var(--gray);border:none;border-radius:50px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.btn-back-result:hover{opacity:.75}
 .res-actions{height:0;overflow:hidden}
 
 /* PRICING DRAWER */
@@ -811,8 +814,20 @@ function buildResult() {
     <div class="msgs-title">Guión de mensajes en orden →</div>
     ${stepsHtml}
     <div class="res-actions">
+      <button class="btn-back-result" onclick="goBackFromResult()">← Volver</button>
       <button class="btn-restart" onclick="restart()">➕ Nueva asesoría</button>
     </div>`;
+}
+
+function goBackFromResult() {
+  show('sc-result',false);
+  document.getElementById('sc-result').innerHTML='';
+  stepIdx = history.pop();
+  delete state[visSteps[stepIdx].id];
+  visSteps = getVis(state);
+  show('sc-step',true);
+  renderStep(stepIdx);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function restart() {
