@@ -651,7 +651,7 @@ function buildMsgs(rec) {
 
   // 5. FOTOS DE HORARIOS + PRECIOS (grupales) | valores escritos (1:1)
   if (rec==='1a1') {
-    const valTxt = `Tenemos dos opciones según el seguimiento que quieras 💛\n\n*Clases sueltas (sin compromiso):*\n⭐ Con Cami → $60 USD / clase\n💃 Con Andrea o Sebastián → $35 USD / clase\n\n*Paquetes CGC ELITE (con seguimiento):*\n📋 Standard → 8 clases en vivo + 2 grabadas + 2 informes\n💎 Premium → 8 clases en vivo + 4 grabadas + 4 informes\n\n¿Quieres que te comparta los precios de los paquetes según el coach que elijas?`;
+    const valTxt = `Tenemos clases sueltas (sin compromiso) 💛\n\n⭐ Con Cami → $60 USD / clase\n💃 Con Andrea o Sebastián → $35 USD / clase\n\n¿Con cuál coach te gustaría empezar?`;
     steps.push({who:tw, lbl:'Enviar opciones y valores 1:1', txt:valTxt});
   } else {
     const horImgs = (isLima || !isExt)
