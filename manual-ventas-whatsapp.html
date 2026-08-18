@@ -395,7 +395,7 @@ const STEPS = [
       {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
       {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'},
       {v:'acrobases',     icon:'🤸', l:'Aprender acrobacias', d:'Parada de manos, rueda de carro, rodamientos — base acrobática'},
-      {v:'1a1',           icon:'🎯', l:'Clase 1:1 directamente con Cami', d:'Quiere atención personalizada — siempre con Cami, no con el equipo'}
+      {v:'1a1',           icon:'🎯', l:'Clases 1:1 (Cami, Andrea o Sebastián)', d:'Quiere atención personalizada con un coach'}
     ]
   }
 ];
@@ -728,7 +728,7 @@ function buildResult() {
   const {quien, edad, ubicacion} = state;
   const isLima = ubicacion==='lima', isNino = edad==='nino';
 
-  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo',acrobases:'🤸 Acrobacias','1a1':'🎯 Clase 1:1 con Cami'};
+  const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo',acrobases:'🤸 Acrobacias','1a1':'🎯 Clases 1:1'};
 
   const modoTag = state.modo==='cami' ? '⭐ Responde Cami' : '💬 Responde equipo';
   const tags = [
