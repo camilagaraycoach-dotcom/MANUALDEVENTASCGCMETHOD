@@ -496,8 +496,9 @@ function buildMsgs(rec) {
     });
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye al inscribirte?',
       txt:'',
-      note:'📸 Enviar la imagen "¿Qué incluye al inscribirte?" (la que muestra: 2 horas en vivo · Certificación · Espacio de preguntas · Grabación permanente). Tenés que tenerla guardada en tu celular desde Instagram o WhatsApp.',
-      imgOnly: true
+      note:'📸 Mantené presionada la imagen para guardarla o compartirla directamente por WhatsApp.',
+      imgOnly: true,
+      img: 'img/img-incluye-certificacion.png'
     });
     steps.push({who:tw, lbl:'Cerrar — beneficios y CTA',
       txt: isCami
@@ -775,7 +776,8 @@ function buildResult() {
       const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
     } else if (s.imgOnly) {
-      body = `<div class="msg-note" style="font-size:14px;padding:14px;">📸 ${esc(s.note)}</div>`;
+      const imgHtml = s.img ? `<div style="margin:12px 0;text-align:center"><img src="${s.img}" alt="Imagen para enviar" style="max-width:100%;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer" onclick="window.open('${s.img}','_blank')" /></div>` : '';
+      body = `${imgHtml}<div class="msg-note" style="font-size:14px;padding:14px;">📸 ${esc(s.note)}</div>`;
     } else {
       const mi = storeMsg(s.txt);
       body = `<div class="msg-txt">${esc(s.txt)}</div>`;
