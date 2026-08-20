@@ -494,7 +494,12 @@ function buildMsgs(rec) {
         ? `Por eso creé esta formación 👇\n\n🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nTe enseño exactamente cómo:\n🔍 Evaluar la flexibilidad real de cada alumno\n📊 Identificar qué necesita trabajar cada cuerpo\n↔️ Elegir la progresión correcta sin adivinar\n⚠️ Corregir los errores técnicos más comunes\n🛡️ Proteger caderas y evitar lesiones\n\n📅 Domingo 30 de agosto · 10:00 a.m.–12:00 p.m. (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 ~~$59 USD~~ → *$39 USD solo por hoy* 🔥\n🔒 Cupos limitados`
         : `Por eso Cami creó esta formación 👇\n\n🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nVas a aprender exactamente cómo:\n🔍 Evaluar la flexibilidad real de cada alumno\n📊 Identificar qué necesita trabajar cada cuerpo\n↔️ Elegir la progresión correcta sin adivinar\n⚠️ Corregir los errores técnicos más comunes\n🛡️ Proteger caderas y evitar lesiones\n\n📅 Domingo 30 de agosto · 10:00 a.m.–12:00 p.m. (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 ~~$59 USD~~ → *$39 USD solo por hoy* 🔥\n🔒 Cupos limitados`
     });
-    steps.push({who:tw, lbl:'Cerrar — beneficios extra y CTA',
+    steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye al inscribirte?',
+      txt:'',
+      note:'📸 Enviar la imagen "¿Qué incluye al inscribirte?" (la que muestra: 2 horas en vivo · Certificación · Espacio de preguntas · Grabación permanente). Tenés que tenerla guardada en tu celular desde Instagram o WhatsApp.',
+      imgOnly: true
+    });
+    steps.push({who:tw, lbl:'Cerrar — beneficios y CTA',
       txt: isCami
         ? `Y aparte de las 2 horas de formación en vivo conmigo, también incluye:\n\n📹 *Grabación completa* — para repasar cada vez que entrenes a un alumno nuevo\n❓ *Q&A en vivo* — me preguntas directamente lo que necesites\n🏅 *Certificado digital* — que acredita tu formación\n\nTodo eso por $39 USD — y solo por hoy 🔥\n\nLos cupos se llenan rápido porque es un grupo pequeño para que puedas preguntar de verdad.\n¿Te animas? ¿Lo reservamos ahora? 🎯`
         : `Y aparte de las 2 horas de formación en vivo con Cami, también incluye:\n\n📹 *Grabación completa* — para repasar cada vez que entrenes a un alumno nuevo\n❓ *Q&A en vivo* — le preguntas directamente a Cami lo que necesites\n🏅 *Certificado digital* — que acredita tu formación\n\nTodo eso por $39 USD — y solo por hoy 🔥\n\nLos cupos se llenan rápido porque es un grupo pequeño para que puedas preguntar de verdad.\n¿Te animas? ¿Lo reservamos ahora? 🎯`
@@ -769,6 +774,8 @@ function buildResult() {
     } else if (s.isAction) {
       const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
+    } else if (s.imgOnly) {
+      body = `<div class="msg-note" style="font-size:14px;padding:14px;">📸 ${esc(s.note)}</div>`;
     } else {
       const mi = storeMsg(s.txt);
       body = `<div class="msg-txt">${esc(s.txt)}</div>`;
