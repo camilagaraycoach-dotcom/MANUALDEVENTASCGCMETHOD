@@ -766,7 +766,7 @@ function buildResult() {
         </div>`;
       }).join('');
       const btnsHtml = s.opts.map(o =>
-        `<button class="branch-btn" id="branchbtn-${i}-${o.key}" onclick="selectBranch(${i},${JSON.stringify(keys)},'${o.key}')">
+        `<button class="branch-btn" id="branchbtn-${i}-${o.key}" onclick="selectBranch(${i},${JSON.stringify(keys).replace(/"/g,"'")},'${o.key}')">
           ${o.label}${o.sublbl ? `<span style="display:block;font-size:10px;font-weight:400;opacity:.75;margin-top:2px">${o.sublbl}</span>` : ''}
         </button>`
       ).join('');
@@ -798,9 +798,6 @@ function buildResult() {
   }).join('');
 
   document.getElementById('sc-result').innerHTML = `
-    <div style="margin-bottom:12px">
-      <button class="btn-back-result" onclick="goBackFromResult()">← Volver</button>
-    </div>
     <div class="res-profile">
       <div class="res-profile-icon">${quien==='mama'?'👩‍👧':'🙋'}</div>
       <div><div class="res-profile-lbl">Perfil del lead</div><div class="res-tags">${tags}</div></div>
