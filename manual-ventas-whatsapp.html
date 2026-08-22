@@ -639,6 +639,14 @@ function buildMsgs(rec) {
       action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.png']});
     steps.push({who:tw, lbl:'Enviar imagen — Resultados Reales', isAction:true,
       action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
+    steps.push({who:tw, lbl:'Resumen del paquete',
+      txt: isCami
+        ? `En resumen, con el paquete tenés:\n\n📹 Clases en vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabaciones de todas tus clases\n📚 Acceso a los 3 cursos según tu objetivo (splits, arcos o acrobacias)\n📊 Seguimiento de tu progreso clase a clase\n\nTodo desde casa, con guía real. 💛`
+        : `En resumen, con el paquete tenés:\n\n📹 Clases en vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabaciones de todas tus clases\n📚 Acceso a los 3 cursos según tu objetivo (splits, arcos o acrobacias)\n📊 Seguimiento del progreso clase a clase\n\nTodo desde casa, con guía real. 💛`});
+    steps.push({who:tw, lbl:'Preguntar horarios y valores',
+      txt: isCami
+        ? `¿Te gustaría que te comparta los horarios disponibles y los valores? 💛`
+        : `¿Te gustaría que te compartamos los horarios disponibles y los valores? 💛`});
   } else {
     steps.push({who:tw, lbl:'Mensaje — envío imágenes',
       txt: isCami
