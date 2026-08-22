@@ -633,9 +633,10 @@ function buildMsgs(rec) {
       txt:`Acá te comparto el video de las clases 1:1 para que veas cómo trabajamos directamente con cada alumno/a 💛🎥`,
       attachNote:'📎 Adjuntar: video de clases 1:1'});
   } else {
-    steps.push({who:tw, lbl:'Mensaje + video de venta',
-      txt:`Te envío un video para que veas cómo funciona y todo lo que incluye cada paquete de clases 💛🎥`,
-      attach:true, attachNote:'📎 Adjuntar: VIDEO DE VENTA COMPRIMIDO.mp4'});
+    steps.push({who:tw, lbl:'Mensaje — envío imágenes',
+      txt: isCami
+        ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`
+        : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`});
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
       action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.png']});
     steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
