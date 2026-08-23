@@ -483,16 +483,23 @@ function buildMsgs(rec) {
         : `¡Hola! Un gusto 💛 Qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`,
       note:'⏳ Esperar la respuesta antes de presentar la certificación.'
     });
-    steps.push({who:tw, lbl:'Conectar con su área — el problema',
-      note:'⚡ Cambia [su área] por lo que te dijo que enseña (ej: "en la danza", "en la gimnasia", "en el cheer").',
+    steps.push({who:tw, lbl:'Conectar con el problema — esperar respuesta',
+      note:'⚡ Cambia [su área] por lo que te dijo que enseña (ej: "en la danza", "en la gimnasia", "en el cheer"). ⏳ Enviar y esperar que respondan antes de continuar.',
       txt: isCami
-        ? `Qué bueno, en [su área] el split es una habilidad clave — y tus alumnos lo saben 💪\n\nPero hay algo que nadie te enseña en los cursos de entrenamiento:\n*Cómo llevar a alguien al split de forma segura, aunque su cuerpo sea completamente diferente al tuyo.*\n\nCada alumno es diferente. Y sin la metodología correcta, puedes tener alumnos que se estancan, se frustran… o peor, se lastiman.`
-        : `Qué bueno, en [su área] el split es una habilidad clave — y sus alumnos lo saben 💪\n\nPero hay algo que nadie enseña en los cursos de entrenamiento:\n*Cómo llevar a alguien al split de forma segura, aunque su cuerpo sea completamente diferente al tuyo.*\n\nCada alumno es diferente. Y sin la metodología correcta, pueden estancarse, frustrarse… o peor, lastimarse.`
+        ? `Qué bueno, en [su área] el split es lo que todos tus alumnos quieren lograr.\n\nY hay algo que casi ningún curso de entrenador enseña: *cómo llevar a un cuerpo diferente al tuyo hasta el split, sin que se lastime en el proceso.*\n\n¿Te ha pasado tener alumnos que llevan meses entrenando y no avanzan? 👀`
+        : `Qué bueno, en [su área] el split es lo que todos los alumnos quieren lograr.\n\nY hay algo que casi ningún curso de entrenador enseña: *cómo llevar a un cuerpo diferente al propio hasta el split, sin que se lastime en el proceso.*\n\n¿Le ha pasado tener alumnos que llevan meses entrenando y no avanzan? 👀`
     });
-    steps.push({who:tw, lbl:'Presentar la Certificación',
+    steps.push({who:tw, lbl:'Micro-compromiso — esperar "sí"',
+      note:'⏳ Enviar solo cuando respondan. Esperar que digan "sí" o "contame" antes del siguiente mensaje.',
       txt: isCami
-        ? `Por eso creé esta formación 👇\n\n🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nTe enseño exactamente cómo:\n🔍 Evaluar la flexibilidad real de cada alumno\n📊 Identificar qué necesita trabajar cada cuerpo\n↔️ Elegir la progresión correcta sin adivinar\n⚠️ Corregir los errores técnicos más comunes\n🛡️ Proteger caderas y evitar lesiones\n\n📅 Domingo 30 de agosto · 10:00 a.m.–12:00 p.m. (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 ~~$59 USD~~ → *$39 USD solo por hoy* 🔥\n🔒 Cupos limitados`
-        : `Por eso Cami creó esta formación 👇\n\n🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nVas a aprender exactamente cómo:\n🔍 Evaluar la flexibilidad real de cada alumno\n📊 Identificar qué necesita trabajar cada cuerpo\n↔️ Elegir la progresión correcta sin adivinar\n⚠️ Corregir los errores técnicos más comunes\n🛡️ Proteger caderas y evitar lesiones\n\n📅 Domingo 30 de agosto · 10:00 a.m.–12:00 p.m. (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 ~~$59 USD~~ → *$39 USD solo por hoy* 🔥\n🔒 Cupos limitados`
+        ? `Exacto, es lo más común — y tiene solución 💛\n\nJustamente creé algo específico para eso. ¿Querés que te cuente de qué se trata?`
+        : `Exacto, es lo más común — y tiene solución 💛\n\nJustamente Cami creó algo específico para eso. ¿Querés que te cuente de qué se trata?`
+    });
+    steps.push({who:tw, lbl:'Presentar la Certificación — versión corta',
+      note:'✅ Enviar solo después de que digan "sí". Mensaje corto y directo.',
+      txt: isCami
+        ? `🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nFormación en vivo conmigo — 2 horas para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n\n📅 Domingo 30 de agosto · 10am–12pm (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 *$39 USD* · cupos limitados 🔒`
+        : `🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nFormación en vivo con Cami — 2 horas para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n\n📅 Domingo 30 de agosto · 10am–12pm (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 *$39 USD* · cupos limitados 🔒`
     });
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye al inscribirte?',
       txt:'',
@@ -500,10 +507,11 @@ function buildMsgs(rec) {
       imgOnly: true,
       img: 'img/img-incluye-certificacion.png'
     });
-    steps.push({who:tw, lbl:'Cerrar — beneficios y CTA',
+    steps.push({who:tw, lbl:'Cerrar — directo, sin repetir',
+      note:'💡 No repetir beneficios. Solo confirmar lo extra y preguntar directamente.',
       txt: isCami
-        ? `Y aparte de las 2 horas de formación en vivo conmigo, también incluye:\n\n📹 *Grabación completa* — para repasar cada vez que entrenes a un alumno nuevo\n❓ *Q&A en vivo* — me preguntas directamente lo que necesites\n🏅 *Certificado digital* — que acredita tu formación\n\nTodo eso por $39 USD — y solo por hoy 🔥\n\nLos cupos se llenan rápido porque es un grupo pequeño para que puedas preguntar de verdad.\n¿Te animas? ¿Lo reservamos ahora? 🎯`
-        : `Y aparte de las 2 horas de formación en vivo con Cami, también incluye:\n\n📹 *Grabación completa* — para repasar cada vez que entrenes a un alumno nuevo\n❓ *Q&A en vivo* — le preguntas directamente a Cami lo que necesites\n🏅 *Certificado digital* — que acredita tu formación\n\nTodo eso por $39 USD — y solo por hoy 🔥\n\nLos cupos se llenan rápido porque es un grupo pequeño para que puedas preguntar de verdad.\n¿Te animas? ¿Lo reservamos ahora? 🎯`
+        ? `También incluye la grabación completa y tu certificado digital 💛\n\n¿Lo reservamos ahora? Te paso el link directo 🎯`
+        : `También incluye la grabación completa y el certificado digital 💛\n\n¿Lo reservamos ahora? Le paso el link directo 🎯`
     });
     steps.push({who:tw, lbl:'Enviar link de pago',
       txt:`¡Perfecto! Acá te dejo el link de pago para que reserves tu cupo ahora 💛\n\n💳 https://express.culqi.com/pago/9A651A2CA4\n\nSon $39 USD (precio especial solo por hoy) · acepta tarjeta de débito o crédito · se hace en 2 minutos ✅\n\nEn cuanto me confirmes el comprobante, te envío los siguientes pasos 🙌`,
