@@ -491,8 +491,8 @@ function buildMsgs(rec) {
     steps.push({who:tw, lbl:'Micro-compromiso — esperar "sí"',
       note:'⏳ Enviar solo cuando respondan. Esperar que digan "sí" o "contame" antes del siguiente mensaje.',
       txt: isCami
-        ? `Exacto, es lo más común — y tiene solución 💛\n\nJustamente creé algo específico para eso. ¿Querés que te cuente de qué se trata?`
-        : `Exacto, es lo más común — y tiene solución 💛\n\nJustamente Cami creó algo específico para eso. ¿Querés que te cuente de qué se trata?`
+        ? `Exacto, es lo más común — y tiene solución 💛\n\nJustamente creé algo específico para eso. ¿Quieres que te cuente de qué se trata?`
+        : `Exacto, es lo más común — y tiene solución 💛\n\nJustamente Cami creó algo específico para eso. ¿Quieres que te cuente de qué se trata?`
     });
     steps.push({who:tw, lbl:'Presentar la Certificación — versión corta',
       note:'✅ Enviar solo después de que digan "sí". Mensaje corto y directo.',
@@ -586,7 +586,7 @@ function buildMsgs(rec) {
     : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='completo') recTxt = isMama
     ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
-    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo y con un solo paquete accedés a los 3 cursos ✨`;
+    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo y con un solo paquete accedes a los 3 cursos ✨`;
   else if (rec==='acrobases') recTxt = isCami
     ? (isMama
         ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
@@ -604,7 +604,7 @@ function buildMsgs(rec) {
   // BRANCH — elegir coach 1:1
   steps.push({
     type:'branch3',
-    lbl:'¿Qué coach le recomendás?',
+    lbl:'¿Qué coach le recomiendas?',
     note:'Elige según lo que respondió el lead 👇',
     opts:[
       {
@@ -645,8 +645,8 @@ function buildMsgs(rec) {
       action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
     steps.push({who:tw, lbl:'Resumen del paquete',
       txt: isCami
-        ? `En resumen, con el paquete tenés:\n\n📹 Clases en vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabaciones de todas tus clases\n📚 Acceso a los 3 cursos según tu objetivo (splits, arcos o acrobacias)\n📊 Seguimiento de tu progreso clase a clase\n\nTodo desde casa, con guía real. 💛`
-        : `En resumen, con el paquete tenés:\n\n📹 Clases en vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabaciones de todas tus clases\n📚 Acceso a los 3 cursos según tu objetivo (splits, arcos o acrobacias)\n📊 Seguimiento del progreso clase a clase\n\nTodo desde casa, con guía real. 💛`});
+        ? `En resumen, con el paquete tienes:\n\n📹 Clases en vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabaciones de todas tus clases\n📚 Acceso a los 3 cursos según tu objetivo (splits, arcos o acrobacias)\n📊 Seguimiento de tu progreso clase a clase\n\nTodo desde casa, con guía real. 💛`
+        : `En resumen, con el paquete tienes:\n\n📹 Clases en vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabaciones de todas tus clases\n📚 Acceso a los 3 cursos según tu objetivo (splits, arcos o acrobacias)\n📊 Seguimiento del progreso clase a clase\n\nTodo desde casa, con guía real. 💛`});
     steps.push({who:tw, lbl:'Preguntar horarios y valores',
       txt: isCami
         ? `¿Te gustaría que te comparta los horarios disponibles y los valores? 💛`
