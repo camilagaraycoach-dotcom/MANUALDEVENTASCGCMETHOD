@@ -213,7 +213,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
   <div class="p-body">
 
     <div class="p-sec">
-      <div class="p-sec-title">Grupales virtuales — PowerSplit · Arcos360 · Prepa Física</div>
+      <div class="p-sec-title">Grupales virtuales — PowerSplit · Arcos360 · ACROBASES</div>
       <div style="background:linear-gradient(135deg,#E8302A,#F07820);border-radius:10px;padding:10px 14px;margin-bottom:12px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px">
         🔥 20% DE DESCUENTO — Decirle al lead que es SOLO POR HOY para generar urgencia
       </div>
@@ -266,7 +266,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
           <div class="pc-save">El menor costo por clase 💎</div>
         </div>
       </div>
-      <div class="info-box" style="background:#f9f9f9;color:#666;margin-top:10px">💡 El alumno puede combinar PowerSplit + Arcos360 + Prepa Física en el mismo paquete.</div>
+      <div class="info-box" style="background:#f9f9f9;color:#666;margin-top:10px">💡 El alumno puede combinar PowerSplit + Arcos360 + ACROBASES en el mismo paquete.</div>
     </div>
 
     <div class="p-sec">
@@ -459,7 +459,7 @@ const REC = {
   'powersplit':   {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'El curso de splits y apertura de piernas de Cami.'},
   'arcos360':     {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
-  'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + Prepa Física',   color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
+  'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + ACROBASES',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
   '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($35) o Sebastián ($35) según lo que busca el alumno.'},
   'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'},
   'prepa':        {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'},
@@ -586,8 +586,8 @@ function buildMsgs(rec) {
     ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
     : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='completo') recTxt = isMama
-    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
-    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + Preparación Física 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n💪 Prepa Física — fuerza funcional y base acrobática\n\nEs el programa más completo y con un solo paquete accedés a los 3 cursos ✨`;
+    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
+    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo y con un solo paquete accedés a los 3 cursos ✨`;
   else if (rec==='acrobases') recTxt = isCami
     ? (isMama
         ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
