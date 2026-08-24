@@ -462,7 +462,6 @@ const REC = {
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + ACROBASES',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
   '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($35) o Sebastián ($35) según lo que busca el alumno.'},
   'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'},
-  'prepa':        {icon:'💪', name:'Preparación Física',                     color:'linear-gradient(135deg,#E8302A,#F07820)', nota:'Fuerza funcional y base acrobática.'},
   'masterclass':  {icon:'🏅', name:'Certificación para Entrenadores',         color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Domina la Enseñanza del Split Sagital · 2h en vivo por Zoom · $39 USD hoy (regular $59) · Cupos limitados · 30 ago.'}
 };
 
@@ -595,9 +594,6 @@ function buildMsgs(rec) {
     : (isMama
         ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
         : `Por lo que me cuentas, te recomendaría ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
-  else if (rec==='prepa') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a te recomendaría Preparación Física 💛\n\n💪 ${isCami ? 'Es mi programa' : 'Es el programa'} de fuerza funcional y base acrobática. Trabaja la condición necesaria para avanzar en cualquier disciplina de movimiento ✨`
-    : `Por lo que me cuentas, te recomendaría Preparación Física 💛\n\n💪 ${isCami ? 'Es mi programa' : 'Es el programa'} de fuerza funcional y base acrobática. Trabaja exactamente la condición que necesitás para avanzar en tu disciplina ✨`;
   else if (rec==='1a1') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
     : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
