@@ -1007,8 +1007,8 @@ function buildRescheduleScreen(modo) {
   window.__cpMsgs = [];
   function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
   const txt = isCami
-    ? `¡Hola [nombre]! Claro, sin problema 😊\n\nPuedes reprogramar tu clase en cualquier momento desde este link: [link de reprogramación]\n\nSolo te recuerdo que tu paquete vence el [fecha de vencimiento], así que asegúrate de tomar todas tus clases antes de esa fecha para no perderlas 💛`
-    : `¡Hola [nombre]! Claro, sin problema 😊\n\nPuedes reprogramar tu clase en cualquier momento desde este link: [link de reprogramación]\n\nSolo te recordamos que tu paquete vence el [fecha de vencimiento], así que asegúrate de tomar todas tus clases antes de esa fecha para no perderlas 💛`;
+    ? `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelé tu clase.\n\nCuando quieras reagendarla, puedes hacerlo desde aquí 👇\n[pegar link de la clase]\n\nSolo te recuerdo que tu paquete vence el [fecha de vencimiento], así que asegúrate de tomar todas tus clases antes de esa fecha para no perderlas 💛`
+    : `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelamos tu clase.\n\nCuando quieras reagendarla, puedes hacerlo desde aquí 👇\n[pegar link de la clase]\n\nSolo te recordamos que tu paquete vence el [fecha de vencimiento], así que asegúrate de tomar todas tus clases antes de esa fecha para no perderlas 💛`;
   const mi = sm(txt);
   const whoHtml = isCami
     ? '<span class="msg-who who-cami">⭐ Cami</span>'
@@ -1021,7 +1021,7 @@ function buildRescheduleScreen(modo) {
       <div style="font-size:18px;font-weight:800">📅 Reprogramación de clase</div>
     </div>
     <div style="background:#fff8e1;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
-      💡 Completar antes de enviar: <b>[link de reprogramación]</b> y <b>[fecha de vencimiento]</b> del paquete del alumno.
+      💡 Antes de enviar: cancela la clase desde el sistema, luego pega el <b>link de agendamiento de la clase correspondiente</b> (PowerSplit, Arcos360 o ACROBASES) y la <b>[fecha de vencimiento]</b> del paquete.
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
       <button class="branch-btn" onclick="showRescheduleMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
