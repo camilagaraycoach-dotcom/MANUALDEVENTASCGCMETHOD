@@ -1184,8 +1184,9 @@ function buildFollowupScreen(modo) {
   </div>`;
 }
 function restart() {
-  show('sc-result',false); show('sc-start',true);
+  show('sc-result',false); show('sc-step',false); show('sc-start',true);
   document.getElementById('sc-result').innerHTML='';
+  document.getElementById('sc-step').innerHTML='';
   state={}; history=[]; visSteps=[]; stepIdx=0;
   window.scrollTo({top:0,behavior:'smooth'});
 }
