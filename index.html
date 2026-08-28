@@ -55,7 +55,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,48,42,.4)}
 .btn-followup{background:linear-gradient(135deg,#4A7FD4 0%,#8B4FC8 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(74,127,212,.3);transition:transform .15s,box-shadow .15s}
 .btn-followup:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,127,212,.45)}
+.btn-renewal{background:linear-gradient(135deg,#1B7A4A 0%,#2ECC80 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(46,204,128,.3);transition:transform .15s,box-shadow .15s}
+.btn-renewal:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(46,204,128,.45)}
 .start-btns{display:flex;flex-direction:column;align-items:center;gap:10px}
+.start-section-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;margin-top:6px}
 .start-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
 .chip{background:var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gray)}
 
@@ -192,8 +195,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
         <div class="start-desc">Responde las preguntas sobre el lead y te damos el guión exacto de mensajes para cerrar la venta paso a paso.</div>
         <div class="start-btns">
           <button class="btn-start" onclick="start()">➕ Nueva asesoría</button>
-          <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;margin-top:6px">Seguimiento</div>
+          <div class="start-section-lbl">Seguimiento de leads</div>
           <button class="btn-followup" onclick="startFollowup()">📲 Seguimiento</button>
+          <div class="start-section-lbl">Alumnos activos</div>
+          <button class="btn-renewal" onclick="startRenewal()">🔄 Renovaciones</button>
         </div>
         <div class="start-chips">
           <span class="chip">👧 Niños y adultos</span>
@@ -986,6 +991,78 @@ function goBackFromResult() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+function startRenewal() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showRenewalMsgs('team');
+}
+function showRenewalMsgs(modo) {
+  document.getElementById('sc-step').innerHTML = buildRenewalScreen(modo);
+}
+function buildRenewalScreen(modo) {
+  const isCami = modo === 'cami';
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+  const msgs = [
+    {
+      label:'⚡ Le queda 1 día',
+      note:'Urgente — el acceso se corta mañana.',
+      txt: isCami
+        ? `Hola [nombre]! 🌟 Mañana se vence tu plan en CGC METHOD y quería avisarte antes de que se corte el acceso.\n\nComo alumna activa tienes un descuento especial para renovar hoy 💛 ¿Seguimos? 🔥`
+        : `Hola [nombre]! 🌟 Mañana se vence tu plan en CGC METHOD y queríamos avisarte antes de que se corte el acceso.\n\nComo alumna activa tienes un descuento especial para renovar hoy 💛 ¿Seguimos? 🔥`
+    },
+    {
+      label:'📅 Le quedan 3 días',
+      note:'Buen momento — todavía tiene tiempo, pero genera urgencia.',
+      txt: isCami
+        ? `Hola [nombre]! 😊 Te escribo porque en 3 días se vence tu plan en CGC METHOD 💛\n\nNo quiero que pierdas el avance que llevas — como alumna activa tienes un descuento especial si renuevas antes de que venza. ¿Seguimos? 🔥`
+        : `Hola [nombre]! 😊 Te escribimos porque en 3 días se vence tu plan en CGC METHOD 💛\n\nNo queremos que pierdas el avance que llevas — como alumna activa tienes un descuento especial si renuevas antes de que venza. ¿Seguimos? 🔥`
+    },
+    {
+      label:'📆 Le queda 1 semana',
+      note:'Aviso anticipado — tono tranquilo, sin presión.',
+      txt: isCami
+        ? `Hola [nombre]! 💛 ¿Cómo estás? Te escribo porque en una semana se vence tu plan en CGC METHOD.\n\nQuería avisarte con tiempo para que puedas renovar con el descuento que tenemos para alumnas activas como tú ✨ ¿Te interesa continuar? 😊`
+        : `Hola [nombre]! 💛 ¿Cómo estás? Te escribimos porque en una semana se vence tu plan en CGC METHOD.\n\nQueríamos avisarte con tiempo para que puedas renovar con el descuento que tenemos para alumnas activas ✨ ¿Te interesa continuar? 😊`
+    }
+  ];
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const msgsHtml = msgs.map((m, i) => {
+    const mi = sm(m.txt);
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i+1}</div>
+        <div class="msg-lbl">${m.label}</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        ${m.note ? `<div class="msg-note" style="margin-bottom:10px">⚠️ ${esc(m.note)}</div>` : ''}
+        <div class="msg-txt">${esc(m.txt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+      </div>
+    </div>`;
+  }).join('');
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🔄 Renovaciones — alumnos activos</div>
+    </div>
+    <div style="background:#e8f5e9;border-left:3px solid #2ECC80;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
+      💡 Revisar diariamente quién tiene el plan por vencer y enviar el mensaje correspondiente.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showRenewalMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showRenewalMsgs('team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    ${msgsHtml}
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
 function startFollowup() {
   show('sc-start', false); show('sc-step', true); show('sc-result', false);
   showFollowupMsgs('team');
