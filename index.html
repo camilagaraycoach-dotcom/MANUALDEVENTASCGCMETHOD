@@ -1080,6 +1080,11 @@ function buildDigitalProductScreen(prod, modo) {
     : `¡Genial! 🎉 Te compartimos los datos para realizar el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: ${p.price}*\n\nCuando hagas el pago, mándanos el comprobante y te enviamos el acceso de inmediato 💛`;
   const miPago = sm(pagoTxt);
 
+  const datosTxt = isCami
+    ? `¡Perfecto! Ya me llegó tu pago 🎉\n\nPara enviarte el acceso necesito estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te comparto el acceso al Drive)\n\n¡Te mando el link en cuanto me los envíes! 💛`
+    : `¡Perfecto! Ya nos llegó tu pago 🎉\n\nPara enviarte el acceso necesitamos estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te compartimos el acceso al Drive)\n\n¡Te mandamos el link en cuanto nos los envíes! 💛`;
+  const miDatos = sm(datosTxt);
+
   const whoHtml = isCami
     ? '<span class="msg-who who-cami">⭐ Cami</span>'
     : '<span class="msg-who who-team">💬 Equipo CGC</span>';
@@ -1125,7 +1130,15 @@ function buildDigitalProductScreen(prod, modo) {
       </div>
     </div>
     <div class="msg-step">
-      <div class="msg-head"><div class="msg-num">3</div><div class="msg-lbl">Objeciones frecuentes</div>${whoHtml}</div>
+      <div class="msg-head"><div class="msg-num">3</div><div class="msg-lbl">Solicitar datos para acceso</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">✅ Enviar <b>después de confirmar el pago</b>. El correo <b>debe ser Gmail</b> obligatoriamente.</div>
+        <div class="msg-txt">${esc(datosTxt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miDatos})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">4</div><div class="msg-lbl">Objeciones frecuentes</div>${whoHtml}</div>
       <div class="msg-body">
         <div class="branch-q">¿El lead pone alguna de estas objeciones?</div>
         <div class="branch-btns">${objBtns}</div>
