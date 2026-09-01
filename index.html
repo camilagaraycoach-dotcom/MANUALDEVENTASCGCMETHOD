@@ -373,7 +373,7 @@ const STEPS = [
     opts:[
       {v:'alumno', icon:'🙋', l:'El/la alumno/a',      d:'La persona que quiere tomar clases'},
       {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',        d:'Escribe el padre o la madre por su hijo/a'},
-      {v:'coach',  icon:'🏋️', l:'Coach / Entrenador/a', d:'Quiere certificarse para enseñar splits — Certificación'}
+      {v:'coach',  icon:'🏋️', l:'Coach / Entrenador/a', d:'Quiere aprender a enseñar splits — Curso grabado $14.99'}
     ]
   },
   {
@@ -482,7 +482,7 @@ const REC = {
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + ACROBASES',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
   '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($35) o Sebastián ($35) según lo que busca el alumno.'},
   'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'},
-  'masterclass':  {icon:'🏅', name:'Certificación para Entrenadores',         color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Domina la Enseñanza del Split Sagital · 2h en vivo por Zoom · $29.99 USD hoy (regular $59) · Cupos limitados · 30 ago.'}
+  'masterclass':  {icon:'🎬', name:'Domina la Enseñanza del Split Sagital',    color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Curso grabado para entrenadores, coaches y profes · Acceso inmediato al video · $14.99 USD · Un solo pago'}
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
@@ -500,7 +500,7 @@ function buildMsgs(rec) {
       txt: isCami
         ? `¡Hola! 💛 Soy Cami, qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`
         : `¡Hola! Un gusto 💛 Qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`,
-      note:'⏳ Esperar la respuesta antes de presentar la certificación.'
+      note:'⏳ Esperar la respuesta antes de presentar el curso.'
     });
     steps.push({who:tw, lbl:'Conectar con el problema — esperar respuesta',
       note:'⚡ Cambia [su área] por lo que te dijo que enseña (ej: "en la danza", "en la gimnasia", "en el cheer"). ⏳ Enviar y esperar que respondan antes de continuar.',
@@ -514,31 +514,29 @@ function buildMsgs(rec) {
         ? `Exacto, es lo más común — y tiene solución 💛\n\nJustamente creé algo específico para eso. ¿Quieres que te cuente de qué se trata?`
         : `Exacto, es lo más común — y tiene solución 💛\n\nJustamente Cami creó algo específico para eso. ¿Quieres que te cuente de qué se trata?`
     });
-    steps.push({who:tw, lbl:'Presentar la Certificación — versión corta',
+    steps.push({who:tw, lbl:'Presentar el curso grabado',
       note:'✅ Enviar solo después de que digan "sí". Mensaje corto y directo.',
       txt: isCami
-        ? `🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nFormación en vivo conmigo — 2 horas para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes de tus alumnos\n\n📅 Domingo 30 de agosto · 10am–12pm (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 *$29.99 USD* · cupos limitados 🔒`
-        : `🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nFormación en vivo con Cami — 2 horas para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes de tus alumnos\n\n📅 Domingo 30 de agosto · 10am–12pm (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 *$29.99 USD* · cupos limitados 🔒`
-    });
-    steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye al inscribirte?',
-      txt:'',
-      note:'📸 Mantené presionada la imagen para guardarla o compartirla directamente por WhatsApp.',
-      imgOnly: true,
-      img: 'img/img-incluye-certificacion.png'
+        ? `🎬 *Domina la Enseñanza del Split Sagital*\n\nEs la grabación de mi Masterclass en vivo — 2 horas de formación para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes\n\n💻 Acceso inmediato al video completo · lo ves cuando quieras\n💰 *$14.99 USD* · un solo pago · tuyo para siempre`
+        : `🎬 *Domina la Enseñanza del Split Sagital*\n\nEs la grabación de la Masterclass en vivo de Cami — 2 horas de formación para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes\n\n💻 Acceso inmediato al video completo · lo ve cuando quiera\n💰 *$14.99 USD* · un solo pago · tuyo para siempre`
     });
     steps.push({who:tw, lbl:'Cerrar — directo, sin repetir',
-      note:'💡 No repetir beneficios. Solo confirmar lo extra y preguntar directamente.',
+      note:'💡 No repetir beneficios. Solo confirmar y preguntar directamente.',
       txt: isCami
-        ? `También incluye la grabación completa y tu certificado digital 💛\n\n¿Lo reservamos ahora? Te paso el link directo 🎯`
-        : `También incluye la grabación completa y el certificado digital 💛\n\n¿Lo reservamos ahora? Le paso el link directo 🎯`
+        ? `¿Lo tomamos ahora? Te paso los datos de pago directo 🎯`
+        : `¿Lo tomamos ahora? Le pasamos los datos de pago directo 🎯`
     });
-    steps.push({who:tw, lbl:'Enviar link de pago',
-      txt:`¡Perfecto! Acá te dejo el link de pago para que reserves tu cupo ahora 💛\n\n💳 https://express.culqi.com/pago/9A651A2CA4\n\nSon $29.99 USD (precio especial solo por hoy) · acepta tarjeta de débito o crédito · se hace en 2 minutos ✅\n\nEn cuanto me confirmes el comprobante, te envío los siguientes pasos 🙌`,
-      note:'Enviar este mensaje y esperar la confirmación del pago.'
+    steps.push({who:tw, lbl:'Enviar datos de pago',
+      note:'⚠️ Completar: [link de pago] para internacionales y [datos Yape/cuenta] para Perú antes de enviar.',
+      txt: isCami
+        ? `¡Perfecto! Acá están los datos para el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: $14.99 USD*\n\nCuando hagas el pago, mándame el comprobante y te envío el acceso de inmediato 💛`
+        : `¡Perfecto! Acá están los datos para el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: $14.99 USD*\n\nCuando hagas el pago, mándanos el comprobante y te enviamos el acceso de inmediato 💛`
     });
-    steps.push({who: isCami ? 'cami' : 'carlos', lbl:'Post-pago — Confirmar e instrucciones',
-      txt: `¡Cupo confirmado! 🎉🎓 Ya eres parte de la Masterclass.\n\nAhora hay dos pasos importantes para que todo quede listo:\n\n1️⃣ Únete al grupo oficial de WhatsApp\n👉 chat.whatsapp.com/IuTou6kJygEKUPML9YN0DJ\nAhí es donde te enviaremos el link de Zoom antes de la clase. Si no te unes al grupo, no podrás recibir el acceso.\n\n2️⃣ Completa el formulario de inscripción\n👉 forms.gle/4WEgxDVqHHXPNreD7\nNos ayuda a preparar mejor la clase y a enviarte tu certificado de participación.\n\nTu inscripción también incluye la grabación de la clase (por si no puedes conectarte en vivo) y tu certificado al finalizar 💛\n\n¡Nos vemos el 30 de agosto! ✨`,
-      note:'Verificar: ✅ pago recibido · ✅ unido al grupo de WA · ✅ forms completado · ✅ link Zoom enviado antes del 30 ago'
+    steps.push({who:tw, lbl:'Post-pago — Solicitar datos para el Drive',
+      note:'✅ Enviar después de confirmar el pago. El correo debe ser Gmail obligatoriamente.',
+      txt: isCami
+        ? `¡Perfecto! Ya me llegó tu pago 🎉\n\nPara enviarte el acceso necesito estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te comparto el acceso al Drive)\n\n¡Te mando el link en cuanto me los envíes! 💛`
+        : `¡Perfecto! Ya nos llegó tu pago 🎉\n\nPara enviarte el acceso necesitamos estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te compartimos el acceso al Drive)\n\n¡Te mandamos el link en cuanto nos los envíes! 💛`
     });
     return steps;
   }
