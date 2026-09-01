@@ -59,6 +59,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .btn-renewal:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(46,204,128,.45)}
 .btn-reschedule{background:linear-gradient(135deg,#E67E22 0%,#F39C12 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(230,126,34,.3);transition:transform .15s,box-shadow .15s}
 .btn-reschedule:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(230,126,34,.45)}
+.btn-digital{background:linear-gradient(135deg,#4A0E8F 0%,#9B59B6 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(74,14,143,.3);transition:transform .15s,box-shadow .15s}
+.btn-digital:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,14,143,.45)}
 .start-btns{display:flex;flex-direction:column;align-items:center;gap:10px}
 .start-section-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;margin-top:6px}
 .start-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
@@ -203,6 +205,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
           <button class="btn-renewal" onclick="startRenewal()">🔄 Renovaciones</button>
           <div class="start-section-lbl">Gestión de clases</div>
           <button class="btn-reschedule" onclick="startReschedule()">📅 Reprogramaciones</button>
+          <div class="start-section-lbl">Productos digitales</div>
+          <button class="btn-digital" onclick="startDigital()">🎬 Cursos grabados</button>
         </div>
         <div class="start-chips">
           <span class="chip">👧 Niños y adultos</span>
@@ -995,6 +999,152 @@ function goBackFromResult() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// ── CURSOS GRABADOS / DIGITALES ─────────────────────────
+function startDigital() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  document.getElementById('sc-step').innerHTML = buildDigitalSelector();
+}
+function buildDigitalSelector() {
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🎬 Cursos grabados</div>
+    </div>
+    <div style="font-size:14px;color:var(--gray);margin-bottom:20px">Selecciona el producto que le quieres vender al lead:</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="msg-step" style="cursor:pointer" onclick="showDigitalProduct('split','team')">
+        <div class="msg-head">
+          <div class="msg-num">1</div>
+          <div class="msg-lbl">🦵 Domina la Enseñanza del Split Sagital</div>
+          <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px">$14.99 USD</span>
+        </div>
+        <div class="msg-body" style="font-size:13px;color:var(--gray)">Para entrenadores, coaches y profes · Grabación de Masterclass · Acceso inmediato</div>
+      </div>
+      <div class="msg-step" style="cursor:pointer" onclick="showDigitalProduct('manos','team')">
+        <div class="msg-head">
+          <div class="msg-num">2</div>
+          <div class="msg-lbl">🤸 Aprende a Pararte de Manos en Casa desde Cero</div>
+          <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px">$9.99 USD</span>
+        </div>
+        <div class="msg-body" style="font-size:13px;color:var(--gray)">Para cualquier persona · Clase grabada · Desde cero · Acceso inmediato</div>
+      </div>
+    </div>
+  </div>`;
+}
+function showDigitalProduct(prod, modo) {
+  document.getElementById('sc-step').innerHTML = buildDigitalProductScreen(prod, modo);
+}
+function buildDigitalProductScreen(prod, modo) {
+  const isCami = modo === 'cami';
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+
+  const PROD = {
+    split: {
+      icon:'🦵', name:'Domina la Enseñanza del Split Sagital', price:'$14.99 USD',
+      for:'entrenadores, coaches y profesores',
+      pitch: isCami
+        ? `¿Enseñas flexibilidad o entrenamiento físico? 🙌\n\nTengo algo que te va a interesar — acabo de liberar la grabación de mi Masterclass *DOMINA LA ENSEÑANZA DEL SPLIT SAGITAL* 🦵\n\nEn 2 horas aprenderás a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes\n\n💰 *$14.99 USD* · acceso inmediato · de por vida 🔒\n📩 ¿Te interesa?`
+        : `¿Enseñas flexibilidad o entrenamiento físico? 🙌\n\nTenemos algo que te va a interesar — Cami acaba de liberar la grabación de su Masterclass *DOMINA LA ENSEÑANZA DEL SPLIT SAGITAL* 🦵\n\nEn 2 horas aprenderás a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes\n\n💰 *$14.99 USD* · acceso inmediato · de por vida 🔒\n📩 ¿Te interesa?`,
+      objs: [
+        { key:'vivo', label:'🎥 "¿Es en vivo?"',
+          txt: isCami ? `No, es una grabación lista para ver cuando quieras 😊 Tienes acceso de por vida así que la puedes revisar las veces que necesites. ¡Sin horario fijo! 💛` : `No, es una grabación lista para ver cuando quieras 😊 Tienen acceso de por vida y la pueden revisar cuando la necesiten. ¡Sin horario fijo! 💛` },
+        { key:'nivel', label:'🎓 "¿Para qué nivel?"',
+          txt: isCami ? `Es para entrenadores, coaches o profes de cualquier nivel que enseñen o quieran enseñar flexibilidad 💛 No importa si recién empiezas a dar clases o llevas años — la metodología la puedes aplicar desde el primer día.` : `Es para entrenadores, coaches o profes de cualquier nivel 💛 No importa si recién empiezan a dar clases o llevan años — la metodología se puede aplicar desde el primer día.` },
+        { key:'solo', label:'🦵 "¿Solo split sagital?"',
+          txt: isCami ? `Sí, la clase está enfocada 100% en el split sagital — o sea, pierna adelante y atrás 💛 Es el más complejo de enseñar correctamente, y dominar este te da la base para enseñar cualquier tipo de flexibilidad.` : `Sí, la clase está enfocada 100% en el split sagital — pierna adelante y atrás 💛 Es el más complejo de enseñar correctamente, y dominarlo da la base para enseñar cualquier tipo de flexibilidad.` }
+      ]
+    },
+    manos: {
+      icon:'🤸', name:'Aprende a Pararte de Manos en Casa desde Cero', price:'$9.99 USD',
+      for:'cualquier persona sin experiencia previa',
+      pitch: isCami
+        ? `¿Quieres aprender a pararte de manos desde casa? 🤸\n\nTengo una clase grabada perfecta para ti: *APRENDE A PARARTE DE MANOS EN CASA DESDE CERO*\n\nEn esta clase aprenderás:\n✅ La posición correcta del cuerpo y las manos\n✅ Los ejercicios de preparación física que no te puedes saltar\n✅ La progresión paso a paso para llegar a la parada\n✅ Cómo practicar de forma segura sin necesitar compañero\n\n💰 *$9.99 USD* · acceso inmediato · de por vida 🔒\nNo necesitas experiencia previa ni equipamiento especial 💛\n📩 ¿Te interesa?`
+        : `¿Quieres aprender a pararte de manos desde casa? 🤸\n\nTenemos una clase grabada perfecta para ti: *APRENDE A PARARTE DE MANOS EN CASA DESDE CERO*\n\nEn esta clase aprenderás:\n✅ La posición correcta del cuerpo y las manos\n✅ Los ejercicios de preparación física que no te puedes saltar\n✅ La progresión paso a paso para llegar a la parada\n✅ Cómo practicar de forma segura sin necesitar compañero\n\n💰 *$9.99 USD* · acceso inmediato · de por vida 🔒\nNo necesitas experiencia previa ni equipamiento especial 💛\n📩 ¿Te interesa?`,
+      objs: [
+        { key:'vivo', label:'🎥 "¿Es en vivo?"',
+          txt: isCami ? `No, es una clase grabada lista para ver cuando quieras 😊 Tienes acceso de por vida — sin horario fijo, sin fechas límite. La ves a tu ritmo 💛` : `No, es una clase grabada lista para ver cuando quieras 😊 Tienen acceso de por vida — sin horario fijo. La ven a su ritmo 💛` },
+        { key:'nivel', label:'🎓 "¿Hace falta experiencia?"',
+          txt: isCami ? `Para nada, es 100% desde cero 💛 No necesitas haber practicado gimnasia ni acrobacia antes. La progresión está diseñada para que cualquier persona pueda seguirla.` : `Para nada, es 100% desde cero 💛 No se necesita haber practicado gimnasia ni acrobacia antes. La progresión está diseñada para que cualquier persona pueda seguirla.` },
+        { key:'espacio', label:'🏠 "¿Necesito espacio especial?"',
+          txt: isCami ? `Solo necesitas un espacio pequeño y una pared para apoyarte al inicio 💛 Sin equipamiento especial ni sala grande. Se puede hacer perfectamente en casa.` : `Solo se necesita un espacio pequeño y una pared para apoyarse al inicio 💛 Sin equipamiento especial ni sala grande. Se puede hacer en cualquier casa.` }
+      ]
+    }
+  };
+
+  const p = PROD[prod];
+  const miPitch = sm(p.pitch);
+
+  const pagoTxt = isCami
+    ? `¡Genial! 🎉 Te comparto los datos para realizar el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: ${p.price}*\n\nCuando hagas el pago, ${isCami ? 'mándame' : 'mándanos'} el comprobante y te envío el acceso de inmediato 💛`
+    : `¡Genial! 🎉 Te compartimos los datos para realizar el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: ${p.price}*\n\nCuando hagas el pago, mándanos el comprobante y te enviamos el acceso de inmediato 💛`;
+  const miPago = sm(pagoTxt);
+
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+
+  const objKeys = p.objs.map(o => o.key);
+  const objBtns = p.objs.map(o =>
+    `<button class="branch-btn" id="branchbtn-dobj-${o.key}" onclick="selDigiObj('${prod}','${modo}',${JSON.stringify(objKeys).replace(/"/g,"'")},'${o.key}')">${o.label}</button>`
+  ).join('');
+  const objTexts = p.objs.map(o => {
+    const mi = sm(o.txt);
+    return `<div class="branch-opt" id="branch-dobj-${o.key}" style="display:none">
+      <div class="msg-txt">${esc(o.txt)}</div>
+      <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+    </div>`;
+  }).join('');
+
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <button onclick="startDigital()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:16px;font-weight:800">${p.icon} ${p.name}</div>
+      <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px;white-space:nowrap">${p.price}</span>
+    </div>
+    <div style="font-size:12px;color:var(--gray);margin-bottom:16px;padding-left:36px">Para ${p.for}</div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showDigitalProduct('${prod}','cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showDigitalProduct('${prod}','team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">1</div><div class="msg-lbl">Presentar el producto</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-txt">${esc(p.pitch)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miPitch})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">2</div><div class="msg-lbl">Datos de pago</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">⚠️ Completar: <b>[link de pago]</b> para internacionales y <b>[datos Yape/cuenta]</b> para Perú antes de enviar.</div>
+        <div class="msg-txt">${esc(pagoTxt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miPago})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">3</div><div class="msg-lbl">Objeciones frecuentes</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="branch-q">¿El lead pone alguna de estas objeciones?</div>
+        <div class="branch-btns">${objBtns}</div>
+        ${objTexts}
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+function selDigiObj(prod, modo, keys, key) {
+  keys.forEach(k => {
+    const btn = document.getElementById('branchbtn-dobj-'+k);
+    const opt = document.getElementById('branch-dobj-'+k);
+    if(btn) btn.style.cssText = k===key ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+    if(opt) opt.style.display = k===key ? '' : 'none';
+  });
+}
 function startReschedule() {
   show('sc-start', false); show('sc-step', true); show('sc-result', false);
   showRescheduleMsgs('team');
