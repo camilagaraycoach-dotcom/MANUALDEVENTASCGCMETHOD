@@ -420,7 +420,7 @@ const STEPS = [
       {v:'splits',        icon:'🦵', l:'Solo splits / apertura de piernas', d:'Quiere abrir más las piernas: split sagital, frontal, elevaciones'},
       {v:'arcos',         icon:'🌙', l:'Solo arcos / flexibilidad de espalda', d:'Quiere mejorar su arco, puente, escorpión o figuras posteriores'},
       {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
-      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'},
+      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa (splits + arcos) + ACROBASES (fuerza y base acrobática)'},
       {v:'acrobases',     icon:'🤸', l:'Aprender acrobacias', d:'Parada de manos, rueda de carro, rodamientos — base acrobática'},
       {v:'1a1',           icon:'🎯', l:'Clases 1:1 (Cami, Andrea o Sebastián)', d:'Quiere atención personalizada con un coach'}
     ]
@@ -647,8 +647,8 @@ function buildMsgs(rec) {
     ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
     : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
-  steps.push({who:tw, lbl:'Presentar clases 1:1 y coaches', txt:recTxt,
-    note:'⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.'});
+  steps.push({who:tw, lbl: rec==='1a1' ? 'Presentar clases 1:1 y coaches' : 'Recomendar el programa', txt:recTxt,
+    note: rec==='1a1' ? '⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.' : '⏳ Enviar y esperar que respondan antes de continuar.'});
 
   // PREGUNTAS FRECUENTES DE MAMÁS
   if (isMama) {
@@ -682,8 +682,8 @@ function buildMsgs(rec) {
     });
   }
 
-  // BRANCH — elegir coach 1:1
-  steps.push({
+  // BRANCH — elegir coach 1:1 (solo si la ruta es clases particulares)
+  if (rec === '1a1') steps.push({
     type:'branch3',
     lbl:'¿Qué coach le recomiendas?',
     note:'Elige según lo que respondió el lead 👇',
