@@ -51,18 +51,27 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .start-title{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
 .start-title b{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .start-desc{font-size:15px;color:var(--gray);margin-bottom:30px;line-height:1.6}
-.btn-start{background:var(--grad-btn);color:#fff;font-size:16px;font-weight:700;padding:13px 38px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(232,48,42,.3);transition:transform .15s,box-shadow .15s}
-.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,48,42,.4)}
-.btn-followup{background:linear-gradient(135deg,#4A7FD4 0%,#8B4FC8 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(74,127,212,.3);transition:transform .15s,box-shadow .15s}
-.btn-followup:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,127,212,.45)}
-.btn-renewal{background:linear-gradient(135deg,#1B7A4A 0%,#2ECC80 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(46,204,128,.3);transition:transform .15s,box-shadow .15s}
-.btn-renewal:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(46,204,128,.45)}
-.btn-reschedule{background:linear-gradient(135deg,#E67E22 0%,#F39C12 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(230,126,34,.3);transition:transform .15s,box-shadow .15s}
-.btn-reschedule:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(230,126,34,.45)}
-.btn-digital{background:linear-gradient(135deg,#4A0E8F 0%,#9B59B6 100%);color:#fff;font-size:15px;font-weight:700;padding:11px 34px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(74,14,143,.3);transition:transform .15s,box-shadow .15s}
-.btn-digital:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,14,143,.45)}
-.start-btns{display:flex;flex-direction:column;align-items:center;gap:10px}
-.start-section-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;margin-top:6px}
+.btn-start{background:var(--grad-btn);color:#fff;font-size:17px;font-weight:800;padding:16px 0;border-radius:16px;border:none;cursor:pointer;box-shadow:0 6px 28px rgba(232,48,42,.35);transition:transform .15s,box-shadow .15s;width:100%}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(232,48,42,.45)}
+.home-primary{display:flex;flex-direction:column;align-items:center;gap:7px;margin-bottom:28px}
+.btn-start-hint{font-size:12px;color:var(--gray)}
+.quick-divider{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.quick-divider-line{flex:1;height:1px;background:var(--border)}
+.quick-divider-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;white-space:nowrap}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:14px 14px 12px;cursor:pointer;text-align:left;transition:transform .12s,box-shadow .12s,border-color .12s;display:flex;flex-direction:column;gap:3px}
+.quick-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.quick-card-icon{font-size:22px;line-height:1;margin-bottom:3px}
+.quick-card-title{font-size:13px;font-weight:800;color:var(--text)}
+.quick-card-desc{font-size:11px;color:var(--gray);line-height:1.4}
+.qc-fu{border-color:rgba(74,127,212,.35);background:linear-gradient(135deg,rgba(74,127,212,.06),rgba(139,79,200,.06))}
+.qc-fu:hover{border-color:rgba(74,127,212,.7)}
+.qc-rn{border-color:rgba(46,204,128,.35);background:linear-gradient(135deg,rgba(27,122,74,.06),rgba(46,204,128,.06))}
+.qc-rn:hover{border-color:rgba(46,204,128,.7)}
+.qc-rp{border-color:rgba(230,126,34,.35);background:linear-gradient(135deg,rgba(230,126,34,.06),rgba(243,156,18,.06))}
+.qc-rp:hover{border-color:rgba(230,126,34,.7)}
+.qc-dg{border-color:rgba(155,89,182,.35);background:linear-gradient(135deg,rgba(74,14,143,.06),rgba(155,89,182,.06))}
+.qc-dg:hover{border-color:rgba(155,89,182,.7)}
 .start-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
 .chip{background:var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gray)}
 
@@ -197,22 +206,36 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
         <div class="start-icon">🎯</div>
         <div class="start-title">Guía de <b>Asesoría CGC</b></div>
         <div class="start-desc">Responde las preguntas sobre el lead y te damos el guión exacto de mensajes para cerrar la venta paso a paso.</div>
-        <div class="start-btns">
+        <div class="home-primary">
           <button class="btn-start" onclick="start()">➕ Nueva asesoría</button>
-          <div class="start-section-lbl">Seguimiento de leads</div>
-          <button class="btn-followup" onclick="startFollowup()">📲 Seguimiento</button>
-          <div class="start-section-lbl">Alumnos activos</div>
-          <button class="btn-renewal" onclick="startRenewal()">🔄 Renovaciones</button>
-          <div class="start-section-lbl">Gestión de clases</div>
-          <button class="btn-reschedule" onclick="startReschedule()">📅 Reprogramaciones</button>
-          <div class="start-section-lbl">Productos digitales</div>
-          <button class="btn-digital" onclick="startDigital()">🎬 Cursos grabados</button>
+          <div class="btn-start-hint">Alguien nuevo que escribe por primera vez</div>
         </div>
-        <div class="start-chips">
-          <span class="chip">👧 Niños y adultos</span>
-          <span class="chip">🌎 Perú y exterior</span>
-          <span class="chip">💪 Con o sin experiencia</span>
-          <span class="chip">📋 Mensajes listos para copiar</span>
+        <div class="quick-divider">
+          <div class="quick-divider-line"></div>
+          <div class="quick-divider-lbl">Acceso rápido</div>
+          <div class="quick-divider-line"></div>
+        </div>
+        <div class="quick-grid">
+          <button class="quick-card qc-fu" onclick="startFollowup()">
+            <div class="quick-card-icon">📲</div>
+            <div class="quick-card-title">Seguimiento</div>
+            <div class="quick-card-desc">Lead que no ha respondido</div>
+          </button>
+          <button class="quick-card qc-rn" onclick="startRenewal()">
+            <div class="quick-card-icon">🔄</div>
+            <div class="quick-card-title">Renovaciones</div>
+            <div class="quick-card-desc">Alumno con plan por vencer</div>
+          </button>
+          <button class="quick-card qc-rp" onclick="startReschedule()">
+            <div class="quick-card-icon">📅</div>
+            <div class="quick-card-title">Reprogramaciones</div>
+            <div class="quick-card-desc">Alumno quiere cancelar su clase</div>
+          </button>
+          <button class="quick-card qc-dg" onclick="startDigital()">
+            <div class="quick-card-icon">🎬</div>
+            <div class="quick-card-title">Cursos grabados</div>
+            <div class="quick-card-desc">Venta de cursos digitales</div>
+          </button>
         </div>
       </div>
     </div>
