@@ -395,8 +395,7 @@ const STEPS = [
     id:'quien', q:'¿Quién nos está escribiendo?', sub:'Lo primero antes de responder',
     opts:[
       {v:'alumno', icon:'🙋', l:'El/la alumno/a',      d:'La persona que quiere tomar clases'},
-      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',        d:'Escribe el padre o la madre por su hijo/a'},
-      {v:'coach',  icon:'🏋️', l:'Coach / Entrenador/a', d:'Quiere aprender a enseñar splits — Curso grabado $14.99'}
+      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',        d:'Escribe el padre o la madre por su hijo/a'}
     ]
   },
   {
@@ -431,7 +430,6 @@ const STEPS = [
 let state = {}, history = [], visSteps = [], stepIdx = 0;
 
 function getVis(s) {
-  if (s.quien === 'coach') return STEPS.filter(st => st.id === 'modo' || st.id === 'quien');
   return STEPS.slice();
 }
 
@@ -488,7 +486,6 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 // ── RECOMMENDATION ────────────────────────────────────
 function getRec() {
   const {quien, objetivo} = state;
-  if (quien === 'coach') return 'masterclass';
   if (objetivo==='1a1')          return '1a1';
   if (objetivo==='acrobases')    return 'acrobases';
   if (objetivo==='splits')       return 'powersplit';
@@ -504,8 +501,7 @@ const REC = {
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + ACROBASES',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
   '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($35) o Sebastián ($35) según lo que busca el alumno.'},
-  'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'},
-  'masterclass':  {icon:'🎬', name:'Domina la Enseñanza del Split Sagital',    color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Curso grabado para entrenadores, coaches y profes · Acceso inmediato al video · $14.99 USD · Un solo pago'}
+  'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'}
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
@@ -516,53 +512,6 @@ function buildMsgs(rec) {
   const isCami = modo === 'cami';
   const tw = isCami ? 'cami' : 'team';
   const steps = [];
-
-  // ── FLUJO COACH / ENTRENADOR ──────────────────────────
-  if (quien === 'coach') {
-    steps.push({who:tw, lbl:'Saludo inicial — Entrenador/a',
-      txt: isCami
-        ? `¡Hola! 💛 Soy Cami, qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`
-        : `¡Hola! Un gusto 💛 Qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`,
-      note:'⏳ Esperar la respuesta antes de presentar el curso.'
-    });
-    steps.push({who:tw, lbl:'Conectar con el problema — esperar respuesta',
-      note:'⚡ Cambia [su área] por lo que te dijo que enseña (ej: "en la danza", "en la gimnasia", "en el cheer"). ⏳ Enviar y esperar que respondan antes de continuar.',
-      txt: isCami
-        ? `Qué bueno 💛 En [su área], el split sagital es una de las habilidades que todos los alumnos quieren — pero pocos logran.\n\nY eso muchas veces pone al entrenador en una posición incómoda. Porque una cosa es *poder* hacer el split, y otra muy distinta es *saber enseñarlo* en un cuerpo que no es el tuyo, con la historia muscular que sea, sin que se lastime.\n\n¿Te ha pasado tener alumnos que llevan meses entrenando y simplemente no avanzan? 👀`
-        : `Qué bueno 💛 En [su área], el split sagital es una de las habilidades que todos los alumnos quieren — pero pocos logran.\n\nY eso muchas veces pone al entrenador en una posición incómoda. Porque una cosa es *poder* hacer el split, y otra muy distinta es *saber enseñarlo* en un cuerpo diferente al propio, sin que se lastime.\n\n¿Le ha pasado tener alumnos que llevan meses entrenando y simplemente no avanzan? 👀`
-    });
-    steps.push({who:tw, lbl:'Micro-compromiso — esperar "sí"',
-      note:'⏳ Enviar solo cuando respondan. Esperar que digan "sí" o "contame" antes del siguiente mensaje.',
-      txt: isCami
-        ? `Exacto — y la mayoría de entrenadores lo atribuye a que el alumno "no tiene flexibilidad natural"... cuando en realidad el problema casi siempre es la metodología, no el cuerpo 💡\n\nGrabé una clase completa de 2 horas donde enseño exactamente cómo resolver eso. ¿Quieres que te cuente de qué se trata? 🎬`
-        : `Exacto — y la mayoría de entrenadores lo atribuye a que el alumno "no tiene flexibilidad natural"... cuando en realidad el problema casi siempre es la metodología, no el cuerpo 💡\n\nCami grabó una clase completa de 2 horas donde enseña exactamente cómo resolver eso. ¿Le cuento de qué se trata? 🎬`
-    });
-    steps.push({who:tw, lbl:'Presentar el curso grabado',
-      note:'✅ Enviar solo después de que digan "sí".',
-      txt: isCami
-        ? `🎬 *Domina la Enseñanza del Split Sagital*\n\nEs la grabación de mi última Masterclass en vivo — 2 horas donde enseñé mi metodología completa para que cualquier entrenador pueda llevar a sus alumnos al split sagital, *sin importar el tipo de cuerpo que tenga enfrente.*\n\nLo que vas a aprender:\n✅ Cómo evaluar la flexibilidad real de cada alumno (cada cuerpo es distinto)\n✅ Qué progresión usar según lo que ves — sin adivinar\n✅ Los errores más comunes que generan lesiones y cómo evitarlos\n✅ Cómo diseñar un plan personalizado de verdad\n✅ Correcciones que aceleran el avance de forma segura\n✅ Respuestas claras a las dudas que más te preguntan tus alumnos\n\n📲 Acceso inmediato en cuanto compras — lo ves cuando y cuanto quieras\n💰 *$14.99 USD* · un solo pago · tuyo para siempre`
-        : `🎬 *Domina la Enseñanza del Split Sagital*\n\nEs la grabación de la última Masterclass en vivo de Cami — 2 horas donde enseñó su metodología completa para que cualquier entrenador pueda llevar a sus alumnos al split sagital, *sin importar el tipo de cuerpo que tenga enfrente.*\n\nLo que va a aprender:\n✅ Cómo evaluar la flexibilidad real de cada alumno (cada cuerpo es distinto)\n✅ Qué progresión usar según lo que ve — sin adivinar\n✅ Los errores más comunes que generan lesiones y cómo evitarlos\n✅ Cómo diseñar un plan personalizado de verdad\n✅ Correcciones que aceleran el avance de forma segura\n✅ Respuestas claras a las dudas que más le preguntan sus alumnos\n\n📲 Acceso inmediato en cuanto compra — lo ve cuando y cuanto quiera\n💰 *$14.99 USD* · un solo pago · suyo para siempre`
-    });
-    steps.push({who:tw, lbl:'Cerrar — justificar el precio y preguntar',
-      note:'💡 No repetir beneficios. Esta frase justifica el precio con ROI inmediato y cierra directo.',
-      txt: isCami
-        ? `Si enseñas splits aunque sea una vez a la semana, esto lo recuperas en la primera clase que puedas aplicar 💛\n\n¿Te lo paso?`
-        : `Si enseña splits aunque sea una vez a la semana, esto lo recupera en la primera clase que pueda aplicar 💛\n\n¿Le pasamos los datos?`
-    });
-    steps.push({who:tw, lbl:'Enviar datos de pago',
-      note:'⚠️ Completar: [link de pago] para internacionales y [datos Yape/cuenta] para Perú antes de enviar.',
-      txt: isCami
-        ? `¡Perfecto! Acá están los datos para el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: $14.99 USD*\n\nCuando hagas el pago, mándame el comprobante y te envío el acceso de inmediato 💛`
-        : `¡Perfecto! Acá están los datos para el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: $14.99 USD*\n\nCuando hagas el pago, mándanos el comprobante y te enviamos el acceso de inmediato 💛`
-    });
-    steps.push({who:tw, lbl:'Post-pago — Solicitar datos para el Drive',
-      note:'✅ Enviar después de confirmar el pago. El correo debe ser Gmail obligatoriamente.',
-      txt: isCami
-        ? `¡Perfecto! Ya me llegó tu pago 🎉\n\nPara enviarte el acceso necesito estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te comparto el acceso al Drive)\n\n¡Te mando el link en cuanto me los envíes! 💛`
-        : `¡Perfecto! Ya nos llegó tu pago 🎉\n\nPara enviarte el acceso necesitamos estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te compartimos el acceso al Drive)\n\n¡Te mandamos el link en cuanto nos los envíes! 💛`
-    });
-    return steps;
-  }
 
   // 1. SALUDO MANUAL (el auto-mensaje ya fue enviado y el lead ya respondió con su info)
   steps.push({who:tw, lbl:'Saludo inicial',
@@ -921,8 +870,8 @@ function buildResult() {
   const tags = [
     `<span class="res-tag res-tag-modo">${modoTag}</span>`,
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
-    quien!=='coach'?(isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)'):'',
-    quien!=='coach'?(isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior'):'',
+    isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
+    isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
     OBJ_LBL[state.objetivo]||''
   ].filter(Boolean).map(t=>t.startsWith('<span')?t:`<span class="res-tag">${t}</span>`).join('');
 
@@ -1033,17 +982,9 @@ function buildDigitalSelector() {
     </div>
     <div style="font-size:14px;color:var(--gray);margin-bottom:20px">Selecciona el producto que le quieres vender al lead:</div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="msg-step" style="cursor:pointer" onclick="showDigitalProduct('split','team')">
-        <div class="msg-head">
-          <div class="msg-num">1</div>
-          <div class="msg-lbl">🦵 Domina la Enseñanza del Split Sagital</div>
-          <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px">$14.99 USD</span>
-        </div>
-        <div class="msg-body" style="font-size:13px;color:var(--gray)">Para entrenadores, coaches y profes · Grabación de Masterclass · Acceso inmediato</div>
-      </div>
       <div class="msg-step" style="cursor:pointer" onclick="showDigitalProduct('manos','team')">
         <div class="msg-head">
-          <div class="msg-num">2</div>
+          <div class="msg-num">1</div>
           <div class="msg-lbl">🤸 Aprende a Pararte de Manos en Casa desde Cero</div>
           <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px">$9.99 USD</span>
         </div>
@@ -1061,21 +1002,6 @@ function buildDigitalProductScreen(prod, modo) {
   function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
 
   const PROD = {
-    split: {
-      icon:'🦵', name:'Domina la Enseñanza del Split Sagital', price:'$14.99 USD',
-      for:'entrenadores, coaches y profesores',
-      pitch: isCami
-        ? `¿Enseñas flexibilidad o entrenamiento físico? 🙌\n\nTengo algo que te va a interesar — acabo de liberar la grabación de mi Masterclass *DOMINA LA ENSEÑANZA DEL SPLIT SAGITAL* 🦵\n\nEn 2 horas aprenderás a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes\n\n💰 *$14.99 USD* · acceso inmediato · de por vida 🔒\n📩 ¿Te interesa?`
-        : `¿Enseñas flexibilidad o entrenamiento físico? 🙌\n\nTenemos algo que te va a interesar — Cami acaba de liberar la grabación de su Masterclass *DOMINA LA ENSEÑANZA DEL SPLIT SAGITAL* 🦵\n\nEn 2 horas aprenderás a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes\n\n💰 *$14.99 USD* · acceso inmediato · de por vida 🔒\n📩 ¿Te interesa?`,
-      objs: [
-        { key:'vivo', label:'🎥 "¿Es en vivo?"',
-          txt: isCami ? `No, es una grabación lista para ver cuando quieras 😊 Tienes acceso de por vida así que la puedes revisar las veces que necesites. ¡Sin horario fijo! 💛` : `No, es una grabación lista para ver cuando quieras 😊 Tienen acceso de por vida y la pueden revisar cuando la necesiten. ¡Sin horario fijo! 💛` },
-        { key:'nivel', label:'🎓 "¿Para qué nivel?"',
-          txt: isCami ? `Es para entrenadores, coaches o profes de cualquier nivel que enseñen o quieran enseñar flexibilidad 💛 No importa si recién empiezas a dar clases o llevas años — la metodología la puedes aplicar desde el primer día.` : `Es para entrenadores, coaches o profes de cualquier nivel 💛 No importa si recién empiezan a dar clases o llevan años — la metodología se puede aplicar desde el primer día.` },
-        { key:'solo', label:'🦵 "¿Solo split sagital?"',
-          txt: isCami ? `Sí, la clase está enfocada 100% en el split sagital — o sea, pierna adelante y atrás 💛 Es el más complejo de enseñar correctamente, y dominar este te da la base para enseñar cualquier tipo de flexibilidad.` : `Sí, la clase está enfocada 100% en el split sagital — pierna adelante y atrás 💛 Es el más complejo de enseñar correctamente, y dominarlo da la base para enseñar cualquier tipo de flexibilidad.` }
-      ]
-    },
     manos: {
       icon:'🤸', name:'Aprende a Pararte de Manos en Casa desde Cero', price:'$9.99 USD',
       for:'cualquier persona sin experiencia previa',
