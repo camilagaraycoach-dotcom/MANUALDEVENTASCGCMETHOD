@@ -236,6 +236,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
             <div class="quick-card-title">Cursos grabados</div>
             <div class="quick-card-desc">Venta de cursos digitales</div>
           </button>
+          <button class="quick-card" style="background:linear-gradient(135deg,#1A7FD4,#0FA8A0);border-color:transparent;color:#fff" onclick="startSystem()">
+            <div class="quick-card-icon">🔗</div>
+            <div class="quick-card-title" style="color:#fff">Sistema de reservas</div>
+            <div class="quick-card-desc" style="color:rgba(255,255,255,.8)">Cómo funciona · preguntas frecuentes</div>
+          </button>
         </div>
       </div>
     </div>
@@ -335,8 +340,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
     <div class="p-sec">
       <div class="p-sec-title">Métodos de pago</div>
       <div style="font-size:13px;color:var(--gray);line-height:1.8">
-        🌎 <strong>Internacional:</strong> Link de pago (tarjeta)<br>
-        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles<br>
+        🌎 <strong>Internacional A:</strong> Link tienda (Culqi) → paquete + correo entran automáticos<br>
+        🌎 <strong>Internacional B:</strong> Link de pago manual → el equipo carga el paquete a mano<br>
+        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles → el equipo carga a mano<br>
         📋 <strong>Siempre:</strong> Pedir comprobante antes de confirmar
       </div>
     </div>
@@ -797,31 +803,32 @@ function buildMsgs(rec) {
   // 9. DATOS DE PAGO
   if (isExt) {
     steps.push({who:tw, lbl:'Datos de pago — internacional',
-      txt:`Para pagos internacionales trabajamos con link de pago 💛\nTe lo ${isCami ? 'envío' : 'enviamos'} ahora para que puedas separar tu cupo ✨`,
-      note:'Enviar el link de pago correspondiente.'
+      txt: isCami
+        ? `Para pagos internacionales tenemos dos opciones 💛\n\n🏷️ *Opción A — tienda online (automático):* Te paso el link, pagas con tarjeta y el paquete entra solo con tu correo de bienvenida.\n\n🧾 *Opción B — link de pago manual:* Te armo el cobro y una vez confirmado lo cargo yo.\n\n¿Cuál prefieres?`
+        : `Para pagos internacionales tenemos dos opciones 💛\n\n🏷️ *Opción A — tienda online (automático):* Te pasamos el link, pagas con tarjeta y el paquete entra solo con tu correo de bienvenida.\n\n🧾 *Opción B — link de pago manual:* Te armamos el cobro y una vez confirmado lo cargamos nosotros.\n\n¿Cuál prefieres?`,
+      note:'⚡ Opción A = link de la tienda (Culqi) → paquete + correo entran automáticos. Opción B = link de pago manual → el equipo carga el paquete a mano en el panel después de recibir el comprobante.'
     });
   } else {
     steps.push({who:tw, lbl:'Datos de pago — Perú',
-      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante me lo mandas y separamos tu cupo ✨`,
-      note:'Enviar los datos de Yape/Plin/cuenta.'
+      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante ${isCami ? 'mándamelo' : 'mándanoslo'} y separamos tu cupo ✨`,
+      note:'Enviar los datos de Yape/Plin/cuenta. Después de recibir el comprobante, cargar el paquete a mano en el panel.'
     });
   }
 
   // 10. CONFIRMAR PAGO
-  if (isCami) {
-    steps.push({who:'cami', lbl:'Confirmar pago recibido',
-      txt:`Perfecto, ya recibí tu comprobante 💛\nBienvenida al método 🎉 Te envío ahora el formulario de inicio y coordinamos tu primera clase ✨`
-    });
-  } else {
-    steps.push({who:'team', lbl:'Confirmar pago recibido',
-      txt:`Perfecto, ya recibimos tu comprobante 💛\nTe paso con el equipo de CGC para que te envíen el formulario de bienvenida, la guía de acceso y coordinen tus clases ✨`
-    });
-    // 11. POST-PAGO equipo (solo cuando responde el equipo)
-    steps.push({who:'carlos', lbl:'Post-pago — Carlos / Ariana entra',
-      txt:`Holaa 💛 Soy [tu nombre] del equipo de Cami Garay ✨\nCami me pasó toda tu info. Te voy a enviar el formulario de bienvenida para completar tus datos y coordinar el inicio de tus clases 🤗`,
-      note:'⚡ Reemplaza [tu nombre] con tu nombre real (Carlos o Ariana). ✅ Verificar: formulario completado · acceso Zoom enviado · vigencia del paquete informada · clases agendadas'
-    });
-  }
+  steps.push({who:tw, lbl:'Confirmar pago recibido',
+    txt: isCami
+      ? `Perfecto, ya recibí tu comprobante 💛 ¡Bienvenida al método! 🎉\n\nTe voy a pasar el formulario de bienvenida para registrarte — son unos datos rápidos y después te llega todo al correo 😊`
+      : `Perfecto, ya recibimos tu comprobante 💛 ¡Bienvenida al método! 🎉\n\nTe vamos a pasar el formulario de bienvenida para registrarte — son unos datos rápidos y después te llega todo al correo 😊`
+  });
+
+  // 11. FORMULARIO + CARGA EN PANEL
+  steps.push({who:tw, lbl:'Enviar formulario de bienvenida (grupales)',
+    txt: isCami
+      ? `¡Aquí está el formulario! 📋\n[link del Google Form grupales]\n\nPide: nombre, edad, país, *ciudad*, correo y WhatsApp. Cuando lo llenes me avisas 💛`
+      : `¡Aquí está el formulario! 📋\n[link del Google Form grupales]\n\nPide: nombre, edad, país, *ciudad*, correo y WhatsApp. Cuando lo llenes nos avisas 💛`,
+    note:'📋 Checklist del equipo al recibir el formulario:\n① Crear alumna en el panel → cgc-reservas.vercel.app/admin → "＋ Nueva alumna"\n② En su ficha → "＋ Cargar paquete" (tipo de paquete + fecha de compra)\n③ La app envía sola el correo de bienvenida con el link personal\n④ Listo — el alumno reserva, cambia y cancela solo desde su link. El equipo no coordina clases ni envía acceso de Zoom.\n\n⚠️ Si el formulario todavía no pide "Ciudad", agrega ese campo — la app lo necesita para mostrar horarios en la hora local del alumno.'
+  });
 
   // ── FOLLOW-UP (si el lead queda en visto o dice "lo pienso") ──
   steps.push({
@@ -1116,10 +1123,18 @@ function buildRescheduleScreen(modo) {
   const isCami = modo === 'cami';
   window.__cpMsgs = [];
   function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
-  const txt = isCami
-    ? `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelé tu clase.\n\nCuando quieras reagendarla, puedes hacerlo desde aquí 👇\n[pegar link de la clase]\n\nSolo te recuerdo que tu paquete vence el [fecha de vencimiento], así que asegúrate de tomar todas tus clases antes de esa fecha para no perderlas 💛`
-    : `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelamos tu clase.\n\nCuando quieras reagendarla, puedes hacerlo desde aquí 👇\n[pegar link de la clase]\n\nSolo te recordamos que tu paquete vence el [fecha de vencimiento], así que asegúrate de tomar todas tus clases antes de esa fecha para no perderlas 💛`;
-  const mi = sm(txt);
+
+  const txtCancelar = isCami
+    ? `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelé esa clase.\n\nLa clase volvió a tu paquete, no se pierde. Cuando quieras reservar otra o cambiar de horario, entrá a tu link personal 👇\n[link del alumno]\n\nRecordá que tu paquete vence el [fecha] — aprovechá todas tus clases antes 💛`
+    : `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelamos esa clase.\n\nLa clase volvió a tu paquete, no se pierde. Cuando quieras reservar otra o cambiar de horario, entrá a tu link personal 👇\n[link del alumno]\n\nRecordá que tu paquete vence el [fecha] — aprovechá todas tus clases antes 💛`;
+
+  const txtCambiar = isCami
+    ? `¡Hola [nombre]! Claro 😊 Para cambiar de horario podés hacerlo directamente desde tu link personal 👇\n[link del alumno]\n\nEntrás, buscás la clase que querés cancelar y la cambiás por otro horario. Podés hacerlo hasta 1 hora antes de que empiece 💛`
+    : `¡Hola [nombre]! Claro 😊 Para cambiar de horario puede hacerlo directamente desde su link personal 👇\n[link del alumno]\n\nEntra, busca la clase que quiere cancelar y la cambia por otro horario. Puede hacerlo hasta 1 hora antes de que empiece 💛`;
+
+  const miCancelar = sm(txtCancelar);
+  const miCambiar = sm(txtCambiar);
+
   const whoHtml = isCami
     ? '<span class="msg-who who-cami">⭐ Cami</span>'
     : '<span class="msg-who who-team">💬 Equipo CGC</span>';
@@ -1128,10 +1143,11 @@ function buildRescheduleScreen(modo) {
   return `<div style="max-width:640px;margin:0 auto">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
       <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
-      <div style="font-size:18px;font-weight:800">📅 Reprogramación de clase</div>
+      <div style="font-size:18px;font-weight:800">📅 Cancelaciones y cambios de horario</div>
     </div>
     <div style="background:#fff8e1;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
-      💡 Antes de enviar: cancela la clase desde el sistema, luego pega el <b>link de agendamiento de la clase correspondiente</b> (PowerSplit, Arcos360 o ACROBASES) y la <b>[fecha de vencimiento]</b> del paquete.
+      💡 <b>Cancelar:</b> El alumno puede hacerlo solo desde su link (hasta 1 h antes). Si escribe por WhatsApp, cancelás desde el panel → Reservas → Cancelar. La clase vuelve al paquete y le llega un correo automático.<br><br>
+      💡 <b>Cambiar horario:</b> Siempre desde su link personal. El equipo no hace esto manualmente.
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
       <button class="branch-btn" onclick="showRescheduleMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
@@ -1140,12 +1156,25 @@ function buildRescheduleScreen(modo) {
     <div class="msg-step">
       <div class="msg-head">
         <div class="msg-num">1</div>
-        <div class="msg-lbl">Confirmar reprogramación</div>
+        <div class="msg-lbl">Alumno pide cancelar clase (escribe por WhatsApp)</div>
         ${whoHtml}
       </div>
       <div class="msg-body">
-        <div class="msg-txt">${esc(txt)}</div>
-        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+        <div class="msg-note" style="margin-bottom:10px">⚡ Cancelar la clase primero desde el panel (cgc-reservas.vercel.app/admin → Reservas → Cancelar), luego enviar este mensaje con el <b>[link del alumno]</b> y la <b>[fecha de vencimiento]</b>.</div>
+        <div class="msg-txt">${esc(txtCancelar)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miCancelar})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">2</div>
+        <div class="msg-lbl">Alumno pide cambiar de horario (escribe por WhatsApp)</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">💡 No hay que hacer nada en el panel. Solo redirigir al alumno a su link personal.</div>
+        <div class="msg-txt">${esc(txtCambiar)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miCambiar})">📋 Copiar mensaje</button>
       </div>
     </div>
     <div style="text-align:center;margin-top:24px;margin-bottom:80px">
@@ -1167,24 +1196,24 @@ function buildRenewalScreen(modo) {
   const msgs = [
     {
       label:'⚡ Le queda 1 día',
-      note:'Urgente — el acceso se corta mañana.',
+      note:'Urgente — el acceso se corta mañana. Si dice "sí": Camino A → link de la tienda con sección dorada (descuento automático 1 solo uso, dura 7 días). Camino B → armar el cobro a mano.',
       txt: isCami
-        ? `Hola [nombre]! 🌟 Mañana se vence tu plan en CGC METHOD y quería avisarte antes de que se corte el acceso.\n\nComo alumna activa tienes un descuento especial para renovar hoy 💛 ¿Seguimos? 🔥`
-        : `Hola [nombre]! 🌟 Mañana se vence tu plan en CGC METHOD y queríamos avisarte antes de que se corte el acceso.\n\nComo alumna activa tienes un descuento especial para renovar hoy 💛 ¿Seguimos? 🔥`
+        ? `Hola [nombre]! 🌟 Mañana se vence tu paquete en CGC METHOD y quería avisarte antes de que se corte el acceso.\n\nComo alumna activa tenés tu descuento de renovación 💛 Entrá a tu link y renovás en 1 clic desde la sección dorada — o si preferís te ayudo yo.\n\n¿Seguimos? 🔥`
+        : `Hola [nombre]! 🌟 Mañana se vence tu paquete en CGC METHOD y queríamos avisarte antes de que se corte el acceso.\n\nComo alumna activa tenés tu descuento de renovación 💛 Entrá a tu link y renovás en 1 clic desde la sección dorada — o si preferís te ayudamos nosotros.\n\n¿Seguimos? 🔥`
     },
     {
       label:'📅 Le quedan 3 días',
-      note:'Buen momento — todavía tiene tiempo, pero genera urgencia.',
+      note:'Buen momento — genera urgencia sin presionar. Si dice "sí": Camino A → link personal (sección dorada), Camino B → armar el cobro.',
       txt: isCami
-        ? `Hola [nombre]! 😊 Te escribo porque en 3 días se vence tu plan en CGC METHOD 💛\n\nNo quiero que pierdas el avance que llevas — como alumna activa tienes un descuento especial si renuevas antes de que venza. ¿Seguimos? 🔥`
-        : `Hola [nombre]! 😊 Te escribimos porque en 3 días se vence tu plan en CGC METHOD 💛\n\nNo queremos que pierdas el avance que llevas — como alumna activa tienes un descuento especial si renuevas antes de que venza. ¿Seguimos? 🔥`
+        ? `Hola [nombre]! 😊 Te escribo porque en 3 días se vence tu paquete en CGC METHOD 💛\n\nNo quiero que pierdas el avance que llevas — como alumna activa tenés tu descuento de renovación esperándote en tu link personal (sección dorada). Renovás en un clic, o si preferís te ayudo yo.\n\n¿Seguimos? 🔥`
+        : `Hola [nombre]! 😊 Te escribimos porque en 3 días se vence tu paquete en CGC METHOD 💛\n\nNo queremos que pierdas el avance que llevás — como alumna activa tenés tu descuento de renovación esperándote en tu link personal (sección dorada). Renovás en un clic, o si preferís te ayudamos nosotros.\n\n¿Seguimos? 🔥`
     },
     {
       label:'📆 Le queda 1 semana',
-      note:'Aviso anticipado — tono tranquilo, sin presión.',
+      note:'Aviso anticipado — tono tranquilo, sin presión. Si dice "sí": recordarle que el descuento está en la sección dorada de su link.',
       txt: isCami
-        ? `Hola [nombre]! 💛 ¿Cómo estás? Te escribo porque en una semana se vence tu plan en CGC METHOD.\n\nQuería avisarte con tiempo para que puedas renovar con el descuento que tenemos para alumnas activas como tú ✨ ¿Te interesa continuar? 😊`
-        : `Hola [nombre]! 💛 ¿Cómo estás? Te escribimos porque en una semana se vence tu plan en CGC METHOD.\n\nQueríamos avisarte con tiempo para que puedas renovar con el descuento que tenemos para alumnas activas ✨ ¿Te interesa continuar? 😊`
+        ? `Hola [nombre]! 💛 ¿Cómo estás? Te escribo porque en una semana se vence tu paquete en CGC METHOD.\n\nQuería avisarte con tiempo — como alumna activa tenés tu descuento de renovación guardado en tu link personal (la sección dorada) ✨ Renovás sola en 1 clic, o si preferís te ayudo yo.\n\n¿Te interesa continuar? 😊`
+        : `Hola [nombre]! 💛 ¿Cómo estás? Te escribimos porque en una semana se vence tu paquete en CGC METHOD.\n\nQueríamos avisarte con tiempo — como alumna activa tenés tu descuento de renovación guardado en tu link personal (la sección dorada) ✨ Renovás sola en 1 clic, o si preferís te ayudamos nosotros.\n\n¿Te interesa continuar? 😊`
     }
   ];
   const whoHtml = isCami
@@ -1213,7 +1242,9 @@ function buildRenewalScreen(modo) {
       <div style="font-size:18px;font-weight:800">🔄 Renovaciones — alumnos activos</div>
     </div>
     <div style="background:#e8f5e9;border-left:3px solid #2ECC80;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
-      💡 Revisar diariamente quién tiene el plan por vencer y enviar el mensaje correspondiente.
+      💡 Revisar diariamente desde el panel quién tiene el paquete por vencer y enviar el mensaje correspondiente.<br><br>
+      🔑 <b>Camino A (preferido):</b> El alumno entra a su link personal → sección dorada → renueva con su descuento automático (10% en 4/8 clases · 20% en 12/20/32). Código único, 1 solo uso, dura 7 días.<br>
+      🧾 <b>Camino B:</b> El asesor arma el cobro (Yape / link de pago) y carga el paquete a mano en el panel.
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
       <button class="branch-btn" onclick="showRenewalMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
@@ -1225,6 +1256,78 @@ function buildRenewalScreen(modo) {
     </div>
   </div>`;
 }
+function startSystem() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  document.getElementById('sc-step').innerHTML = buildSystemScreen();
+}
+function buildSystemScreen() {
+  const section = (icon, title, content) =>
+    `<div style="margin-bottom:20px">
+      <div style="font-size:14px;font-weight:800;color:var(--dark);margin-bottom:8px;display:flex;align-items:center;gap:7px">${icon} ${title}</div>
+      <div style="font-size:13px;color:var(--gray);line-height:1.65">${content}</div>
+    </div>`;
+
+  const faq = (q, a) =>
+    `<div style="margin-bottom:14px">
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:3px">❓ "${q}"</div>
+      <div style="font-size:13px;color:var(--gray);padding-left:16px;line-height:1.55">→ ${a}</div>
+    </div>`;
+
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🔗 Sistema de reservas CGC</div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#1A7FD4,#0FA8A0);border-radius:12px;padding:14px 18px;color:#fff;font-size:13px;margin-bottom:20px;line-height:1.6">
+      <div style="font-weight:800;font-size:15px;margin-bottom:4px">App propia de reservas — cgc-reservas.vercel.app</div>
+      Solo para clases grupales en vivo (PowerSplit · Arcos360 · Acrobases). Las clases 1:1 de CGC ELITE van por separado.
+    </div>
+
+    ${section('🔑', 'El link personal del alumno',
+      'Cada alumno tiene <b>un solo link secreto</b>, sin contraseña, solo para él o ella. Con ese link puede:<br>• Reservar cualquier clase de cualquier curso<br>• Cancelar (hasta 1 hora antes — la clase vuelve al paquete)<br>• Cambiar de horario<br>• Anotarse a la lista de espera si la clase está llena<br>• Ver el link de Zoom de cada clase<br>• Renovar su paquete con descuento (sección dorada)<br>El equipo lo tiene en el panel. Al alumno le llega en el correo de bienvenida.'
+    )}
+
+    ${section('📦', 'Los paquetes — "bolsas" de clases',
+      '• Un paquete = saldo de clases + vigencia propia (vence X días <b>desde la primera clase reservada</b>, no desde la compra).<br>• Un paquete da acceso a los <b>3 cursos</b> (PowerSplit + Arcos360 + Acrobases) con el mismo saldo.<br>• Si el alumno tiene dos paquetes, la app descuenta del que vence primero. El equipo no calcula nada.<br>• Los paquetes recién cargados aparecen como "sin estrenar" hasta que el alumno reserva su primera clase.'
+    )}
+
+    ${section('🗓️', 'Reservar · Cancelar · Cambiar · Lista de espera',
+      '• <b>Reservar:</b> el alumno elige clase y horario desde su link. El Zoom sale automático.<br>• <b>Cancelar:</b> el alumno lo hace solo desde su link, hasta 1 h antes. Si escribe por WhatsApp, el equipo lo cancela desde el panel (Reservas → Cancelar) y avisa al alumno.<br>• <b>Cambiar horario:</b> siempre desde el link del alumno. El equipo no lo hace manualmente.<br>• <b>Lista de espera:</b> si la clase está llena, el alumno se anota. Si se libera un cupo, entra solo y le llega un correo automático.'
+    )}
+
+    ${section('📹', 'Zoom',
+      'Hay <b>una sola sala</b> para todas las clases grupales. El link de Zoom sale automático en el link del alumno y en todos los correos de confirmación y recordatorio. El equipo <b>ya no envía el acceso de Zoom</b> por WhatsApp.'
+    )}
+
+    ${section('🌍', 'Zona horaria automática',
+      'El alumno ve todos los horarios en <b>su hora local</b>, automático. Por eso en el formulario de bienvenida se le pide la <b>ciudad</b> además del país.'
+    )}
+
+    ${section('🔄', 'Renovación',
+      '<b>Camino A (preferido):</b> el alumno entra a su link → sección dorada → renueva con su descuento (10% en 4/8 clases · 20% en 12/20/32). Código único, 1 solo uso, válido 7 días. El paquete entra solo.<br><b>Camino B:</b> el asesor arma el cobro y carga el paquete manualmente en el panel.'
+    )}
+
+    ${section('🛠️', 'Panel del equipo',
+      '<b>cgc-reservas.vercel.app/admin</b><br>Desde ahí: crear alumnas, cargar paquetes, ver reservas, cancelar clases, ver lista de espera y revisar quién vence pronto.'
+    )}
+
+    <div style="margin-top:24px;margin-bottom:12px;font-size:14px;font-weight:800;color:var(--dark)">💬 Preguntas frecuentes del prospecto</div>
+    <div style="background:var(--surface,#f9f9f9);border-radius:12px;padding:16px 18px">
+      ${faq('¿Desde cuándo cuenta la vigencia?', 'Desde tu primera clase reservada, no desde la compra. Mientras no reserves ninguna clase, el paquete está "sin estrenar" y no corre el tiempo.')}
+      ${faq('¿Puedo cambiar una clase si no puedo asistir?', 'Sí, desde tu link personal, hasta 1 hora antes de que empiece. La clase vuelve a tu paquete.')}
+      ${faq('¿Y si la clase que quiero está llena?', 'Te anotás a la lista de espera desde tu link. Si se libera un cupo, entrás sola y te avisamos por correo.')}
+      ${faq('¿Cómo entro a la clase?', 'El link de Zoom sale en tu link personal y en cada correo de confirmación. Una sola sala para todas las clases.')}
+      ${faq('Vivo en México / España / EE.UU. — ¿cómo veo los horarios?', 'Los ves en tu hora local, automático. Por eso te pedimos tu ciudad al registrarte.')}
+      ${faq('¿Puedo combinar PowerSplit, Arcos360 y Acrobases?', 'Sí. Un mismo paquete sirve para los 3 cursos. Vos elegís a cuál clase asistir.')}
+    </div>
+
+    <div style="text-align:center;margin-top:28px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+
 function startFollowup() {
   show('sc-start', false); show('sc-step', true); show('sc-result', false);
   showFollowupMsgs('team');
