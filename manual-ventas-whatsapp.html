@@ -51,8 +51,27 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .start-title{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
 .start-title b{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .start-desc{font-size:15px;color:var(--gray);margin-bottom:30px;line-height:1.6}
-.btn-start{background:var(--grad-btn);color:#fff;font-size:16px;font-weight:700;padding:13px 38px;border-radius:14px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(232,48,42,.3);transition:transform .15s,box-shadow .15s}
-.btn-start:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,48,42,.4)}
+.btn-start{background:var(--grad-btn);color:#fff;font-size:17px;font-weight:800;padding:16px 0;border-radius:16px;border:none;cursor:pointer;box-shadow:0 6px 28px rgba(232,48,42,.35);transition:transform .15s,box-shadow .15s;width:100%}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(232,48,42,.45)}
+.home-primary{display:flex;flex-direction:column;align-items:center;gap:7px;margin-bottom:28px}
+.btn-start-hint{font-size:12px;color:var(--gray)}
+.quick-divider{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.quick-divider-line{flex:1;height:1px;background:var(--border)}
+.quick-divider-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;white-space:nowrap}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:14px 14px 12px;cursor:pointer;text-align:left;transition:transform .12s,box-shadow .12s,border-color .12s;display:flex;flex-direction:column;gap:3px}
+.quick-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.quick-card-icon{font-size:22px;line-height:1;margin-bottom:3px}
+.quick-card-title{font-size:13px;font-weight:800;color:var(--text)}
+.quick-card-desc{font-size:11px;color:var(--gray);line-height:1.4}
+.qc-fu{border-color:rgba(74,127,212,.35);background:linear-gradient(135deg,rgba(74,127,212,.06),rgba(139,79,200,.06))}
+.qc-fu:hover{border-color:rgba(74,127,212,.7)}
+.qc-rn{border-color:rgba(46,204,128,.35);background:linear-gradient(135deg,rgba(27,122,74,.06),rgba(46,204,128,.06))}
+.qc-rn:hover{border-color:rgba(46,204,128,.7)}
+.qc-rp{border-color:rgba(230,126,34,.35);background:linear-gradient(135deg,rgba(230,126,34,.06),rgba(243,156,18,.06))}
+.qc-rp:hover{border-color:rgba(230,126,34,.7)}
+.qc-dg{border-color:rgba(155,89,182,.35);background:linear-gradient(135deg,rgba(74,14,143,.06),rgba(155,89,182,.06))}
+.qc-dg:hover{border-color:rgba(155,89,182,.7)}
 .start-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
 .chip{background:var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--gray)}
 
@@ -187,12 +206,41 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
         <div class="start-icon">🎯</div>
         <div class="start-title">Guía de <b>Asesoría CGC</b></div>
         <div class="start-desc">Responde las preguntas sobre el lead y te damos el guión exacto de mensajes para cerrar la venta paso a paso.</div>
-        <button class="btn-start" onclick="start()">➕ Nueva asesoría</button>
-        <div class="start-chips">
-          <span class="chip">👧 Niños y adultos</span>
-          <span class="chip">🌎 Perú y exterior</span>
-          <span class="chip">💪 Con o sin experiencia</span>
-          <span class="chip">📋 Mensajes listos para copiar</span>
+        <div class="home-primary">
+          <button class="btn-start" onclick="start()">➕ Nueva asesoría</button>
+          <div class="btn-start-hint">Alguien nuevo que escribe por primera vez</div>
+        </div>
+        <div class="quick-divider">
+          <div class="quick-divider-line"></div>
+          <div class="quick-divider-lbl">Acceso rápido</div>
+          <div class="quick-divider-line"></div>
+        </div>
+        <div class="quick-grid">
+          <button class="quick-card qc-fu" onclick="startFollowup()">
+            <div class="quick-card-icon">📲</div>
+            <div class="quick-card-title">Seguimiento</div>
+            <div class="quick-card-desc">Lead que no ha respondido</div>
+          </button>
+          <button class="quick-card qc-rn" onclick="startRenewal()">
+            <div class="quick-card-icon">🔄</div>
+            <div class="quick-card-title">Renovaciones</div>
+            <div class="quick-card-desc">Alumno con plan por vencer</div>
+          </button>
+          <button class="quick-card qc-rp" onclick="startReschedule()">
+            <div class="quick-card-icon">📅</div>
+            <div class="quick-card-title">Reprogramaciones</div>
+            <div class="quick-card-desc">Alumno quiere cancelar su clase</div>
+          </button>
+          <button class="quick-card qc-dg" onclick="startDigital()">
+            <div class="quick-card-icon">🎬</div>
+            <div class="quick-card-title">Cursos grabados</div>
+            <div class="quick-card-desc">Venta de cursos digitales</div>
+          </button>
+          <button class="quick-card" style="background:linear-gradient(135deg,#1A7FD4,#0FA8A0);border-color:transparent;color:#fff" onclick="startSystem()">
+            <div class="quick-card-icon">🔗</div>
+            <div class="quick-card-title" style="color:#fff">Sistema de reservas</div>
+            <div class="quick-card-desc" style="color:rgba(255,255,255,.8)">Cómo funciona · preguntas frecuentes</div>
+          </button>
         </div>
       </div>
     </div>
@@ -292,8 +340,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
     <div class="p-sec">
       <div class="p-sec-title">Métodos de pago</div>
       <div style="font-size:13px;color:var(--gray);line-height:1.8">
-        🌎 <strong>Internacional:</strong> Link de pago (tarjeta)<br>
-        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles<br>
+        🌎 <strong>Internacional A:</strong> Link tienda (Culqi) → paquete + correo entran automáticos<br>
+        🌎 <strong>Internacional B:</strong> Link de pago manual → el equipo carga el paquete a mano<br>
+        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles → el equipo carga a mano<br>
         📋 <strong>Siempre:</strong> Pedir comprobante antes de confirmar
       </div>
     </div>
@@ -352,8 +401,7 @@ const STEPS = [
     id:'quien', q:'¿Quién nos está escribiendo?', sub:'Lo primero antes de responder',
     opts:[
       {v:'alumno', icon:'🙋', l:'El/la alumno/a',      d:'La persona que quiere tomar clases'},
-      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',        d:'Escribe el padre o la madre por su hijo/a'},
-      {v:'coach',  icon:'🏋️', l:'Coach / Entrenador/a', d:'Quiere certificarse para enseñar splits — Certificación'}
+      {v:'mama',   icon:'👩‍👧', l:'Mamá o Papá',        d:'Escribe el padre o la madre por su hijo/a'}
     ]
   },
   {
@@ -377,7 +425,7 @@ const STEPS = [
       {v:'splits',        icon:'🦵', l:'Solo splits / apertura de piernas', d:'Quiere abrir más las piernas: split sagital, frontal, elevaciones'},
       {v:'arcos',         icon:'🌙', l:'Solo arcos / flexibilidad de espalda', d:'Quiere mejorar su arco, puente, escorpión o figuras posteriores'},
       {v:'flexibilidad',  icon:'🔥', l:'Flexibilidad completa — splits + arcos', d:'Quiere trabajar ambos: apertura de piernas Y flexibilidad de espalda'},
-      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa más preparación física y base acrobática'},
+      {v:'todo',          icon:'⭐', l:'Todo — flexibilidad + fuerza + técnica', d:'Flexibilidad completa (splits + arcos) + ACROBASES (fuerza y base acrobática)'},
       {v:'acrobases',     icon:'🤸', l:'Aprender acrobacias', d:'Parada de manos, rueda de carro, rodamientos — base acrobática'},
       {v:'1a1',           icon:'🎯', l:'Clases 1:1 (Cami, Andrea o Sebastián)', d:'Quiere atención personalizada con un coach'}
     ]
@@ -388,7 +436,6 @@ const STEPS = [
 let state = {}, history = [], visSteps = [], stepIdx = 0;
 
 function getVis(s) {
-  if (s.quien === 'coach') return STEPS.filter(st => st.id === 'modo' || st.id === 'quien');
   return STEPS.slice();
 }
 
@@ -445,7 +492,6 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 // ── RECOMMENDATION ────────────────────────────────────
 function getRec() {
   const {quien, objetivo} = state;
-  if (quien === 'coach') return 'masterclass';
   if (objetivo==='1a1')          return '1a1';
   if (objetivo==='acrobases')    return 'acrobases';
   if (objetivo==='splits')       return 'powersplit';
@@ -461,8 +507,7 @@ const REC = {
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + ACROBASES',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
   '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($35) o Sebastián ($35) según lo que busca el alumno.'},
-  'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'},
-  'masterclass':  {icon:'🏅', name:'Certificación para Entrenadores',         color:'linear-gradient(135deg,#1a7fd4,#0fa8a0)', nota:'Domina la Enseñanza del Split Sagital · 2h en vivo por Zoom · $29.99 USD hoy (regular $59) · Cupos limitados · 30 ago.'}
+  'acrobases':    {icon:'🤸', name:'ACROBASES',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'}
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
@@ -474,73 +519,32 @@ function buildMsgs(rec) {
   const tw = isCami ? 'cami' : 'team';
   const steps = [];
 
-  // ── FLUJO COACH / ENTRENADOR ──────────────────────────
-  if (quien === 'coach') {
-    steps.push({who:tw, lbl:'Saludo inicial — Entrenador/a',
-      txt: isCami
-        ? `¡Hola! 💛 Soy Cami, qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`
-        : `¡Hola! Un gusto 💛 Qué bueno que nos escribiste.\n¿En qué área enseñas o entrenas? (gimnasia, danza, acrobacia, cheer, stretching...) 🎓`,
-      note:'⏳ Esperar la respuesta antes de presentar la certificación.'
-    });
-    steps.push({who:tw, lbl:'Conectar con el problema — esperar respuesta',
-      note:'⚡ Cambia [su área] por lo que te dijo que enseña (ej: "en la danza", "en la gimnasia", "en el cheer"). ⏳ Enviar y esperar que respondan antes de continuar.',
-      txt: isCami
-        ? `Qué bueno, en [su área] el split es lo que todos tus alumnos quieren lograr.\n\nY hay algo que casi ningún curso de entrenador enseña: *cómo llevar a un cuerpo diferente al tuyo hasta el split, sin que se lastime en el proceso.*\n\n¿Te ha pasado tener alumnos que llevan meses entrenando y no avanzan? 👀`
-        : `Qué bueno, en [su área] el split es lo que todos los alumnos quieren lograr.\n\nY hay algo que casi ningún curso de entrenador enseña: *cómo llevar a un cuerpo diferente al propio hasta el split, sin que se lastime en el proceso.*\n\n¿Le ha pasado tener alumnos que llevan meses entrenando y no avanzan? 👀`
-    });
-    steps.push({who:tw, lbl:'Micro-compromiso — esperar "sí"',
-      note:'⏳ Enviar solo cuando respondan. Esperar que digan "sí" o "contame" antes del siguiente mensaje.',
-      txt: isCami
-        ? `Exacto, es lo más común — y tiene solución 💛\n\nJustamente creé algo específico para eso. ¿Quieres que te cuente de qué se trata?`
-        : `Exacto, es lo más común — y tiene solución 💛\n\nJustamente Cami creó algo específico para eso. ¿Quieres que te cuente de qué se trata?`
-    });
-    steps.push({who:tw, lbl:'Presentar la Certificación — versión corta',
-      note:'✅ Enviar solo después de que digan "sí". Mensaje corto y directo.',
-      txt: isCami
-        ? `🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nFormación en vivo conmigo — 2 horas para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes de tus alumnos\n\n📅 Domingo 30 de agosto · 10am–12pm (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 *$29.99 USD* · cupos limitados 🔒`
-        : `🏅 *Certificación: Domina la Enseñanza del Split Sagital*\n\nFormación en vivo con Cami — 2 horas para aprender a:\n✅ Evaluar la flexibilidad real de cada alumno\n✅ Elegir la progresión exacta para cada cuerpo\n✅ Corregir los errores que generan lesiones\n✅ Diseñar un plan de entrenamiento personalizado\n✅ Dar correcciones que aceleren el avance sin riesgo\n✅ Responder con seguridad las dudas más frecuentes de tus alumnos\n\n📅 Domingo 30 de agosto · 10am–12pm (Perú/Colombia)\n💻 En vivo por Zoom · desde cualquier país\n💰 *$29.99 USD* · cupos limitados 🔒`
-    });
-    steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye al inscribirte?',
-      txt:'',
-      note:'📸 Mantené presionada la imagen para guardarla o compartirla directamente por WhatsApp.',
-      imgOnly: true,
-      img: 'img/img-incluye-certificacion.png'
-    });
-    steps.push({who:tw, lbl:'Cerrar — directo, sin repetir',
-      note:'💡 No repetir beneficios. Solo confirmar lo extra y preguntar directamente.',
-      txt: isCami
-        ? `También incluye la grabación completa y tu certificado digital 💛\n\n¿Lo reservamos ahora? Te paso el link directo 🎯`
-        : `También incluye la grabación completa y el certificado digital 💛\n\n¿Lo reservamos ahora? Le paso el link directo 🎯`
-    });
-    steps.push({who:tw, lbl:'Enviar link de pago',
-      txt:`¡Perfecto! Acá te dejo el link de pago para que reserves tu cupo ahora 💛\n\n💳 https://express.culqi.com/pago/9A651A2CA4\n\nSon $29.99 USD (precio especial solo por hoy) · acepta tarjeta de débito o crédito · se hace en 2 minutos ✅\n\nEn cuanto me confirmes el comprobante, te envío los siguientes pasos 🙌`,
-      note:'Enviar este mensaje y esperar la confirmación del pago.'
-    });
-    steps.push({who: isCami ? 'cami' : 'carlos', lbl:'Post-pago — Confirmar e instrucciones',
-      txt: `¡Cupo confirmado! 🎉🎓 Ya eres parte de la Masterclass.\n\nAhora hay dos pasos importantes para que todo quede listo:\n\n1️⃣ Únete al grupo oficial de WhatsApp\n👉 chat.whatsapp.com/IuTou6kJygEKUPML9YN0DJ\nAhí es donde te enviaremos el link de Zoom antes de la clase. Si no te unes al grupo, no podrás recibir el acceso.\n\n2️⃣ Completa el formulario de inscripción\n👉 forms.gle/4WEgxDVqHHXPNreD7\nNos ayuda a preparar mejor la clase y a enviarte tu certificado de participación.\n\nTu inscripción también incluye la grabación de la clase (por si no puedes conectarte en vivo) y tu certificado al finalizar 💛\n\n¡Nos vemos el 30 de agosto! ✨`,
-      note:'Verificar: ✅ pago recibido · ✅ unido al grupo de WA · ✅ forms completado · ✅ link Zoom enviado antes del 30 ago'
-    });
-    return steps;
-  }
-
   // 1. SALUDO MANUAL (el auto-mensaje ya fue enviado y el lead ya respondió con su info)
   steps.push({who:tw, lbl:'Saludo inicial',
     txt: isCami
       ? (isMama
-          ? `¡Hola! 💛 Soy Cami. Ya vi todo lo que nos compartieron — con mucho gusto les ayudo personalmente a encontrar la mejor opción para su hijo/a 🤗`
-          : `¡Hola [nombre]! 💛 Soy Cami. Ya vi todo lo que nos contaste — con mucho gusto te ayudo personalmente a encontrar la mejor opción para ti 😊`)
+          ? `¡Hola! 💛 Soy Cami. Ya leí lo que nos compartieron — les voy a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
+          : `¡Hola [nombre]! 💛 Soy Cami. Ya leí lo que me contaste — voy a hacerte un par de preguntas para orientarte exactamente según lo que buscas 🎯`)
       : (isMama
-          ? `¡Hola! 💛 Ya vi todo lo que nos compartieron — con mucho gusto les ayudo a encontrar la mejor opción para su hijo/a 🤗`
-          : `¡Hola [nombre]! 💛 Ya vi todo lo que nos contaste — con mucho gusto te ayudo a encontrar la mejor opción para ti 😊`),
+          ? `¡Hola! 💛 Ya leí lo que nos compartieron — les vamos a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
+          : `¡Hola [nombre]! 💛 Ya leí lo que nos contaste — te voy a hacer un par de preguntas para orientarte exactamente según lo que buscas 🎯`),
     note:'⚡ El mensaje de bienvenida automático ya fue enviado. Reemplaza [nombre] con el nombre real del lead. 📌 El nombre está en su primer mensaje o en el perfil de WhatsApp.'
   });
 
   // CONEXIÓN EMOCIONAL (antes de recomendar)
   steps.push({who:tw, lbl:'Conectar — preguntar el objetivo real',
     txt: isMama
-      ? `¡Qué bueno que nos escribieron! 🤗 Antes de recomendarles algo, cuéntenme: ¿qué es lo que su hijo/a quiere lograr? ¿Tiene alguna meta específica — una competencia, una audición, algo que siempre quiso aprender?`
-      : `¡Qué bueno que nos escribiste! 🤗 Antes de recomendarte algo, cuéntame: ¿qué es lo que más quieres lograr? ¿Tienes alguna meta en mente — una competencia, una actuación, algo que siempre quisiste aprender?`,
+      ? `Para orientarlos bien — ¿qué es lo que su hijo/a quiere lograr? ¿Tiene alguna meta específica: una competencia, una audición, algo que siempre quiso aprender?`
+      : `Para orientarte bien — ¿qué es lo que más quieres lograr? ¿Tienes alguna meta en mente: una competencia, una actuación, algo que siempre quisiste aprender?`,
     note:'⏳ Esperar la respuesta. Esta pregunta conecta emocionalmente y hace que la recomendación se sienta personalizada, no genérica.'
+  });
+
+  // 4b. PREGUNTAR MOTIVACIÓN — ¿para qué?
+  steps.push({who:tw, lbl:'Preguntar motivación — ¿para qué?',
+    txt: isMama
+      ? `¡Qué bueno! Y cuando dice que su hijo/a quiere lograr eso — ¿hay algún motivo especial? ¿Una competencia o audición próxima, o es algo que siempre quiso aprender? 💛`
+      : `¡Qué bueno! Y cuando dices que quieres lograr eso — ¿hay algún motivo especial? ¿Una competencia o evento próximo, o es algo que siempre quisiste lograr para ti? 💛`,
+    note:'⏳ Esperar la respuesta. Si mencionan una fecha o evento → usarlo para crear urgencia al cerrar ("entonces para llegar a tiempo necesitarías empezar cuanto antes"). Si es un sueño personal → enfocarse en la transformación al recomendar.'
   });
 
   // 4. PREGUNTAR EXPERIENCIA (copyable)
@@ -561,21 +565,21 @@ function buildMsgs(rec) {
         key:'si', label:'💪 Tiene experiencia',
         txt: isCami
           ? (isMama
-              ? `¡Qué bueno que tu hijo/a ya tiene experiencia! Eso es una ventaja enorme 💪\nMi método complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
-              : `¡Qué genial que ya tienes experiencia! Eso es una ventaja enorme 💪\nMi método complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`)
+              ? `La experiencia de tu hijo/a es una ventaja — ya tiene consciencia corporal y base muscular 💪\n\nY lo que hace diferente mi método es que mis coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con esa base los avances van a ser mucho más notorios y rápidos que cualquier cosa que haya intentado antes ✨`
+              : `Tu experiencia es una ventaja — ya tienes consciencia corporal y base muscular 💪\n\nY lo que hace diferente mi método es que mis coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con tu base los avances van a ser mucho más notorios y rápidos que cualquier cosa que hayas intentado antes ✨`)
           : (isMama
-              ? `¡Qué bueno que tu hijo/a ya tiene experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa muy bien ese entrenamiento y los resultados se ven desde las primeras clases ✨`
-              : `¡Qué genial que ya tienes experiencia! Eso es una ventaja enorme 💪\nEl método de Cami complementa perfecto ese entrenamiento y vas a ver resultados desde la primera clase ✨`)
+              ? `La experiencia de tu hijo/a es una ventaja — ya tiene consciencia corporal y base muscular 💪\n\nY lo que hace diferente el método de Cami es que los coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con esa base los avances van a ser mucho más notorios y rápidos que cualquier cosa que haya intentado antes ✨`
+              : `Tu experiencia es una ventaja — ya tienes consciencia corporal y base muscular 💪\n\nY lo que hace diferente el método de Cami es que los coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con tu base los avances van a ser mucho más notorios y rápidos que cualquier cosa que hayas intentado antes ✨`)
       },
       {
         key:'no', label:'🌱 Comenzando desde cero',
         txt: isCami
           ? (isMama
-              ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nMi método construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
-              : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nMi método construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`)
+              ? `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nMi método está basado en anatomía y biomecánica real: mis coaches entienden cómo funciona cada cuerpo y adaptan el trabajo al de tu hijo/a específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de la historia previa, depende de la metodología ✨`
+              : `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nMi método está basado en anatomía y biomecánica real: mis coaches entienden cómo funciona cada cuerpo y adaptan el trabajo a ti específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de tu historia, depende de la metodología ✨`)
           : (isMama
-              ? `¡Perfecto para empezar desde cero! No se necesita ninguna experiencia previa 🌱\nEl método de Cami construye todo desde la base, de forma segura y con resultados reales. Muchas alumnas empezaron exactamente igual y hoy hacen cosas increíbles ✨`
-              : `¡Perfecto para empezar desde cero! No necesitas experiencia previa 🌱\nEl método de Cami construye todo paso a paso, de forma segura. Muchas alumnas empezaron así y hoy hacen cosas increíbles ✨`)
+              ? `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nEl método de Cami está basado en anatomía y biomecánica real: los coaches entienden cómo funciona cada cuerpo y adaptan el trabajo al de tu hijo/a específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de la historia previa, depende de la metodología ✨`
+              : `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nEl método de Cami está basado en anatomía y biomecánica real: los coaches entienden cómo funciona cada cuerpo y adaptan el trabajo a ti específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de tu historia, depende de la metodología ✨`)
       }
     ]
   });
@@ -584,30 +588,30 @@ function buildMsgs(rec) {
   let recTxt = '';
   // Sin pregunta de horarios/valores al final — eso va después del video+imágenes
   if (rec==='powersplit') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a le recomendaría PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
-    : `Por lo que me cuentas, te recomendaría PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por todo lo que me contaste, lo que necesitas es PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='arcos360') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a le recomendaría Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
-    : `Por lo que me cuentas, te recomendaría Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
+    : `Por todo lo que me contaste, lo que necesitas es Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='ps-a360') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a le recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
-    : `Por lo que me cuentas, te recomendaría combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por todo lo que me contaste, lo que necesitas es combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='completo') recTxt = isMama
-    ? `Por lo que me cuentas, la mejor opción para tu hijo/a sería el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
-    : `Por lo que me cuentas, te recomendaría el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo y con un solo paquete accedes a los 3 cursos ✨`;
+    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
+    : `Por todo lo que me contaste, lo que necesitas es el programa completo: PowerSplit + Arcos360 + ACROBASES 💛\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo y con un solo paquete accedes a los 3 cursos ✨`;
   else if (rec==='acrobases') recTxt = isCami
     ? (isMama
-        ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
-        : `Por lo que me cuentas, te recomendaría ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que tu cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`)
+        ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
+        : `Por todo lo que me contaste, lo que necesitas es ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que tu cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`)
     : (isMama
-        ? `Por lo que me cuentas, para tu hijo/a le recomendaría ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
-        : `Por lo que me cuentas, te recomendaría ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
+        ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
+        : `Por todo lo que me contaste, lo que necesitas es ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
   else if (rec==='1a1') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
     : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
-  steps.push({who:tw, lbl:'Presentar clases 1:1 y coaches', txt:recTxt,
-    note:'⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.'});
+  steps.push({who:tw, lbl: rec==='1a1' ? 'Presentar clases 1:1 y coaches' : 'Recomendar el programa', txt:recTxt,
+    note: rec==='1a1' ? '⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.' : '⏳ Enviar y esperar que respondan antes de continuar.'});
 
   // PREGUNTAS FRECUENTES DE MAMÁS
   if (isMama) {
@@ -641,8 +645,8 @@ function buildMsgs(rec) {
     });
   }
 
-  // BRANCH — elegir coach 1:1
-  steps.push({
+  // BRANCH — elegir coach 1:1 (solo si la ruta es clases particulares)
+  if (rec === '1a1') steps.push({
     type:'branch3',
     lbl:'¿Qué coach le recomiendas?',
     note:'Elige según lo que respondió el lead 👇',
@@ -651,22 +655,22 @@ function buildMsgs(rec) {
         key:'cami', label:'⭐ Cami ($60)',
         sublbl:'Splits, arcos, acrobacias, danza — todo',
         txt: isMama
-          ? `¡Perfecto! En ese caso te recomendaría una clase directamente con *Cami Garay* 💛\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarle a tu hijo/a un plan exacto según su objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría reservar su primera clase? 🎯`
-          : `¡Perfecto! En ese caso te recomendaría una clase directamente con *Cami Garay* 💛\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarte un plan exacto según tu objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría reservar tu primera clase? 🎯`
+          ? `¡Perfecto! Lo ideal para tu hijo/a es trabajar directamente con *Cami Garay* 💛\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarle un plan exacto según su objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría reservar su primera clase? 🎯`
+          : `¡Perfecto! Lo ideal para ti es trabajar directamente con *Cami Garay* 💛\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarte un plan exacto según tu objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría reservar tu primera clase? 🎯`
       },
       {
         key:'andrea', label:'💃 Andrea ($35)',
         sublbl:'Gimnasia, acrobacias, trucos de danza',
         txt: isMama
-          ? `¡Perfecto! Para ese objetivo te recomendaría a *Andrea* 💛\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Muy paciente con los niños — sabe exactamente cómo guiarlos paso a paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nTodas las coaches están formadas por Cami y siguen el mismo método CGC.\n\n¿Te gustaría reservar la primera clase con Andrea? 🎯`
-          : `¡Perfecto! Para ese objetivo te recomendaría a *Andrea* 💛\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Directa y cercana — te hace sentir acompañada en cada paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formada por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar tu primera clase con Andrea? 🎯`
+          ? `¡Perfecto! La indicada para tu hijo/a es *Andrea* 💛\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Muy paciente con los niños — sabe exactamente cómo guiarlos paso a paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nTodas las coaches están formadas por Cami y siguen el mismo método CGC.\n\n¿Te gustaría reservar la primera clase con Andrea? 🎯`
+          : `¡Perfecto! La indicada para ti es *Andrea* 💛\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Directa y cercana — te hace sentir acompañada en cada paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formada por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar tu primera clase con Andrea? 🎯`
       },
       {
         key:'sebastian', label:'🩰 Sebastián ($35)',
         sublbl:'Flexibilidad y técnica de danza',
         txt: isMama
-          ? `¡Perfecto! Para ese objetivo te recomendaría a *Sebastián* 💛\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — le explica a tu hijo/a el porqué de cada movimiento para que entienda su cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar la primera clase con Sebastián? 🎯`
-          : `¡Perfecto! Para ese objetivo te recomendaría a *Sebastián* 💛\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — te explica el porqué de cada movimiento para que entiendas tu cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar tu primera clase con Sebastián? 🎯`
+          ? `¡Perfecto! El indicado para tu hijo/a es *Sebastián* 💛\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — le explica a tu hijo/a el porqué de cada movimiento para que entienda su cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar la primera clase con Sebastián? 🎯`
+          : `¡Perfecto! El indicado para ti es *Sebastián* 💛\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — te explica el porqué de cada movimiento para que entiendas tu cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría reservar tu primera clase con Sebastián? 🎯`
       }
     ]
   });
@@ -678,33 +682,33 @@ function buildMsgs(rec) {
         ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`
         : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`});
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.png']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/paquete-cgc.png']});
     steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.png']});
-    steps.push({who:tw, lbl:'Enviar imagen — Resultados Reales', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/3cursos-cgc.png']});
+    steps.push({who:tw, lbl:'Enviar imágenes — Resultados Reales', isAction:true,
+      action:'📸 Enviar estas imágenes por WhatsApp (una por una):', imgs:['img/laura-resultados-cgc.png','img/manuel-resultados-cgc.png']});
     steps.push({who:tw, lbl:'Resumen de clases 1:1',
       txt: isCami
         ? `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para ti — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para que puedas repasar\n📊 Plan de entrenamiento diseñado según tu objetivo y nivel\n\nAvanzás a tu ritmo, con guía real clase a clase. 💛`
         : `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para el alumno — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para repasar cuando quiera\n📊 Plan de entrenamiento diseñado según su objetivo y nivel\n\nAvanza a su ritmo, con guía real clase a clase. 💛`});
-    steps.push({who:tw, lbl:'Preguntar horarios y valores',
+    steps.push({who:tw, lbl:'Confirmar disponibilidad horaria',
       txt: isCami
-        ? `¿Te gustaría que te comparta los horarios disponibles y los valores? 💛`
-        : `¿Te gustaría que te compartamos los horarios disponibles y los valores? 💛`});
+        ? `Perfecto — ¿cuándo tienes disponibilidad para tu primera clase? Así coordinamos el horario 📅`
+        : `Perfecto — ¿cuándo tiene disponibilidad para su primera clase? Así coordinamos el horario 📅`});
   } else {
     steps.push({who:tw, lbl:'Mensaje — envío imágenes',
       txt: isCami
         ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`
         : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`});
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.png']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/paquete-cgc.png']});
     steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.png']});
-    steps.push({who:tw, lbl:'Enviar imagen — Resultados Reales', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
-    steps.push({who:tw, lbl:'Preguntar horarios/valores — con urgencia',
-      note:'🔥 Mencionar el 20% de descuento. Si el lead vuelve al día siguiente: seguir aplicando el descuento y decir "te lo guardamos" — no perder la venta por esto.',
-      txt:`¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/3cursos-cgc.png']});
+    steps.push({who:tw, lbl:'Enviar imágenes — Resultados Reales', isAction:true,
+      action:'📸 Enviar estas imágenes por WhatsApp (una por una):', imgs:['img/laura-resultados-cgc.png','img/manuel-resultados-cgc.png']});
+    steps.push({who:tw, lbl:'Preguntar ciudad/país — para enviar el horario correcto',
+      txt:`¿Desde qué ciudad o país nos escribes? Así te mando el horario que corresponde 📍`,
+      note:'📍 Con la respuesta: configurar la ubicación en el wizard si aún no estaba definida, y enviar la imagen del horario correspondiente en el siguiente paso.\n🔥 Descuento del 20% vigente. Si el lead vuelve al día siguiente: seguir aplicando y decir "te lo guardamos" — no perder la venta por esto.'});
   }
 
   // CLASE DE PRUEBA GRATUITA
@@ -743,10 +747,11 @@ function buildMsgs(rec) {
       txt: isCami
         ? `¿Sabes lo mejor del paquete? 🔥\n\nCon una sola compra accedes a los *3 cursos completos*:\n\n🦵 *PowerSplit* — splits, elevaciones y fortalecimiento de piernas. Tu apertura avanza clase a clase.\n🌙 *Arcos360* — arco, puente, escorpión, figuras posteriores y fortalecimiento de espalda. La flexibilidad que marca la diferencia.\n🤸 *ACROBASES* — rodamiento adelante, rodamiento atrás, parada de manos, parada de codos, ruedas y aspas. Todo desde cero, paso a paso, con preparación física integrada.\n\nTodas las clases son en vivo por Zoom, se graban, y tú eliges a cuál asistir según tus horarios. *Un paquete, tres cursos, resultados reales.* 💛`
         : `¿Sabes lo mejor del paquete? 🔥\n\nCon una sola compra accedes a los *3 cursos completos*:\n\n🦵 *PowerSplit* — splits, elevaciones y fortalecimiento de piernas. Tu apertura avanza clase a clase.\n🌙 *Arcos360* — arco, puente, escorpión, figuras posteriores y fortalecimiento de espalda. La flexibilidad que marca la diferencia.\n🤸 *ACROBASES* — rodamiento adelante, rodamiento atrás, parada de manos, parada de codos, ruedas y aspas. Todo desde cero, paso a paso, con preparación física integrada.\n\nTodas las clases son en vivo por Zoom, se graban, y tú eliges a cuál asistir según tus horarios. *Un paquete, tres cursos, resultados reales.* 💛`});
-    steps.push({who:tw, lbl:'Preguntar disponibilidad horaria',
-      txt:`¿En qué días y horarios ${isMama ? 'tiene más disponibilidad tu hijo/a' : 'tienes más disponibilidad'}? 📅\nAsí te recomiendo el mejor plan según tu rutina.`});
+    steps.push({who:tw, lbl:'Preguntar frecuencia de entrenamiento',
+      txt:`¿Cuántos días a la semana ${isMama ? 'podría entrenar tu hijo/a' : 'podrías entrenar'} — 2 o 3? 📅`,
+      note:'2 días → paquete BÁSICOS | 3 días → paquete INTENSIVOS. La respuesta define directamente qué paquete cerrar.'});
     steps.push({who:tw, lbl:'Recomendar paquete personalizado',
-      txt:`Perfecto, con esos horarios te recomiendo el paquete de [X clases] 💛\nCon el descuento de hoy te sale $[precio] USD / S/[precio] 🔥\n¿Lo separamos?`,
+      txt:`Perfecto, con esos horarios el paquete ideal para ti es el de [X clases] 💛\nCon el descuento de hoy te sale $[precio] USD / S/[precio] 🔥\n¿Lo separamos?`,
       note:'✍️ Reemplaza [X clases] y [precio] con los datos de abajo:\n\n📋 BÁSICOS (2x/sem) | 8 clases $67→$54 S/168→$134 | 20 clases $165→$132 S/520→$416 | 32 clases $245→$196 S/770→$616\n📋 INTENSIVOS (3x/sem) | 12 clases $105→$84 S/330→$264 | 20 clases $165→$132 S/520→$416 | 32 clases $245→$196 S/770→$616\n💡 Recomienda el que se ajuste a los días/horarios que dijeron tener.'});
 
     // OBJECIONES COMUNES
@@ -759,6 +764,9 @@ function buildMsgs(rec) {
           key:'caro',
           label:'💸 "Está muy caro"',
           txt: isCami
+            ? `Gracias por contarme 💛 Solo para entender bien — ¿por qué te parece elevado?`
+            : `Gracias por comentarnos 💛 Solo para entender bien — ¿por qué te parece elevado?`,
+          txt2: isCami
             ? `Entiendo perfectamente 💛 Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase suelta particular de flexibilidad cuesta entre $30 y $60. Con el paquete de 20 clases, cada clase te sale menos de $7 — y además accedes a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase. Y los resultados se ven desde las primeras semanas 🙌\n\n¿Con cuántas clases por semana podrías comprometerte?`
             : `Entiendo perfectamente 💛 Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase suelta particular de flexibilidad cuesta entre $30 y $60. Con el paquete de 20 clases, cada clase sale menos de $7 — y además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase. Y los resultados se ven desde las primeras semanas 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
         },
@@ -766,22 +774,22 @@ function buildMsgs(rec) {
           key:'pensar',
           label:'🤔 "Lo pienso y te aviso"',
           txt: isCami
-            ? `¡Claro, sin presión! 💛 Solo te cuento que el descuento del 20% es válido por hoy — mañana el precio vuelve a ser el normal.\n\nSi tienes alguna duda puntual que te esté frenando, con gusto te la resuelvo ahora mismo 😊\n\n¿Qué es lo que más dudas?`
-            : `¡Claro, sin presión! 💛 Solo le comento que el descuento del 20% es válido por hoy — mañana el precio vuelve a ser el normal.\n\nSi tiene alguna duda puntual que le esté frenando, con gusto se la resolvemos ahora mismo 😊\n\n¿Qué es lo que más le genera dudas?`
+            ? `¡Claro, sin presión! 💛 Solo te cuento que el descuento del 20% es válido por hoy — mañana el precio vuelve a ser el normal.\n\n¿Lo que más te frena es el precio, el horario o algo más?`
+            : `¡Claro, sin presión! 💛 Solo le comento que el descuento del 20% es válido por hoy — mañana el precio vuelve a ser el normal.\n\n¿Lo que más le frena es el precio, el horario o algo más?`
         },
         {
           key:'info',
           label:'📩 "Mándame más info"',
           txt: isCami
-            ? `¡Claro! Aunque antes de enviarte más cosas, prefiero entender bien qué es lo que buscas para enviarte solo lo que te sirve de verdad 💛\n\n¿Qué es lo que más te interesa saber? ¿Los horarios, los precios, cómo funcionan las clases...?`
-            : `¡Claro! Aunque antes de enviarle más cosas, prefiero entender bien qué busca para enviarle solo lo que le sirve de verdad 💛\n\n¿Qué es lo que más le interesa saber? ¿Los horarios, los precios, cómo funcionan las clases...?`
+            ? `Claro 💛 Para mandarte exactamente lo que necesitas — ¿qué es lo que más te genera duda: los horarios, los precios o cómo funcionan las clases?`
+            : `Claro 💛 Para mandarle exactamente lo que necesita — ¿qué es lo que más le genera duda: los horarios, los precios o cómo funcionan las clases?`
         },
         {
           key:'tiempo',
           label:'⏰ "No tengo tiempo"',
           txt: isCami
-            ? `Eso lo escucho mucho 💛 Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puedes conectarte en vivo igual tienes la clase disponible.\n\n¿Cuáles son los días y horarios que en general sí tienes libres?`
-            : `Eso lo escuchamos mucho 💛 Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puede conectarse en vivo igual tiene la clase disponible.\n\n¿Cuáles son los días y horarios que en general sí tiene libres?`
+            ? `Eso lo escucho mucho 💛 Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puedes conectarte en vivo igual tienes la clase disponible.\n\n¿Cuántos días a la semana podrías comprometerte — 2 o 3? 📅`
+            : `Eso lo escuchamos mucho 💛 Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puede conectarse en vivo igual tiene la clase disponible.\n\n¿Cuántos días a la semana podría comprometerse — 2 o 3? 📅`
         }
       ]
     });
@@ -791,8 +799,8 @@ function buildMsgs(rec) {
   if (isLima && !isNino && rec!=='1a1') {
     steps.push({who:tw, lbl:'Ofrecer FlexiPower — bonus Lima',
       txt: isCami
-        ? `Como estás en Lima, también te recomendaría FlexiPower 🏋️💛\n\nSon clases grupales presenciales en Acroflex (Jesús María) — las diseñé yo y las dan mis entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`
-        : `Como estás en Lima, también te recomendaría FlexiPower 🏋️💛\n\nSon clases grupales presenciales en Acroflex (Jesús María), diseñadas por Cami y dictadas por sus entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`,
+        ? `Como estás en Lima, eres candidata perfecta para FlexiPower también 🏋️💛\n\nSon clases grupales presenciales en Acroflex (Jesús María) — las diseñé yo y las dan mis entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`
+        : `Como estás en Lima, eres candidata perfecta para FlexiPower también 🏋️💛\n\nSon clases grupales presenciales en Acroflex (Jesús María), diseñadas por Cami y dictadas por sus entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`,
       note:'Si le interesa → enviar: 📱 WhatsApp Acroflex: +51 993 813 336 para coordinar horarios e inscripción'
     });
   }
@@ -807,31 +815,32 @@ function buildMsgs(rec) {
   // 9. DATOS DE PAGO
   if (isExt) {
     steps.push({who:tw, lbl:'Datos de pago — internacional',
-      txt:`Para pagos internacionales trabajamos con link de pago 💛\nTe lo ${isCami ? 'envío' : 'enviamos'} ahora para que puedas separar tu cupo ✨`,
-      note:'Enviar el link de pago correspondiente.'
+      txt: isCami
+        ? `Para pagos internacionales tenemos dos opciones 💛\n\n🏷️ *Opción A — tienda online (automático):* Te paso el link, pagas con tarjeta y el paquete entra solo con tu correo de bienvenida.\n\n🧾 *Opción B — link de pago manual:* Te armo el cobro y una vez confirmado lo cargo yo.\n\n¿Cuál prefieres?`
+        : `Para pagos internacionales tenemos dos opciones 💛\n\n🏷️ *Opción A — tienda online (automático):* Te pasamos el link, pagas con tarjeta y el paquete entra solo con tu correo de bienvenida.\n\n🧾 *Opción B — link de pago manual:* Te armamos el cobro y una vez confirmado lo cargamos nosotros.\n\n¿Cuál prefieres?`,
+      note:'⚡ Opción A = link de la tienda (Culqi) → paquete + correo entran automáticos. Opción B = link de pago manual → el equipo carga el paquete a mano en el panel después de recibir el comprobante.'
     });
   } else {
     steps.push({who:tw, lbl:'Datos de pago — Perú',
-      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante me lo mandas y separamos tu cupo ✨`,
-      note:'Enviar los datos de Yape/Plin/cuenta.'
+      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante ${isCami ? 'mándamelo' : 'mándanoslo'} y separamos tu cupo ✨`,
+      note:'Enviar los datos de Yape/Plin/cuenta. Después de recibir el comprobante, cargar el paquete a mano en el panel.'
     });
   }
 
   // 10. CONFIRMAR PAGO
-  if (isCami) {
-    steps.push({who:'cami', lbl:'Confirmar pago recibido',
-      txt:`Perfecto, ya recibí tu comprobante 💛\nBienvenida al método 🎉 Te envío ahora el formulario de inicio y coordinamos tu primera clase ✨`
-    });
-  } else {
-    steps.push({who:'team', lbl:'Confirmar pago recibido',
-      txt:`Perfecto, ya recibimos tu comprobante 💛\nTe paso con el equipo de CGC para que te envíen el formulario de bienvenida, la guía de acceso y coordinen tus clases ✨`
-    });
-    // 11. POST-PAGO equipo (solo cuando responde el equipo)
-    steps.push({who:'carlos', lbl:'Post-pago — Carlos / Ariana entra',
-      txt:`Holaa 💛 Soy [tu nombre] del equipo de Cami Garay ✨\nCami me pasó toda tu info. Te voy a enviar el formulario de bienvenida para completar tus datos y coordinar el inicio de tus clases 🤗`,
-      note:'⚡ Reemplaza [tu nombre] con tu nombre real (Carlos o Ariana). ✅ Verificar: formulario completado · acceso Zoom enviado · vigencia del paquete informada · clases agendadas'
-    });
-  }
+  steps.push({who:tw, lbl:'Confirmar pago recibido',
+    txt: isCami
+      ? `Perfecto, ya recibí tu comprobante 💛 ¡Bienvenida al método! 🎉\n\nTe voy a pasar el formulario de bienvenida para registrarte — son unos datos rápidos y después te llega todo al correo 😊`
+      : `Perfecto, ya recibimos tu comprobante 💛 ¡Bienvenida al método! 🎉\n\nTe vamos a pasar el formulario de bienvenida para registrarte — son unos datos rápidos y después te llega todo al correo 😊`
+  });
+
+  // 11. FORMULARIO + CARGA EN PANEL
+  steps.push({who:tw, lbl:'Enviar formulario de bienvenida (grupales)',
+    txt: isCami
+      ? `¡Aquí está el formulario! 📋\n[link del Google Form grupales]\n\nPide: nombre, edad, país, *ciudad*, correo y WhatsApp. Cuando lo llenes me avisas 💛`
+      : `¡Aquí está el formulario! 📋\n[link del Google Form grupales]\n\nPide: nombre, edad, país, *ciudad*, correo y WhatsApp. Cuando lo llenes nos avisas 💛`,
+    note:'📋 Checklist del equipo al recibir el formulario:\n① Crear alumna en el panel → cgc-reservas.vercel.app/admin → "＋ Nueva alumna"\n② En su ficha → "＋ Cargar paquete" (tipo de paquete + fecha de compra)\n③ La app envía sola el correo de bienvenida con el link personal\n④ Listo — el alumno reserva, cambia y cancela solo desde su link. El equipo no coordina clases ni envía acceso de Zoom.\n\n⚠️ Si el formulario todavía no pide "Ciudad", agrega ese campo — la app lo necesita para mostrar horarios en la hora local del alumno.'
+  });
 
   // ── FOLLOW-UP (si el lead queda en visto o dice "lo pienso") ──
   steps.push({
@@ -880,8 +889,8 @@ function buildResult() {
   const tags = [
     `<span class="res-tag res-tag-modo">${modoTag}</span>`,
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
-    quien!=='coach'?(isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)'):'',
-    quien!=='coach'?(isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior'):'',
+    isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
+    isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
     OBJ_LBL[state.objetivo]||''
   ].filter(Boolean).map(t=>t.startsWith('<span')?t:`<span class="res-tag">${t}</span>`).join('');
 
@@ -908,10 +917,16 @@ function buildResult() {
       const keys = s.opts.map(o => o.key);
       const optsHtml = s.opts.map(o => {
         const mi = storeMsg(o.txt);
+        const mi2 = o.txt2 ? storeMsg(o.txt2) : null;
+        const second = o.txt2 ? `
+          <div class="msg-note" style="margin:10px 0 6px">⏳ Espera su respuesta. Si confirma que es por presupuesto, envía este segundo mensaje:</div>
+          <div class="msg-txt">${esc(o.txt2)}</div>
+          <button class="copy-btn" onclick="cpIdx(this,${mi2})">📋 Copiar mensaje 2</button>` : '';
         return `<div class="branch-opt" id="branch-${i}-${o.key}" style="display:none">
           <div class="msg-txt">${esc(o.txt)}</div>
           ${o.note ? `<div class="msg-note">⚠️ ${esc(o.note)}</div>` : ''}
           <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+          ${second}
         </div>`;
       }).join('');
       const btnsHtml = s.opts.map(o =>
@@ -979,9 +994,430 @@ function goBackFromResult() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// ── CURSOS GRABADOS / DIGITALES ─────────────────────────
+function startDigital() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  document.getElementById('sc-step').innerHTML = buildDigitalSelector();
+}
+function buildDigitalSelector() {
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🎬 Cursos grabados</div>
+    </div>
+    <div style="font-size:14px;color:var(--gray);margin-bottom:20px">Selecciona el producto que le quieres vender al lead:</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="msg-step" style="cursor:pointer" onclick="showDigitalProduct('manos','team')">
+        <div class="msg-head">
+          <div class="msg-num">1</div>
+          <div class="msg-lbl">🤸 Aprende a Pararte de Manos en Casa desde Cero</div>
+          <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px">$9.99 USD</span>
+        </div>
+        <div class="msg-body" style="font-size:13px;color:var(--gray)">Para cualquier persona · Clase grabada · Desde cero · Acceso inmediato</div>
+      </div>
+    </div>
+  </div>`;
+}
+function showDigitalProduct(prod, modo) {
+  document.getElementById('sc-step').innerHTML = buildDigitalProductScreen(prod, modo);
+}
+function buildDigitalProductScreen(prod, modo) {
+  const isCami = modo === 'cami';
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+
+  const PROD = {
+    manos: {
+      icon:'🤸', name:'Aprende a Pararte de Manos en Casa desde Cero', price:'$9.99 USD',
+      for:'cualquier persona sin experiencia previa',
+      pitch: isCami
+        ? `¿Quieres aprender a pararte de manos desde casa? 🤸\n\nTengo una clase grabada perfecta para ti: *APRENDE A PARARTE DE MANOS EN CASA DESDE CERO*\n\nEn esta clase aprenderás:\n✅ La posición correcta del cuerpo y las manos\n✅ Los ejercicios de preparación física que no te puedes saltar\n✅ La progresión paso a paso para llegar a la parada\n✅ Cómo practicar de forma segura sin necesitar compañero\n\n💰 *$9.99 USD* · acceso inmediato · de por vida 🔒\nNo necesitas experiencia previa ni equipamiento especial 💛\n📩 ¿Te interesa?`
+        : `¿Quieres aprender a pararte de manos desde casa? 🤸\n\nTenemos una clase grabada perfecta para ti: *APRENDE A PARARTE DE MANOS EN CASA DESDE CERO*\n\nEn esta clase aprenderás:\n✅ La posición correcta del cuerpo y las manos\n✅ Los ejercicios de preparación física que no te puedes saltar\n✅ La progresión paso a paso para llegar a la parada\n✅ Cómo practicar de forma segura sin necesitar compañero\n\n💰 *$9.99 USD* · acceso inmediato · de por vida 🔒\nNo necesitas experiencia previa ni equipamiento especial 💛\n📩 ¿Te interesa?`,
+      objs: [
+        { key:'vivo', label:'🎥 "¿Es en vivo?"',
+          txt: isCami ? `No, es una clase grabada lista para ver cuando quieras 😊 Tienes acceso de por vida — sin horario fijo, sin fechas límite. La ves a tu ritmo 💛` : `No, es una clase grabada lista para ver cuando quieras 😊 Tienen acceso de por vida — sin horario fijo. La ven a su ritmo 💛` },
+        { key:'nivel', label:'🎓 "¿Hace falta experiencia?"',
+          txt: isCami ? `Para nada, es 100% desde cero 💛 No necesitas haber practicado gimnasia ni acrobacia antes. La progresión está diseñada para que cualquier persona pueda seguirla.` : `Para nada, es 100% desde cero 💛 No se necesita haber practicado gimnasia ni acrobacia antes. La progresión está diseñada para que cualquier persona pueda seguirla.` },
+        { key:'espacio', label:'🏠 "¿Necesito espacio especial?"',
+          txt: isCami ? `Solo necesitas un espacio pequeño y una pared para apoyarte al inicio 💛 Sin equipamiento especial ni sala grande. Se puede hacer perfectamente en casa.` : `Solo se necesita un espacio pequeño y una pared para apoyarse al inicio 💛 Sin equipamiento especial ni sala grande. Se puede hacer en cualquier casa.` }
+      ]
+    }
+  };
+
+  const p = PROD[prod];
+  const miPitch = sm(p.pitch);
+
+  const pagoTxt = isCami
+    ? `¡Genial! 🎉 Te comparto los datos para realizar el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: ${p.price}*\n\nCuando hagas el pago, ${isCami ? 'mándame' : 'mándanos'} el comprobante y te envío el acceso de inmediato 💛`
+    : `¡Genial! 🎉 Te compartimos los datos para realizar el pago:\n\n🌎 *Internacional (tarjeta):* [link de pago]\n🇵🇪 *Perú — Yape / Plin / transferencia:* [datos Yape/cuenta]\n\n*Total: ${p.price}*\n\nCuando hagas el pago, mándanos el comprobante y te enviamos el acceso de inmediato 💛`;
+  const miPago = sm(pagoTxt);
+
+  const datosTxt = isCami
+    ? `¡Perfecto! Ya me llegó tu pago 🎉\n\nPara enviarte el acceso necesito estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te comparto el acceso al Drive)\n\n¡Te mando el link en cuanto me los envíes! 💛`
+    : `¡Perfecto! Ya nos llegó tu pago 🎉\n\nPara enviarte el acceso necesitamos estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te compartimos el acceso al Drive)\n\n¡Te mandamos el link en cuanto nos los envíes! 💛`;
+  const miDatos = sm(datosTxt);
+
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+
+  const objKeys = p.objs.map(o => o.key);
+  const objBtns = p.objs.map(o =>
+    `<button class="branch-btn" id="branchbtn-dobj-${o.key}" onclick="selDigiObj('${prod}','${modo}',${JSON.stringify(objKeys).replace(/"/g,"'")},'${o.key}')">${o.label}</button>`
+  ).join('');
+  const objTexts = p.objs.map(o => {
+    const mi = sm(o.txt);
+    return `<div class="branch-opt" id="branch-dobj-${o.key}" style="display:none">
+      <div class="msg-txt">${esc(o.txt)}</div>
+      <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+    </div>`;
+  }).join('');
+
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <button onclick="startDigital()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:16px;font-weight:800">${p.icon} ${p.name}</div>
+      <span class="res-tag" style="background:linear-gradient(135deg,#4A0E8F,#9B59B6);color:#fff;font-size:12px;padding:4px 10px;white-space:nowrap">${p.price}</span>
+    </div>
+    <div style="font-size:12px;color:var(--gray);margin-bottom:16px;padding-left:36px">Para ${p.for}</div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showDigitalProduct('${prod}','cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showDigitalProduct('${prod}','team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">1</div><div class="msg-lbl">Presentar el producto</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-txt">${esc(p.pitch)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miPitch})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">2</div><div class="msg-lbl">Datos de pago</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">⚠️ Completar: <b>[link de pago]</b> para internacionales y <b>[datos Yape/cuenta]</b> para Perú antes de enviar.</div>
+        <div class="msg-txt">${esc(pagoTxt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miPago})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">3</div><div class="msg-lbl">Solicitar datos para acceso</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">✅ Enviar <b>después de confirmar el pago</b>. El correo <b>debe ser Gmail</b> obligatoriamente.</div>
+        <div class="msg-txt">${esc(datosTxt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miDatos})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">4</div><div class="msg-lbl">Objeciones frecuentes</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="branch-q">¿El lead pone alguna de estas objeciones?</div>
+        <div class="branch-btns">${objBtns}</div>
+        ${objTexts}
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+function selDigiObj(prod, modo, keys, key) {
+  keys.forEach(k => {
+    const btn = document.getElementById('branchbtn-dobj-'+k);
+    const opt = document.getElementById('branch-dobj-'+k);
+    if(btn) btn.style.cssText = k===key ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+    if(opt) opt.style.display = k===key ? '' : 'none';
+  });
+}
+function startReschedule() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showRescheduleMsgs('team');
+}
+function showRescheduleMsgs(modo) {
+  document.getElementById('sc-step').innerHTML = buildRescheduleScreen(modo);
+}
+function buildRescheduleScreen(modo) {
+  const isCami = modo === 'cami';
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+
+  const txtCancelar = isCami
+    ? `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelé esa clase.\n\nLa clase volvió a tu paquete, no se pierde. Cuando quieras reservar otra o cambiar de horario, entrá a tu link personal 👇\n[link del alumno]\n\nRecordá que tu paquete vence el [fecha] — aprovechá todas tus clases antes 💛`
+    : `¡Hola [nombre]! Claro, sin problema 😊 Ya cancelamos esa clase.\n\nLa clase volvió a tu paquete, no se pierde. Cuando quieras reservar otra o cambiar de horario, entrá a tu link personal 👇\n[link del alumno]\n\nRecordá que tu paquete vence el [fecha] — aprovechá todas tus clases antes 💛`;
+
+  const txtCambiar = isCami
+    ? `¡Hola [nombre]! Claro 😊 Para cambiar de horario podés hacerlo directamente desde tu link personal 👇\n[link del alumno]\n\nEntrás, buscás la clase que querés cancelar y la cambiás por otro horario. Podés hacerlo hasta 1 hora antes de que empiece 💛`
+    : `¡Hola [nombre]! Claro 😊 Para cambiar de horario puede hacerlo directamente desde su link personal 👇\n[link del alumno]\n\nEntra, busca la clase que quiere cancelar y la cambia por otro horario. Puede hacerlo hasta 1 hora antes de que empiece 💛`;
+
+  const miCancelar = sm(txtCancelar);
+  const miCambiar = sm(txtCambiar);
+
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">📅 Cancelaciones y cambios de horario</div>
+    </div>
+    <div style="background:#fff8e1;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
+      💡 <b>Cancelar:</b> El alumno puede hacerlo solo desde su link (hasta 1 h antes). Si escribe por WhatsApp, cancelás desde el panel → Reservas → Cancelar. La clase vuelve al paquete y le llega un correo automático.<br><br>
+      💡 <b>Cambiar horario:</b> Siempre desde su link personal. El equipo no hace esto manualmente.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showRescheduleMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showRescheduleMsgs('team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">1</div>
+        <div class="msg-lbl">Alumno pide cancelar clase (escribe por WhatsApp)</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">⚡ Cancelar la clase primero desde el panel (cgc-reservas.vercel.app/admin → Reservas → Cancelar), luego enviar este mensaje con el <b>[link del alumno]</b> y la <b>[fecha de vencimiento]</b>.</div>
+        <div class="msg-txt">${esc(txtCancelar)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miCancelar})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">2</div>
+        <div class="msg-lbl">Alumno pide cambiar de horario (escribe por WhatsApp)</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        <div class="msg-note" style="margin-bottom:10px">💡 No hay que hacer nada en el panel. Solo redirigir al alumno a su link personal.</div>
+        <div class="msg-txt">${esc(txtCambiar)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miCambiar})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+function startRenewal() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showRenewalMsgs('team');
+}
+function showRenewalMsgs(modo) {
+  document.getElementById('sc-step').innerHTML = buildRenewalScreen(modo);
+}
+function buildRenewalScreen(modo) {
+  const isCami = modo === 'cami';
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+  const msgs = [
+    {
+      label:'⚡ Le queda 1 día',
+      note:'Urgente — el acceso se corta mañana. Si dice "sí": Camino A → link de la tienda con sección dorada (descuento automático 1 solo uso, dura 7 días). Camino B → armar el cobro a mano.',
+      txt: isCami
+        ? `Hola [nombre]! 🌟 Mañana se vence tu paquete en CGC METHOD y quería avisarte antes de que se corte el acceso.\n\nComo alumna activa tenés tu descuento de renovación 💛 Entrá a tu link y renovás en 1 clic desde la sección dorada — o si preferís te ayudo yo.\n\n¿Seguimos? 🔥`
+        : `Hola [nombre]! 🌟 Mañana se vence tu paquete en CGC METHOD y queríamos avisarte antes de que se corte el acceso.\n\nComo alumna activa tenés tu descuento de renovación 💛 Entrá a tu link y renovás en 1 clic desde la sección dorada — o si preferís te ayudamos nosotros.\n\n¿Seguimos? 🔥`
+    },
+    {
+      label:'📅 Le quedan 3 días',
+      note:'Buen momento — genera urgencia sin presionar. Si dice "sí": Camino A → link personal (sección dorada), Camino B → armar el cobro.',
+      txt: isCami
+        ? `Hola [nombre]! 😊 Te escribo porque en 3 días se vence tu paquete en CGC METHOD 💛\n\nNo quiero que pierdas el avance que llevas — como alumna activa tenés tu descuento de renovación esperándote en tu link personal (sección dorada). Renovás en un clic, o si preferís te ayudo yo.\n\n¿Seguimos? 🔥`
+        : `Hola [nombre]! 😊 Te escribimos porque en 3 días se vence tu paquete en CGC METHOD 💛\n\nNo queremos que pierdas el avance que llevás — como alumna activa tenés tu descuento de renovación esperándote en tu link personal (sección dorada). Renovás en un clic, o si preferís te ayudamos nosotros.\n\n¿Seguimos? 🔥`
+    },
+    {
+      label:'📆 Le queda 1 semana',
+      note:'Aviso anticipado — tono tranquilo, sin presión. Si dice "sí": recordarle que el descuento está en la sección dorada de su link.',
+      txt: isCami
+        ? `Hola [nombre]! 💛 ¿Cómo estás? Te escribo porque en una semana se vence tu paquete en CGC METHOD.\n\nQuería avisarte con tiempo — como alumna activa tenés tu descuento de renovación guardado en tu link personal (la sección dorada) ✨ Renovás sola en 1 clic, o si preferís te ayudo yo.\n\n¿Te interesa continuar? 😊`
+        : `Hola [nombre]! 💛 ¿Cómo estás? Te escribimos porque en una semana se vence tu paquete en CGC METHOD.\n\nQueríamos avisarte con tiempo — como alumna activa tenés tu descuento de renovación guardado en tu link personal (la sección dorada) ✨ Renovás sola en 1 clic, o si preferís te ayudamos nosotros.\n\n¿Te interesa continuar? 😊`
+    }
+  ];
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const msgsHtml = msgs.map((m, i) => {
+    const mi = sm(m.txt);
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i+1}</div>
+        <div class="msg-lbl">${m.label}</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        ${m.note ? `<div class="msg-note" style="margin-bottom:10px">⚠️ ${esc(m.note)}</div>` : ''}
+        <div class="msg-txt">${esc(m.txt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+      </div>
+    </div>`;
+  }).join('');
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🔄 Renovaciones — alumnos activos</div>
+    </div>
+    <div style="background:#e8f5e9;border-left:3px solid #2ECC80;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
+      💡 Revisar diariamente desde el panel quién tiene el paquete por vencer y enviar el mensaje correspondiente.<br><br>
+      🔑 <b>Camino A (preferido):</b> El alumno entra a su link personal → sección dorada → renueva con su descuento automático (10% en 4/8 clases · 20% en 12/20/32). Código único, 1 solo uso, dura 7 días.<br>
+      🧾 <b>Camino B:</b> El asesor arma el cobro (Yape / link de pago) y carga el paquete a mano en el panel.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showRenewalMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showRenewalMsgs('team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    ${msgsHtml}
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+function startSystem() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  document.getElementById('sc-step').innerHTML = buildSystemScreen();
+}
+function buildSystemScreen() {
+  const section = (icon, title, content) =>
+    `<div style="margin-bottom:20px">
+      <div style="font-size:14px;font-weight:800;color:var(--dark);margin-bottom:8px;display:flex;align-items:center;gap:7px">${icon} ${title}</div>
+      <div style="font-size:13px;color:var(--gray);line-height:1.65">${content}</div>
+    </div>`;
+
+  const faq = (q, a) =>
+    `<div style="margin-bottom:14px">
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:3px">❓ "${q}"</div>
+      <div style="font-size:13px;color:var(--gray);padding-left:16px;line-height:1.55">→ ${a}</div>
+    </div>`;
+
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🔗 Sistema de reservas CGC</div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#1A7FD4,#0FA8A0);border-radius:12px;padding:14px 18px;color:#fff;font-size:13px;margin-bottom:20px;line-height:1.6">
+      <div style="font-weight:800;font-size:15px;margin-bottom:4px">App propia de reservas — cgc-reservas.vercel.app</div>
+      Solo para clases grupales en vivo (PowerSplit · Arcos360 · Acrobases). Las clases 1:1 de CGC ELITE van por separado.
+    </div>
+
+    ${section('🔑', 'El link personal del alumno',
+      'Cada alumno tiene <b>un solo link secreto</b>, sin contraseña, solo para él o ella. Con ese link puede:<br>• Reservar cualquier clase de cualquier curso<br>• Cancelar (hasta 1 hora antes — la clase vuelve al paquete)<br>• Cambiar de horario<br>• Anotarse a la lista de espera si la clase está llena<br>• Ver el link de Zoom de cada clase<br>• Renovar su paquete con descuento (sección dorada)<br>El equipo lo tiene en el panel. Al alumno le llega en el correo de bienvenida.'
+    )}
+
+    ${section('📦', 'Los paquetes — "bolsas" de clases',
+      '• Un paquete = saldo de clases + vigencia propia (vence X días <b>desde la primera clase reservada</b>, no desde la compra).<br>• Un paquete da acceso a los <b>3 cursos</b> (PowerSplit + Arcos360 + Acrobases) con el mismo saldo.<br>• Si el alumno tiene dos paquetes, la app descuenta del que vence primero. El equipo no calcula nada.<br>• Los paquetes recién cargados aparecen como "sin estrenar" hasta que el alumno reserva su primera clase.'
+    )}
+
+    ${section('🗓️', 'Reservar · Cancelar · Cambiar · Lista de espera',
+      '• <b>Reservar:</b> el alumno elige clase y horario desde su link. El Zoom sale automático.<br>• <b>Cancelar:</b> el alumno lo hace solo desde su link, hasta 1 h antes. Si escribe por WhatsApp, el equipo lo cancela desde el panel (Reservas → Cancelar) y avisa al alumno.<br>• <b>Cambiar horario:</b> siempre desde el link del alumno. El equipo no lo hace manualmente.<br>• <b>Lista de espera:</b> si la clase está llena, el alumno se anota. Si se libera un cupo, entra solo y le llega un correo automático.'
+    )}
+
+    ${section('📹', 'Zoom',
+      'Hay <b>una sola sala</b> para todas las clases grupales. El link de Zoom sale automático en el link del alumno y en todos los correos de confirmación y recordatorio. El equipo <b>ya no envía el acceso de Zoom</b> por WhatsApp.'
+    )}
+
+    ${section('🌍', 'Zona horaria automática',
+      'El alumno ve todos los horarios en <b>su hora local</b>, automático. Por eso en el formulario de bienvenida se le pide la <b>ciudad</b> además del país.'
+    )}
+
+    ${section('🔄', 'Renovación',
+      '<b>Camino A (preferido):</b> el alumno entra a su link → sección dorada → renueva con su descuento (10% en 4/8 clases · 20% en 12/20/32). Código único, 1 solo uso, válido 7 días. El paquete entra solo.<br><b>Camino B:</b> el asesor arma el cobro y carga el paquete manualmente en el panel.'
+    )}
+
+    ${section('🛠️', 'Panel del equipo',
+      '<b>cgc-reservas.vercel.app/admin</b><br>Desde ahí: crear alumnas, cargar paquetes, ver reservas, cancelar clases, ver lista de espera y revisar quién vence pronto.'
+    )}
+
+    <div style="margin-top:24px;margin-bottom:12px;font-size:14px;font-weight:800;color:var(--dark)">💬 Preguntas frecuentes del prospecto</div>
+    <div style="background:var(--surface,#f9f9f9);border-radius:12px;padding:16px 18px">
+      ${faq('¿Desde cuándo cuenta la vigencia?', 'Desde tu primera clase reservada, no desde la compra. Mientras no reserves ninguna clase, el paquete está "sin estrenar" y no corre el tiempo.')}
+      ${faq('¿Puedo cambiar una clase si no puedo asistir?', 'Sí, desde tu link personal, hasta 1 hora antes de que empiece. La clase vuelve a tu paquete.')}
+      ${faq('¿Y si la clase que quiero está llena?', 'Te anotás a la lista de espera desde tu link. Si se libera un cupo, entrás sola y te avisamos por correo.')}
+      ${faq('¿Cómo entro a la clase?', 'El link de Zoom sale en tu link personal y en cada correo de confirmación. Una sola sala para todas las clases.')}
+      ${faq('Vivo en México / España / EE.UU. — ¿cómo veo los horarios?', 'Los ves en tu hora local, automático. Por eso te pedimos tu ciudad al registrarte.')}
+      ${faq('¿Puedo combinar PowerSplit, Arcos360 y Acrobases?', 'Sí. Un mismo paquete sirve para los 3 cursos. Vos elegís a cuál clase asistir.')}
+    </div>
+
+    <div style="text-align:center;margin-top:28px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+
+function startFollowup() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showFollowupMsgs('team');
+}
+function showFollowupMsgs(modo) {
+  document.getElementById('sc-step').innerHTML = buildFollowupScreen(modo);
+}
+function buildFollowupScreen(modo) {
+  const isCami = modo === 'cami';
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+  const msgs = [
+    {
+      label:'📅 Día siguiente',
+      txt: isCami
+        ? `Hola [nombre]! 😊 Solo paso a ver si pudiste revisar la info que te compartí ayer 💛\n\nEl descuento del 20% lo tenemos guardado para ti. ¿Quedó alguna duda que te pueda resolver?`
+        : `Hola [nombre]! 😊 Solo pasamos a ver si pudiste revisar la info que te compartimos ayer 💛\n\nEl descuento del 20% lo tenemos guardado para ti. ¿Quedó alguna duda que te podamos resolver?`
+    },
+    {
+      label:'📅 3 días después',
+      txt: isCami
+        ? `Hola [nombre]! 💛 Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nAdicionalmente, mira este resultado de una alumna que empezó en una situación parecida a la tuya 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena? Con gusto lo conversamos 😊`
+        : `Hola [nombre]! 💛 Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira este resultado de una alumna que empezó en una situación parecida 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena? Con gusto lo conversamos 😊`
+    },
+    {
+      label:'📅 1 semana después',
+      txt: isCami
+        ? `Hola [nombre]! Soy Cami 💛 Hace una semana hablamos sobre las clases — ¿cómo estás?\n\nA veces la vida se complica y uno lo pospone, lo entiendo totalmente 😊 Si en algún momento decides retomarlo, aquí estoy. Solo quería que sepas que el cupo sigue disponible.\n\n¡Que tengas un lindo día! ✨`
+        : `Hola [nombre]! Somos del equipo de Cami 💛 Hace una semana hablamos sobre las clases — ¿cómo estás?\n\nA veces la vida se complica y uno lo pospone, lo entiendo totalmente 😊 Si en algún momento decides retomarlo, aquí estamos. ¡Que tengas un lindo día! ✨`
+    }
+  ];
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const msgsHtml = msgs.map((m, i) => {
+    const mi = sm(m.txt);
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i+1}</div>
+        <div class="msg-lbl">${m.label}</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        <div class="msg-txt">${esc(m.txt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+      </div>
+    </div>`;
+  }).join('');
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">📲 Mensajes de seguimiento</div>
+    </div>
+    <div style="background:#fff5e0;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
+      ⚠️ Usar solo si el lead <b>no volvió a escribir</b> después de que le enviaste los precios.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showFollowupMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showFollowupMsgs('team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    ${msgsHtml}
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
 function restart() {
-  show('sc-result',false); show('sc-start',true);
+  show('sc-result',false); show('sc-step',false); show('sc-start',true);
   document.getElementById('sc-result').innerHTML='';
+  document.getElementById('sc-step').innerHTML='';
   state={}; history=[]; visSteps=[]; stepIdx=0;
   window.scrollTo({top:0,behavior:'smooth'});
 }
