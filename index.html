@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Guía de Asesoría – CGC METHOD</title>
+<title>Guía de Asesoría – CGC METHOD v8</title>
 <style>
 :root {
   --red:#E8302A; --orange:#F07820; --pink:#C040A0; --purple:#8B4FC8; --blue:#4A7FD4;
@@ -502,7 +502,7 @@ function getRec() {
 }
 
 const REC = {
-  'powersplit':   {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'El curso de splits y apertura de piernas de Cami.'},
+  'powersplit':   {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'Splits: sagital, frontal, elevaciones y flexibilidad activa de piernas.'},
   'arcos360':     {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + ACROBASES',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
@@ -529,14 +529,6 @@ function buildMsgs(rec) {
           ? `¡Hola! 💛 Ya leí lo que nos compartieron — les vamos a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
           : `¡Hola [nombre]! 💛 Ya leí lo que nos contaste — te voy a hacer un par de preguntas para orientarte exactamente según lo que buscas 🎯`),
     note:'⚡ El mensaje de bienvenida automático ya fue enviado. Reemplaza [nombre] con el nombre real del lead. 📌 El nombre está en su primer mensaje o en el perfil de WhatsApp.'
-  });
-
-  // CONEXIÓN EMOCIONAL (antes de recomendar)
-  steps.push({who:tw, lbl:'Conectar — preguntar el objetivo real',
-    txt: isMama
-      ? `Para orientarlos bien — ¿qué es lo que su hijo/a quiere lograr? ¿Tiene alguna meta específica: una competencia, una audición, algo que siempre quiso aprender?`
-      : `Para orientarte bien — ¿qué es lo que más quieres lograr? ¿Tienes alguna meta en mente: una competencia, una actuación, algo que siempre quisiste aprender?`,
-    note:'⏳ Esperar la respuesta. Esta pregunta conecta emocionalmente y hace que la recomendación se sienta personalizada, no genérica.'
   });
 
   // 4b. PREGUNTAR MOTIVACIÓN — ¿para qué?
@@ -588,11 +580,11 @@ function buildMsgs(rec) {
   let recTxt = '';
   // Sin pregunta de horarios/valores al final — eso va después del video+imágenes
   if (rec==='powersplit') recTxt = isMama
-    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
-    : `Por todo lo que me contaste, lo que necesitas es PowerSplit 💛\n\n🦵 Es el curso de splits y apertura de piernas de Cami — trabaja split sagital, frontal, elevaciones y flexibilidad activa.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es PowerSplit 💛\n\n🦵 Trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas — con técnica de fuerza real, no solo estiramiento.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
+    : `Por todo lo que me contaste, lo que necesitas es PowerSplit 💛\n\n🦵 Trabaja split sagital, frontal, elevaciones y flexibilidad activa — con técnica de fuerza real, no solo estiramiento.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='arcos360') recTxt = isMama
-    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
-    : `Por todo lo que me contaste, lo que necesitas es Arcos360 💛\n\n🌙 Es el curso de flexibilidad de espalda de Cami — trabaja arco, puente, escorpión, needle y todas las figuras posteriores.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
+    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es Arcos360 💛\n\n🌙 Trabaja arco, puente, escorpión, needle y todas las figuras posteriores — desde la base hasta el dominio completo de la flexibilidad de espalda.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
+    : `Por todo lo que me contaste, lo que necesitas es Arcos360 💛\n\n🌙 Trabaja arco, puente, escorpión, needle y todas las figuras posteriores — desde la base hasta el dominio completo de la flexibilidad de espalda.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
   else if (rec==='ps-a360') recTxt = isMama
     ? `Por todo lo que me contaste, lo que necesita tu hijo/a es combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
     : `Por todo lo que me contaste, lo que necesitas es combinar PowerSplit + Arcos360 💛\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
@@ -604,8 +596,8 @@ function buildMsgs(rec) {
         ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
         : `Por todo lo que me contaste, lo que necesitas es ACROBASES 💛\n\n🤸 Es mi curso de acrobacias básicas — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que tu cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`)
     : (isMama
-        ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
-        : `Por todo lo que me contaste, lo que necesitas es ACROBASES 💛\n\n🤸 Es el curso de acrobacias básicas de Cami — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
+        ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES 💛\n\n🤸 Trabaja parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva — con preparación física integrada desde el primer día.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
+        : `Por todo lo que me contaste, lo que necesitas es ACROBASES 💛\n\n🤸 Trabajas parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva — con preparación física integrada desde el primer día.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
   else if (rec==='1a1') recTxt = isMama
     ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
     : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada 💛\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
@@ -682,11 +674,11 @@ function buildMsgs(rec) {
         ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`
         : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`});
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.png']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/paquete-cgc.png']});
     steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.png']});
-    steps.push({who:tw, lbl:'Enviar imagen — Resultados Reales', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/3cursos-cgc.png']});
+    steps.push({who:tw, lbl:'Enviar imágenes — Resultados Reales', isAction:true,
+      action:'📸 Enviar estas imágenes por WhatsApp (una por una):', imgs:['img/laura-resultados-cgc.png','img/manuel-resultados-cgc.png']});
     steps.push({who:tw, lbl:'Resumen de clases 1:1',
       txt: isCami
         ? `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para ti — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para que puedas repasar\n📊 Plan de entrenamiento diseñado según tu objetivo y nivel\n\nAvanzás a tu ritmo, con guía real clase a clase. 💛`
@@ -701,11 +693,11 @@ function buildMsgs(rec) {
         ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`
         : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo 💛📸`});
     steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-paquete.png']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/paquete-cgc.png']});
     steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.png']});
-    steps.push({who:tw, lbl:'Enviar imagen — Resultados Reales', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
+      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/3cursos-cgc.png']});
+    steps.push({who:tw, lbl:'Enviar imágenes — Resultados Reales', isAction:true,
+      action:'📸 Enviar estas imágenes por WhatsApp (una por una):', imgs:['img/laura-resultados-cgc.png','img/manuel-resultados-cgc.png']});
     steps.push({who:tw, lbl:'Preguntar ciudad/país — para enviar el horario correcto',
       txt:`¿Desde qué ciudad o país nos escribes? Así te mando el horario que corresponde 📍`,
       note:'📍 Con la respuesta: configurar la ubicación en el wizard si aún no estaba definida, y enviar la imagen del horario correspondiente en el siguiente paso.\n🔥 Descuento del 20% vigente. Si el lead vuelve al día siguiente: seguir aplicando y decir "te lo guardamos" — no perder la venta por esto.'});
