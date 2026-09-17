@@ -531,14 +531,6 @@ function buildMsgs(rec) {
     note:'⚡ El mensaje de bienvenida automático ya fue enviado. Reemplaza [nombre] con el nombre real del lead. 📌 El nombre está en su primer mensaje o en el perfil de WhatsApp.'
   });
 
-  // CONEXIÓN EMOCIONAL (antes de recomendar)
-  steps.push({who:tw, lbl:'Conectar — preguntar el objetivo real',
-    txt: isMama
-      ? `Para orientarlos bien — ¿qué es lo que su hijo/a quiere lograr? ¿Tiene alguna meta específica: una competencia, una audición, algo que siempre quiso aprender?`
-      : `Para orientarte bien — ¿qué es lo que más quieres lograr? ¿Tienes alguna meta en mente: una competencia, una actuación, algo que siempre quisiste aprender?`,
-    note:'⏳ Esperar la respuesta. Esta pregunta conecta emocionalmente y hace que la recomendación se sienta personalizada, no genérica.'
-  });
-
   // 4b. PREGUNTAR MOTIVACIÓN — ¿para qué?
   steps.push({who:tw, lbl:'Preguntar motivación — ¿para qué?',
     txt: isMama
