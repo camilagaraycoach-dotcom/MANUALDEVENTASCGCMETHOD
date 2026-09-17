@@ -523,19 +523,19 @@ function buildMsgs(rec) {
   steps.push({who:tw, lbl:'Saludo inicial',
     txt: isCami
       ? (isMama
-          ? `¡Hola! 💛 Soy Cami. Ya vi todo lo que nos compartieron — con mucho gusto les ayudo personalmente a encontrar la mejor opción para su hijo/a 🤗`
-          : `¡Hola [nombre]! 💛 Soy Cami. Ya vi todo lo que nos contaste — con mucho gusto te ayudo personalmente a encontrar la mejor opción para ti 😊`)
+          ? `¡Hola! 💛 Soy Cami. Ya leí lo que nos compartieron — les voy a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
+          : `¡Hola [nombre]! 💛 Soy Cami. Ya leí lo que me contaste — voy a hacerte un par de preguntas para orientarte exactamente según lo que buscas 🎯`)
       : (isMama
-          ? `¡Hola! 💛 Ya vi todo lo que nos compartieron — con mucho gusto les ayudo a encontrar la mejor opción para su hijo/a 🤗`
-          : `¡Hola [nombre]! 💛 Ya vi todo lo que nos contaste — con mucho gusto te ayudo a encontrar la mejor opción para ti 😊`),
+          ? `¡Hola! 💛 Ya leí lo que nos compartieron — les vamos a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
+          : `¡Hola [nombre]! 💛 Ya leí lo que nos contaste — te voy a hacer un par de preguntas para orientarte exactamente según lo que buscas 🎯`),
     note:'⚡ El mensaje de bienvenida automático ya fue enviado. Reemplaza [nombre] con el nombre real del lead. 📌 El nombre está en su primer mensaje o en el perfil de WhatsApp.'
   });
 
   // CONEXIÓN EMOCIONAL (antes de recomendar)
   steps.push({who:tw, lbl:'Conectar — preguntar el objetivo real',
     txt: isMama
-      ? `¡Qué bueno que nos escribieron! 🤗 Antes de recomendarles algo, cuéntenme: ¿qué es lo que su hijo/a quiere lograr? ¿Tiene alguna meta específica — una competencia, una audición, algo que siempre quiso aprender?`
-      : `¡Qué bueno que nos escribiste! 🤗 Antes de recomendarte algo, cuéntame: ¿qué es lo que más quieres lograr? ¿Tienes alguna meta en mente — una competencia, una actuación, algo que siempre quisiste aprender?`,
+      ? `Para orientarlos bien — ¿qué es lo que su hijo/a quiere lograr? ¿Tiene alguna meta específica: una competencia, una audición, algo que siempre quiso aprender?`
+      : `Para orientarte bien — ¿qué es lo que más quieres lograr? ¿Tienes alguna meta en mente: una competencia, una actuación, algo que siempre quisiste aprender?`,
     note:'⏳ Esperar la respuesta. Esta pregunta conecta emocionalmente y hace que la recomendación se sienta personalizada, no genérica.'
   });
 
