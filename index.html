@@ -539,6 +539,14 @@ function buildMsgs(rec) {
     note:'⏳ Esperar la respuesta. Esta pregunta conecta emocionalmente y hace que la recomendación se sienta personalizada, no genérica.'
   });
 
+  // 4b. PREGUNTAR MOTIVACIÓN — ¿para qué?
+  steps.push({who:tw, lbl:'Preguntar motivación — ¿para qué?',
+    txt: isMama
+      ? `¡Qué bueno! Y cuando dice que su hijo/a quiere lograr eso — ¿hay algún motivo especial? ¿Una competencia o audición próxima, o es algo que siempre quiso aprender? 💛`
+      : `¡Qué bueno! Y cuando dices que quieres lograr eso — ¿hay algún motivo especial? ¿Una competencia o evento próximo, o es algo que siempre quisiste lograr para ti? 💛`,
+    note:'⏳ Esperar la respuesta. Si mencionan una fecha o evento → usarlo para crear urgencia al cerrar ("entonces para llegar a tiempo necesitarías empezar cuanto antes"). Si es un sueño personal → enfocarse en la transformación al recomendar.'
+  });
+
   // 4. PREGUNTAR EXPERIENCIA (copyable)
   steps.push({who:tw, lbl:'Preguntar sobre experiencia',
     txt: isMama
