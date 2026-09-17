@@ -755,6 +755,9 @@ function buildMsgs(rec) {
           key:'caro',
           label:'💸 "Está muy caro"',
           txt: isCami
+            ? `Gracias por contarme 💛 Solo para entender bien — ¿por qué te parece elevado?`
+            : `Gracias por comentarnos 💛 Solo para entender bien — ¿por qué te parece elevado?`,
+          txt2: isCami
             ? `Entiendo perfectamente 💛 Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase suelta particular de flexibilidad cuesta entre $30 y $60. Con el paquete de 20 clases, cada clase te sale menos de $7 — y además accedes a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase. Y los resultados se ven desde las primeras semanas 🙌\n\n¿Con cuántas clases por semana podrías comprometerte?`
             : `Entiendo perfectamente 💛 Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase suelta particular de flexibilidad cuesta entre $30 y $60. Con el paquete de 20 clases, cada clase sale menos de $7 — y además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase. Y los resultados se ven desde las primeras semanas 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
         },
@@ -905,10 +908,16 @@ function buildResult() {
       const keys = s.opts.map(o => o.key);
       const optsHtml = s.opts.map(o => {
         const mi = storeMsg(o.txt);
+        const mi2 = o.txt2 ? storeMsg(o.txt2) : null;
+        const second = o.txt2 ? `
+          <div class="msg-note" style="margin:10px 0 6px">⏳ Espera su respuesta. Si confirma que es por presupuesto, envía este segundo mensaje:</div>
+          <div class="msg-txt">${esc(o.txt2)}</div>
+          <button class="copy-btn" onclick="cpIdx(this,${mi2})">📋 Copiar mensaje 2</button>` : '';
         return `<div class="branch-opt" id="branch-${i}-${o.key}" style="display:none">
           <div class="msg-txt">${esc(o.txt)}</div>
           ${o.note ? `<div class="msg-note">⚠️ ${esc(o.note)}</div>` : ''}
           <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+          ${second}
         </div>`;
       }).join('');
       const btnsHtml = s.opts.map(o =>
