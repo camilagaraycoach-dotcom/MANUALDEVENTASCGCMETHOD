@@ -691,10 +691,10 @@ function buildMsgs(rec) {
       txt: isCami
         ? `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para ti — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para que puedas repasar\n📊 Plan de entrenamiento diseñado según tu objetivo y nivel\n\nAvanzás a tu ritmo, con guía real clase a clase. 💛`
         : `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para el alumno — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para repasar cuando quiera\n📊 Plan de entrenamiento diseñado según su objetivo y nivel\n\nAvanza a su ritmo, con guía real clase a clase. 💛`});
-    steps.push({who:tw, lbl:'Preguntar horarios y valores',
+    steps.push({who:tw, lbl:'Confirmar disponibilidad horaria',
       txt: isCami
-        ? `¿Te gustaría que te comparta los horarios disponibles y los valores? 💛`
-        : `¿Te gustaría que te compartamos los horarios disponibles y los valores? 💛`});
+        ? `Perfecto — ¿cuándo tienes disponibilidad para tu primera clase? Así coordinamos el horario 📅`
+        : `Perfecto — ¿cuándo tiene disponibilidad para su primera clase? Así coordinamos el horario 📅`});
   } else {
     steps.push({who:tw, lbl:'Mensaje — envío imágenes',
       txt: isCami
@@ -706,9 +706,9 @@ function buildMsgs(rec) {
       action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-3cursos.png']});
     steps.push({who:tw, lbl:'Enviar imagen — Resultados Reales', isAction:true,
       action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/img-resultados.jpg']});
-    steps.push({who:tw, lbl:'Preguntar horarios/valores — con urgencia',
-      note:'🔥 Mencionar el 20% de descuento. Si el lead vuelve al día siguiente: seguir aplicando el descuento y decir "te lo guardamos" — no perder la venta por esto.',
-      txt:`¿Te gustaría que te comparta los horarios y valores? 💛\nTenemos un descuento del 20% que vence hoy 🔥`});
+    steps.push({who:tw, lbl:'Preguntar ciudad/país — para enviar el horario correcto',
+      txt:`¿Desde qué ciudad o país nos escribes? Así te mando el horario que corresponde 📍`,
+      note:'📍 Con la respuesta: configurar la ubicación en el wizard si aún no estaba definida, y enviar la imagen del horario correspondiente en el siguiente paso.\n🔥 Descuento del 20% vigente. Si el lead vuelve al día siguiente: seguir aplicando y decir "te lo guardamos" — no perder la venta por esto.'});
   }
 
   // CLASE DE PRUEBA GRATUITA
