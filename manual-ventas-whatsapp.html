@@ -1072,6 +1072,11 @@ function buildDigitalProductScreen(prod, modo) {
     : `¡Perfecto! Ya nos llegó tu pago 🎉\n\nPara enviarte el acceso necesitamos estos datos:\n\n📝 Nombre completo\n🎂 Edad\n🌎 País\n📧 Correo Gmail (debe ser Gmail — es por donde te compartimos el acceso al Drive)\n\n¡Te mandamos el link en cuanto nos los envíes! 💛`;
   const miDatos = sm(datosTxt);
 
+  const accesoTxt = isCami
+    ? `¡Listo! Ya tienes acceso a la carpeta 🎉\n\nTe recuerdo practicar de 2 a 3 veces por semana — es la frecuencia ideal para empezar a notar los cambios 💪\n\nCualquier duda, foto o video de avance que tengas y quieras enviarme, lo puedes hacer por acá — quedo atenta 💛`
+    : `¡Listo! Ya tienes acceso a la carpeta 🎉\n\nTe recordamos practicar de 2 a 3 veces por semana — es la frecuencia ideal para empezar a notar los cambios 💪\n\nCualquier duda, foto o video de avance que tengas y quieras enviarnos, lo puedes hacer por acá — quedamos atentos 💛`;
+  const miAcceso = sm(accesoTxt);
+
   const whoHtml = isCami
     ? '<span class="msg-who who-cami">⭐ Cami</span>'
     : '<span class="msg-who who-team">💬 Equipo CGC</span>';
@@ -1125,7 +1130,20 @@ function buildDigitalProductScreen(prod, modo) {
       </div>
     </div>
     <div class="msg-step">
-      <div class="msg-head"><div class="msg-num">4</div><div class="msg-lbl">Objeciones frecuentes</div>${whoHtml}</div>
+      <div class="msg-head"><div class="msg-num">4</div><div class="msg-lbl">Dar acceso en Drive</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-note">📁 Drive → carpeta del curso → "Compartir" → pegar el correo Gmail del estudiante → permiso "Lector" → enviar invitación. Verificar que recibió el email de Drive antes de continuar.</div>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">5</div><div class="msg-lbl">Confirmar acceso + bienvenida</div>${whoHtml}</div>
+      <div class="msg-body">
+        <div class="msg-txt">${esc(accesoTxt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${miAcceso})">📋 Copiar mensaje</button>
+      </div>
+    </div>
+    <div class="msg-step">
+      <div class="msg-head"><div class="msg-num">6</div><div class="msg-lbl">Objeciones frecuentes</div>${whoHtml}</div>
       <div class="msg-body">
         <div class="branch-q">¿El lead pone alguna de estas objeciones?</div>
         <div class="branch-btns">${objBtns}</div>
