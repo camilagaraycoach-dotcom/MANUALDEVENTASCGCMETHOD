@@ -868,15 +868,22 @@ function buildMsgs(rec) {
 
   // ── POST-COMPRA: LINK PERSONAL DE CGC RESERVAS ──
   if (rec !== '1a1') {
-    steps.push({who:tw, lbl:'Post-compra — explicar el link personal de reservas',
+    steps.push({who:tw, lbl:'Post-compra — avisar que llegó el correo',
       txt: isMama
         ? (isCami
-            ? `¡Listo! Ya cargué el acceso de tu hijo/a 💛\n\nLe va a llegar un correo de *CGC Reservas* con su link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo de tu hijo/a y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar sus clases\n🔄 Cambiar o cancelar un turno si necesita\n📊 Ver cuántas clases le quedan\n\n¡Guárdalo! Es el mismo link que van a usar siempre 📌`
-            : `¡Listo! Ya cargamos el acceso de tu hijo/a 💛\n\nLe va a llegar un correo de *CGC Reservas* con su link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo de tu hijo/a y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar sus clases\n🔄 Cambiar o cancelar un turno si necesita\n📊 Ver cuántas clases le quedan\n\n¡Guárdalo! Es el mismo link que van a usar siempre 📌`)
+            ? `¡Listo! Ya cargué el acceso de tu hijo/a 💛\n\nLe acaba de llegar un correo de *CGC Reservas* con su link personal de clases — revisa también en spam si no aparece 📧\n\nTe lo envío también por acá para que lo tengas siempre a mano 👇`
+            : `¡Listo! Ya cargamos el acceso de tu hijo/a 💛\n\nLe acaba de llegar un correo de *CGC Reservas* con su link personal de clases — revisa también en spam si no aparece 📧\n\nTe lo enviamos también por acá para que lo tengan siempre a mano 👇`)
         : (isCami
-            ? `¡Listo, ya cargué tu acceso! 💛\n\nTe va a llegar un correo de *CGC Reservas* con tu link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo tuyo y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar tus clases\n🔄 Cambiar o cancelar un turno si necesitas\n📊 Ver cuántas clases te quedan\n\n¡Guárdalo! Es el mismo link que vas a usar siempre 📌`
-            : `¡Listo, ya cargamos tu acceso! 💛\n\nTe va a llegar un correo de *CGC Reservas* con tu link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo tuyo y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar tus clases\n🔄 Cambiar o cancelar un turno si necesitas\n📊 Ver cuántas clases te quedan\n\n¡Guárdalo! Es el mismo link que vas a usar siempre 📌`),
-      note:'📲 Si el correo no llega en 5 min: ir a la ficha del estudiante en el panel (cgc-reservas.vercel.app/admin) → botón "Copiar link" → mandar el link directo por WhatsApp.'
+            ? `¡Listo, ya cargué tu acceso! 💛\n\nTe acaba de llegar un correo de *CGC Reservas* con tu link personal de clases — revisa también en spam si no aparece 📧\n\nTe lo envío también por acá para que lo tengas siempre a mano 👇`
+            : `¡Listo, ya cargamos tu acceso! 💛\n\nTe acaba de llegar un correo de *CGC Reservas* con tu link personal de clases — revisa también en spam si no aparece 📧\n\nTe lo enviamos también por acá para que lo tengas siempre a mano 👇`)
+    });
+    steps.push({who:tw, lbl:'Pegar el link personal en WhatsApp', isAction:true,
+      action:'🔗 Panel → ficha del estudiante → botón "Copiar link" → pegar en WhatsApp como mensaje separado\n\ncgc-reservas.vercel.app/admin'
+    });
+    steps.push({who:tw, lbl:'Post-compra — explicar para qué sirve el link',
+      txt: isMama
+        ? `¡Guárdalo o destácalo! 📌\n\nCon ese link tu hijo/a puede:\n📅 Ver los horarios disponibles\n✅ Reservar sus clases\n🔄 Cambiar o cancelar un turno si necesita\n📊 Ver cuántas clases le quedan\n\nEs el mismo link que van a usar siempre 💛`
+        : `¡Guárdalo o destácalo! 📌\n\nCon ese link puedes:\n📅 Ver los horarios disponibles\n✅ Reservar tus clases\n🔄 Cambiar o cancelar un turno\n📊 Ver cuántas clases te quedan\n\nEs el mismo link que vas a usar siempre 💛`
     });
   }
 
