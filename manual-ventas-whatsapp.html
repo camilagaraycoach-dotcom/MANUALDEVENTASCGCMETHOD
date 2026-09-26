@@ -814,8 +814,10 @@ function buildMsgs(rec) {
     });
   } else {
     steps.push({who:tw, lbl:'Datos de pago — Perú',
-      txt:`Para el pago puedes usar Yape, Plin o transferencia bancaria 💛\nCuando tengas el comprobante ${isCami ? 'mándamelo' : 'mándanoslo'} y separamos tu cupo ✨`,
-      note:'Enviar los datos de Yape/Plin/cuenta. Después de recibir el comprobante, cargar el paquete a mano en el panel.'
+      txt: isCami
+        ? `Para el pago tienes dos opciones 💛\n\n📲 *Yape / Plin / Transferencia:* cuando tengas el comprobante mándamelo\n💳 *Tarjeta:* te genero un link de pago seguro para pagar con tarjeta\n\n¿Cuál te queda más cómodo?`
+        : `Para el pago tienes dos opciones 💛\n\n📲 *Yape / Plin / Transferencia:* cuando tengas el comprobante mándanoslo\n💳 *Tarjeta:* te generamos un link de pago seguro para pagar con tarjeta\n\n¿Cuál te queda más cómodo?`,
+      note:'📲 Yape/Plin/Transferencia → enviar datos de cuenta → recibir comprobante → cargar paquete en panel.\n💳 Tarjeta → generar CulqiLink por el monto acordado → mandar el link → confirmar pago → cargar paquete en panel.'
     });
   }
 
@@ -833,6 +835,20 @@ function buildMsgs(rec) {
       : `¡Aquí está el formulario! 📋\n[link del Google Form grupales]\n\nPide: nombre, edad, país, *ciudad*, correo y WhatsApp. Cuando lo llenes nos avisas 💛`,
     note:'📋 Checklist del equipo al recibir el formulario:\n① Crear alumna en el panel → cgc-reservas.vercel.app/admin → "＋ Nueva alumna"\n② En su ficha → "＋ Cargar paquete" (tipo de paquete + fecha de compra)\n③ La app envía sola el correo de bienvenida con el link personal\n④ Listo — el alumno reserva, cambia y cancela solo desde su link. El equipo no coordina clases ni envía acceso de Zoom.\n\n⚠️ Si el formulario todavía no pide "Ciudad", agrega ese campo — la app lo necesita para mostrar horarios en la hora local del alumno.'
   });
+
+  // 12. EXPLICAR LINK PERSONAL DE CGC RESERVAS
+  if (rec !== '1a1') {
+    steps.push({who:tw, lbl:'Explicar el link personal de reservas',
+      txt: isMama
+        ? (isCami
+            ? `¡Listo! Ya cargué el acceso de tu hijo/a 💛\n\nLe va a llegar un correo de *CGC Reservas* con su link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo de tu hijo/a y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar sus clases\n🔄 Cambiar o cancelar un turno si necesita\n📊 Ver cuántas clases le quedan\n\n¡Guárdalo! Es el mismo link que van a usar siempre 📌`
+            : `¡Listo! Ya cargamos el acceso de tu hijo/a 💛\n\nLe va a llegar un correo de *CGC Reservas* con su link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo de tu hijo/a y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar sus clases\n🔄 Cambiar o cancelar un turno si necesita\n📊 Ver cuántas clases le quedan\n\n¡Guárdalo! Es el mismo link que van a usar siempre 📌`)
+        : (isCami
+            ? `¡Listo, ya cargué tu acceso! 💛\n\nTe va a llegar un correo de *CGC Reservas* con tu link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo tuyo y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar tus clases\n🔄 Cambiar o cancelar un turno si necesitas\n📊 Ver cuántas clases te quedan\n\n¡Guárdalo! Es el mismo link que vas a usar siempre 📌`
+            : `¡Listo, ya cargamos tu acceso! 💛\n\nTe va a llegar un correo de *CGC Reservas* con tu link personal de clases — revisa también en spam si no aparece en bandeja principal 📧\n\nEse link es exclusivo tuyo y sirve para:\n📅 Ver los horarios disponibles\n✅ Reservar tus clases\n🔄 Cambiar o cancelar un turno si necesitas\n📊 Ver cuántas clases te quedan\n\n¡Guárdalo! Es el mismo link que vas a usar siempre 📌`),
+      note:'📲 Si el correo no llega en 5 min: ir a la ficha del estudiante en el panel (cgc-reservas.vercel.app/admin) → botón "Copiar link" → mandar el link directo por WhatsApp.'
+    });
+  }
 
   // ── FOLLOW-UP (si el lead queda en visto o dice "lo pienso") ──
   steps.push({
