@@ -669,14 +669,6 @@ function buildMsgs(rec) {
 
   // 4. VIDEO + IMÁGENES DE VALOR (después de la recomendación)
   if (rec === '1a1') {
-    steps.push({who:tw, lbl:'Mensaje — envío imágenes',
-      txt: isCami
-        ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo📸`
-        : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo📸`});
-    steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/paquete-cgc.png']});
-    steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/3cursos-cgc.png']});
     steps.push({who:tw, lbl:'Enviar imagen — Resultado Real', isAction:true,
       action:'📸 Elige según el género del lead y envía UNA sola imagen:\n👩 Mujer → Laura\n👨 Hombre → Manuel', imgs:['img/laura-resultados-cgc.png','img/manuel-resultados-cgc.png']});
     steps.push({who:tw, lbl:'Enviar imagen — ¿Listo para empezar?', isAction:true,
