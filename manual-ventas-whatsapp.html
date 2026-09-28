@@ -531,20 +531,12 @@ function buildMsgs(rec) {
     note:'⚡ El mensaje de bienvenida automático ya fue enviado. Reemplaza [nombre] con el nombre real del lead. 📌 El nombre está en su primer mensaje o en el perfil de WhatsApp.'
   });
 
-  // 4b. PREGUNTAR MOTIVACIÓN — ¿para qué?
-  steps.push({who:tw, lbl:'Preguntar motivación — ¿para qué?',
+  // PREGUNTAR MOTIVACIÓN + EXPERIENCIA (fusionado — 1 vuelta de conversación en vez de 2)
+  steps.push({who:tw, lbl:'Preguntar motivación y experiencia',
     txt: isMama
-      ? `¡Qué bueno! Y cuando dice que su hijo/a quiere lograr eso — ¿hay algún motivo especial? ¿Una competencia o audición próxima, o es algo que siempre quiso aprender?`
-      : `¡Qué bueno! Y cuando dices que quieres lograr eso — ¿hay algún motivo especial? ¿Una competencia o evento próximo, o es algo que siempre quisiste lograr para ti?`,
+      ? `¡Qué bueno! Para orientarlos bien — ¿tu hijo/a tiene experiencia en algo físico: danza, gimnasia, deportes? Y ¿hay algún motivo especial para empezar ahora: una competencia, audición, o es algo que siempre quiso lograr? 💪`
+      : `¡Qué bueno! Para orientarte bien — ¿tienes experiencia en algo físico: danza, gym, deportes? Y ¿hay algún motivo especial para empezar ahora: una competencia, evento, o es algo que siempre quisiste lograr para ti? 💪`,
     note:'⏳ Esperar la respuesta. Si mencionan una fecha o evento → usarlo para crear urgencia al cerrar ("entonces para llegar a tiempo necesitarías empezar cuanto antes"). Si es un sueño personal → enfocarse en la transformación al recomendar.'
-  });
-
-  // 4. PREGUNTAR EXPERIENCIA (copyable)
-  steps.push({who:tw, lbl:'Preguntar sobre experiencia',
-    txt: isMama
-      ? `¿Tu hijo/a tiene experiencia en algo físico? Danza, gimnasia, deportes... o sería su primera vez 💪`
-      : `¿Y tienes experiencia en algo físico? Danza, gym, deportes... o sería tu primera vez 💪`,
-    note:'⏳ Enviar este mensaje y esperar la respuesta del lead.'
   });
 
   // 5. BRANCH — según lo que respondió el lead
@@ -602,8 +594,11 @@ function buildMsgs(rec) {
     ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
     : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
+  if (rec !== '1a1') {
+    recTxt += isMama ? '\n\n¿Cómo les suena? 🎯' : '\n\n¿Cómo te suena? 🎯';
+  }
   steps.push({who:tw, lbl: rec==='1a1' ? 'Presentar clases 1:1 y coaches' : 'Recomendar el programa', txt:recTxt,
-    note: rec==='1a1' ? '⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.' : '⏳ Enviar y esperar que respondan antes de continuar.'});
+    note: rec==='1a1' ? '⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.' : '⏳ Esperar respuesta antes de continuar.'});
 
   // PREGUNTAS FRECUENTES DE MAMÁS
   if (isMama) {
@@ -699,22 +694,6 @@ function buildMsgs(rec) {
       note:'📍 Con la respuesta: configurar la ubicación en el wizard si aún no estaba definida, y enviar la imagen del horario correspondiente en el siguiente paso.\n🔥 Descuento del 20% vigente. Si el lead vuelve al día siguiente: seguir aplicando y decir "te lo guardamos" — no perder la venta por esto.'});
   }
 
-  // CLASE DE PRUEBA GRATUITA
-  steps.push({
-    type:'branch',
-    lbl:'¿El lead pregunta por clase de prueba gratis?',
-    note:'Responder solo si lo pregunta — si no, continuar al siguiente paso.',
-    opts:[
-      {
-        key:'si',
-        label:'🎁 "¿Hay clase de prueba?"',
-        txt: isCami
-          ? `¡Buena pregunta! No trabajamos con clases de prueba gratuitas porque el método requiere continuidad para ver resultados — una sola clase no te daría la experiencia real\n\nLo que sí hacemos es que el paquete más pequeño es de solo 8 clases, así que el compromiso inicial es mínimo. Y muchos alumnos ven avances desde la segunda o tercera clase ✨\n\n¿Quieres empezar con ese paquete para ver cómo te va?`
-          : `¡Buena pregunta! No trabajamos con clases de prueba gratuitas porque el método requiere continuidad para ver resultados — una sola clase no daría la experiencia real\n\nLo que sí hacemos es que el paquete más pequeño es de solo 8 clases, así que el compromiso inicial es mínimo. Y muchos alumnos ven avances desde la segunda o tercera clase ✨\n\n¿Le gustaría empezar con ese paquete para ver cómo le va?`
-      }
-    ]
-  });
-
   // 5. FOTOS DE HORARIOS + PRECIOS (grupales) | valores escritos (1:1)
   if (rec==='1a1') {
     const valTxt = `Tenemos clases sueltas (sin compromiso)\n\n⭐ Con Cami → $60 USD / clase\n💃 Con Andrea o Sebastián → $35 USD / clase\n\n¿Con cuál coach te gustaría empezar?`;
@@ -730,11 +709,6 @@ function buildMsgs(rec) {
     steps.push({who:tw, lbl:'Enviar fotos de precios', isAction:true,
       action:'📸 Enviar primero "Básicos" y luego "Intensivos" por WhatsApp:',
       imgs:['img/precios-basicos.jpg','img/precios-intensivos.jpg']});
-    steps.push({who:tw, lbl:'Explicar qué incluye el paquete — texto',
-      note:'💡 Este mensaje es clave para quienes no leen las imágenes. Enviarlo siempre después de las fotos de precios.',
-      txt: isCami
-        ? `¿Sabes lo mejor del paquete? 🔥\n\nCon una sola compra accedes a los *3 cursos completos*:\n\n🦵 *PowerSplit* — splits, elevaciones y fortalecimiento de piernas. Tu apertura avanza clase a clase.\n🌙 *Arcos360* — arco, puente, escorpión, figuras posteriores y fortalecimiento de espalda. La flexibilidad que marca la diferencia.\n🤸 *ACROBASES* — rodamiento adelante, rodamiento atrás, parada de manos, parada de codos, ruedas y aspas. Todo desde cero, paso a paso, con preparación física integrada.\n\nTodas las clases son en vivo por Zoom, se graban, y tú eliges a cuál asistir según tus horarios. *Un paquete, tres cursos, resultados reales.*`
-        : `¿Sabes lo mejor del paquete? 🔥\n\nCon una sola compra accedes a los *3 cursos completos*:\n\n🦵 *PowerSplit* — splits, elevaciones y fortalecimiento de piernas. Tu apertura avanza clase a clase.\n🌙 *Arcos360* — arco, puente, escorpión, figuras posteriores y fortalecimiento de espalda. La flexibilidad que marca la diferencia.\n🤸 *ACROBASES* — rodamiento adelante, rodamiento atrás, parada de manos, parada de codos, ruedas y aspas. Todo desde cero, paso a paso, con preparación física integrada.\n\nTodas las clases son en vivo por Zoom, se graban, y puede elegir a cuál asistir según sus horarios. *Un paquete, tres cursos, resultados reales.*`});
     steps.push({who:tw, lbl:'Preguntar frecuencia de entrenamiento',
       txt:`¿Cuántos días a la semana ${isMama ? 'podría entrenar tu hijo/a' : 'podrías entrenar'} — 2 o 3? 📅`,
       note:'2 días → paquete BÁSICOS | 3 días → paquete INTENSIVOS. La respuesta define directamente qué paquete cerrar.'});
@@ -778,6 +752,22 @@ function buildMsgs(rec) {
           txt: isCami
             ? `Eso lo escucho mucho Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puedes conectarte en vivo igual tienes la clase disponible.\n\n¿Cuántos días a la semana podrías comprometerte — 2 o 3? 📅`
             : `Eso lo escuchamos mucho Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puede conectarse en vivo igual tiene la clase disponible.\n\n¿Cuántos días a la semana podría comprometerse — 2 o 3? 📅`
+        }
+      ]
+    });
+
+    // CLASE DE PRUEBA — objeción, va después del precio
+    steps.push({
+      type:'branch',
+      lbl:'¿El lead pregunta por clase de prueba gratis?',
+      note:'Responder solo si lo pregunta — si no, continuar al siguiente paso.',
+      opts:[
+        {
+          key:'si',
+          label:'🎁 "¿Hay clase de prueba?"',
+          txt: isCami
+            ? `¡Buena pregunta! No trabajamos con clases de prueba gratuitas porque el método requiere continuidad para ver resultados — una sola clase no te daría la experiencia real\n\nLo que sí hacemos es que el paquete más pequeño es de solo 8 clases, así que el compromiso inicial es mínimo. Y muchos alumnos ven avances desde la segunda o tercera clase ✨\n\n¿Quieres empezar con ese paquete para ver cómo te va?`
+            : `¡Buena pregunta! No trabajamos con clases de prueba gratuitas porque el método requiere continuidad para ver resultados — una sola clase no daría la experiencia real\n\nLo que sí hacemos es que el paquete más pequeño es de solo 8 clases, así que el compromiso inicial es mínimo. Y muchos alumnos ven avances desde la segunda o tercera clase ✨\n\n¿Le gustaría empezar con ese paquete para ver cómo le va?`
         }
       ]
     });
@@ -849,8 +839,9 @@ function buildMsgs(rec) {
         key:'dia3',
         label:'📅 3 días después',
         txt: isCami
-          ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nAdicionalmente, mira este resultado de una alumna que empezó en una situación parecida a la tuya 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena? Con gusto lo conversamos 😊`
-          : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira este resultado de una alumna que empezó en una situación parecida 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena? Con gusto lo conversamos 😊`
+          ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida a la tuya 👇\n\n¿Qué te frena? Con gusto lo conversamos 😊`
+          : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida 👇\n\n¿Qué te frena? Con gusto lo conversamos 😊`,
+        note:'📸 Enviar justo después del mensaje: img/laura-resultados-cgc.webp (mujer) o img/manuel-resultados-cgc.webp (hombre)'
       },
       {
         key:'dia7',
