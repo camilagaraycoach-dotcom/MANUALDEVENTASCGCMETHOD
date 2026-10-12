@@ -216,6 +216,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
           <div class="quick-divider-line"></div>
         </div>
         <div class="quick-grid">
+          <button class="quick-card" style="background:linear-gradient(135deg,#E8302A,#F07820);border-color:transparent;color:#fff" onclick="startQuick()">
+            <div class="quick-card-icon">⚡</div>
+            <div class="quick-card-title" style="color:#fff">Rutas rápidas</div>
+            <div class="quick-card-desc" style="color:rgba(255,255,255,.85)">Pide precio · quiere inscribirse · compite · entrenador/a</div>
+          </button>
           <button class="quick-card qc-fu" onclick="startFollowup()">
             <div class="quick-card-icon">📲</div>
             <div class="quick-card-title">Seguimiento</div>
@@ -519,86 +524,75 @@ function buildMsgs(rec) {
   const tw = isCami ? 'cami' : 'team';
   const steps = [];
 
-  // 1. SALUDO MANUAL (el auto-mensaje ya fue enviado y el lead ya respondió con su info)
-  steps.push({who:tw, lbl:'Saludo inicial',
-    txt: isCami
-      ? (isMama
-          ? `¡Hola! Soy Cami. Ya leí lo que nos compartieron — les voy a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
-          : `¡Hola [nombre]! Soy Cami. Ya leí lo que me contaste — voy a hacerte un par de preguntas para orientarte exactamente según lo que buscas 🎯`)
-      : (isMama
-          ? `¡Hola! Ya leí lo que nos compartieron — les vamos a hacer un par de preguntas para orientarlos exactamente según lo que buscan para su hijo/a 🎯`
-          : `¡Hola [nombre]! Ya leí lo que nos contaste — te voy a hacer un par de preguntas para orientarte exactamente según lo que buscas 🎯`),
-    note:'⚡ El mensaje de bienvenida automático ya fue enviado. Reemplaza [nombre] con el nombre real del lead. 📌 El nombre está en su primer mensaje o en el perfil de WhatsApp.'
-  });
+  // ── GUION CORTO (oct 2026): máximo 3 mensajes hasta el precio ──
+  // Revisión de chats reales: se perdían ventas por demora, por preguntar lo que el lead ya dijo
+  // y por esquivar "¿cuánto cuesta?". Por eso: un mensaje de recomendación + uno de precio y cierre.
+  const v = (cami, team) => isCami ? cami : team;
+  const m = (mama, alumno) => isMama ? mama : alumno;
+  const enSoles = !isExt;
+  const recTxt1a1 = isMama
+    ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
+    : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
-  // PREGUNTAR MOTIVACIÓN + EXPERIENCIA (fusionado — 1 vuelta de conversación en vez de 2)
-  steps.push({who:tw, lbl:'Preguntar motivación y experiencia',
-    txt: isMama
-      ? `¡Qué bueno! Para orientarlos bien — ¿tu hijo/a tiene experiencia en algo físico: danza, gimnasia, deportes? Y ¿hay algún motivo especial para empezar ahora: una competencia, audición, o es algo que siempre quiso lograr? 💪`
-      : `¡Qué bueno! Para orientarte bien — ¿tienes experiencia en algo físico: danza, gym, deportes? Y ¿hay algún motivo especial para empezar ahora: una competencia, evento, o es algo que siempre quisiste lograr para ti? 💪`,
-    note:'⏳ Esperar la respuesta. Si mencionan una fecha o evento → usarlo para crear urgencia al cerrar ("entonces para llegar a tiempo necesitarías empezar cuanto antes"). Si es un sueño personal → enfocarse en la transformación al recomendar.'
-  });
-
-  // 5. BRANCH — según lo que respondió el lead
-  steps.push({
+  // RESPUESTA A DUDAS O MIEDOS (va pegada al mensaje 1, antes de la pregunta de días)
+  if (rec !== '1a1') steps.push({
     type:'branch',
-    lbl:'¿Qué respondió el lead?',
-    who: tw,
+    lbl:'¿En su respuesta mencionó alguna duda, miedo o experiencia?',
+    note:'Si sí → manda esta respuesta primero y luego el mensaje de recomendación. Si no mencionó nada → salta al siguiente paso.',
     opts:[
       {
-        key:'si', label:'💪 Tiene experiencia',
-        txt: isCami
-          ? (isMama
-              ? `La experiencia de tu hijo/a es una ventaja — ya tiene consciencia corporal y base muscular 💪\n\nY lo que hace diferente mi método es que mis coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con esa base los avances van a ser mucho más notorios y rápidos que cualquier cosa que haya intentado antes ✨`
-              : `Tu experiencia es una ventaja — ya tienes consciencia corporal y base muscular 💪\n\nY lo que hace diferente mi método es que mis coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con tu base los avances van a ser mucho más notorios y rápidos que cualquier cosa que hayas intentado antes ✨`)
-          : (isMama
-              ? `La experiencia de tu hijo/a es una ventaja — ya tiene consciencia corporal y base muscular 💪\n\nY lo que hace diferente el método de Cami es que los coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con esa base los avances van a ser mucho más notorios y rápidos que cualquier cosa que haya intentado antes ✨`
-              : `Tu experiencia es una ventaja — ya tienes consciencia corporal y base muscular 💪\n\nY lo que hace diferente el método de Cami es que los coaches enseñan desde la anatomía y biomecánica real del cuerpo: saben exactamente qué músculo trabaja, en qué orden y por qué. Por eso con tu base los avances van a ser mucho más notorios y rápidos que cualquier cosa que hayas intentado antes ✨`)
+        key:'edad', label:'⏳ "¿Ya es tarde para mí?"',
+        txt: m(
+          `¡Para nada! ✨ El método va desde la base y se adapta a cada cuerpo: no se fuerza nada, se avanza con técnica y fuerza. Tenemos estudiantes de todas las edades avanzando clase a clase 💪`,
+          `¡Para nada es tarde! ✨ Tenemos estudiantes de 40, 50 y más de 60 años avanzando. El método va desde la base y se adapta a tu cuerpo: no se fuerza nada, se progresa con técnica y fuerza.\n\nLo que importa no es la edad, es empezar con alguien que te corrija 💪`)
       },
       {
-        key:'no', label:'🌱 Comenzando desde cero',
-        txt: isCami
-          ? (isMama
-              ? `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nMi método está basado en anatomía y biomecánica real: mis coaches entienden cómo funciona cada cuerpo y adaptan el trabajo al de tu hijo/a específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de la historia previa, depende de la metodología ✨`
-              : `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nMi método está basado en anatomía y biomecánica real: mis coaches entienden cómo funciona cada cuerpo y adaptan el trabajo a ti específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de tu historia, depende de la metodología ✨`)
-          : (isMama
-              ? `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nEl método de Cami está basado en anatomía y biomecánica real: los coaches entienden cómo funciona cada cuerpo y adaptan el trabajo al de tu hijo/a específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de la historia previa, depende de la metodología ✨`
-              : `Eso no es un obstáculo — es un punto de partida limpio 🌱\n\nEl método de Cami está basado en anatomía y biomecánica real: los coaches entienden cómo funciona cada cuerpo y adaptan el trabajo a ti específicamente. Por eso avanza igual una persona de 12 años que una de 50, alguien que bailó toda la vida o alguien que nunca entrenó nada — el avance no depende de tu historia, depende de la metodología ✨`)
+        key:'miedo', label:'😰 Le da miedo',
+        txt: m(
+          `Es súper normal sentir miedo al inicio 🙌 Por eso trabajamos con progresiones: primero fuerza y control, luego apoyos y recién después el movimiento completo. Siempre hay un coach mirándolo/a y corrigiéndolo/a en vivo, así que avanza con seguridad y sin forzar.`,
+          `Es súper normal sentir miedo al inicio 🙌 Por eso trabajamos con progresiones: primero fuerza y control, luego apoyos en la pared y recién después el movimiento completo. Siempre vas a tener un coach mirándote y corrigiéndote en vivo, así que avanzas con seguridad y sin forzar.`)
+      },
+      {
+        key:'cuesta', label:'😣 "Me cuesta / no avanzo"',
+        txt: m(
+          `Es muy común, y justamente por eso no se trata de forzar 🙌 En las clases se trabaja con técnica y fuerza, no solo estirando, y el coach ajusta cada ejercicio a su cuerpo. Si tiene alguna lesión, cuéntanos para adaptar los ejercicios.`,
+          `Es muy común al empezar, y justamente por eso no se trata de forzar 🙌 En las clases trabajas con técnica y fuerza, no solo estirando, y el coach ajusta cada ejercicio a tu cuerpo. Si tienes alguna lesión, cuéntanos para adaptar los ejercicios.`)
+      },
+      {
+        key:'exp', label:'💪 Tiene experiencia',
+        txt: m(
+          `Su experiencia es una ventaja: ya tiene consciencia corporal y base muscular 💪 ${v('Mis coaches enseñan','Los coaches de Cami enseñan')} desde la anatomía y la biomecánica, así que con esa base el avance se nota rápido.`,
+          `Tu experiencia es una ventaja: ya tienes consciencia corporal y base muscular 💪 ${v('Mis coaches enseñan','Los coaches de Cami enseñan')} desde la anatomía y la biomecánica, así que con tu base el avance se nota rápido.`)
+      },
+      {
+        key:'cero', label:'🌱 Empieza desde cero',
+        txt: m(
+          `Empezar desde cero no es un obstáculo 🌱 El método parte de la base y se adapta a su cuerpo, así que avanza igual alguien que nunca entrenó que alguien con experiencia.`,
+          `Empezar desde cero no es un obstáculo 🌱 El método parte de la base y se adapta a tu cuerpo, así que avanza igual alguien que nunca entrenó que alguien con experiencia.`)
       }
     ]
   });
 
-  // 3. RECOMENDACIÓN
-  let recTxt = '';
-  // Sin pregunta de horarios/valores al final — eso va después del video+imágenes
-  if (rec==='powersplit') recTxt = isMama
-    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es PowerSplit\n\n🦵 Trabaja split sagital, frontal, elevaciones y flexibilidad activa de piernas — con técnica de fuerza real, no solo estiramiento.\n\nClases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
-    : `Por todo lo que me contaste, lo que necesitas es PowerSplit\n\n🦵 Trabaja split sagital, frontal, elevaciones y flexibilidad activa — con técnica de fuerza real, no solo estiramiento.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
-  else if (rec==='arcos360') recTxt = isMama
-    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es Arcos360\n\n🌙 Trabaja arco, puente, escorpión, needle y todas las figuras posteriores — desde la base hasta el dominio completo de la flexibilidad de espalda.\n\nClases en vivo por Zoom con correcciones reales — se ve el progreso desde la primera clase ✨`
-    : `Por todo lo que me contaste, lo que necesitas es Arcos360\n\n🌙 Trabaja arco, puente, escorpión, needle y todas las figuras posteriores — desde la base hasta el dominio completo de la flexibilidad de espalda.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
-  else if (rec==='ps-a360') recTxt = isMama
-    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es combinar PowerSplit + Arcos360\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores\n\nSon clases en vivo por Zoom con correcciones reales — se puede ver el avance desde la primera clase ✨`
-    : `Por todo lo que me contaste, lo que necesitas es combinar PowerSplit + Arcos360\n\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y needle\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`;
-  else if (rec==='completo') recTxt = isMama
-    ? `Por todo lo que me contaste, lo que necesita tu hijo/a es el programa completo: PowerSplit + Arcos360 + ACROBASES\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo que tenemos y cada paquete da acceso a los 3 cursos ✨`
-    : `Por todo lo que me contaste, lo que necesitas es el programa completo: PowerSplit + Arcos360 + ACROBASES\n\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física integrada\n\nEs el programa más completo y con un solo paquete accedes a los 3 cursos ✨`;
-  else if (rec==='acrobases') recTxt = isCami
-    ? (isMama
-        ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES\n\n🤸 Es mi curso de acrobacias básicas — aprende parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que el cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
-        : `Por todo lo que me contaste, lo que necesitas es ACROBASES\n\n🤸 Es mi curso de acrobacias básicas — aprendes parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva. Incluye preparación física integrada para que tu cuerpo esté listo.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`)
-    : (isMama
-        ? `Por todo lo que me contaste, lo que necesita tu hijo/a es ACROBASES\n\n🤸 Trabaja parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva — con preparación física integrada desde el primer día.\n\nClases en vivo por Zoom con correcciones reales — se ve el avance desde la primera clase ✨`
-        : `Por todo lo que me contaste, lo que necesitas es ACROBASES\n\n🤸 Trabajas parada de manos, parada de codos, rueda de carro y rodamientos de forma segura y progresiva — con preparación física integrada desde el primer día.\n\nClases en vivo por Zoom con correcciones reales — vas a notar la diferencia desde la primera clase ✨`);
-  else if (rec==='1a1') recTxt = isMama
-    ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
-    : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
-
+  // MENSAJE 1 — RECOMENDACIÓN PERSONALIZADA + UNA PREGUNTA
+  const LINEAS = {
+    'powersplit': `*PowerSplit* 🦵 — split sagital, frontal y elevaciones, con técnica de fuerza (no solo estirar)`,
+    'arcos360':   `*Arcos360* 🌙 — arco, puente, escorpión y figuras de espalda, desde la base`,
+    'ps-a360':    `*PowerSplit + Arcos360*:\n🦵 PowerSplit — splits, apertura y elevaciones de piernas\n🌙 Arcos360 — arco, movilidad de espalda, escorpión y figuras posteriores`,
+    'completo':   `el programa completo *PowerSplit + Arcos360 + ACROBASES*:\n🦵 PowerSplit — splits y apertura de piernas\n🌙 Arcos360 — flexibilidad de espalda y arcos\n🤸 ACROBASES — acrobacias básicas con preparación física`,
+    'acrobases':  `*ACROBASES* 🤸 — parada de manos, parada de codos, rueda de carro y rodamientos, paso a paso y de forma segura, con preparación física integrada`
+  };
   if (rec !== '1a1') {
-    recTxt += isMama ? '\n\n¿Cómo les suena? 🎯' : '\n\n¿Cómo te suena? 🎯';
+    steps.push({who:tw, lbl:'Mensaje 1 — Recomendación + 1 pregunta',
+      txt: `¡Hola [nombre]! ${v('Soy Cami. ','')}Ya ${v('leí','leímos')} lo que ${m(v('me compartieron','nos compartieron'), v('me contaste','nos contaste'))} 😊\n\n[Repite con sus palabras lo que busca. Ej.: "${rec==='acrobases' ? m('Quieres que tu hijo/a aprenda parada de manos y rueda de carro','Quieres lograr tu parada de manos y perderle el miedo') : m('Quieres que tu hijo/a logre su split y mejore su arco','Quieres lograr tu split y mejorar tu arco')}"]\n\nPara eso lo ideal ${m('para tu hijo/a ','')}es ${LINEAS[rec]}\n\nSon clases en vivo por Zoom con un coach que corrige en tiempo real, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n¿${m('Podría entrenar','Podrías entrenar')} 2 o 3 veces por semana? 📅`,
+      note:'⏱️ Mándalo el MISMO DÍA en que respondió.\n✍️ Cambia la línea entre corchetes por lo que te escribió, con sus palabras.\n🚫 No vuelvas a preguntar lo que ya te dijo (edad, país, objetivo).\n🎯 Si quiere acrobacias, parada de manos, parada de cabeza o cuervo → la recomendación es ACROBASES (vuelve y elige "Aprender acrobacias").\n📍 Si NO sabes su país, agrega al final: "¿Y desde qué país nos escribes? Así te paso el horario de tu zona".\n💰 Si ya preguntó el precio, no lo hagas esperar: manda este mensaje y enseguida el de precio (paso de "¿Cuántos días?"), asumiendo 2 días si no lo dijo.'
+    });
+    steps.push({who:tw, lbl:'Enviar imagen — Resultado real', isAction:true,
+      action:'📸 Justo después del mensaje 1, envía UNA imagen según el género del lead:\n👩 Mujer → Laura\n👨 Hombre → Manuel', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
+  } else {
+    steps.push({who:tw, lbl:'Presentar clases 1:1 y coaches',
+      txt: `¡Hola [nombre]! ${v('Soy Cami. ','')}` + recTxt1a1,
+      note:'⏱️ Mándalo el MISMO DÍA en que respondió.\n⏳ Espera su respuesta: eso define qué coach recomendar.\n🏅 Si es un niño/a que ya compite (gimnasia, ballet intensivo, selección) → es perfil CGC ELITE: usa "Rutas rápidas → Niño/a que compite" y avisa a Cami.'});
   }
-  steps.push({who:tw, lbl: rec==='1a1' ? 'Presentar clases 1:1 y coaches' : 'Recomendar el programa', txt:recTxt,
-    note: rec==='1a1' ? '⏳ Esperar la respuesta del lead para saber qué busca — eso define qué coach recomendar.' : '⏳ Esperar respuesta antes de continuar.'});
 
   // PREGUNTAS FRECUENTES DE MAMÁS
   if (isMama) {
@@ -611,22 +605,20 @@ function buildMsgs(rec) {
           key:'edad',
           label:'🧒 "¿Es adecuado para su edad?"',
           txt: isCami
-            ? `¡Sí, totalmente! El método está adaptado para niños y trabaja siempre desde la base, de forma segura. Se respetan los tiempos de cada cuerpo — nunca se fuerza nada.\n\nDe hecho muchas de mis alumnas más jóvenes son las que progresan más rápido porque el cuerpo a esa edad responde increíble ✨`
-            : `¡Sí, totalmente! El método está adaptado para niños y trabaja siempre desde la base, de forma segura. Se respetan los tiempos de cada cuerpo — nunca se fuerza nada.\n\nDe hecho muchas de las alumnas más jóvenes de Cami son las que progresan más rápido porque el cuerpo a esa edad responde increíble ✨`
+            ? `¡Sí, totalmente! El método está adaptado para niños y trabaja siempre desde la base, de forma segura. Se respetan los tiempos de cada cuerpo — nunca se fuerza nada.\n\nDe hecho muchas de mis estudiantes más jóvenes son las que progresan más rápido porque el cuerpo a esa edad responde increíble ✨`
+            : `¡Sí, totalmente! El método está adaptado para niños y trabaja siempre desde la base, de forma segura. Se respetan los tiempos de cada cuerpo — nunca se fuerza nada.\n\nDe hecho muchas de las estudiantes más jóvenes de Cami son las que progresan más rápido porque el cuerpo a esa edad responde increíble ✨`
         },
         {
           key:'grupo',
           label:'👥 "¿Hay grupos por edad?"',
           txt: isCami
-            ? `Las clases grupales son mixtas en cuanto a edad — hay niños, adolescentes y adultos juntos Esto en realidad es muy positivo porque los más jóvenes se motivan al ver a los demás avanzar.\n\nLos ejercicios se adaptan al nivel de cada uno, no a la edad. Si prefieres algo más personalizado, las clases 1:1 son totalmente individuales 🎯`
-            : `Las clases grupales son mixtas en cuanto a edad — hay niños, adolescentes y adultos juntos Los ejercicios se adaptan al nivel de cada uno, no a la edad.\n\nSi prefieren algo más personalizado, las clases 1:1 son totalmente individuales para su hijo/a 🎯`
+            ? `Las clases grupales son mixtas en cuanto a edad — hay niños, adolescentes y adultos juntos. Esto en realidad es muy positivo porque los más jóvenes se motivan al ver a los demás avanzar.\n\nLos ejercicios se adaptan al nivel de cada uno, no a la edad. Si prefieres algo más personalizado, las clases 1:1 son totalmente individuales 🎯`
+            : `Las clases grupales son mixtas en cuanto a edad — hay niños, adolescentes y adultos juntos. Los ejercicios se adaptan al nivel de cada uno, no a la edad.\n\nSi prefieren algo más personalizado, las clases 1:1 son totalmente individuales para su hijo/a 🎯`
         },
         {
-          key:'frecuencia',
-          label:'📅 "¿Con qué frecuencia se recomienda?"',
-          txt: isCami
-            ? `Lo ideal es 2 a 3 veces por semana para ver resultados sostenidos Pero incluso con 2 clases semanales hay avances reales — muchos alumnos empiezan así y luego aumentan.\n\nEl paquete permite asistir a las clases que quieran dentro de los horarios disponibles, así que es flexible según la rutina de su hijo/a ✨`
-            : `Lo ideal es 2 a 3 veces por semana para ver resultados sostenidos Pero incluso con 2 clases semanales hay avances reales.\n\nEl paquete permite asistir a las clases que quieran dentro de los horarios disponibles, así que es flexible según la rutina del niño/a ✨`
+          key:'juntos',
+          label:'👩‍👧 "¿Podemos entrenar las dos?"',
+          txt: `¡Claro que sí, y es lindísimo entrenar juntas! 💕 Cada una necesita su propio paquete (cada una reserva sus clases y tiene su seguimiento). ${v('Si me dices','Si nos dices')} cuántos días podría cada una, ${v('te paso','te pasamos')} el total de las dos.`
         }
       ]
     });
@@ -662,59 +654,40 @@ function buildMsgs(rec) {
     ]
   });
 
-  // 4. VIDEO + IMÁGENES DE VALOR (después de la recomendación)
   if (rec === '1a1') {
-    steps.push({who:tw, lbl:'Enviar imagen — Resultado Real', isAction:true,
+    steps.push({who:tw, lbl:'Enviar imagen — Resultado real', isAction:true,
       action:'📸 Elige según el género del lead y envía UNA sola imagen:\n👩 Mujer → Laura\n👨 Hombre → Manuel', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
-    steps.push({who:tw, lbl:'Enviar imagen — ¿Listo para empezar?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/proceso-cgc.webp']});
     steps.push({who:tw, lbl:'Resumen de clases 1:1',
       txt: isCami
-        ? `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para ti — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para que puedas repasar\n📊 Plan de entrenamiento diseñado según tu objetivo y nivel\n\nAvanzás a tu ritmo, con guía real clase a clase.`
-        : `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para el alumno — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para repasar cuando quiera\n📊 Plan de entrenamiento diseñado según su objetivo y nivel\n\nAvanza a su ritmo, con guía real clase a clase.`});
-    steps.push({who:tw, lbl:'Confirmar disponibilidad horaria',
+        ? `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para ti — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para que puedas repasar\n📊 Plan de entrenamiento diseñado según tu objetivo y nivel\n\nAvanzas a tu ritmo, con guía real clase a clase.`
+        : `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para el estudiante — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para repasar cuando quiera\n📊 Plan de entrenamiento diseñado según su objetivo y nivel\n\nAvanza a su ritmo, con guía real clase a clase.`});
+    steps.push({who:tw, lbl:'Cerrar con día y hora',
       txt: isCami
-        ? `Perfecto — ¿cuándo tienes disponibilidad para tu primera clase? Así coordinamos el horario 📅`
-        : `Perfecto — ¿cuándo tiene disponibilidad para su primera clase? Así coordinamos el horario 📅`});
+        ? `¿Te reservo tu primera clase para el [día] a las [hora] o prefieres el [día] a las [hora]? 📅`
+        : `¿Le reservamos la primera clase para el [día] a las [hora] o prefiere el [día] a las [hora]? 📅`,
+      note:'Ofrece 2 horarios reales del coach elegido. Pregunta cerrada: que elija uno, no "¿cuándo puedes?".'});
   } else {
-    steps.push({who:tw, lbl:'Mensaje — envío imágenes',
-      txt: isCami
-        ? `Te envío un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo📸`
-        : `Te enviamos un par de imágenes para que veas cómo funcionan las clases, qué incluye el paquete y cómo está organizado todo📸`});
-    steps.push({who:tw, lbl:'Enviar imagen — ¿Qué incluye tu paquete?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/paquete-cgc.webp']});
-    steps.push({who:tw, lbl:'Enviar imagen — 1 paquete 3 cursos', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/3cursos-cgc.webp']});
-    steps.push({who:tw, lbl:'Enviar imagen — Resultado Real', isAction:true,
-      action:'📸 Elige según el género del lead y envía UNA sola imagen:\n👩 Mujer → Laura\n👨 Hombre → Manuel', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
-    steps.push({who:tw, lbl:'Enviar imagen — ¿Listo para empezar?', isAction:true,
-      action:'📸 Enviar esta imagen por WhatsApp:', imgs:['img/proceso-cgc.webp']});
-    steps.push({who:tw, lbl:'Preguntar ciudad/país — para enviar el horario correcto',
-      txt:`¿Desde qué ciudad o país nos escribes? Así te mando el horario que corresponde 📍`,
-      note:'📍 Con la respuesta: configurar la ubicación en el wizard si aún no estaba definida, y enviar la imagen del horario correspondiente en el siguiente paso.\n🔥 Descuento del 20% vigente. Si el lead vuelve al día siguiente: seguir aplicando y decir "te lo guardamos" — no perder la venta por esto.'});
-  }
-
-  // 5. FOTOS DE HORARIOS + PRECIOS (grupales) | valores escritos (1:1)
-  if (rec==='1a1') {
-    const valTxt = `Tenemos clases sueltas (sin compromiso)\n\n⭐ Con Cami → $60 USD / clase\n💃 Con Andrea o Sebastián → $35 USD / clase\n\n¿Con cuál coach te gustaría empezar?`;
-    steps.push({who:tw, lbl:'Enviar opciones y valores 1:1', txt:valTxt});
-  } else {
+    // MENSAJE 2 — HORARIO + PRECIO + CIERRE
     const horImgs = (isLima || !isExt)
       ? ['img/horario-peru.png']
       : ['img/horario-peru.png','img/horario-venezuela.png','img/horario-argentina.png','img/horario-miami.jpg','img/horario-mexico.png','img/horario-europa.png'];
-    const horNote = (isLima || !isExt)
-      ? '📸 Enviar esta imagen de horarios por WhatsApp:'
-      : '📸 Enviar la imagen del horario que corresponda según el país del lead:';
-    steps.push({who:tw, lbl:'Enviar foto de horarios', isAction:true, action: horNote, imgs: horImgs});
-    steps.push({who:tw, lbl:'Enviar fotos de precios', isAction:true,
-      action:'📸 Enviar primero "Básicos" y luego "Intensivos" por WhatsApp:',
-      imgs:['img/precios-basicos.jpg','img/precios-intensivos.jpg']});
-    steps.push({who:tw, lbl:'Preguntar frecuencia de entrenamiento',
-      txt:`¿Cuántos días a la semana ${isMama ? 'podría entrenar tu hijo/a' : 'podrías entrenar'} — 2 o 3? 📅`,
-      note:'2 días → paquete BÁSICOS | 3 días → paquete INTENSIVOS. La respuesta define directamente qué paquete cerrar.'});
-    steps.push({who:tw, lbl:'Recomendar paquete personalizado',
-      txt:`El valor es de $[precio] USD / S/[precio] por el paquete de [X clases] en vivo e incluye:\n\n✅ [X] clases en vivo por Zoom con correcciones en tiempo real\n🎁 Biblioteca de clases grabadas — para repasar cuando quieras\n🦵 Acceso a los 3 cursos completos: PowerSplit + Arcos360 + ACROBASES\n📊 Método progresivo — avanzas clase a clase desde donde estás hoy\n\nCon el descuento de hoy: $[precio] USD / S/[precio] 🔥\n¿Lo separamos?`,
-      note:'✍️ Reemplaza [X clases] y [precio] con los datos de abajo:\n\n📋 BÁSICOS (2x/sem) | 8 clases $67→$54 S/168→$134 | 20 clases $165→$132 S/520→$416 | 32 clases $245→$196 S/770→$616\n📋 INTENSIVOS (3x/sem) | 12 clases $105→$84 S/330→$264 | 20 clases $165→$132 S/520→$416 | 32 clases $245→$196 S/770→$616\n💡 Recomienda el que se ajuste a los días/horarios que dijeron tener.'});
+    steps.push({who:tw, lbl:'Enviar foto del horario de su zona', isAction:true,
+      action: (isLima || !isExt) ? '📸 Envía esta imagen de horarios justo antes del mensaje de precio:' : '📸 Envía SOLO la imagen del horario de su país, justo antes del mensaje de precio:',
+      imgs: horImgs});
+    const precioTxt = (clases, lista, final, porClase, vig) =>
+      `Para ${clases===8?'2':'3'} veces por semana ${m('le','te')} queda el paquete de *${clases} clases en vivo*:\n\n💰 ~${lista}~ → *${final}* con el 20% de descuento (sale a ${porClase} por clase)\n\nIncluye:\n✅ ${clases} clases en vivo por Zoom con corrección en tiempo real\n🎁 Biblioteca de clases grabadas para repasar\n🦵 Los 3 cursos: PowerSplit + Arcos360 + ACROBASES\n📅 Vigencia: ${vig}\n\nArriba ${v('te dejo','te dejamos')} el horario de ${m('su','tu')} zona 👆\n¿${m(v('Le reservo','Le reservamos'), v('Te reservo','Te reservamos'))} para empezar el [día] a las [hora] o ${m('prefieren','prefieres')} el [día] a las [hora]?`;
+    steps.push({
+      type:'branch',
+      lbl:'Mensaje 2 — ¿Cuántos días respondió? (precio + cierre)',
+      note:'Cambia [día] y [hora] por 2 horarios REALES de la imagen. Pregunta cerrada: que elija uno.\n1 día → 4 clases $45→$36 · S/140→S/112 (1 mes)\n4 o más → 20 clases $165→$132 · S/520→S/416 (2 meses) o 32 clases $245→$196 · S/770→S/616 (3 meses)\n👩‍👧 Si son 2 personas, cada una lleva su paquete: dalo con el total.',
+      opts: enSoles ? [
+        {key:'d2', label:'2 días → 8 clases', txt: precioTxt(8,  'S/250', 'S/200', 'S/25', '1 mes')},
+        {key:'d3', label:'3 días → 12 clases', txt: precioTxt(12, 'S/330', 'S/264', 'S/22', '2 meses')}
+      ] : [
+        {key:'d2', label:'2 días → 8 clases', txt: precioTxt(8,  '$80 USD',  '$64 USD', '$8',  '1 mes')},
+        {key:'d3', label:'3 días → 12 clases', txt: precioTxt(12, '$105 USD', '$84 USD', '$7',  '2 meses')}
+      ]
+    });
 
     // OBJECIONES COMUNES
     steps.push({
@@ -726,32 +699,34 @@ function buildMsgs(rec) {
           key:'caro',
           label:'💸 "Está muy caro"',
           txt: isCami
-            ? `Gracias por contarme Solo para entender bien — ¿por qué te parece elevado?`
-            : `Gracias por comentarnos Solo para entender bien — ¿por qué te parece elevado?`,
+            ? `Gracias por contarme 😊 Solo para entender bien — ¿por qué te parece elevado?`
+            : `Gracias por comentarnos 😊 Solo para entender bien — ¿por qué te parece elevado?`,
           txt2: isCami
-            ? `Entiendo perfectamente Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase suelta particular de flexibilidad cuesta entre $30 y $60. Con el paquete de 20 clases, cada clase te sale menos de $7 — y además accedes a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase. Y los resultados se ven desde las primeras semanas 🙌\n\n¿Con cuántas clases por semana podrías comprometerte?`
-            : `Entiendo perfectamente Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase suelta particular de flexibilidad cuesta entre $30 y $60. Con el paquete de 20 clases, cada clase sale menos de $7 — y además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase. Y los resultados se ven desde las primeras semanas 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
+            ? `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo te sale entre $7 y $8, con un coach que te corrige — y además accedes a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podrías comprometerte?`
+            : `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo sale entre $7 y $8, con un coach que corrige en tiempo real — y además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
         },
         {
           key:'pensar',
           label:'🤔 "Lo pienso y te aviso"',
           txt: isCami
-            ? `¡Claro, sin presión! Solo te cuento que el descuento del 20% es válido por hoy — mañana el precio vuelve a ser el normal.\n\n¿Lo que más te frena es el precio, el horario o algo más?`
-            : `¡Claro, sin presión! Solo le comento que el descuento del 20% es válido por hoy — mañana el precio vuelve a ser el normal.\n\n¿Lo que más le frena es el precio, el horario o algo más?`
+            ? `¡Claro, sin presión! 😊 Para ayudarte mejor: ¿lo que más te frena es el precio, el horario o algo más?`
+            : `¡Claro, sin presión! 😊 Para ayudarte mejor: ¿lo que más te frena es el precio, el horario o algo más?`,
+          note:'Si no responde, al día siguiente usa el seguimiento de "Día siguiente".'
         },
         {
           key:'info',
           label:'📩 "Mándame más info"',
           txt: isCami
-            ? `Claro Para mandarte exactamente lo que necesitas — ¿qué es lo que más te genera duda: los horarios, los precios o cómo funcionan las clases?`
-            : `Claro Para mandarle exactamente lo que necesita — ¿qué es lo que más le genera duda: los horarios, los precios o cómo funcionan las clases?`
+            ? `Claro 😊 Para mandarte exactamente lo que necesitas — ¿qué es lo que más te genera duda: los horarios, los precios o cómo funcionan las clases?`
+            : `Claro 😊 Para mandarte exactamente lo que necesitas — ¿qué es lo que más te genera duda: los horarios, los precios o cómo funcionan las clases?`,
+          note:'Si quiere ver más: envía la imagen "¿Qué incluye tu paquete?" (img/paquete-cgc.webp) o "1 paquete, 3 cursos" (img/3cursos-cgc.webp).'
         },
         {
           key:'tiempo',
           label:'⏰ "No tengo tiempo"',
           txt: isCami
-            ? `Eso lo escucho mucho Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puedes conectarte en vivo igual tienes la clase disponible.\n\n¿Cuántos días a la semana podrías comprometerte — 2 o 3? 📅`
-            : `Eso lo escuchamos mucho Y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puede conectarse en vivo igual tiene la clase disponible.\n\n¿Cuántos días a la semana podría comprometerse — 2 o 3? 📅`
+            ? `Eso lo escucho mucho, y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puedes conectarte en vivo igual tienes la clase disponible.\n\n¿Cuántos días a la semana podrías comprometerte — 2 o 3? 📅`
+            : `Eso lo escuchamos mucho, y justamente el método está diseñado para personas con agenda ocupada.\n\nLas clases son de 1 hora, hay horarios mañana, tarde y noche — incluyendo sábados. Y como todo se graba, si un día no puedes conectarte en vivo igual tienes la clase disponible.\n\n¿Cuántos días a la semana podrías comprometerte — 2 o 3? 📅`
         }
       ]
     });
@@ -766,7 +741,7 @@ function buildMsgs(rec) {
           key:'si',
           label:'🎁 "¿Hay clase de prueba?"',
           txt: isCami
-            ? `¡Sí, tenemos! Tu primera clase es gratis — sin tarjeta, sin compromiso. Entra a cursos.camilagaraycoach.com, la reservas tú misma ahí (nombre y correo, nada más) y eliges el curso y el horario que quieras 🎁\n\n¿Te paso el link?`
+            ? `¡Sí, tenemos! Tu primera clase es gratis — sin tarjeta, sin compromiso. Entra a cursos.camilagaraycoach.com, la reservas tú ahí (nombre y correo, nada más) y eliges el curso y el horario que quieras 🎁\n\n¿Te paso el link?`
             : `¡Sí, tenemos! Su primera clase es gratis — sin tarjeta, sin compromiso. Puede entrar a cursos.camilagaraycoach.com y reservarla ahí mismo (nombre y correo, nada más), eligiendo el curso y el horario que prefiera 🎁\n\n¿Le paso el link?`
         }
       ]
@@ -841,23 +816,23 @@ function buildMsgs(rec) {
         key:'dia1',
         label:'📅 Día siguiente',
         txt: isCami
-          ? `Hola [nombre]! 😊 Solo paso a ver si pudiste revisar la info que te compartí ayer\n\nEl descuento del 20% lo tenemos guardado para ti. ¿Quedó alguna duda que te pueda resolver?`
-          : `Hola [nombre]! 😊 Solo pasamos a ver si pudiste revisar la info que te compartimos ayer\n\nEl descuento del 20% lo tenemos guardado para ti. ¿Quedó alguna duda que te podamos resolver?`
+          ? `Hola [nombre]! 😊 ¿Pudiste ver el horario que te mandé?\n\nSi me dices qué día te acomoda más, te separo el cupo con el 20% de descuento. ¿Te queda mejor el [día] o el [día]?`
+          : `Hola [nombre]! 😊 ¿Pudiste ver el horario que te mandamos?\n\nSi nos dices qué día te acomoda más, te separamos el cupo con el 20% de descuento. ¿Te queda mejor el [día] o el [día]?`
       },
       {
         key:'dia3',
         label:'📅 3 días después',
         txt: isCami
-          ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida a la tuya 👇\n\n¿Qué te frena? Con gusto lo conversamos 😊`
-          : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida 👇\n\n¿Qué te frena? Con gusto lo conversamos 😊`,
+          ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida a la tuya 👇\n\n¿Qué te frena más: el horario o el precio? Con gusto lo conversamos 😊`
+          : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida 👇\n\n¿Qué te frena más: el horario o el precio? Con gusto lo conversamos 😊`,
         note:'📸 Enviar justo después del mensaje: img/laura-resultados-cgc.webp (mujer) o img/manuel-resultados-cgc.webp (hombre)'
       },
       {
         key:'dia7',
         label:'📅 1 semana después',
         txt: isCami
-          ? `Hola [nombre]! Soy Cami Hace una semana hablamos sobre las clases — ¿cómo estás?\n\nA veces la vida se complica y uno lo pospone, lo entiendo totalmente 😊 Si en algún momento decides retomarlo, aquí estoy. Solo quería que sepas que el cupo sigue disponible.\n\n¡Que tengas un lindo día! ✨`
-          : `Hola [nombre]! Somos del equipo de Cami Hace una semana hablamos sobre las clases — ¿cómo estás?\n\nA veces la vida se complica y uno lo pospone, lo entiendo totalmente 😊 Si en algún momento decides retomarlo, aquí estamos. ¡Que tengas un lindo día! ✨`
+          ? `Hola [nombre]! Soy Cami 😊 Hace una semana hablamos sobre las clases.\n\nTe escribo porque el próximo grupo empieza el [día]. ¿Te guardo un cupo o prefieres dejarlo para más adelante?`
+          : `Hola [nombre]! Somos del equipo de Cami 😊 Hace una semana hablamos sobre las clases.\n\nTe escribimos porque el próximo grupo empieza el [día]. ¿Te guardamos un cupo o prefieres dejarlo para más adelante?`
       }
     ]
   });
@@ -986,6 +961,9 @@ function buildResult() {
       </div>
     </div>
     ${fpBonus}
+    <div style="background:#fff5e0;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin:12px 0 16px;line-height:1.6">
+      <b>Reglas de oro</b><br>⏱️ Responder el <b>mismo día</b> · 💰 Si pregunta el precio, <b>se lo das ya</b> · 🚫 No preguntes lo que ya te dijo · 📲 Si no responde: seguimiento a las 24 h, 3 días y 7 días
+    </div>
     <div class="msgs-title">Guión de mensajes en orden →</div>
     ${stepsHtml}
     <div class="res-actions">
@@ -1390,20 +1368,20 @@ function buildFollowupScreen(modo) {
     {
       label:'📅 Día siguiente',
       txt: isCami
-        ? `Hola [nombre]! 😊 Solo paso a ver si pudiste revisar la info que te compartí ayer\n\nEl descuento del 20% lo tenemos guardado para ti. ¿Quedó alguna duda que te pueda resolver?`
-        : `Hola [nombre]! 😊 Solo pasamos a ver si pudiste revisar la info que te compartimos ayer\n\nEl descuento del 20% lo tenemos guardado para ti. ¿Quedó alguna duda que te podamos resolver?`
+        ? `Hola [nombre]! 😊 ¿Pudiste ver el horario que te mandé?\n\nSi me dices qué día te acomoda más, te separo el cupo con el 20% de descuento. ¿Te queda mejor el [día] o el [día]?`
+        : `Hola [nombre]! 😊 ¿Pudiste ver el horario que te mandamos?\n\nSi nos dices qué día te acomoda más, te separamos el cupo con el 20% de descuento. ¿Te queda mejor el [día] o el [día]?`
     },
     {
       label:'📅 3 días después',
       txt: isCami
-        ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nAdicionalmente, mira este resultado de una alumna que empezó en una situación parecida a la tuya 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena? Con gusto lo conversamos 😊`
-        : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira este resultado de una alumna que empezó en una situación parecida 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena? Con gusto lo conversamos 😊`
+        ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nAdicionalmente, mira este resultado de una alumna que empezó en una situación parecida a la tuya 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena más: el horario o el precio? Con gusto lo conversamos 😊`
+        : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira este resultado de una alumna que empezó en una situación parecida 👀✨\n\n[Compartir screenshot de resultado relevante]\n\n¿Qué te frena más: el horario o el precio? Con gusto lo conversamos 😊`
     },
     {
       label:'📅 1 semana después',
       txt: isCami
-        ? `Hola [nombre]! Soy Cami Hace una semana hablamos sobre las clases — ¿cómo estás?\n\nA veces la vida se complica y uno lo pospone, lo entiendo totalmente 😊 Si en algún momento decides retomarlo, aquí estoy. Solo quería que sepas que el cupo sigue disponible.\n\n¡Que tengas un lindo día! ✨`
-        : `Hola [nombre]! Somos del equipo de Cami Hace una semana hablamos sobre las clases — ¿cómo estás?\n\nA veces la vida se complica y uno lo pospone, lo entiendo totalmente 😊 Si en algún momento decides retomarlo, aquí estamos. ¡Que tengas un lindo día! ✨`
+        ? `Hola [nombre]! Soy Cami 😊 Hace una semana hablamos sobre las clases.\n\nTe escribo porque el próximo grupo empieza el [día]. ¿Te guardo un cupo o prefieres dejarlo para más adelante?`
+        : `Hola [nombre]! Somos del equipo de Cami 😊 Hace una semana hablamos sobre las clases.\n\nTe escribimos porque el próximo grupo empieza el [día]. ¿Te guardamos un cupo o prefieres dejarlo para más adelante?`
     }
   ];
   const whoHtml = isCami
@@ -1436,6 +1414,83 @@ function buildFollowupScreen(modo) {
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
       <button class="branch-btn" onclick="showFollowupMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
       <button class="branch-btn" onclick="showFollowupMsgs('team')" style="${styleTeam}">💬 Responde equipo</button>
+    </div>
+    ${msgsHtml}
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+// ── RUTAS RÁPIDAS (casos que no deben pasar por todo el guion) ──
+function startQuick() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showQuickMsgs('team');
+}
+function showQuickMsgs(modo) {
+  document.getElementById('sc-step').innerHTML = buildQuickScreen(modo);
+}
+function buildQuickScreen(modo) {
+  const isCami = modo === 'cami';
+  const v = (cami, team) => isCami ? cami : team;
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+  const msgs = [
+    {
+      label:'💰 Su primer mensaje es "¿cuánto cuesta?"',
+      txt:`¡Hola [nombre]! Claro 😊 Los paquetes de clases en vivo por Zoom van desde *$64 USD* (8 clases, sale a $8 por clase) con el 20% de descuento, y con un solo paquete accedes a los 3 cursos: PowerSplit, Arcos360 y ACROBASES.\n\nPara recomendarte el ideal: ¿qué te gustaría lograr y podrías entrenar 2 o 3 veces por semana?`,
+      note:'Nunca respondas "precio" con otra pregunta sola: primero el precio, después la pregunta.\n🇵🇪 Si está en Perú: "desde *S/200* (8 clases, sale a S/25 por clase)".\nCon su respuesta, sigue en "Nueva asesoría" desde el mensaje 2.'
+    },
+    {
+      label:'✅ "Quiero inscribirme" / "¿Cómo pago?"',
+      txt:`¡Qué alegría, [nombre]! 🎉 Lo dejamos listo ahora mismo.\n\nSolo dime: ¿vas a entrenar 2 o 3 veces por semana? Con eso ${v('te paso','te pasamos')} el paquete y los datos de pago.`,
+      note:'NO le hagas las preguntas de calificación: ya decidió. Con su respuesta, manda el precio y los datos de pago (Nueva asesoría → pasos de precio y pago).'
+    },
+    {
+      label:'🏅 Niño/a que ya compite (gimnasia, ballet intensivo, selección)',
+      txt:`¡Qué lindo! Para una deportista que ya compite, lo ideal es *CGC ELITE*: clases 1:1 con Cami, con un plan hecho para su objetivo (competencia, selección o subir de nivel) y seguimiento de su progreso ✨\n\n¿Cuál es su próximo objetivo o competencia? Con eso ${v('te cuento','Cami te cuenta')} cómo lo trabajaríamos.`,
+      note:'Avisa a Cami apenas aparezca este perfil: ella define el paquete ELITE.\nNo lo mandes al guion de clases grupales.\nSolicitud: https://cursos.camilagaraycoach.com/inscripcion-1a1'
+    },
+    {
+      label:'🎓 Entrenador/a que quiere aprender a enseñar',
+      txt:`¡Qué bueno! Sí tenemos formación para entrenadores: certificaciones para aprender a enseñar flexibilidad con el método 🎓 Aquí puedes ver las fechas y anotarte en la lista de espera 👇\nhttps://cursos.camilagaraycoach.com/certificacion\n\nMientras tanto, muchos entrenadores toman las clases en vivo para vivir el método desde adentro. ¿Te cuento cómo funcionan?`,
+      note:'Nunca respondas "no tenemos certificación".'
+    },
+    {
+      label:'⏳ "¿Ya es tarde para mí?" (adultos)',
+      txt:`¡Para nada es tarde! ✨ Tenemos estudiantes de 40, 50 y más de 60 años avanzando. El método va desde la base y se adapta a tu cuerpo: no se fuerza nada, se progresa con técnica y fuerza.\n\nLo que importa no es la edad, es empezar con alguien que te corrija 💪 ¿Podrías entrenar 2 o 3 veces por semana?`
+    }
+  ];
+  const whoHtml = isCami
+    ? '<span class="msg-who who-cami">⭐ Cami</span>'
+    : '<span class="msg-who who-team">💬 Equipo CGC</span>';
+  const msgsHtml = msgs.map((m, i) => {
+    const mi = sm(m.txt);
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i+1}</div>
+        <div class="msg-lbl">${m.label}</div>
+        ${whoHtml}
+      </div>
+      <div class="msg-body">
+        <div class="msg-txt">${esc(m.txt)}</div>
+        ${m.note ? `<div class="msg-note">⚠️ ${esc(m.note)}</div>` : ''}
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+      </div>
+    </div>`;
+  }).join('');
+  const styleCami = isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styleTeam = !isCami ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">⚡ Rutas rápidas</div>
+    </div>
+    <div style="background:#fff5e0;border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
+      ⚠️ Para leads que <b>no deben pasar por todo el guion</b>. Busca el caso y copia el mensaje.
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showQuickMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
+      <button class="branch-btn" onclick="showQuickMsgs('team')" style="${styleTeam}">💬 Responde equipo</button>
     </div>
     ${msgsHtml}
     <div style="text-align:center;margin-top:24px;margin-bottom:80px">
