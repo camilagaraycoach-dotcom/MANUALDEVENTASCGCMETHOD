@@ -1,0 +1,48 @@
+# Cambia solas las imágenes de horarios cuando Europa o Miami cambian de hora.
+# En cambio-hora/ cada archivo se llama AAAA-MM-DD__<nombre en img/>. Cuando llega esa fecha
+# (hora de Lima), el archivo reemplaza a img/<nombre> y se publica el manual.
+name: Cambio de hora en los horarios
+
+on:
+  schedule:
+    - cron: "0 11 * * *" # 6:00 a. m. hora de Lima, todos los días
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  cambiar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reemplazar imágenes cuya fecha ya llegó
+        id: cambio
+        run: |
+          hoy=$(TZ=America/Lima date +%F)
+          cambios=0
+          for f in cambio-hora/*__*; do
+            [ -e "$f" ] || continue
+            base=$(basename "$f")
+            fecha=${base%%__*}
+            nombre=${base#*__}
+            if [[ "$fecha" < "$hoy" || "$fecha" == "$hoy" ]]; then
+              git mv -f "$f" "img/$nombre"
+              echo "Reemplazada img/$nombre (cambio de hora del $fecha)"
+              cambios=1
+            fi
+          done
+          echo "cambios=$cambios" >> "$GITHUB_OUTPUT"
+
+      - name: Guardar y publicar
+        if: steps.cambio.outputs.cambios == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Horarios: cambio de hora automático ($(TZ=America/Lima date +%F))"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
