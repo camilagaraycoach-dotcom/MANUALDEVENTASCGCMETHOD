@@ -680,7 +680,7 @@ function buildMsgs(rec) {
     steps.push({
       type:'branch',
       lbl:'Mensaje 2 — ¿Cuántos días respondió? (precio + cierre)',
-      note:'Cambia [día] y [hora] por 2 horarios REALES de la imagen. Pregunta cerrada: que elija uno.\n1 día → 4 clases $45 · S/140 (1 mes)\n4 o más → 20 clases $165 · S/520 (2 meses) o 32 clases $245 · S/770 (3 meses)\n👩‍👧 Si son 2 personas, cada una lleva su paquete: dalo con el total.',
+      note:'Cambia [día] y [hora] por 2 horarios REALES de la imagen. Pregunta cerrada: que elija uno.\n🚫 Si respondió SOLO el país (sin días), NO le repitas la pregunta: mándale su horario y las dos opciones (8 y 12 clases) y cierra con "¿Te acomoda más empezar con 8 o con 12 clases?".\n1 día → 4 clases $45 · S/140 (1 mes)\n4 o más → 20 clases $165 · S/520 (2 meses) o 32 clases $245 · S/770 (3 meses)\n👩‍👧 Si son 2 personas, cada una lleva su paquete: dalo con el total.',
       opts: enSoles ? [
         {key:'d2', label:'2 días → 8 clases', txt: precioTxt(8,  'S/250', 'S/250', 'S/31.25', '1 mes')},
         {key:'d3', label:'3 días → 12 clases', txt: precioTxt(12, 'S/330', 'S/330', 'S/27.50', '2 meses')}
