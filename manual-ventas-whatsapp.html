@@ -598,14 +598,14 @@ function buildMsgs(rec) {
     ];
     const EQUIPO = m('Entrena con un equipo de entrenadores formados por Cami: le corrigen la técnica en vivo y las clases son semi-personalizadas, porque el coach adapta cada ejercicio a lo que necesita 💪', 'Entrenas con un equipo de entrenadores formados por Cami: te corrigen la técnica en vivo y las clases son semi-personalizadas, porque el coach adapta cada ejercicio a lo que necesitas 💪');
     const cierre1 = isExt
-      ? `¿Desde qué país ${m('nos escriben','nos escribes')}? Así ${m('les','te')} paso el horario y las opciones 📍`
+      ? `¿Desde qué país ${m('nos escriben','nos escribes')}? Así ${m('les','te')} paso el horario de ${m('su','tu')} zona 📍`
       : isLima
-        ? `Te dejo el horario y las opciones virtuales aquí abajo 👇\n\nY como ${m('están','estás')} en Lima, ${m('también puede','también puedes')} entrenar presencial en Acroflex, el centro de Cami en Jesús María, con el mismo método y el mismo equipo (clases de flexibilidad y de acrobacias). Para horarios, precios y dirección de las presenciales, ${m('escríbanles','escríbeles')} directo al WhatsApp de Acroflex: +51 993 813 336 📲`
-        : `Te dejo el horario y las opciones aquí abajo 👇`;
+        ? `Te dejo el horario aquí abajo 👇\n\nY como ${m('están','estás')} en Lima, ${m('también puede','también puedes')} entrenar presencial en Acroflex, el centro de Cami en Jesús María, con el mismo método y el mismo equipo (clases de flexibilidad y de acrobacias). Para horarios, precios y dirección de las presenciales, ${m('escríbanles','escríbeles')} directo al WhatsApp de Acroflex: +51 993 813 336 📲`
+        : `Te dejo el horario aquí abajo 👇`;
     steps.push({
       type:'branch',
       lbl:'Mensaje 1 — ¿Qué le preocupa?',
-      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '\n🇵🇪 Si te responde "Perú", pregúntale la ciudad: si es Lima, vuelve y elige "Lima, Perú" (se le ofrece Acroflex presencial).' : isLima ? '\nManda enseguida el Mensaje 2 (horario + las 2 opciones virtuales). Lo presencial (precios, horarios, dirección) lo da Acroflex por su WhatsApp: no des esa información.' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
+      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '\n🇵🇪 Si te responde "Perú", pregúntale la ciudad: si es Lima, vuelve y elige "Lima, Perú" (se le ofrece Acroflex presencial).' : isLima ? '\nManda enseguida la imagen del horario y el Mensaje 2 (¿qué días?). Lo presencial (precios, horarios, dirección) lo da Acroflex por su WhatsApp: no des esa información.' : '\nComo ya sabes que es de Perú, manda enseguida la imagen del horario y el Mensaje 2 (¿qué días?).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
       opts: MIEDOS.map(o => ({key:o.key, label:o.label,
         txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f} ${EQUIPO}\n\n${m('Para tu '+hijoA,'Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
     });
@@ -692,21 +692,31 @@ function buildMsgs(rec) {
   } else {
     // MENSAJE 2 — HORARIO + PRECIO + CIERRE
     steps.push({who:tw, lbl:'Enviar foto del horario de su país', isAction:true,
-      action: (isLima || !isExt) ? '📸 Envía esta imagen de horarios justo antes del mensaje de precio:' : '📸 Elige su país y envía SOLO esa imagen, justo antes del mensaje de precio (cada país tiene la suya, con su hora):',
+      action: (isLima || !isExt) ? '📸 Cuando sepas su ciudad, envía esta imagen de horarios y enseguida el Mensaje 2:' : '📸 Elige su país y envía SOLO esa imagen (cada país tiene la suya, con su hora). Enseguida, el Mensaje 2:',
       imgs: (isLima || !isExt) ? ['img/horario-peru.png'] : null,
       paises: (isLima || !isExt) ? null : HOR_PAISES});
-    const precioTxt = (clases, lista, final, porClase, vig) =>
-      `Para ${clases===8?'2':'3'} veces por semana ${m('le','te')} queda el paquete de *${clases} clases en vivo*:\n\n💰 *${final}* (sale a ${porClase} por clase)\n\nIncluye:\n✅ ${clases} clases en vivo por Zoom con corrección en tiempo real\n🎁 Biblioteca de clases grabadas para repasar\n🦵 Los 3 cursos: PowerSplit + Arcos360 + Acrobases\n📅 Vigencia: ${vig}\n\nArriba ${v('te dejo','te dejamos')} el horario de ${m('su','tu')} zona 👆\n${m('¿Prefieren que empiece el [día] a las [hora] o el [día] a las [hora]?','¿Empiezas el [día] a las [hora] o prefieres el [día] a las [hora]?')} Así ${v('dejo','dejamos')} listo ${m('su','tu')} paquete 😊`;
+    steps.push({who:tw, lbl:'Mensaje 2 — Horario + ¿qué días?',
+      txt:`Arriba ${v('te dejo','te dejamos')} el horario ${isExt ? 'de tu país' : 'de Perú'} 👆 Hay clases de mañana, tarde y noche, de lunes a sábado.\n\n¿Qué días ${m('se le acomodan','se te acomodan')} más para entrenar? 📅`,
+      note:'Todavía SIN precio. Pregunta QUÉ días (que mire el horario y elija), no "¿2 o 3 veces?".\n💰 Si ya te preguntó el precio, no lo hagas esperar: manda también la imagen de precios (paso siguiente) y menciona el de 8 y el de 12 clases.'});
+    steps.push({who:tw, lbl:'Enviar imagen de precios', isAction:true,
+      action:'📸 Cuando te diga qué días, envía esta imagen con todos los paquetes y enseguida el Mensaje 3:',
+      imgs:[enSoles ? 'img/precios-soles.png' : 'img/precios-usd.png']});
+    const planTxt = (dias, clases, precio, porClase, vig) =>
+      `¡Perfecto! Con [los días que eligió] ${m('le','te')} queda ideal el paquete de ${clases} clases: ${precio} (sale a ${porClase} por clase), vigencia ${vig} 💰\n\nArriba ${v('te dejo','te dejamos')} todos los paquetes 👆 Incluye las clases en vivo, la biblioteca de clases grabadas y los 3 cursos ✨\n\n${m('¿Empieza este [día] o el [día]?','¿Empiezas este [día] o el [día]?')} Así ${v('dejo','dejamos')} listo ${m('su','tu')} paquete 😊`;
     steps.push({
       type:'branch',
-      lbl:'Mensaje 2 — ¿Cuántos días respondió? (precio + cierre)',
-      note:'Cambia [día] y [hora] por 2 horarios REALES de la imagen. Pregunta cerrada: que elija uno.\n🚫 Si respondió SOLO el país (sin días), NO le repitas la pregunta: mándale su horario y las dos opciones (8 y 12 clases) y cierra con "¿Te acomoda más empezar con 8 o con 12 clases?".\n1 día → 4 clases $45 · S/140 (1 mes)\n4 o más → 20 clases $165 · S/520 (2 meses) o 32 clases $245 · S/770 (3 meses)\n👩‍👧 Si son 2 personas, cada una lleva su paquete: dalo con el total.',
+      lbl:'Mensaje 3 — ¿Cuántos días eligió? (su plan)',
+      note:'Cambia [los días que eligió] y los dos [día] por los días REALES que te dijo. Recomienda UN solo plan: el que va con sus días.\n👩‍👧 Si son 2 personas, cada una lleva su paquete: da el total.',
       opts: enSoles ? [
-        {key:'d2', label:'2 días → 8 clases', txt: precioTxt(8,  'S/250', 'S/250', 'S/31.25', '1 mes')},
-        {key:'d3', label:'3 días → 12 clases', txt: precioTxt(12, 'S/330', 'S/330', 'S/27.50', '2 meses')}
+        {key:'p1', label:'1 día → 4 clases',  txt: planTxt(1, 4,  'S/140', 'S/35',    '1 mes')},
+        {key:'p2', label:'2 días → 8 clases', txt: planTxt(2, 8,  'S/250', 'S/31.25', '1 mes')},
+        {key:'p3', label:'3 días → 12 clases', txt: planTxt(3, 12, 'S/330', 'S/27.50', '2 meses')},
+        {key:'p4', label:'4 o más → 20 clases', txt: planTxt(4, 20, 'S/520', 'S/26',    '2 meses')}
       ] : [
-        {key:'d2', label:'2 días → 8 clases', txt: precioTxt(8,  '$80 USD',  '$80 USD', '$10',  '1 mes')},
-        {key:'d3', label:'3 días → 12 clases', txt: precioTxt(12, '$105 USD', '$105 USD', '$8.75',  '2 meses')}
+        {key:'p1', label:'1 día → 4 clases',  txt: planTxt(1, 4,  '$45 USD',  '$11.25', '1 mes')},
+        {key:'p2', label:'2 días → 8 clases', txt: planTxt(2, 8,  '$80 USD',  '$10',    '1 mes')},
+        {key:'p3', label:'3 días → 12 clases', txt: planTxt(3, 12, '$105 USD', '$8.75',  '2 meses')},
+        {key:'p4', label:'4 o más → 20 clases', txt: planTxt(4, 20, '$165 USD', '$8.25',  '2 meses')}
       ]
     });
 
