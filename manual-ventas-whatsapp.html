@@ -413,6 +413,13 @@ const STEPS = [
     ]
   },
   {
+    id:'genero', q:'¿El/la alumno/a es hombre o mujer?', sub:'Define la imagen de resultado y cómo le hablamos',
+    opts:[
+      {v:'mujer',  icon:'👩', l:'Mujer / niña',  d:'Se le envía el resultado de Laura'},
+      {v:'hombre', icon:'👨', l:'Hombre / niño', d:'Se le envía el resultado de Manuel'}
+    ]
+  },
+  {
     id:'ubicacion', q:'¿Dónde está el/la alumno/a?', sub:'Define cursos disponibles y moneda de pago',
     opts:[
       {v:'lima',     icon:'📍', l:'Lima, Perú',           d:'Acceso a clases presenciales en Acroflex + online'},
@@ -522,6 +529,8 @@ const HOR_PAISES = [['mexico','🇲🇽 México'],['colombia','🇨🇴 Colombia
 function buildMsgs(rec) {
   const {quien, edad, ubicacion, modo} = state;
   const isMama = quien==='mama', isNino = edad==='nino';
+  const isH = state.genero==='hombre', hijoA = isH ? 'hijo' : 'hija';
+  const imgRes = isH ? ['img/manuel-resultados-cgc.webp'] : ['img/laura-resultados-cgc.webp'];
   const isLima = ubicacion==='lima', isExt = ubicacion==='exterior';
   const isCami = modo === 'cami';
   const tw = isCami ? 'cami' : 'team';
@@ -582,10 +591,10 @@ function buildMsgs(rec) {
       lbl:'Mensaje 1 — ¿Qué le preocupa?',
       note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
       opts: MIEDOS.map(o => ({key:o.key, label:o.label,
-        txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f}\n\n${m('Para tu hijo/a','Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
+        txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f}\n\n${m('Para tu '+hijoA,'Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
     });
     steps.push({who:tw, lbl:'Enviar imagen — Resultado real', isAction:true,
-      action:'📸 Prueba real: justo después del Mensaje 1 envía UNA imagen:\n👩 Mujer o hija → Laura (la primera)\n👨 Hombre o hijo → Manuel (la segunda)', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
+      action:`📸 Prueba real: justo después del Mensaje 1 envía esta imagen (resultado de ${isH ? 'Manuel' : 'Laura'}):`, imgs: imgRes});
   } else {
     steps.push({who:tw, lbl:'Presentar clases 1:1 y coaches',
       txt: `¡Hola [nombre]! ${v('Soy Cami. ','')}` + recTxt1a1,
@@ -654,7 +663,7 @@ function buildMsgs(rec) {
 
   if (rec === '1a1') {
     steps.push({who:tw, lbl:'Enviar imagen — Resultado real', isAction:true,
-      action:'📸 Elige según el género del lead y envía UNA sola imagen:\n👩 Mujer → Laura\n👨 Hombre → Manuel', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
+      action:`📸 Envía esta imagen (resultado de ${isH ? 'Manuel' : 'Laura'}):`, imgs: imgRes});
     steps.push({who:tw, lbl:'Resumen de clases 1:1',
       txt: isCami
         ? `En resumen, con las clases 1:1 tienes:\n\n🎯 Atención personalizada solo para ti — sin grupos\n📹 En vivo por Zoom (con correcciones en tiempo real)\n🎬 Grabación de cada clase para que puedas repasar\n📊 Plan de entrenamiento diseñado según tu objetivo y nivel\n\nAvanzas a tu ritmo, con guía real clase a clase.`
@@ -821,7 +830,7 @@ function buildMsgs(rec) {
         txt: isCami
           ? `Hola [nombre]! Quería retomar nuestra conversación — sigo aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida a la tuya 👇\n\n¿Qué te frena más: el horario o el precio? Con gusto lo conversamos 😊`
           : `Hola [nombre]! Queríamos retomar la conversación — seguimos aquí si tienes alguna duda.\n\nMira el resultado de una alumna que empezó en una situación parecida 👇\n\n¿Qué te frena más: el horario o el precio? Con gusto lo conversamos 😊`,
-        note:'📸 Enviar justo después del mensaje: img/laura-resultados-cgc.webp (mujer) o img/manuel-resultados-cgc.webp (hombre)'
+        note: state.genero==='hombre' ? '📸 Enviar justo después del mensaje la imagen de resultado de Manuel (img/manuel-resultados-cgc.webp)' : '📸 Enviar justo después del mensaje la imagen de resultado de Laura (img/laura-resultados-cgc.webp)'
       },
       {
         key:'dia7',
@@ -872,6 +881,7 @@ function buildResult() {
     `<span class="res-tag res-tag-modo">${modoTag}</span>`,
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
     isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
+    state.genero==='hombre'?'👨 Hombre / niño':'👩 Mujer / niña',
     isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
     OBJ_LBL[state.objetivo]||''
   ].filter(Boolean).map(t=>t.startsWith('<span')?t:`<span class="res-tag">${t}</span>`).join('');
