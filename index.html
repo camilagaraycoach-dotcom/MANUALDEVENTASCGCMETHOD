@@ -724,12 +724,29 @@ function buildMsgs(rec) {
             : `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo sale entre $8 y $10, con un coach que corrige en tiempo real — y además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
         },
         {
+          key:'momento',
+          label:'📅 "Veo cuándo empiezo / me acomodo"',
+          txt:`¡Gracias a ti, [nombre]! 😊 Tómate tu tiempo para organizarte.\n\nUn dato que quizá te ayuda: la vigencia del paquete empieza recién con ${m('su','tu')} primera clase, así que ${m('pueden dejarlo listo y que arranque cuando se acomoden','puedes dejarlo listo y arrancar cuando te acomodes')}.\n\n¿Te escribo el [día] para ver qué día ${m('le','te')} queda mejor para empezar?`,
+          note:'Su freno es el MOMENTO, no el producto: no le preguntes qué le hace dudar. Pon un día concreto (ej. "el lunes"). Si dice que sí, anótalo en la hoja y escríbele ese día.'
+        },
+        {
           key:'pensar',
-          label:'🤔 "Lo pienso y te aviso"',
-          txt: isCami
-            ? `¡Claro, sin presión! 😊 Para ayudarte mejor: ¿lo que más te frena es el precio, el horario o algo más?`
-            : `¡Claro, sin presión! 😊 Para ayudarte mejor: ¿lo que más te frena es el precio, el horario o algo más?`,
-          note:'Si no responde, al día siguiente usa el seguimiento de "Día siguiente".'
+          label:'🤔 "Lo pienso" (sin decir por qué)',
+          txt:`¡Claro, [nombre]! 😊 Es una decisión importante.\n\n¿Es más por el horario o por el presupuesto? Así ${v('te ayudo','te ayudamos')} con lo que necesites.`,
+          note:'Una sola pregunta suave, con dos opciones. Si responde "horario" → muéstrale 2 horarios concretos de su imagen. Si responde "presupuesto" → usa la objeción "Está muy caro" (nunca bajes el precio). Si no responde, al día siguiente usa el seguimiento de "Día siguiente".'
+        },
+        {
+          key:'consulta',
+          label:'👥 "Lo consulto con mi pareja / familia"',
+          txt:`¡Claro, me parece perfecto! 😊 ¿Te paso un resumen cortito para que se lo muestres?`,
+          txt2:`Aquí va 👇\n\n✨ CGC METHOD: clases en vivo por Zoom con un coach que corrige en tiempo real\n🎯 Para [objetivo]: [curso]\n📅 [2/3] veces por semana: [8/12] clases por [precio]\n🎁 Incluye la biblioteca de clases grabadas y los 3 cursos\n\nCualquier duda que tengan, ${v('aquí estoy','aquí estamos')} 💛`,
+          note:'Otra persona decide: dale algo fácil de reenviar. Completa los corchetes con lo que ya le recomendaste. Si no responde, escríbele a los 2 días: "¿Pudieron verlo juntos?".'
+        },
+        {
+          key:'plata',
+          label:'💳 "Ahora no puedo / a fin de mes"',
+          txt:`¡Entiendo perfecto, [nombre]! 😊 ¿Te escribo el [fecha] para que ${m('empiece','empieces')} con todo?`,
+          note:'Su freno es el dinero de este mes: NO bajes el precio ni ofrezcas descuento. Pon una fecha concreta (fin de mes o el día que te dijo) y anótala en la hoja para escribirle ese día.'
         },
         {
           key:'info',
