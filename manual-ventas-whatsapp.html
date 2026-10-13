@@ -579,34 +579,35 @@ function buildMsgs(rec) {
     const CURSO = {'powersplit':'PowerSplit 🦵','arcos360':'Arcos360 🌙','ps-a360':'PowerSplit + Arcos360','completo':'el programa completo (PowerSplit + Arcos360 + Acrobases)','acrobases':'Acrobases 🤸'};
     const MIEDOS = (isMama || isNino) ? [
       {key:'seguro', label:'🛡️ Seguridad (lo normal en niños)',
-       f:'En cuanto a la seguridad: avanza con progresiones paso a paso, desde la base, y el coach le ve por Zoom y le corrige la postura en el momento.'},
+       f:'En cuanto a la seguridad: avanza con progresiones paso a paso, desde la base, sin forzar nada.'},
       {key:'deporte', label:'💪 Ya hace un deporte',
-       f:'Y como ya entrena, el método le suma lo que suele faltar: fortalecimiento muscular, no solo estirar, con un coach que le corrige en vivo por Zoom.'},
+       f:'Y como ya entrena, el método le suma lo que suele faltar: fortalecimiento muscular, no solo estirar.'},
       {key:'cero', label:'🌱 Empieza desde cero',
-       f:'Y no necesita experiencia: se parte de la base con progresiones por niveles, y el coach le ve por Zoom y le corrige en el momento.'}
+       f:'Y no necesita experiencia: se parte de la base con progresiones por niveles.'}
     ] : [
       {key:'50', label:'⏳ 40+ / "¿ya es tarde?"',
-       f:'Y para nada es tarde: empiezas desde tu nivel, sin rebotes ni posturas forzadas, y el coach te ve por Zoom y te corrige en el momento para que avances seguro.'},
+       f:'Y para nada es tarde: empiezas desde tu nivel, sin rebotes ni posturas forzadas, para que avances seguro.'},
       {key:'cero', label:'🌱 Principiante / rígido',
-       f:'Y no necesitas ser flexible para empezar: se parte de la base con progresiones por niveles, y el coach te ve por Zoom y te corrige en el momento.'},
+       f:'Y no necesitas ser flexible para empezar: se parte de la base con progresiones por niveles.'},
       {key:'entrena', label:'💪 Ya entrena (danza, yoga, pole…)',
-       f:'Y con tu experiencia vas a avanzar rápido: el método suma lo que suele faltar, fortalecimiento muscular y técnica, con un coach que te corrige en vivo por Zoom.'},
+       f:'Y con tu experiencia vas a avanzar rápido: el método suma lo que suele faltar, fortalecimiento muscular y técnica.'},
       {key:'noavanza', label:'😣 No avanza / no sabe si lo hace bien',
-       f:'Eso pasa mucho cuando entrenas sin nadie que te vea: en las clases el coach te ve por Zoom, te corrige en el momento y avanzas por niveles, así sabes exactamente en qué punto estás.'},
+       f:'Eso pasa mucho cuando entrenas sin nadie que te vea: en clase avanzas por niveles, así sabes exactamente en qué punto estás.'},
       {key:'tiempo', label:'⏰ Poco tiempo',
        f:'Y se adapta a tu agenda: clases de 1 hora, con horarios de mañana, tarde y noche, y si un día no llegas tienes la biblioteca de clases grabadas.'}
     ];
+    const EQUIPO = m('Entrena con un equipo de entrenadores formados por Cami: le corrigen la técnica en vivo y las clases son semi-personalizadas, porque el coach adapta cada ejercicio a lo que necesita 💪', 'Entrenas con un equipo de entrenadores formados por Cami: te corrigen la técnica en vivo y las clases son semi-personalizadas, porque el coach adapta cada ejercicio a lo que necesitas 💪');
     const cierre1 = isExt
       ? `¿Desde qué país ${m('nos escriben','nos escribes')}? Así ${m('les','te')} paso el horario y las opciones 📍`
       : isLima
-        ? `Como ${m('están','estás')} en Lima, ${m('también puede','también puedes')} entrenar presencial en Acroflex, el centro de Cami en Jesús María: mismo método de Camila, dictado por su equipo, con clases de flexibilidad y de acrobacias 🙌\n\n¿${m('Prefieren','Prefieres')} presencial en Acroflex o virtual por Zoom?`
+        ? `Te dejo el horario y las opciones virtuales aquí abajo 👇\n\nY como ${m('están','estás')} en Lima, ${m('también puede','también puedes')} entrenar presencial en Acroflex, el centro de Cami en Jesús María, con el mismo método y el mismo equipo (clases de flexibilidad y de acrobacias). Para horarios, precios y dirección de las presenciales, ${m('escríbanles','escríbeles')} directo al WhatsApp de Acroflex: +51 993 813 336 📲`
         : `Te dejo el horario y las opciones aquí abajo 👇`;
     steps.push({
       type:'branch',
       lbl:'Mensaje 1 — ¿Qué le preocupa?',
-      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '\n🇵🇪 Si te responde "Perú", pregúntale la ciudad: si es Lima, vuelve y elige "Lima, Perú" (se le ofrece Acroflex presencial).' : isLima ? '\nPresencial → WhatsApp de Acroflex +51 993 813 336 (horarios, precios e inscripción). Virtual → manda el Mensaje 2 (horario + las 2 opciones).' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
+      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '\n🇵🇪 Si te responde "Perú", pregúntale la ciudad: si es Lima, vuelve y elige "Lima, Perú" (se le ofrece Acroflex presencial).' : isLima ? '\nManda enseguida el Mensaje 2 (horario + las 2 opciones virtuales). Lo presencial (precios, horarios, dirección) lo da Acroflex por su WhatsApp: no des esa información.' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
       opts: MIEDOS.map(o => ({key:o.key, label:o.label,
-        txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f}\n\n${m('Para tu '+hijoA,'Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
+        txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f} ${EQUIPO}\n\n${m('Para tu '+hijoA,'Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
     });
     steps.push({who:tw, lbl:'Enviar imagen — Resultado real', isAction:true,
       action:`📸 Prueba real: justo después del Mensaje 1 envía esta imagen (resultado de ${isH ? 'Manuel' : 'Laura'}):`, imgs: imgRes});
