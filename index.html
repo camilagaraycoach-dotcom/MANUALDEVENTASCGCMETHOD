@@ -408,7 +408,8 @@ const STEPS = [
   {
     id:'edad', q:'¿Qué edad tiene el/la alumno/a?', sub:'Define el tipo de programa y el tono del mensaje',
     opts:[
-      {v:'nino',   icon:'🧒', l:'Niño/a (hasta 14 años)', d:'Programa adaptado para niños y preadolescentes'},
+      {v:'menor9', icon:'👶', l:'Menor de 9 años',        d:'No hay clases virtuales: Acroflex (Lima) o YouTube'},
+      {v:'nino',   icon:'🧒', l:'Niño/a de 9 a 14 años',  d:'Programa adaptado para niños y preadolescentes'},
       {v:'adulto', icon:'🧑', l:'Joven o adulto/a (15+)', d:'Programa estándar para adolescentes y adultos'}
     ]
   },
@@ -500,6 +501,7 @@ function show(id, v) { document.getElementById(id).style.display = v?'':'none'; 
 // ── RECOMMENDATION ────────────────────────────────────
 function getRec() {
   const {quien, objetivo} = state;
+  if (state.edad==='menor9')     return 'menor9';
   if (objetivo==='1a1')          return '1a1';
   if (objetivo==='acrobases')    return 'acrobases';
   if (objetivo==='splits')       return 'powersplit';
@@ -510,6 +512,7 @@ function getRec() {
 }
 
 const REC = {
+  'menor9':       {icon:'👶', name:'Sin clases virtuales (menor de 9)', color:'linear-gradient(135deg,#9AA0A6,#5F6368)', nota:'Las clases en vivo son desde los 9 años. En Lima → Acroflex (presencial). Fuera de Lima → canal de YouTube de Cami.'},
   'powersplit':   {icon:'🦵', name:'PowerSplit',                              color:'linear-gradient(135deg,#F07820,#E8302A)', nota:'Splits: sagital, frontal, elevaciones y flexibilidad activa de piernas.'},
   'arcos360':     {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
@@ -530,6 +533,16 @@ function buildMsgs(rec) {
   const {quien, edad, ubicacion, modo} = state;
   const isMama = quien==='mama', isNino = edad==='nino';
   const isH = state.genero==='hombre', hijoA = isH ? 'hijo' : 'hija';
+  // Menores de 9: las clases virtuales son desde los 9 años → no se venden paquetes
+  if (edad==='menor9') {
+    const tw0 = modo==='cami' ? 'cami' : 'team';
+    const tu = quien==='mama' ? hijoA : 'hijo/a';
+    const msgs = [];
+    msgs.push({who:tw0, lbl:'Mensaje — Menor de 9 años',
+      txt:`¡Hola [nombre]! Qué lindo que quieras empezar algo así con tu ${tu} 🙌\n\nNuestras clases en vivo por Zoom son desde los 9 años: a esta edad lo ideal es lo presencial, con acompañamiento directo.` + (ubicacion==='lima' ? `\n\nComo están en Lima, te recomendamos Acroflex, el centro presencial de Cami en Jesús María 📍 Ahí te dan horarios e inscripción por WhatsApp: +51 993 813 336` : `\n\nMientras tanto, en el canal de YouTube de Cami hay rutinas gratuitas para practicar en casa 🎥 https://www.youtube.com/@camilagaray_coach\n\nCuando cumpla 9 años, con gusto ${isH ? 'lo' : 'la'} recibimos en las clases en vivo 💛`),
+      note:'🚫 No le ofrezcas paquetes, precios ni horarios.' + (ubicacion==='lima' ? '' : '\n📍 Si no sabes si está en Lima, pregunta primero "¿Están en Lima o en otra ciudad?". Si está en Lima → vuelve y elige "Lima, Perú".')});
+    return msgs;
+  }
   const imgRes = isH ? ['img/manuel-resultados-cgc.webp'] : ['img/laura-resultados-cgc.webp'];
   const isLima = ubicacion==='lima', isExt = ubicacion==='exterior';
   const isCami = modo === 'cami';
@@ -872,7 +885,7 @@ function buildResult() {
   const ri = REC[rec];
   const steps = buildMsgs(rec);
   const {quien, edad, ubicacion} = state;
-  const isLima = ubicacion==='lima', isNino = edad==='nino';
+  const isLima = ubicacion==='lima', isNino = edad==='nino' || edad==='menor9';
 
   const OBJ_LBL = {splits:'🦵 Solo splits',arcos:'🌙 Solo arcos',flexibilidad:'🔥 Splits + Arcos',todo:'⭐ Todo completo',acrobases:'🤸 Acrobacias','1a1':'🎯 Clases 1:1'};
 
@@ -880,7 +893,7 @@ function buildResult() {
   const tags = [
     `<span class="res-tag res-tag-modo">${modoTag}</span>`,
     quien==='mama'?'👩‍👧 Escribe mamá/papá':'🙋 Escribe el alumno/a',
-    isNino?'🧒 Niño/a (hasta 14)':'🧑 Adulto/a (15+)',
+    edad==='menor9'?'👶 Menor de 9':isNino?'🧒 Niño/a (9 a 14)':'🧑 Adulto/a (15+)',
     state.genero==='hombre'?'👨 Hombre / niño':'👩 Mujer / niña',
     isLima?'📍 Lima':ubicacion==='peru'?'🇵🇪 Otra ciudad Perú':'🌎 Exterior',
     OBJ_LBL[state.objetivo]||''
