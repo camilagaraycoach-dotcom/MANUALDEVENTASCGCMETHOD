@@ -126,7 +126,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .msg-action{font-size:13px;color:var(--purple);font-weight:600;background:#F5F0FF;border-radius:10px;padding:12px 14px}
 .img-preview{width:100%;max-width:340px;border-radius:10px;display:block;margin:10px auto 0;cursor:pointer}
 .img-preview:hover{opacity:.92}
-.pais-sel{display:block;width:100%;max-width:340px;margin:10px auto 0;padding:10px 12px;font-size:15px;border-radius:10px;border:2px solid #ddd;background:#fff;font-family:inherit}
+.pais-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pais-chip{border:1.5px solid #ddd;background:#fff;border-radius:999px;padding:6px 11px;font-size:13px;font-family:inherit;cursor:pointer}
+.pais-chip.on{background:#14141f;color:#fff;border-color:#14141f}
+.pais-hint{font-size:12px;color:#777;margin-top:8px;text-align:center}
 .branch-q{font-size:13px;font-weight:700;color:var(--purple);margin-bottom:8px}
 .branch-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .branch-btn{border:2px solid var(--purple);background:#fff;color:var(--purple);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
@@ -509,7 +512,13 @@ const REC = {
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
-const HOR_PAISES = [['mexico','🇲🇽 México'],['colombia','🇨🇴 Colombia'],['argentina','🇦🇷 Argentina'],['chile','🇨🇱 Chile'],['espana','🇪🇸 España'],['estados-unidos-este','🇺🇸 EE. UU. — hora del Este (Miami, New York)'],['estados-unidos-centro','🇺🇸 EE. UU. — hora del Centro (Chicago, Texas)'],['estados-unidos-pacifico','🇺🇸 EE. UU. — hora del Pacífico (California)'],['venezuela','🇻🇪 Venezuela'],['ecuador','🇪🇨 Ecuador'],['peru','🇵🇪 Perú'],['bolivia','🇧🇴 Bolivia'],['uruguay','🇺🇾 Uruguay'],['paraguay','🇵🇾 Paraguay'],['brasil','🇧🇷 Brasil'],['costa-rica','🇨🇷 Costa Rica'],['guatemala','🇬🇹 Guatemala'],['honduras','🇭🇳 Honduras'],['el-salvador','🇸🇻 El Salvador'],['nicaragua','🇳🇮 Nicaragua'],['panama','🇵🇦 Panamá'],['republica-dominicana','🇩🇴 República Dominicana'],['puerto-rico','🇵🇷 Puerto Rico'],['cuba','🇨🇺 Cuba'],['canada','🇨🇦 Canadá (Toronto, Montreal)'],['francia','🇫🇷 Francia'],['italia','🇮🇹 Italia'],['alemania','🇩🇪 Alemania'],['australia','🇦🇺 Australia (Sídney)']];
+function verHorario(btn, k) {
+  const box = btn.closest('.msg-action');
+  box.querySelectorAll('.pais-chip').forEach(b => b.classList.toggle('on', b === btn));
+  const img = box.querySelector('.pais-img'); img.src = 'img/horario-' + k + '.png'; img.style.display = 'block';
+  box.querySelector('.pais-hint').style.display = 'none';
+}
+const HOR_PAISES = [['mexico','🇲🇽 México'],['colombia','🇨🇴 Colombia'],['argentina','🇦🇷 Argentina'],['chile','🇨🇱 Chile'],['espana','🇪🇸 España'],['estados-unidos-este','🇺🇸 EE. UU. Este'],['estados-unidos-centro','🇺🇸 EE. UU. Centro'],['estados-unidos-pacifico','🇺🇸 EE. UU. Pacífico'],['venezuela','🇻🇪 Venezuela'],['ecuador','🇪🇨 Ecuador'],['peru','🇵🇪 Perú'],['bolivia','🇧🇴 Bolivia'],['uruguay','🇺🇾 Uruguay'],['paraguay','🇵🇾 Paraguay'],['brasil','🇧🇷 Brasil'],['costa-rica','🇨🇷 Costa Rica'],['guatemala','🇬🇹 Guatemala'],['honduras','🇭🇳 Honduras'],['el-salvador','🇸🇻 El Salvador'],['nicaragua','🇳🇮 Nicaragua'],['panama','🇵🇦 Panamá'],['republica-dominicana','🇩🇴 Rep. Dominicana'],['puerto-rico','🇵🇷 Puerto Rico'],['cuba','🇨🇺 Cuba'],['canada','🇨🇦 Canadá'],['francia','🇫🇷 Francia'],['italia','🇮🇹 Italia'],['alemania','🇩🇪 Alemania'],['australia','🇦🇺 Australia']];
 function buildMsgs(rec) {
   const {quien, edad, ubicacion, modo} = state;
   const isMama = quien==='mama', isNino = edad==='nino';
@@ -916,7 +925,7 @@ function buildResult() {
       body = `${qLabel}<div class="branch-btns">${btnsHtml}</div>${optsHtml}`;
     } else if (s.isAction) {
       let imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
-      if (s.paises) imgsHtml = `<select class="pais-sel" onchange="this.nextElementSibling.src='img/horario-'+this.value+'.png'">${s.paises.map(([k,n])=>`<option value="${k}">${n}</option>`).join('')}</select><img src="img/horario-${s.paises[0][0]}.png" class="img-preview" onclick="window.open(this.src,'_blank')" />`;
+      if (s.paises) imgsHtml = `<div class="pais-chips">${s.paises.map(([k,n])=>`<button class="pais-chip" onclick="verHorario(this,'${k}')">${n}</button>`).join('')}</div><div class="pais-hint">👆 Toca el país del interesado para ver su imagen</div><img class="img-preview pais-img" style="display:none" onclick="window.open(this.src,'_blank')" />`;
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
     } else if (s.imgOnly) {
       const imgHtml = s.img ? `<div style="margin:12px 0;text-align:center"><img src="${s.img}" alt="Imagen para enviar" style="max-width:100%;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer" onclick="window.open('${s.img}','_blank')" /></div>` : '';
