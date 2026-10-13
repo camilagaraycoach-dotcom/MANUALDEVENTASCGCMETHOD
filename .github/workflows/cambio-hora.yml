@@ -1,4 +1,4 @@
-# Cambia solas las imágenes de horarios cuando Europa o Miami cambian de hora.
+# Cambia solas las imágenes de horarios cuando un país cambia de hora (Europa, EE. UU., Canadá, Cuba, Chile, Australia).
 # En cambio-hora/ cada archivo se llama AAAA-MM-DD__<nombre en img/>. Cuando llega esa fecha
 # (hora de Lima), el archivo reemplaza a img/<nombre> y se publica el manual.
 name: Cambio de hora en los horarios

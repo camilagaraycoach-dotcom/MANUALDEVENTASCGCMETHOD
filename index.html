@@ -126,6 +126,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--dark);background:#E
 .msg-action{font-size:13px;color:var(--purple);font-weight:600;background:#F5F0FF;border-radius:10px;padding:12px 14px}
 .img-preview{width:100%;max-width:340px;border-radius:10px;display:block;margin:10px auto 0;cursor:pointer}
 .img-preview:hover{opacity:.92}
+.pais-sel{display:block;width:100%;max-width:340px;margin:10px auto 0;padding:10px 12px;font-size:15px;border-radius:10px;border:2px solid #ddd;background:#fff;font-family:inherit}
 .branch-q{font-size:13px;font-weight:700;color:var(--purple);margin-bottom:8px}
 .branch-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .branch-btn{border:2px solid var(--purple);background:#fff;color:var(--purple);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
@@ -508,6 +509,7 @@ const REC = {
 };
 
 // ── BUILD MESSAGES ────────────────────────────────────
+const HOR_PAISES = [['mexico','🇲🇽 México'],['colombia','🇨🇴 Colombia'],['argentina','🇦🇷 Argentina'],['chile','🇨🇱 Chile'],['espana','🇪🇸 España'],['estados-unidos-este','🇺🇸 EE. UU. — hora del Este (Miami, New York)'],['estados-unidos-centro','🇺🇸 EE. UU. — hora del Centro (Chicago, Texas)'],['estados-unidos-pacifico','🇺🇸 EE. UU. — hora del Pacífico (California)'],['venezuela','🇻🇪 Venezuela'],['ecuador','🇪🇨 Ecuador'],['peru','🇵🇪 Perú'],['bolivia','🇧🇴 Bolivia'],['uruguay','🇺🇾 Uruguay'],['paraguay','🇵🇾 Paraguay'],['brasil','🇧🇷 Brasil'],['costa-rica','🇨🇷 Costa Rica'],['guatemala','🇬🇹 Guatemala'],['honduras','🇭🇳 Honduras'],['el-salvador','🇸🇻 El Salvador'],['nicaragua','🇳🇮 Nicaragua'],['panama','🇵🇦 Panamá'],['republica-dominicana','🇩🇴 República Dominicana'],['puerto-rico','🇵🇷 Puerto Rico'],['cuba','🇨🇺 Cuba'],['canada','🇨🇦 Canadá (Toronto, Montreal)'],['francia','🇫🇷 Francia'],['italia','🇮🇹 Italia'],['alemania','🇩🇪 Alemania'],['australia','🇦🇺 Australia (Sídney)']];
 function buildMsgs(rec) {
   const {quien, edad, ubicacion, modo} = state;
   const isMama = quien==='mama', isNino = edad==='nino';
@@ -660,12 +662,10 @@ function buildMsgs(rec) {
       note:'Ofrece 2 horarios reales del coach elegido. Pregunta cerrada: que elija uno, no "¿cuándo puedes?".'});
   } else {
     // MENSAJE 2 — HORARIO + PRECIO + CIERRE
-    const horImgs = (isLima || !isExt)
-      ? ['img/horario-peru.png']
-      : ['img/horario-peru.png','img/horario-venezuela.png','img/horario-argentina.png','img/horario-miami.jpg','img/horario-mexico.png','img/horario-europa.png'];
-    steps.push({who:tw, lbl:'Enviar foto del horario de su zona', isAction:true,
-      action: (isLima || !isExt) ? '📸 Envía esta imagen de horarios justo antes del mensaje de precio:' : '📸 Envía SOLO la imagen del horario de su país, justo antes del mensaje de precio:',
-      imgs: horImgs});
+    steps.push({who:tw, lbl:'Enviar foto del horario de su país', isAction:true,
+      action: (isLima || !isExt) ? '📸 Envía esta imagen de horarios justo antes del mensaje de precio:' : '📸 Elige su país y envía SOLO esa imagen, justo antes del mensaje de precio (cada país tiene la suya, con su hora):',
+      imgs: (isLima || !isExt) ? ['img/horario-peru.png'] : null,
+      paises: (isLima || !isExt) ? null : HOR_PAISES});
     const precioTxt = (clases, lista, final, porClase, vig) =>
       `Para ${clases===8?'2':'3'} veces por semana ${m('le','te')} queda el paquete de *${clases} clases en vivo*:\n\n💰 *${final}* (sale a ${porClase} por clase)\n\nIncluye:\n✅ ${clases} clases en vivo por Zoom con corrección en tiempo real\n🎁 Biblioteca de clases grabadas para repasar\n🦵 Los 3 cursos: PowerSplit + Arcos360 + Acrobases\n📅 Vigencia: ${vig}\n\nArriba ${v('te dejo','te dejamos')} el horario de ${m('su','tu')} zona 👆\n${m('¿Prefieren que empiece el [día] a las [hora] o el [día] a las [hora]?','¿Empiezas el [día] a las [hora] o prefieres el [día] a las [hora]?')} Así ${v('dejo','dejamos')} listo ${m('su','tu')} paquete 😊`;
     steps.push({
@@ -915,7 +915,8 @@ function buildResult() {
       const qLabel = s.note ? `<div class="branch-q">${esc(s.lbl)}</div><div class="msg-note" style="margin-bottom:8px">⚠️ ${esc(s.note)}</div>` : `<div class="branch-q">${esc(s.lbl)}</div>`;
       body = `${qLabel}<div class="branch-btns">${btnsHtml}</div>${optsHtml}`;
     } else if (s.isAction) {
-      const imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
+      let imgsHtml = s.imgs ? s.imgs.map(src=>`<img src="${src}" class="img-preview" onclick="window.open('${src}','_blank')" />`).join('') : '';
+      if (s.paises) imgsHtml = `<select class="pais-sel" onchange="this.nextElementSibling.src='img/horario-'+this.value+'.png'">${s.paises.map(([k,n])=>`<option value="${k}">${n}</option>`).join('')}</select><img src="img/horario-${s.paises[0][0]}.png" class="img-preview" onclick="window.open(this.src,'_blank')" />`;
       body = `<div class="msg-action">${esc(s.action)}${imgsHtml}</div>`;
     } else if (s.imgOnly) {
       const imgHtml = s.img ? `<div style="margin:12px 0;text-align:center"><img src="${s.img}" alt="Imagen para enviar" style="max-width:100%;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer" onclick="window.open('${s.img}','_blank')" /></div>` : '';
