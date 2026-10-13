@@ -825,6 +825,11 @@ function buildMsgs(rec) {
     });
   }
 
+  // 8b. RESUMEN DE COMPRA (cuando dice que quiere inscribirse / pagar)
+  if (rec!=='1a1') steps.push({who:tw, lbl:'Resumen de compra (cuando quiere inscribirse)',
+    txt:`¡Genial, [nombre]! 🎉 Este es el resumen de ${m('su','tu')} paquete:\n\n🎯 Paquete de [N] clases en vivo: [precio]\n✅ [N] clases en vivo por Zoom con corrección de técnica en tiempo real\n🎁 De regalo: la biblioteca de clases grabadas para repasar\n🦵 Los 3 cursos: PowerSplit + Arcos360 + Acrobases\n📅 Vigencia: [1 mes / 2 meses] desde ${m('su','tu')} primera clase\n\n` + (isExt ? `Ahora mismo ${v('te genero','te generamos')} el link para que ${m('puedan','puedas')} pagar con cualquier tarjeta 💳` : `Ahora mismo ${v('te paso','te pasamos')} los datos para pagar: Yape, Plin, transferencia o tarjeta 💳`),
+    note:'Mándalo apenas diga que quiere inscribirse o pagar. Completa [N], [precio] y la vigencia. Enseguida genera el link (o pasa los datos de Perú) del paso siguiente. En Chatwoot el bot ya lo hace solo y deja la etiqueta "listo-para-pagar".'});
+
   // 9. DATOS DE PAGO
   if (isExt) {
     steps.push({who:tw, lbl:'Datos de pago — internacional',
