@@ -749,6 +749,12 @@ function buildMsgs(rec) {
           note:'Su freno es el dinero de este mes: NO bajes el precio ni ofrezcas descuento. Pon una fecha concreta (fin de mes o el día que te dijo) y anótala en la hoja para escribirle ese día.'
         },
         {
+          key:'inicio',
+          label:'📆 "¿Cuándo empieza el curso?"',
+          txt:`¡Hola [nombre]! 😊 Las clases no tienen una fecha de inicio: son en vivo por Zoom todas las semanas, de lunes a sábado, así que ${m('puede empezar','puedes empezar')} el día que ${m('quiera','quieras')}.\n\nMientras antes ${m('empiece','empieces')}, antes ${m('va notando su','vas notando tu')} flexibilidad 🙌 ¿${m('Le queda','Te queda')} mejor empezar esta semana o la próxima?`,
+          note:'Las clases grupales son permanentes: no hay ciclos, ni inicio ni fin. Si no sabes su país, en vez de la última pregunta usa: "¿Desde qué país nos escribes? Así te paso el horario de tu zona".'
+        },
+        {
           key:'info',
           label:'📩 "Mándame más info"',
           txt: isCami
