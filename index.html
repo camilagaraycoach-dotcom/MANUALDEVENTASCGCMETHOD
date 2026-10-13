@@ -537,45 +537,6 @@ function buildMsgs(rec) {
     ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
     : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
-  // RESPUESTA A DUDAS O MIEDOS (va pegada al mensaje 1, antes de la pregunta de días)
-  if (rec !== '1a1') steps.push({
-    type:'branch',
-    lbl:'¿En su respuesta mencionó alguna duda, miedo o experiencia?',
-    note:'Si sí → manda esta respuesta primero y luego el mensaje de recomendación. Si no mencionó nada → salta al siguiente paso.',
-    opts:[
-      {
-        key:'edad', label:'⏳ "¿Ya es tarde para mí?"',
-        txt: m(
-          `¡Para nada! ✨ El método va desde la base y se adapta a cada cuerpo: no se fuerza nada, se avanza con técnica y fuerza. Tenemos estudiantes de todas las edades avanzando clase a clase 💪`,
-          `¡Para nada es tarde! ✨ Tenemos estudiantes de 40, 50 y más de 60 años avanzando. El método va desde la base y se adapta a tu cuerpo: no se fuerza nada, se progresa con técnica y fuerza.\n\nLo que importa no es la edad, es empezar con alguien que te corrija 💪`)
-      },
-      {
-        key:'miedo', label:'😰 Le da miedo',
-        txt: m(
-          `Es súper normal sentir miedo al inicio 🙌 Por eso trabajamos con progresiones: primero fuerza y control, luego apoyos y recién después el movimiento completo. Siempre hay un coach mirándolo/a y corrigiéndolo/a en vivo, así que avanza con seguridad y sin forzar.`,
-          `Es súper normal sentir miedo al inicio 🙌 Por eso trabajamos con progresiones: primero fuerza y control, luego apoyos en la pared y recién después el movimiento completo. Siempre vas a tener un coach mirándote y corrigiéndote en vivo, así que avanzas con seguridad y sin forzar.`)
-      },
-      {
-        key:'cuesta', label:'😣 "Me cuesta / no avanzo"',
-        txt: m(
-          `Es muy común, y justamente por eso no se trata de forzar 🙌 En las clases se trabaja con técnica y fuerza, no solo estirando, y el coach ajusta cada ejercicio a su cuerpo. Si tiene alguna lesión, cuéntanos para adaptar los ejercicios.`,
-          `Es muy común al empezar, y justamente por eso no se trata de forzar 🙌 En las clases trabajas con técnica y fuerza, no solo estirando, y el coach ajusta cada ejercicio a tu cuerpo. Si tienes alguna lesión, cuéntanos para adaptar los ejercicios.`)
-      },
-      {
-        key:'exp', label:'💪 Tiene experiencia',
-        txt: m(
-          `Su experiencia es una ventaja: ya tiene consciencia corporal y base muscular 💪 ${v('Mis coaches enseñan','Los coaches de Cami enseñan')} desde la anatomía y la biomecánica, así que con esa base el avance se nota rápido.`,
-          `Tu experiencia es una ventaja: ya tienes consciencia corporal y base muscular 💪 ${v('Mis coaches enseñan','Los coaches de Cami enseñan')} desde la anatomía y la biomecánica, así que con tu base el avance se nota rápido.`)
-      },
-      {
-        key:'cero', label:'🌱 Empieza desde cero',
-        txt: m(
-          `Empezar desde cero no es un obstáculo 🌱 El método parte de la base y se adapta a su cuerpo, así que avanza igual alguien que nunca entrenó que alguien con experiencia.`,
-          `Empezar desde cero no es un obstáculo 🌱 El método parte de la base y se adapta a tu cuerpo, así que avanza igual alguien que nunca entrenó que alguien con experiencia.`)
-      }
-    ]
-  });
-
   // MENSAJE 1 — RECOMENDACIÓN PERSONALIZADA + UNA PREGUNTA
   const LINEAS = {
     'powersplit': `*PowerSplit* 🦵 — split sagital, frontal y elevaciones, con fortalecimiento muscular (no solo estirar)`,
@@ -585,16 +546,50 @@ function buildMsgs(rec) {
     'acrobases':  `*Acrobases* 🤸 — parada de manos, parada de codos, rueda de carro y rodamientos, paso a paso y de forma segura, con preparación física integrada`
   };
   if (rec !== '1a1') {
-    steps.push({who:tw, lbl:'Mensaje 1 — Recomendación + 1 pregunta',
-      txt: `¡Hola [nombre]! ${v('Soy Cami. ','')}Ya ${v('leí','leímos')} lo que ${m(v('me compartieron','nos compartieron'), v('me contaste','nos contaste'))} 😊\n\n[Repite con sus palabras lo que busca. Ej.: "${rec==='acrobases' ? m('Quieres que tu hijo/a aprenda parada de manos y rueda de carro','Quieres lograr tu parada de manos y perderle el miedo') : m('Quieres que tu hijo/a logre su split y mejore su arco','Quieres lograr tu split y mejorar tu arco')}"]\n\nPara eso lo ideal ${m('para tu hijo/a ','')}es ${LINEAS[rec]}\n\nSon clases en vivo por Zoom con un coach que corrige en tiempo real, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n¿${m('Podría entrenar','Podrías entrenar')} 2 o 3 veces por semana? 📅`,
-      note:'⏱️ Mándalo el MISMO DÍA en que respondió.\n❤️ Arma el mensaje así: 1) saludo cálido ("¡Qué bueno que te animes!"), 2) SU NECESIDAD en beneficios para su vida (ej. 60 años: agacharse sin esfuerzo, menos rigidez), 3) SU MIEDO SIEMPRE: el que dijo, o el más probable (50+: lesionarse → desde su nivel, sin forzar, coach corrigiendo en vivo · principiante/rígido: "no voy a poder" → progresiones desde la base · niño: seguridad · ya entrena: estancarse), 4) el curso en 1 línea, 5) UNA sola pregunta (el país). Si contó un problema ("no sé si lo hago bien", "no avanzo"), empieza por eso: por qué le pasa y cómo lo resolvemos.\n✍️ Cambia la línea entre corchetes por lo que te escribió, con sus palabras.\n🚫 No vuelvas a preguntar lo que ya te dijo (edad, país, objetivo).\n🎯 Si quiere acrobacias, parada de manos, parada de cabeza o cuervo → la recomendación es Acrobases (vuelve y elige "Aprender acrobacias").\n🩰 Si pide una TÉCNICA ESPECÍFICA (saut de chat, grand jeté, fouetté, pirouette, puntas, un elemento de su deporte) → NO es grupal: recomienda clases 1 a 1 (vuelve y elige 1 a 1). Saltos y giros de ballet → Sebastián; nivel avanzado o todo junto → Cami; trucos de gimnasia → Andrea.\n📍 Si NO sabes su país, agrega al final: "¿Y desde qué país nos escribes? Así te paso el horario de tu zona".\n💰 Si ya preguntó el precio, no lo hagas esperar: manda este mensaje y enseguida el de precio (paso de "¿Cuántos días?"), asumiendo 2 días si no lo dijo.'
+    // 4 líneas: saludo + su beneficio · le quitamos el miedo · el curso · UNA pregunta
+    const BENEF = {
+      'powersplit': m('Va a notar la diferencia en su split: bajar con control, sin dolor y con piernas más fuertes.', 'Vas a notar la diferencia en tu split: bajar con control, sin dolor y con piernas más fuertes.'),
+      'arcos360':   m('Va a ganar una espalda más móvil y fuerte: un arco más alto, mejor postura y más seguridad.', 'Vas a ganar una espalda más móvil y fuerte: un arco más alto, mejor postura y menos rigidez.'),
+      'ps-a360':    m('Va a moverse con más libertad: más flexibilidad en piernas y espalda, y mejor postura.', 'Vas a notar el cambio en el día a día: moverte con más libertad, menos rigidez en espalda y cadera, y piernas más flexibles.'),
+      'completo':   m('Va a ganar flexibilidad, fuerza y sus primeras acrobacias, todo con una base sólida.', 'Vas a ganar flexibilidad, fuerza y tus primeras acrobacias, todo con una base sólida.'),
+      'acrobases':  m('Va a lograr sus acrobacias con una base de fuerza que le da seguridad: parada de manos, rueda y más.', 'Vas a lograr tus acrobacias con una base de fuerza que te da seguridad: parada de manos, rueda y más.')
+    };
+    const CURSO = {'powersplit':'PowerSplit 🦵','arcos360':'Arcos360 🌙','ps-a360':'PowerSplit + Arcos360','completo':'el programa completo (PowerSplit + Arcos360 + Acrobases)','acrobases':'Acrobases 🤸'};
+    const MIEDOS = (isMama || isNino) ? [
+      {key:'seguro', label:'🛡️ Seguridad (lo normal en niños)',
+       f:'En cuanto a la seguridad: avanza con progresiones paso a paso, desde la base, y el coach le ve por Zoom y le corrige la postura en el momento.'},
+      {key:'deporte', label:'💪 Ya hace un deporte',
+       f:'Y como ya entrena, el método le suma lo que suele faltar: fortalecimiento muscular, no solo estirar, con un coach que le corrige en vivo por Zoom.'},
+      {key:'cero', label:'🌱 Empieza desde cero',
+       f:'Y no necesita experiencia: se parte de la base con progresiones por niveles, y el coach le ve por Zoom y le corrige en el momento.'}
+    ] : [
+      {key:'50', label:'⏳ 40+ / "¿ya es tarde?"',
+       f:'Y para nada es tarde: empiezas desde tu nivel, sin rebotes ni posturas forzadas, y el coach te ve por Zoom y te corrige en el momento para que avances seguro.'},
+      {key:'cero', label:'🌱 Principiante / rígido',
+       f:'Y no necesitas ser flexible para empezar: se parte de la base con progresiones por niveles, y el coach te ve por Zoom y te corrige en el momento.'},
+      {key:'entrena', label:'💪 Ya entrena (danza, yoga, pole…)',
+       f:'Y con tu experiencia vas a avanzar rápido: el método suma lo que suele faltar, fortalecimiento muscular y técnica, con un coach que te corrige en vivo por Zoom.'},
+      {key:'noavanza', label:'😣 No avanza / no sabe si lo hace bien',
+       f:'Eso pasa mucho cuando entrenas sin nadie que te vea: en las clases el coach te ve por Zoom, te corrige en el momento y avanzas por niveles, así sabes exactamente en qué punto estás.'},
+      {key:'tiempo', label:'⏰ Poco tiempo',
+       f:'Y se adapta a tu agenda: clases de 1 hora, con horarios de mañana, tarde y noche, y si un día no llegas tienes la biblioteca de clases grabadas.'}
+    ];
+    const cierre1 = isExt
+      ? `¿Desde qué país ${m('nos escriben','nos escribes')}? Así ${m('les','te')} paso el horario y las opciones 📍`
+      : `Te dejo el horario y las opciones aquí abajo 👇`;
+    steps.push({
+      type:'branch',
+      lbl:'Mensaje 1 — ¿Qué le preocupa?',
+      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
+      opts: MIEDOS.map(o => ({key:o.key, label:o.label,
+        txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f}\n\n${m('Para tu hijo/a','Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
     });
     steps.push({who:tw, lbl:'Enviar imagen — Resultado real', isAction:true,
-      action:'📸 Justo después del mensaje 1, envía UNA imagen según el género del lead:\n👩 Mujer → Laura\n👨 Hombre → Manuel', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
+      action:'📸 Prueba real: justo después del Mensaje 1 envía UNA imagen:\n👩 Mujer o hija → Laura (la primera)\n👨 Hombre o hijo → Manuel (la segunda)', imgs:['img/laura-resultados-cgc.webp','img/manuel-resultados-cgc.webp']});
   } else {
     steps.push({who:tw, lbl:'Presentar clases 1:1 y coaches',
       txt: `¡Hola [nombre]! ${v('Soy Cami. ','')}` + recTxt1a1,
-      note:'⏱️ Mándalo el MISMO DÍA en que respondió.\n❤️ Arma el mensaje así: 1) saludo cálido ("¡Qué bueno que te animes!"), 2) SU NECESIDAD en beneficios para su vida (ej. 60 años: agacharse sin esfuerzo, menos rigidez), 3) SU MIEDO SIEMPRE: el que dijo, o el más probable (50+: lesionarse → desde su nivel, sin forzar, coach corrigiendo en vivo · principiante/rígido: "no voy a poder" → progresiones desde la base · niño: seguridad · ya entrena: estancarse), 4) el curso en 1 línea, 5) UNA sola pregunta (el país). Si contó un problema ("no sé si lo hago bien", "no avanzo"), empieza por eso: por qué le pasa y cómo lo resolvemos.\n⏳ Espera su respuesta: eso define qué coach recomendar.\n🏅 Si es un niño/a que ya compite (gimnasia, ballet intensivo, selección) → es perfil CGC ELITE: usa "Rutas rápidas → Niño/a que compite" y avisa a Cami.'});
+      note:'⏱️ Mándalo el MISMO DÍA en que respondió.\n❤️ Si contó un miedo o un problema, respóndelo en una línea antes de presentar a los coaches.\n⏳ Espera su respuesta: eso define qué coach recomendar.\n🏅 Si es un niño/a que ya compite (gimnasia, ballet intensivo, selección) → es perfil CGC ELITE: usa "Rutas rápidas → Niño/a que compite" y avisa a Cami.'});
   }
 
   // PREGUNTAS FRECUENTES DE MAMÁS
