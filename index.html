@@ -598,11 +598,13 @@ function buildMsgs(rec) {
     ];
     const cierre1 = isExt
       ? `¿Desde qué país ${m('nos escriben','nos escribes')}? Así ${m('les','te')} paso el horario y las opciones 📍`
-      : `Te dejo el horario y las opciones aquí abajo 👇`;
+      : isLima
+        ? `Como ${m('están','estás')} en Lima, ${m('también puede','también puedes')} entrenar presencial en Acroflex, el centro de Cami en Jesús María: mismo método de Camila, dictado por su equipo, con clases de flexibilidad y de acrobacias 🙌\n\n¿${m('Prefieren','Prefieres')} presencial en Acroflex o virtual por Zoom?`
+        : `Te dejo el horario y las opciones aquí abajo 👇`;
     steps.push({
       type:'branch',
       lbl:'Mensaje 1 — ¿Qué le preocupa?',
-      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
+      note:'Toca lo que más se parece a lo que te contó (si no dijo nada, elige por su perfil). Cambia solo [nombre].' + (isExt ? '\n🇵🇪 Si te responde "Perú", pregúntale la ciudad: si es Lima, vuelve y elige "Lima, Perú" (se le ofrece Acroflex presencial).' : isLima ? '\nPresencial → WhatsApp de Acroflex +51 993 813 336 (horarios, precios e inscripción). Virtual → manda el Mensaje 2 (horario + las 2 opciones).' : '\nComo ya sabes que es de Perú, manda enseguida el Mensaje 2 (horario + las 2 opciones).') + '\n🎯 ¿Pide acrobacias? → vuelve y elige "Aprender acrobacias". ¿Técnica específica (saut de chat, fouetté, puntas)? → vuelve y elige 1 a 1.',
       opts: MIEDOS.map(o => ({key:o.key, label:o.label,
         txt:`¡Hola [nombre]! Qué bueno que ${m('se animen','te animes')} 🙌 ${BENEF[rec]}\n\n${o.f}\n\n${m('Para tu '+hijoA,'Para ti')} lo ideal es ${CURSO[rec]}, y con un solo paquete ${m('accede','accedes')} a los 3 cursos ✨\n\n${cierre1}`}))
     });
@@ -793,8 +795,8 @@ function buildMsgs(rec) {
   if (isLima && !isNino && rec!=='1a1') {
     steps.push({who:tw, lbl:'Ofrecer FlexiPower — bonus Lima',
       txt: isCami
-        ? `Como estás en Lima, eres candidata perfecta para FlexiPower también 🏋️\n\nSon clases grupales presenciales en Acroflex (Jesús María) — las diseñé yo y las dan mis entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`
-        : `Como estás en Lima, eres candidata perfecta para FlexiPower también 🏋️\n\nSon clases grupales presenciales en Acroflex (Jesús María), diseñadas por Cami y dictadas por sus entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`,
+        ? `Como estás en Lima, FlexiPower también es para ti 🏋️\n\nSon clases grupales presenciales en Acroflex (Jesús María) — las diseñé yo y las dan mis entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`
+        : `Como estás en Lima, FlexiPower también es para ti 🏋️\n\nSon clases grupales presenciales en Acroflex (Jesús María), diseñadas por Cami y dictadas por sus entrenadores. Ideal para complementar las clases online ✨\n\n¿Te interesa? Te paso el contacto directo.`,
       note:'Si le interesa → enviar: 📱 WhatsApp Acroflex: +51 993 813 336 para coordinar horarios e inscripción'
     });
   }
