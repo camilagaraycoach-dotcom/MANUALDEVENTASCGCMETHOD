@@ -727,6 +727,13 @@ function buildMsgs(rec) {
       note:'Selecciona si el lead pone alguna de estas objeciones — o continúa al siguiente paso si acepta.',
       opts:[
         {
+          key:'lesion',
+          label:'🩹 Tiene lesión, desgarro, hernia o dolor',
+          txt:`¡Gracias por contarnos, [nombre]! 💛 ${v('Quiero','Queremos')} ${m('acompañarlos a que vuelva a moverse','acompañarte a volver a moverte')} con confianza.\n\nPara cuidar bien ${m('su','tu')} salud: nuestras clases son de flexibilidad con técnica y no reemplazan la rehabilitación con ${m('su','tu')} fisioterapeuta.\n\n¿${m('Ya tiene','Ya tienes')} el alta de ${m('su','tu')} médico o fisioterapeuta para volver a entrenar y estirar?`,
+          txt2:`¡Qué buena noticia! 🙌 Trabajamos con progresiones y fortalecimiento muscular, y el coach adapta cada ejercicio y corrige en vivo.\n\n${m('Tienen','Tienes')} dos opciones para empezar:\n• Una clase de prueba de las clases grupales, completamente gratis, para conocer el método (se reserva en cursos.camilagaraycoach.com con nombre y correo)\n• Una clase particular 1:1 con uno de nuestros entrenadores, para ver ${m('su','tu')} caso de cerca (Andrea o Sebastián $35 USD · Cami $60 USD)\n\n¿Qué ${m('prefieren','prefieres')}: la clase de prueba gratis o una clase particular?`,
+          note:'Paso 1 (primer mensaje): pregunta SIEMPRE primero por el alta, sin recomendar curso ni paquete. Paso 2 (segundo mensaje): solo si dice que SÍ tiene el alta. Si NO la tiene o sigue en terapia, responde: "¡Mucho ánimo con tu recuperación! 💛 Lo primero es que tengas el alta para entrenar seguro. Cuando te la den, escríbenos y con gusto te ayudamos a empezar 😊" y no insistas. Nunca abras con "no somos rehabilitación" (suena cortante) ni des consejos médicos.'
+        },
+        {
           key:'caro',
           label:'💸 "Está muy caro"',
           txt: isCami
