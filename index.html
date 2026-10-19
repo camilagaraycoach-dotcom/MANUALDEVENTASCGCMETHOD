@@ -246,6 +246,11 @@ button,.copy-btn{-webkit-user-select:none;user-select:none}
             <div class="quick-card-title">Cursos grabados</div>
             <div class="quick-card-desc">Venta de cursos digitales</div>
           </button>
+          <button class="quick-card" style="background:linear-gradient(135deg,#7A3FD4,#C040A0);border-color:transparent;color:#fff" onclick="startMasterclass()">
+            <div class="quick-card-icon">🎓</div>
+            <div class="quick-card-title" style="color:#fff">Masterclasses en vivo</div>
+            <div class="quick-card-desc" style="color:rgba(255,255,255,.85)">Venta · si el pago no funciona · dar acceso</div>
+          </button>
           <button class="quick-card" style="background:linear-gradient(135deg,#1A7FD4,#0FA8A0);border-color:transparent;color:#fff" onclick="startSystem()">
             <div class="quick-card-icon">🔗</div>
             <div class="quick-card-title" style="color:#fff">Sistema de reservas</div>
@@ -1437,6 +1442,143 @@ function buildSystemScreen() {
     </div>
 
     <div style="text-align:center;margin-top:28px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
+  </div>`;
+}
+
+/* ---------- Masterclasses en vivo (entrenadores): venta, pago alternativo y acceso manual ---------- */
+const MC_DATA = {
+  mid: {
+    nombre: 'Middle split',
+    titulo: 'MASTERCLASS DE MIDDLE SPLIT para entrenadores y profesores',
+    fecha: 'domingo 8 de noviembre · 10:00 a. m. (hora de Lima)',
+    link: 'https://cursos.camilagaraycoach.com/masterclass-middle-split',
+    preventa: '1 de noviembre, 11:59 p. m. (hora de Lima)',
+    producto: 'Domina la enseñanza del middle split (masterclass en vivo)',
+    desc: 'Masterclass middle split'
+  },
+  arcos: {
+    nombre: 'Arcos y flexibilidad de espalda',
+    titulo: 'MASTERCLASS: Arcos y flexibilidad de espalda, cómo enseñarlos con método',
+    fecha: 'domingo 22 de noviembre · 10:00 a. m. (hora de Lima)',
+    link: 'https://cursos.camilagaraycoach.com/masterclass',
+    preventa: '15 de noviembre, 11:59 p. m. (hora de Lima)',
+    producto: 'Arcos y flexibilidad de espalda: cómo enseñarlos con método (masterclass en vivo)',
+    desc: 'Masterclass arcos y espalda'
+  }
+};
+function startMasterclass() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showMasterclass('mid');
+}
+function showMasterclass(k) {
+  document.getElementById('sc-step').innerHTML = buildMasterclassScreen(k);
+  window.scrollTo(0, 0);
+}
+function buildMasterclassScreen(k) {
+  const d = MC_DATA[k];
+  window.__cpMsgs = [];
+  function sm(txt) { window.__cpMsgs.push(txt); return window.__cpMsgs.length - 1; }
+  const msgs = [
+    {
+      label: '1 · Cuando preguntan por la masterclass',
+      note: 'Va directo con los datos y el link. La persona puede comprar sola desde la página con tarjeta o PayPal.',
+      txt: `🎓 ${d.titulo}\n\n📅 ${d.fecha}\n🎥 2 horas por Zoom con Camila Garay\n✅ Certificación incluida\n🔁 Grabación para siempre\n\n🔥 PREVENTA: $19.99 (precio normal $29.99) hasta el ${d.preventa}.\n\nReserva tu lugar 👉 ${d.link}\n\n¿Dudas? Respóndeme por aquí 🙌`
+    },
+    {
+      label: '2 · Si no puede pagar por la página (o no le funciona)',
+      note: 'Antes de cobrar por otra vía, pídele que pruebe otra tarjeta o el botón de PayPal. Si igual no puede, usa este mensaje. Necesitas el nombre y el correo para dar el acceso.',
+      txt: `Sin problema, te ayudo a reservar tu lugar por otra vía 💛\n\nEscríbeme estos datos:\n1️⃣ Nombre y apellido completos (así saldrán en tu certificado)\n2️⃣ Correo con el que te vas a inscribir\n3️⃣ País desde el que te conectas\n\nCon eso te paso el medio de pago.`
+    },
+    {
+      label: '3A · Cobro desde Perú (Yape / Plin / transferencia)',
+      note: 'Calcula el monto en soles al cambio del día: $19.99 ≈ S/ 69 (revisa el cambio de hoy). Si ya pasó la preventa, el precio es $29.99.',
+      txt: `Perfecto 💛 Puedes pagar por Yape o Plin por S/ [monto al cambio del día] (equivale a $19.99 de preventa).\n\n📲 Yape/Plin: [número]\n\nEnvíame la captura del pago y te doy acceso de inmediato 🙌`
+    },
+    {
+      label: '3B · Cobro desde el extranjero (CulqiLink)',
+      note: 'Genera el CulqiLink en Culqi por $19.99 USD (o $29.99 si ya pasó la preventa). Descripción: "' + d.desc + '".',
+      txt: `Perfecto 💛 Te envío un link de pago seguro con tarjeta por $19.99 (precio de preventa):\n\n👉 [CulqiLink]\n\nCuando pagues, avísame por aquí y te doy acceso de inmediato 🙌`
+    },
+    {
+      label: '4 · Pago confirmado → avísale (después de "Dar acceso")',
+      note: 'Primero haz el paso de "Dar acceso" en el panel (más abajo). Luego manda este mensaje.',
+      txt: `¡Listo, ya te di acceso! 💛\n\nRevisa tu correo (mira también en spam): ahí está el botón para completar tu inscripción (son 2 minutos). Cuando la envíes, te llega el link de Zoom con el ID y la contraseña.\n\nUsa el mismo correo que me diste 📩 Si no te llega, avísame.`
+    },
+    {
+      label: '5 · Si no completó el formulario (recordatorio)',
+      note: 'Sin el formulario no le llega el Zoom. Revisa los días previos a la clase.',
+      txt: `Hola [nombre] 💛 Te recuerdo que para recibir el link de Zoom de la masterclass falta completar tu inscripción (2 minutos). Está en el correo que te llegó; si no lo encuentras, mira en spam y me avisas. Apenas la envíes te llega el Zoom 🙌`
+    }
+  ];
+  const msgsHtml = msgs.map((m, i) => {
+    const mi = sm(m.txt);
+    return `<div class="msg-step">
+      <div class="msg-head">
+        <div class="msg-num">${i + 1}</div>
+        <div class="msg-lbl">${m.label}</div>
+      </div>
+      <div class="msg-body">
+        ${m.note ? `<div class="msg-note" style="margin-bottom:10px">⚠️ ${esc(m.note)}</div>` : ''}
+        <div class="msg-txt">${esc(m.txt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button>
+      </div>
+    </div>`;
+  }).join('');
+  const styA = k === 'mid' ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const styB = k === 'arcos' ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : '';
+  const stepLi = (n, t) => `<div style="display:flex;gap:10px;margin-bottom:9px"><div style="flex:none;width:24px;height:24px;border-radius:50%;background:var(--grad-btn);color:#fff;font-weight:800;font-size:12px;display:grid;place-items:center">${n}</div><div style="font-size:13px;color:var(--gray);line-height:1.55">${t}</div></div>`;
+  return `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🎓 Masterclasses en vivo — entrenadores</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="branch-btn" onclick="showMasterclass('mid')" style="${styA}">Middle split · 8 nov</button>
+      <button class="branch-btn" onclick="showMasterclass('arcos')" style="${styB}">Arcos y espalda · 22 nov</button>
+    </div>
+    <div style="background:linear-gradient(135deg,#7A3FD4,#C040A0);border-radius:12px;padding:14px 18px;color:#fff;font-size:13px;margin-bottom:16px;line-height:1.6">
+      <div style="font-weight:800;font-size:15px;margin-bottom:4px">${esc(d.nombre)}</div>
+      📅 ${esc(d.fecha)}<br>
+      💲 Preventa $19.99 (normal $29.99) hasta el ${esc(d.preventa)}<br>
+      🔗 ${esc(d.link)}<br>
+      ✅ Certificación incluida · 🔁 Grabación para siempre · 🎥 Zoom con Camila Garay
+    </div>
+    <div style="background:#e8f5e9;border-left:3px solid #2ECC80;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px;line-height:1.6">
+      💡 <b>Lo normal:</b> la persona compra sola en el link con tarjeta o PayPal. Después le llega un correo con el formulario de inscripción; cuando lo llena, le llega el Zoom (link, ID y contraseña). También recibe recordatorios 1 día y 1 hora antes.<br>
+      🛠️ <b>Si no puede pagar en la página,</b> cobras tú por otra vía y le das el acceso desde el panel (pasos abajo).
+    </div>
+    ${msgsHtml}
+
+    <div style="margin-top:26px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">🛠️ Cómo dar el acceso en el panel (cuando ya pagó por otra vía)</div>
+    <div style="background:var(--surface,#f9f9f9);border-radius:12px;padding:16px 18px">
+      ${stepLi(1, 'Confirma que el pago <b>llegó de verdad</b> (Yape recibido o CulqiLink pagado).')}
+      ${stepLi(2, 'Entra al panel: <b>cgc-reservas.vercel.app/admin</b> → <b>Grabadas</b> → <b>"Dar acceso"</b>.')}
+      ${stepLi(3, 'Elige la clase: <b>' + esc(d.producto) + '</b>.')}
+      ${stepLi(4, 'Escribe <b>nombre y apellido, y el correo</b> tal cual te los dio la persona (una línea por persona).')}
+      ${stepLi(5, 'Marca <b>"avisar"</b> y guarda. Debe salir el mensaje de "Acceso dado". Si dice "ya lo tenían", ya estaba registrada.')}
+      ${stepLi(6, 'Manda a la persona el <b>mensaje 4</b> de arriba.')}
+    </div>
+
+    <div style="margin-top:18px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">📩 Qué le llega a la persona (automático)</div>
+    <div style="font-size:13px;color:var(--gray);line-height:1.65;background:var(--surface,#f9f9f9);border-radius:12px;padding:16px 18px">
+      • Al darle acceso con "avisar": correo de <b>lugar reservado</b> con el botón "Completar mi inscripción" y el grupo de WhatsApp.<br>
+      • Al llenar el formulario: correo con el <b>Zoom</b> (link, ID y contraseña).<br>
+      • <b>1 día y 1 hora antes:</b> recordatorios con el Zoom. Quien no llenó el formulario recibe el botón para completarlo.
+    </div>
+
+    <div style="margin-top:18px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">⚠️ Ojo</div>
+    <div style="font-size:13px;color:var(--gray);line-height:1.7;background:#fff7e6;border-left:3px solid #F0A020;border-radius:0 8px 8px 0;padding:12px 16px">
+      • El correo del formulario debe ser <b>el mismo</b> que pusiste en "Dar acceso". Si usa otro, no le llega el Zoom.<br>
+      • Revisa que el correo esté bien escrito antes de guardar.<br>
+      • Dar acceso <b>no registra el pago</b> ni manda recibo: anota el cobro en la hoja de ventas.<br>
+      • El <b>certificado</b> se envía a mano después de la masterclass.<br>
+      • Si no le llega el correo, que mire en spam. Si sigue sin llegar, avisa a Cami.<br>
+      • Después de la fecha de fin de preventa, el precio es <b>$29.99</b>.
+    </div>
+
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
       <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
     </div>
   </div>`;
