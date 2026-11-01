@@ -329,8 +329,8 @@ button,.copy-btn{-webkit-user-select:none;user-select:none}
       <table class="t1a1">
         <tr><th>Coach</th><th>Incluye</th><th>Precio</th></tr>
         <tr><td>Cami Garay</td><td>1 clase 1:1 · 60 min · virtual por Zoom <strong>o presencial en Lima</strong></td><td>$60 USD</td></tr>
-        <tr><td>Andrea</td><td>1 clase 1:1 · 60 min · virtual por Zoom · acrobacias, trucos de danza, gimnasia</td><td>$35 USD</td></tr>
-        <tr><td>Sebastián</td><td>1 clase 1:1 · 60 min · virtual por Zoom · flexibilidad, técnica de danza, saltos y giros</td><td>$35 USD</td></tr>
+        <tr><td>Andrea</td><td>1 clase 1:1 · 60 min · virtual por Zoom · acrobacias, trucos de danza, gimnasia</td><td>$40 USD</td></tr>
+        <tr><td>Sebastián</td><td>1 clase 1:1 · 60 min · virtual por Zoom · flexibilidad, técnica de danza, saltos y giros</td><td>$40 USD</td></tr>
         <tr><td>CGC ELITE Standard</td><td>8 vivo + 2 grabadas + 2 informes</td><td>$350 USD</td></tr>
         <tr><td>CGC ELITE Premium</td><td>8 vivo + 4 grabadas + 4 informes</td><td>$500 USD</td></tr>
       </table>
@@ -525,7 +525,7 @@ const REC = {
   'arcos360':     {icon:'🌙', name:'Arcos360',                               color:'linear-gradient(135deg,#8B4FC8,#C040A0)', nota:'El curso de flexibilidad de espalda: arco, puente, escorpión y figuras posteriores.'},
   'ps-a360':      {icon:'🔥', name:'PowerSplit + Arcos360',                  color:'linear-gradient(135deg,#8B4FC8,#E8302A)', nota:'Los dos cursos de flexibilidad: splits y arcos. Con un solo paquete acceden a los dos.'},
   'completo':     {icon:'⭐', name:'PowerSplit + Arcos360 + Acrobases',      color:'linear-gradient(135deg,#4A7FD4,#8B4FC8)', nota:'Programa integral: flexibilidad + fuerza + base acrobática. Un paquete, tres cursos.'},
-  '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($35) o Sebastián ($35) según lo que busca el alumno.'},
+  '1a1':          {icon:'🎯', name:'Clases 1:1 personalizadas',               color:'linear-gradient(135deg,#E8302A,#C040A0)', nota:'Atención personalizada con Cami ($60), Andrea ($40) o Sebastián ($40) según lo que busca el alumno.'},
   'acrobases':    {icon:'🤸', name:'Acrobases',                              color:'linear-gradient(135deg,#2ECC71,#1A7FD4)', nota:'Acrobacias básicas: parada de manos, rueda de carro, rodamientos. Con preparación física integrada.'}
 };
 
@@ -564,8 +564,8 @@ function buildMsgs(rec) {
   const m = (mama, alumno) => isMama ? mama : alumno;
   const enSoles = !isExt;
   const recTxt1a1 = isMama
-    ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
-    : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($35/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($35/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
+    ? `Por lo que me cuentas, para tu hijo/a lo mejor sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($40/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($40/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más le interesa trabajar a tu hijo/a?`
+    : `Por lo que me cuentas, lo mejor para ti sería una clase 1:1 personalizada\n\nTenemos 3 coaches — cada uno especializado en algo distinto:\n\n⭐ *Camila Garay* ($60/clase) — splits, arcos, acrobacias, danza. Todo.\n💃 *Andrea* ($40/clase) — gimnasia, acrobacias y trucos de danza. Exgimnasta nacional.\n🩰 *Sebastián* ($40/clase) — flexibilidad y técnica de danza. Ballet clásico profesional.\n\nTodos siguen el mismo método CGC. ¿Qué es lo que más te interesa trabajar?`;
 
   // MENSAJE 1 — RECOMENDACIÓN PERSONALIZADA + UNA PREGUNTA
   const LINEAS = {
@@ -669,18 +669,18 @@ function buildMsgs(rec) {
           : `¡Perfecto! Lo ideal para ti es trabajar directamente con *Cami Garay*\n\nElla trabaja todo — splits, arcos, acrobacias y danza — y puede armarte un plan exacto según tu objetivo y nivel.\n\n⭐ $60 USD por clase (1 hora en vivo por Zoom)\n📍 También disponible presencial en Lima (Acroflex)\n\n¿Te gustaría agendar tu clase con Cami? 🎯`
       },
       {
-        key:'andrea', label:'💃 Andrea ($35)',
+        key:'andrea', label:'💃 Andrea ($40)',
         sublbl:'Gimnasia, acrobacias, trucos de danza',
         txt: isMama
-          ? `¡Perfecto! La indicada para tu hijo/a es *Andrea*\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Muy paciente con los niños — sabe exactamente cómo guiarlos paso a paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nTodas las coaches están formadas por Cami y siguen el mismo método CGC.\n\n¿Te gustaría agendar su clase con Andrea? 🎯`
-          : `¡Perfecto! La indicada para ti es *Andrea*\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Directa y cercana — te hace sentir acompañada en cada paso.\n\n💃 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formada por Cami y sigue el mismo método CGC.\n\n¿Te gustaría agendar tu clase con Andrea? 🎯`
+          ? `¡Perfecto! La indicada para tu hijo/a es *Andrea*\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Muy paciente con los niños — sabe exactamente cómo guiarlos paso a paso.\n\n💃 $40 USD por clase (1 hora en vivo por Zoom)\n\nTodas las coaches están formadas por Cami y siguen el mismo método CGC.\n\n¿Te gustaría agendar su clase con Andrea? 🎯`
+          : `¡Perfecto! La indicada para ti es *Andrea*\n\nEs exgimnasta nacional e internacional, especialista en acrobacias, trucos de danza y gimnasia artística. Directa y cercana — te hace sentir acompañada en cada paso.\n\n💃 $40 USD por clase (1 hora en vivo por Zoom)\n\nEstá formada por Cami y sigue el mismo método CGC.\n\n¿Te gustaría agendar tu clase con Andrea? 🎯`
       },
       {
-        key:'sebastian', label:'🩰 Sebastián ($35)',
+        key:'sebastian', label:'🩰 Sebastián ($40)',
         sublbl:'Flexibilidad y técnica de danza',
         txt: isMama
-          ? `¡Perfecto! El indicado para tu hijo/a es *Sebastián*\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — le explica a tu hijo/a el porqué de cada movimiento para que entienda su cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría agendar su clase con Sebastián? 🎯`
-          : `¡Perfecto! El indicado para ti es *Sebastián*\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — te explica el porqué de cada movimiento para que entiendas tu cuerpo de verdad.\n\n🩰 $35 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría agendar tu clase con Sebastián? 🎯`
+          ? `¡Perfecto! El indicado para tu hijo/a es *Sebastián*\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — le explica a tu hijo/a el porqué de cada movimiento para que entienda su cuerpo de verdad.\n\n🩰 $40 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría agendar su clase con Sebastián? 🎯`
+          : `¡Perfecto! El indicado para ti es *Sebastián*\n\nEs bailarín profesional de ballet clásico, especialista en flexibilidad, técnica de danza, saltos y giros. Muy metódico — te explica el porqué de cada movimiento para que entiendas tu cuerpo de verdad.\n\n🩰 $40 USD por clase (1 hora en vivo por Zoom)\n\nEstá formado por Cami y sigue el mismo método CGC.\n\n¿Te gustaría agendar tu clase con Sebastián? 🎯`
       }
     ]
   });
@@ -738,7 +738,7 @@ function buildMsgs(rec) {
           key:'lesion',
           label:'🩹 Tiene lesión, desgarro, hernia o dolor',
           txt:`¡Gracias por contarnos, [nombre]! 💛 ${v('Quiero','Queremos')} ${m('acompañarlos a que vuelva a moverse','acompañarte a volver a moverte')} con confianza.\n\nPara cuidar bien ${m('su','tu')} salud: nuestras clases son de flexibilidad con técnica y no reemplazan la rehabilitación con ${m('su','tu')} fisioterapeuta.\n\n¿${m('Ya tiene','Ya tienes')} el alta de ${m('su','tu')} médico o fisioterapeuta para volver a entrenar y estirar?`,
-          txt2:`¡Qué buena noticia! 🙌 Trabajamos con progresiones y fortalecimiento muscular, y el coach adapta cada ejercicio y corrige en vivo.\n\n${m('Tienen','Tienes')} dos opciones para empezar:\n• Una clase de prueba de las clases grupales, completamente gratis, para conocer el método (se reserva en cursos.camilagaraycoach.com con nombre y correo)\n• Una clase particular 1:1 con uno de nuestros entrenadores, para ver ${m('su','tu')} caso de cerca (Andrea o Sebastián $35 USD · Cami $60 USD)\n\n¿Qué ${m('prefieren','prefieres')}: la clase de prueba gratis o una clase particular?`,
+          txt2:`¡Qué buena noticia! 🙌 Trabajamos con progresiones y fortalecimiento muscular, y el coach adapta cada ejercicio y corrige en vivo.\n\n${m('Tienen','Tienes')} dos opciones para empezar:\n• Una clase de prueba de las clases grupales, completamente gratis, para conocer el método (se reserva en cursos.camilagaraycoach.com con nombre y correo)\n• Una clase particular 1:1 con uno de nuestros entrenadores, para ver ${m('su','tu')} caso de cerca (Andrea o Sebastián $40 USD · Cami $60 USD)\n\n¿Qué ${m('prefieren','prefieres')}: la clase de prueba gratis o una clase particular?`,
           note:'Paso 1 (primer mensaje): pregunta SIEMPRE primero por el alta, sin recomendar curso ni paquete. Paso 2 (segundo mensaje): solo si dice que SÍ tiene el alta. Si NO la tiene o sigue en terapia, responde: "¡Mucho ánimo con tu recuperación! 💛 Lo primero es que tengas el alta para entrenar seguro. Cuando te la den, escríbenos y con gusto te ayudamos a empezar 😊" y no insistas. Nunca abras con "no somos rehabilitación" (suena cortante) ni des consejos médicos.'
         },
         {
