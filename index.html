@@ -349,10 +349,12 @@ button,.copy-btn{-webkit-user-select:none;user-select:none}
     <div class="p-sec">
       <div class="p-sec-title">Métodos de pago</div>
       <div style="font-size:13px;color:var(--gray);line-height:1.8">
-        🌎 <strong>Internacional A:</strong> Link tienda (Culqi) → paquete + correo entran automáticos<br>
-        🌎 <strong>Internacional B:</strong> Link de pago manual → el equipo carga el paquete a mano<br>
-        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles → el equipo carga a mano<br>
-        📋 <strong>Siempre:</strong> Pedir comprobante antes de confirmar
+        🌎 <strong>Paquete normal (A, el preferido):</strong> link de la web con el paquete ya elegido → paga con tarjeta o PayPal y el paquete + correo entran SOLOS (no hay que cargar nada). Cobra en soles si está en Perú y en dólares si está afuera.<br>
+        &nbsp;&nbsp;&nbsp;🔗 <a href="https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=4-clases#paquetes" target="_blank" style="color:inherit">4 clases</a> · <a href="https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=8-clases#paquetes" target="_blank" style="color:inherit">8 clases</a> · <a href="https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=12-clases#paquetes" target="_blank" style="color:inherit">12 clases</a> · <a href="https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=20-clases#paquetes" target="_blank" style="color:inherit">20 clases</a> · <a href="https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=32-clases#paquetes" target="_blank" style="color:inherit">32 clases</a><br>
+        🌎 <strong>Monto especial (B):</strong> promo dúo, varias 1:1, descuentos → CulqiLink por el monto exacto<br>
+        🇵🇪 <strong>Perú:</strong> Yape · Plin · Transferencia en soles<br>
+        💳 <strong>Captura de Yape, transferencia o CulqiLink:</strong> el agente la deja llenada en <a href="https://cgc-reservas.vercel.app/admin/pagos" target="_blank" style="color:inherit"><b>Panel → Pagos por confirmar</b></a>: revisa que la plata llegó (app de Yape, banco o Culqi) y toca ✅ Confirmar. No hace falta cargar el paquete a mano.<br>
+        📋 <strong>Siempre:</strong> Revisar que el pago llegó antes de confirmar
       </div>
     </div>
 
@@ -863,14 +865,14 @@ function buildMsgs(rec) {
       txt: isCami
         ? `Para pagos internacionales tenemos dos opciones\n\n🏷️ *Opción A — tienda online (automático):* Te paso el link, pagas con tarjeta y el paquete entra solo con tu correo de bienvenida.\n\n🧾 *Opción B — link de pago manual:* Te armo el cobro y una vez confirmado lo cargo yo.\n\n¿Cuál prefieres?`
         : `Para pagos internacionales tenemos dos opciones\n\n🏷️ *Opción A — tienda online (automático):* Te pasamos el link, pagas con tarjeta y el paquete entra solo con tu correo de bienvenida.\n\n🧾 *Opción B — link de pago manual:* Te armamos el cobro y una vez confirmado lo cargamos nosotros.\n\n¿Cuál prefieres?`,
-      note:'⚡ Opción A = link de la tienda (Culqi) → paquete + correo entran automáticos. Opción B = link de pago manual → el equipo carga el paquete a mano en el panel después de recibir el comprobante.'
+      note:'⚡ Opción A = link de la web con su paquete ya elegido (ej. 8 clases: https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=8-clases#paquetes; cambia el 8 por 4, 12, 20 o 32) → paga con tarjeta o PayPal y el paquete + correo entran solos. Opción B = CulqiLink por el monto exacto (solo montos especiales) → cuando mande la captura, confírmalo en Panel → Pagos por confirmar.'
     });
   } else {
     steps.push({who:tw, lbl:'Datos de pago — Perú',
       txt: isCami
         ? `Para el pago tienes estas opciones:\n\n📲 *Yape / Plin:* 954 655 122\n🏦 *Transferencia BCP (soles):*\nCuenta: 19394356284075\nCCI: 00219319435628407511\nA nombre de Camila Rosario Garay Robles\n\n💳 *Tarjeta:* te genero un link de pago seguro\n\nCuando tengas el comprobante mándamelo 😊`
         : `Para el pago tienes estas opciones:\n\n📲 *Yape / Plin:* 954 655 122\n🏦 *Transferencia BCP (soles):*\nCuenta: 19394356284075\nCCI: 00219319435628407511\nA nombre de Camila Rosario Garay Robles\n\n💳 *Tarjeta:* te generamos un link de pago seguro\n\nCuando tengas el comprobante mándanoslo 😊`,
-      note:'📲 Yape/Plin → recibir comprobante → cargar paquete en panel.\n🏦 Transferencia BCP → recibir comprobante → cargar paquete en panel.\n💳 Tarjeta → generar CulqiLink por el monto acordado → mandar el link → confirmar pago → cargar paquete en panel.'
+      note:'📲 Yape/Plin y 🏦 Transferencia BCP → cuando mande la captura, el agente la deja en Panel → Pagos por confirmar: revisa que llegó y toca ✅ Confirmar (si no aparece ahí, cárgalo a mano como antes).\n💳 Tarjeta → paquete normal: manda el link de la web de su paquete (ej. https://cursos.camilagaraycoach.com/clases-en-vivo?paquete=8-clases#paquetes), entra solo. Monto especial: CulqiLink por el monto acordado → confirmar en Pagos por confirmar.'
     });
   }
 
@@ -1184,7 +1186,7 @@ function buildDigitalProductScreen(prod, modo) {
     <div class="msg-step">
       <div class="msg-head"><div class="msg-num">2</div><div class="msg-lbl">Datos de pago</div>${whoHtml}</div>
       <div class="msg-body">
-        <div class="msg-note" style="margin-bottom:10px">⚠️ Completar: <b>[link de pago]</b> para internacionales y <b>[datos Yape/cuenta]</b> para Perú antes de enviar.</div>
+        <div class="msg-note" style="margin-bottom:10px">⚠️ Completar: <b>[link de pago]</b> para internacionales (paquete normal: link de la web de su paquete, ver "Métodos de pago"; monto especial: CulqiLink) y <b>[datos Yape/cuenta]</b> para Perú antes de enviar.</div>
         <div class="msg-txt">${esc(pagoTxt)}</div>
         <button class="copy-btn" onclick="cpIdx(this,${miPago})">📋 Copiar mensaje</button>
       </div>
@@ -1363,7 +1365,7 @@ function buildRenewalScreen(modo) {
     <div style="background:#e8f5e9;border-left:3px solid #2ECC80;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px">
       💡 Revisar diariamente desde el panel quién tiene el paquete por vencer y enviar el mensaje correspondiente.<br><br>
       🔑 <b>Camino A (preferido):</b> El alumno entra a su link personal → sección dorada → renueva con su descuento automático (10% en 4/8 clases · 20% en 12/20/32). Código único, 1 solo uso, dura 7 días.<br>
-      🧾 <b>Camino B:</b> El asesor arma el cobro (Yape / link de pago) y carga el paquete a mano en el panel.
+      🧾 <b>Camino B:</b> El asesor arma el cobro (Yape / link de pago). Cuando llega la captura, se confirma en Panel → Pagos por confirmar (o se carga a mano si no aparece ahí).
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
       <button class="branch-btn" onclick="showRenewalMsgs('cami')" style="${styleCami}">⭐ Responde Cami</button>
