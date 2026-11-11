@@ -221,6 +221,11 @@ button,.copy-btn{-webkit-user-select:none;user-select:none}
           <div class="quick-divider-line"></div>
         </div>
         <div class="quick-grid">
+          <button class="quick-card" style="background:linear-gradient(135deg,#B4235F,#E8302A);border-color:transparent;color:#fff;grid-column:1/-1" onclick="startConsultivo()">
+            <div class="quick-card-icon">🧭</div>
+            <div class="quick-card-title" style="color:#fff">Guion nuevo: preguntar antes de vender</div>
+            <div class="quick-card-desc" style="color:rgba(255,255,255,.85)">Nuevo 10-nov · los 6 pasos con mensajes según el objetivo: split, arcos, acrobacias, flexibilidad</div>
+          </button>
           <button class="quick-card" style="background:linear-gradient(135deg,#E8302A,#F07820);border-color:transparent;color:#fff" onclick="startQuick()">
             <div class="quick-card-icon">⚡</div>
             <div class="quick-card-title" style="color:#fff">Rutas rápidas</div>
@@ -1470,6 +1475,67 @@ const MC_DATA = {
     desc: 'Masterclass arcos y espalda'
   }
 };
+const GC_DATA = {
+  split: { nombre: 'Split (adelante o abierto)', curso: 'PowerSplit', obj: 'tu split',
+    p1: '¡Qué lindo objetivo! ¿Hasta dónde llegas hoy? ¿Te falta mucho para tocar el piso?',
+    p2: '¿Qué sientes que te frena más: la parte de atrás de la pierna, la cadera o alguna molestia al bajar?',
+    metodo: 'En CGC nos tomamos muy en serio cada parte de la clase: articular, calentar, fortalecer y flexibilizar los músculos que se usan para abrir las piernas. Y claro, en cada clase trabajamos el split que toca ese día. Con nuestro método es mucho más eficiente, sin forzar la posición.' },
+  arcos: { nombre: 'Arcos y espalda', curso: 'Arcos360', obj: 'tus arcos',
+    p1: '¡Qué lindo objetivo! ¿Hoy ya haces el puente desde el piso?',
+    p2: 'Cuando te arqueas, ¿sientes alguna molestia en la espalda baja?',
+    metodo: 'No enseñamos flexibilidad de espalda a lo bruto ni buscando llegar al máximo. Cuidamos siempre la técnica y que no se cargue la espalda baja, porque cuando esa zona se esfuerza empiezan las molestias. Para cuidar la columna usamos el abdomen y los glúteos, que compensan el trabajo de la espalda.' },
+  acro: { nombre: 'Acrobacias', curso: 'Acrobases', obj: 'tus acrobacias',
+    p1: '¡Qué lindo objetivo! ¿Qué acrobacia te gustaría lograr primero: parada de manos, rueda, mortal?',
+    p2: '¿Qué te frena más hoy: la fuerza, el miedo o no saber cómo hacerla?',
+    metodo: 'Trabajamos con progresiones: la acrobacia se aprende por partes, y así la ves mucho más fácil de lograr.' },
+  flex: { nombre: 'Flexibilidad en general', curso: 'PowerSplit + Arcos360', obj: 'tu flexibilidad',
+    p1: '¡Qué bien! ¿Para qué te gustaría tener más flexibilidad: para el día a día, para ballet o para algún deporte?',
+    p2: '¿Qué parte del cuerpo sientes más dura?',
+    metodo: 'Estirar sin un orden casi no cambia nada. Lo que funciona es combinar fuerza y flexibilidad, poco a poco y con buena técnica, para que el avance se quede.' },
+};
+function startConsultivo() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  showConsultivo('split');
+}
+function showConsultivo(k) {
+  const d = GC_DATA[k];
+  window.__cpMsgs = [];
+  const sm = t => { window.__cpMsgs.push(t); return window.__cpMsgs.length - 1; };
+  const msgs = [
+    { label: '1 · Primer mensaje: datos + experiencia', note: 'Si la persona ya dio algunos datos, pide solo los que faltan. Si no responde alguno, no lo vuelvas a preguntar.',
+      txt: '¡Hola! 💛 Qué bueno que nos escribes.\nPara recomendarte la clase y el horario que mejor te quedan, cuéntame:\n1. Tu nombre y edad\n2. Qué te gustaría lograr: split, arcos, acrobacias o flexibilidad en general\n3. Desde qué país nos escribes\n4. ¿Ya has entrenado esto antes, con clases, videos o por tu cuenta?' },
+    { label: '2 · Diagnóstico: dónde está hoy', note: 'Una pregunta por mensaje. Antes de preguntar, repite con calidez algo que la persona contó ("¡Qué bueno, Mariana!").', txt: d.p1 },
+    { label: '3 · Diagnóstico: qué le frena', note: 'Escucha más de lo que hablas. Si ya lo contó, sáltate esta pregunta.', txt: d.p2 },
+    { label: '4 · Solo si ya entrenó antes y no lo logró', note: 'Es la pregunta más importante: que la persona diga con sus palabras lo que le faltó. Si nunca entrenó, manda solo: "¡Ideal! Así empiezas con buena técnica desde el primer día".', txt: 'Te entiendo, llevas un tiempo intentándolo 💛 ¿Qué crees que te faltó para lograrlo?' },
+    { label: '5 · Enseñar el método (según su objetivo)', note: 'Conecta con lo que contó. Siempre "nuestro equipo de profesores", nunca "la profe" ni nombres.',
+      txt: 'Eso que me cuentas pasa muchísimo, y tiene solución 💛\n\n' + d.metodo + '\n\nPor eso las clases son en vivo y en grupos pequeños: nuestro equipo de profesores te ve y te corrige en el momento.' },
+    { label: '6 · Pedir permiso para el precio', note: '', txt: 'Con lo que me contaste, creo que las clases de ' + d.curso + ' te van a ayudar mucho con ' + d.obj + '. ¿Te paso los horarios para tu país y los precios?' },
+    { label: '7 · Horario + 2 opciones (una recomendada)', note: 'Manda primero la imagen del horario de su país y la de precios. Solo 2 opciones: muchas hacen que la gente posponga. Fuera de Perú agrega el aproximado en su moneda.',
+      txt: 'Te recomiendo 8 clases, 2 por semana, porque así tu cuerpo avanza sin perder lo que trabajaste: $80 USD (aprox. [monto en su moneda]; tu banco lo convierte a su tipo de cambio).\nSi prefieres empezar de a poco, también puedes tomar 4 clases: $45 USD.\nTu paquete empieza recién con tu primera clase. ¿Cuál te acomoda más?' },
+    { label: '8 · Cuando elige: link en ese mismo mensaje', note: 'No hagas otra pregunta antes del link. Usa 2 días reales de su horario.', txt: '¡Genial! 🎉 Aquí está tu link para las 8 clases 👉 [link]\nApenas pagues, te llega el acceso para reservar. ¿Tu primera clase sería el [día] o el [día]?' },
+    { label: '9 · Si dice "lo voy a pensar"', note: 'Nunca bajes el precio. Si dice "está caro": "¿por qué te parece elevado?". Si ahora no puede, mándale la comunidad CGC Flex & Acro.', txt: '¡Claro, tómate tu tiempo! 💛 ¿Hay algo que te haga dudar? Así te ayudo a resolverlo.' },
+  ];
+  const html = msgs.map((m, i) => { const mi = sm(m.txt); return `<div class="msg-step">
+      <div class="msg-head"><div class="msg-num">${i + 1}</div><div class="msg-lbl">${esc(m.label)}</div></div>
+      <div class="msg-body">${m.note ? `<div class="msg-note" style="margin-bottom:10px">💡 ${esc(m.note)}</div>` : ''}
+        <div class="msg-txt">${esc(m.txt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button></div></div>`; }).join('');
+  const tab = (kk, t) => `<button class="branch-btn" onclick="showConsultivo('${kk}')" style="${kk === k ? 'background:var(--grad-btn);color:#fff;border-color:transparent' : ''}">${t}</button>`;
+  document.getElementById('sc-step').innerHTML = `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🧭 Guion nuevo: preguntar antes de vender</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#B4235F,#E8302A);border-radius:12px;padding:14px 18px;color:#fff;font-size:13px;margin-bottom:16px;line-height:1.6">
+      <b>La idea:</b> la persona se convence más con sus palabras que con las nuestras. Primero preguntamos por SU objetivo y escuchamos; después explicamos el método y recién ahí damos el precio.<br>
+      ⚡ Si pide el precio de frente, se lo das al toque. Máximo 3 preguntas de diagnóstico. Responde en menos de 5 minutos.
+    </div>
+    <div style="font-size:13px;font-weight:700;margin-bottom:8px">¿Qué quiere lograr?</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">${tab('split', 'Split')}${tab('arcos', 'Arcos y espalda')}${tab('acro', 'Acrobacias')}${tab('flex', 'Flexibilidad en general')}</div>
+    ${html}
+  </div>`;
+  window.scrollTo(0, 0);
+}
 function startMasterclass() {
   show('sc-start', false); show('sc-step', true); show('sc-result', false);
   showMasterclass('mid');
