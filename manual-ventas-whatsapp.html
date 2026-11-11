@@ -1476,9 +1476,13 @@ const MC_DATA = {
   }
 };
 const GC_DATA = {
-  split: { nombre: 'Split (adelante o abierto)', curso: 'PowerSplit', obj: 'tu split',
+  split: { nombre: 'Split adelante', curso: 'PowerSplit', obj: 'tu split',
     p1: '¡Qué lindo objetivo! ¿Hasta dónde llegas hoy? ¿Te falta mucho para tocar el piso?',
-    p2: '¿Qué sientes que te frena más: la parte de atrás de la pierna, la cadera o alguna molestia al bajar?',
+    p2: '¿Qué sientes que te frena más: la parte de atrás de la pierna, la parte de adelante de la cadera o alguna molestia al bajar?',
+    metodo: 'En CGC nos tomamos muy en serio cada parte de la clase: articular, calentar, fortalecer y flexibilizar los músculos que se usan para abrir las piernas. Y claro, en cada clase trabajamos el split que toca ese día. Con nuestro método es mucho más eficiente, sin forzar la posición.' },
+  splitab: { nombre: 'Split abierto', curso: 'PowerSplit', obj: 'tu split',
+    p1: '¡Qué lindo objetivo! ¿Hasta dónde llegas hoy? ¿Te falta mucho para tocar el piso?',
+    p2: '¿Qué sientes que te frena más: la parte de adentro de los muslos, la cadera o alguna molestia al abrir?',
     metodo: 'En CGC nos tomamos muy en serio cada parte de la clase: articular, calentar, fortalecer y flexibilizar los músculos que se usan para abrir las piernas. Y claro, en cada clase trabajamos el split que toca ese día. Con nuestro método es mucho más eficiente, sin forzar la posición.' },
   arcos: { nombre: 'Arcos y espalda', curso: 'Arcos360', obj: 'tus arcos',
     p1: '¡Qué lindo objetivo! ¿Hoy ya haces el puente desde el piso?',
@@ -1504,8 +1508,8 @@ function showConsultivo(k) {
   const msgs = [
     { label: '1 · Primer mensaje: datos + experiencia', note: 'Si la persona ya dio algunos datos, pide solo los que faltan. Si no responde alguno, no lo vuelvas a preguntar.',
       txt: '¡Hola! 💛 Qué bueno que nos escribes.\nPara recomendarte la clase y el horario que mejor te quedan, cuéntame:\n1. Tu nombre y edad\n2. Qué te gustaría lograr: split, arcos, acrobacias o flexibilidad en general\n3. Desde qué país nos escribes\n4. ¿Ya has entrenado esto antes, con clases, videos o por tu cuenta?' },
-    { label: '2 · Diagnóstico: dónde está hoy', note: 'Una pregunta por mensaje. Antes de preguntar, repite con calidez algo que la persona contó ("¡Qué bueno, Mariana!").', txt: d.p1 },
-    { label: '3 · Diagnóstico: qué le frena', note: 'Escucha más de lo que hablas. Si ya lo contó, sáltate esta pregunta.', txt: d.p2 },
+    { label: '2 · Diagnóstico: dónde está hoy', note: (k === 'split' || k === 'splitab' ? 'Si no dijo cuál split quiere, pregúntale primero: ¿el de una pierna adelante y otra atrás, o el de piernas abiertas a los costados? ' : '') + 'Una pregunta por mensaje. Antes de preguntar, repite con calidez algo que la persona contó ("¡Qué bueno, Mariana!").', txt: d.p1 },
+    { label: '3 · Diagnóstico: qué le frena', note: (k === 'splitab' ? 'En el split abierto trabaja la parte de adentro de los muslos (aductores): nunca le hables de la parte de atrás de la pierna. ' : '') + 'Escucha más de lo que hablas. Si ya lo contó, sáltate esta pregunta.', txt: d.p2 },
     { label: '4 · Solo si ya entrenó antes y no lo logró', note: 'Es la pregunta más importante: que la persona diga con sus palabras lo que le faltó. Si nunca entrenó, manda solo: "¡Ideal! Así empiezas con buena técnica desde el primer día".', txt: 'Te entiendo, llevas un tiempo intentándolo 💛 ¿Qué crees que te faltó para lograrlo?' },
     { label: '5 · Enseñar el método (según su objetivo)', note: 'Conecta con lo que contó. Siempre "nuestro equipo de profesores", nunca "la profe" ni nombres.',
       txt: 'Eso que me cuentas pasa muchísimo, y tiene solución 💛\n\n' + d.metodo + '\n\nPor eso las clases son en vivo y en grupos pequeños: nuestro equipo de profesores te ve y te corrige en el momento.' },
@@ -1531,7 +1535,7 @@ function showConsultivo(k) {
       ⚡ Si pide el precio de frente, se lo das al toque. Máximo 3 preguntas de diagnóstico. Responde en menos de 5 minutos.
     </div>
     <div style="font-size:13px;font-weight:700;margin-bottom:8px">¿Qué quiere lograr?</div>
-    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">${tab('split', 'Split')}${tab('arcos', 'Arcos y espalda')}${tab('acro', 'Acrobacias')}${tab('flex', 'Flexibilidad en general')}</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">${tab('split', 'Split adelante')}${tab('splitab', 'Split abierto')}${tab('arcos', 'Arcos y espalda')}${tab('acro', 'Acrobacias')}${tab('flex', 'Flexibilidad en general')}</div>
     ${html}
   </div>`;
   window.scrollTo(0, 0);
