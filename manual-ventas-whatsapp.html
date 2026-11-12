@@ -1559,10 +1559,10 @@ function startWorkshop() {
       note: 'Recomienda el pack: es lo que más conviene y llena las dos fechas. Si solo puede una fecha, que elija la del split que más quiere.',
       txt: `Te recomiendo el pack 💛 Cada split usa músculos distintos, así que con los 2 trabajas todo lo que necesitas para abrir las piernas en las dos direcciones. Además ahorras: los 2 te salen S/ 99 en vez de S/ 118.\n\n¿Te separo los dos?` },
     { label: '3 · Si quiere pagar con Yape, Plin o transferencia',
-      note: 'Necesitas su nombre completo (sale en el certificado) y su correo (ahí le llega la confirmación). Monto: S/ 59 uno o S/ 99 el pack hasta el dom 15-nov; desde el lunes 16-nov, S/ 69 y S/ 119.',
-      txt: `¡Genial! 🎉 Para separar tu cupo:\n\n📲 Yape / Plin: 954 655 122\n🏦 Transferencia BCP (soles):\nCuenta: 19394356284075\nCCI: 00219319435628407511\nA nombre de Camila Rosario Garay Robles\n\nMonto: S/ [59 o 99]\n\nCuando pagues, mándame la captura junto con:\n1️⃣ Tu nombre y apellido completos (así sale en tu certificado)\n2️⃣ Tu correo (ahí te llega la confirmación)` },
-    { label: '4 · Ya la inscribiste en el panel → avísale',
-      note: 'Primero haz los pasos de "Cómo inscribir en el panel" (más abajo). Recién después manda este mensaje.',
+      note: 'NO le pidas nombre ni correo: esos datos los pone ella en su ficha, que le llega sola cuando confirmas el pago (✅). Monto: S/ 59 uno o S/ 99 el pack hasta el dom 15-nov; desde el lunes 16-nov, S/ 69 y S/ 119.',
+      txt: `¡Genial! 🎉 Para separar tu cupo:\n\n📲 Yape / Plin: 954 655 122\n🏦 Transferencia BCP (soles):\nCuenta: 19394356284075\nCCI: 00219319435628407511\nA nombre de Camila Rosario Garay Robles\n\nMonto: S/ [59 o 99]\n\nCuando pagues, mándame la captura por aquí 📸 y apenas confirmemos tu pago te llega tu ficha de inscripción 💛` },
+    { label: '4 · Ya llenó su ficha y la inscribiste en el panel → avísale',
+      note: 'Primero haz los pasos de "Pagó por Yape, Plin o transferencia" (más abajo). Recién después manda este mensaje.',
       txt: `¡Listo, [nombre]! 💛 Ya tienes tu cupo.\n\nTe llegó un correo con la fecha, la hora y la dirección (si no lo ves, mira en spam).\n\n🎒 Lleva 2 bloques de yoga y una liga de números, ropa cómoda y agua. Si no tienes bloques o liga, puedes comprarlos en Acroflex ese mismo día: llega un poco antes.\n\n¡Nos vemos! 🔥` },
     { label: '5 · "Soy principiante / no tengo nada de flexibilidad"',
       note: 'Es el miedo más común. Responde la duda primero y cierra con una pregunta.',
@@ -1619,19 +1619,28 @@ function startWorkshop() {
       ⚠️ Di siempre <b>workshop</b>, nunca "masterclass". Nunca digas "gratis". Responde en menos de 5 minutos: los cupos se van.
     </div>
     ${html}
-    <div style="margin-top:26px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">🛠️ Cómo inscribir en el panel (pagó por Yape, Plin o transferencia)</div>
+    <div style="margin-top:26px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">🤖 Lo que hace Sophie (el agente) cuando paga por Yape, Plin o transferencia</div>
+    <div style="background:#eef3ff;border-left:3px solid #5b8cf0;border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:16px">
+      1️⃣ La persona manda la captura → Sophie le agradece y <b>no le pide nombre ni correo</b>.<br>
+      2️⃣ Sophie avisa en <b>TEAM VENTAS</b>: "🎟️ Pago de WORKSHOP por confirmar" con dos links: <b>✅ Llegó</b> / <b>❌ No llegó</b>.<br>
+      3️⃣ Con ✅ → a la persona le llega sola su <b>ficha de inscripción</b> (con su nombre, celular y fecha ya puestos) y la venta se anota sola en <b>Cierres de ventass CGC🤑</b>.<br>
+      4️⃣ Con ❌ → queda una nota en su chat para que le escribas (otra captura o n.º de operación). A ella no le llega nada.<br>
+      📝 Ficha: <a href="https://cursos.camilagaraycoach.com/inscripcion-workshop" target="_blank" style="color:inherit"><b>cursos.camilagaraycoach.com/inscripcion-workshop</b></a> (si alguna vez la mandas tú, sirve este mismo link).
+    </div>
+    <div style="margin-top:26px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">🛠️ Pagó por Yape, Plin o transferencia: qué haces tú</div>
     <div style="background:var(--surface,#f9f9f9);border-radius:12px;padding:16px 18px">
-      ${stepLi(1, 'Revisa que el pago <b>llegó de verdad</b> (app de Yape o banco) y que el monto es el correcto.')}
-      ${stepLi(2, 'Entra a <a href="https://cgc-reservas.vercel.app/admin/workshops" target="_blank" style="color:inherit"><b>Panel → Workshops</b></a>. Ahí ves cuántos cupos quedan y la lista de cada fecha.')}
-      ${stepLi(3, 'En <b>"Inscribir"</b> elige el workshop: sagital, frontal o pack.')}
-      ${stepLi(4, 'Escribe <b>nombre y apellido</b> y el <b>correo</b> tal cual te los dio.')}
-      ${stepLi(5, 'Toca <b>Inscribir</b>. Debe salir "Listo: … ya tiene su lugar". Se descuenta el cupo y le llega el correo con fecha, hora, dirección y qué llevar.')}
-      ${stepLi(6, 'Mándale el <b>mensaje 4</b> de arriba.')}
+      ${stepLi(1, 'Revisa que el pago <b>llegó de verdad</b> (app de Yape o banco) y que el monto es el correcto. Toca <b>✅ Llegó</b> o <b>❌ No llegó</b> en el aviso de TEAM VENTAS (se abre una página: confirma con el botón grande).')}
+      ${stepLi(2, 'Cuando ya llenó su ficha (ahí está su nombre completo y su correo), sigue con estos pasos.')}
+      ${stepLi(3, 'Entra a <a href="https://cgc-reservas.vercel.app/admin/workshops" target="_blank" style="color:inherit"><b>Panel → Workshops</b></a>. Ahí ves cuántos cupos quedan y la lista de cada fecha.')}
+      ${stepLi(4, 'En <b>"Inscribir"</b> elige el workshop: sagital, frontal o pack.')}
+      ${stepLi(5, 'Escribe <b>nombre y apellido</b> y el <b>correo</b> tal cual los puso en su ficha.')}
+      ${stepLi(6, 'Toca <b>Inscribir</b>. Debe salir "Listo: … ya tiene su lugar". Se descuenta el cupo y le llega el correo con fecha, hora, dirección y qué llevar.')}
+      ${stepLi(7, 'Mándale el <b>mensaje 4</b> de arriba.')}
     </div>
     <div style="margin-top:18px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">⚠️ Ojo</div>
     <div style="font-size:13px;color:var(--gray);line-height:1.7;background:#fff7e6;border-left:3px solid #F0A020;border-radius:0 8px 8px 0;padding:12px 16px">
       • El pago del workshop <b>no se confirma en "Pagos por confirmar"</b> ni se carga como paquete: se inscribe en <b>Workshops</b>.<br>
-      • Inscribir no registra el pago: anótalo en el grupo de cierres de ventas como siempre.<br>
+      • Si tocaste ✅, la venta ya se anotó sola en Cierres de ventas: <b>no la anotes de nuevo</b>. Si el pago no pasó por el aviso de Sophie, anótala como siempre.<br>
       • Si el panel dice "ya tiene su lugar", esa persona ya estaba inscrita.<br>
       • Si dice "ya no quedan cupos", ofrece la otra fecha.<br>
       • Menores de edad: consulta con Cami antes de inscribir.<br>
