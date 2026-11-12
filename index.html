@@ -226,6 +226,11 @@ button,.copy-btn{-webkit-user-select:none;user-select:none}
             <div class="quick-card-title" style="color:#fff">Guion nuevo: preguntar antes de vender</div>
             <div class="quick-card-desc" style="color:rgba(255,255,255,.85)">Nuevo 10-nov · los 6 pasos con mensajes según el objetivo: split, arcos, acrobacias, flexibilidad</div>
           </button>
+          <button class="quick-card" style="background:linear-gradient(135deg,#f0582a,#d6409a,#5b8cf0);border-color:transparent;color:#fff;grid-column:1/-1" onclick="startWorkshop()">
+            <div class="quick-card-icon">🔥</div>
+            <div class="quick-card-title" style="color:#fff">Workshops presenciales: Desbloquea tu split</div>
+            <div class="quick-card-desc" style="color:rgba(255,255,255,.88)">Nuevo 11-nov · 27 nov y 4 dic en Acroflex · resumen, mensajes, Yape y cómo inscribir</div>
+          </button>
           <button class="quick-card" style="background:linear-gradient(135deg,#E8302A,#F07820);border-color:transparent;color:#fff" onclick="startQuick()">
             <div class="quick-card-icon">⚡</div>
             <div class="quick-card-title" style="color:#fff">Rutas rápidas</div>
@@ -1537,6 +1542,104 @@ function showConsultivo(k) {
     <div style="font-size:13px;font-weight:700;margin-bottom:8px">¿Qué quiere lograr?</div>
     <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">${tab('split', 'Split adelante')}${tab('splitab', 'Split abierto')}${tab('arcos', 'Arcos y espalda')}${tab('acro', 'Acrobacias')}${tab('flex', 'Flexibilidad en general')}</div>
     ${html}
+  </div>`;
+  window.scrollTo(0, 0);
+}
+/* ---------- Workshops presenciales "Desbloquea tu split" (27 nov y 4 dic, Acroflex) ---------- */
+function startWorkshop() {
+  show('sc-start', false); show('sc-step', true); show('sc-result', false);
+  window.__cpMsgs = [];
+  const sm = t => { window.__cpMsgs.push(t); return window.__cpMsgs.length - 1; };
+  const LINK = 'https://cursos.camilagaraycoach.com/desbloquea-tu-split';
+  const msgs = [
+    { label: '1 · Pregunta por los workshops o comentó DESBLOQUEA',
+      note: 'Manda esto apenas escriba, con el link. Puede pagar sola en la página con tarjeta. Si ya contó su objetivo, empieza respondiendo eso en una línea.',
+      txt: `¡Hola! 💛 Estos son los 2 últimos workshops presenciales del año con Camila Garay:\n\n🔥 DESBLOQUEA TU SPLIT\n📅 Viernes 27 de noviembre → split sagital (una pierna adelante y otra atrás)\n📅 Viernes 4 de diciembre → split frontal (piernas abiertas a los costados)\n🕖 7:00 a 8:30 p. m.\n📍 Acroflex · Av. Húsares de Junín 374, piso 6, Jesús María\n\nEs una clase 100% práctica: haces todos los ejercicios mientras Camila te explica qué músculos te frenan, los errores más comunes y cómo corregirlos. Incluye certificado virtual de participación 🎓\n\n💰 Preventa hasta el domingo 15 de noviembre:\n• 1 workshop: S/ 59 (luego S/ 69)\n• Pack los 2: S/ 99 (luego S/ 119)\n\n⚠️ Solo 15 cupos por fecha.\n\nReserva aquí 👉 ${LINK}\n\n¿Te interesa uno o los dos?` },
+    { label: '2 · Si duda entre uno o los dos',
+      note: 'Recomienda el pack: es lo que más conviene y llena las dos fechas. Si solo puede una fecha, que elija la del split que más quiere.',
+      txt: `Te recomiendo el pack 💛 Cada split usa músculos distintos, así que con los 2 trabajas todo lo que necesitas para abrir las piernas en las dos direcciones. Además ahorras: los 2 te salen S/ 99 en vez de S/ 118.\n\n¿Te separo los dos?` },
+    { label: '3 · Si quiere pagar con Yape, Plin o transferencia',
+      note: 'Necesitas su nombre completo (sale en el certificado) y su correo (ahí le llega la confirmación). Monto: S/ 59 uno o S/ 99 el pack hasta el dom 15-nov; desde el lunes 16-nov, S/ 69 y S/ 119.',
+      txt: `¡Genial! 🎉 Para separar tu cupo:\n\n📲 Yape / Plin: 954 655 122\n🏦 Transferencia BCP (soles):\nCuenta: 19394356284075\nCCI: 00219319435628407511\nA nombre de Camila Rosario Garay Robles\n\nMonto: S/ [59 o 99]\n\nCuando pagues, mándame la captura junto con:\n1️⃣ Tu nombre y apellido completos (así sale en tu certificado)\n2️⃣ Tu correo (ahí te llega la confirmación)` },
+    { label: '4 · Ya la inscribiste en el panel → avísale',
+      note: 'Primero haz los pasos de "Cómo inscribir en el panel" (más abajo). Recién después manda este mensaje.',
+      txt: `¡Listo, [nombre]! 💛 Ya tienes tu cupo.\n\nTe llegó un correo con la fecha, la hora y la dirección (si no lo ves, mira en spam).\n\n🎒 Lleva 2 bloques de yoga y una liga de números, ropa cómoda y agua. Si no tienes bloques o liga, puedes comprarlos en Acroflex ese mismo día: llega un poco antes.\n\n¡Nos vemos! 🔥` },
+    { label: '5 · "Soy principiante / no tengo nada de flexibilidad"',
+      note: 'Es el miedo más común. Responde la duda primero y cierra con una pregunta.',
+      txt: `¡Es justo para ti! 💛 No necesitas tener el split: cada ejercicio tiene su versión según tu nivel, y Camila te corrige en vivo. Vas a entender qué te frena y salir con ejercicios para seguir avanzando en casa.\n\n¿Te animas al sagital, al frontal o a los dos?` },
+    { label: '6 · Si cuenta una lesión o un dolor',
+      note: 'Pregunta si es algo de AHORA. Lesión actual, dolor o sin alta médica → no la inscribas: que traiga el alta. Si es una lesión pasada y ya está bien, puede ir; pídele que le avise a Camila al llegar.',
+      txt: `Gracias por contarme 💛 ¿Esa lesión es de ahora o ya tienes el alta de tu médico? Te pregunto porque es una clase práctica y queremos que la disfrutes sin riesgo.` },
+    { label: '7 · "Está caro"',
+      note: 'Nunca bajes el precio. Pregunta primero, escucha y luego explica el valor.',
+      txt: `Te entiendo 💛 ¿Por qué te parece elevado?` },
+    { label: '8 · No vive en Lima o no puede esas fechas',
+      note: 'No insistas con el workshop: ofrécele las clases en vivo por Zoom (usa el guion de clases grupales).',
+      txt: `¡Qué pena que no puedas venir! 💛 Lo bueno es que el método de Camila también lo trabajamos en las clases en vivo por Zoom, con corrección de técnica en el momento. ¿Quieres que te cuente cómo funcionan?` },
+    { label: '9 · Seguimiento: último día de preventa (domingo 15-nov)',
+      note: 'Solo a quien preguntó y no compró, y solo si su último mensaje fue hace 7 días o menos. Máximo unos 30 al día, en tandas de 10.',
+      txt: `¡Hoy es el último día de preventa de Desbloquea tu split, [nombre]! 🔥 Hasta las 11:59 p. m. el pack de los 2 workshops está en S/ 99 (desde mañana sube a S/ 119).\n\nReserva aquí 👉 ${LINK}` },
+    { label: '10 · Si ya no quedan cupos',
+      note: 'La página dice cuántos cupos quedan. Si una fecha se llena, ofrece la otra o avísale a Cami.',
+      txt: `¡Uy, el workshop del [fecha] ya se llenó! 💛 Todavía quedan cupos para el [otra fecha]. ¿Te separo ese?` },
+  ];
+  const html = msgs.map((m, i) => { const mi = sm(m.txt); return `<div class="msg-step">
+      <div class="msg-head"><div class="msg-num">${i + 1}</div><div class="msg-lbl">${esc(m.label)}</div></div>
+      <div class="msg-body">${m.note ? `<div class="msg-note" style="margin-bottom:10px">💡 ${esc(m.note)}</div>` : ''}
+        <div class="msg-txt">${esc(m.txt)}</div>
+        <button class="copy-btn" onclick="cpIdx(this,${mi})">📋 Copiar mensaje</button></div></div>`; }).join('');
+  const stepLi = (n, t) => `<div style="display:flex;gap:10px;margin-bottom:9px"><div style="flex:none;width:24px;height:24px;border-radius:50%;background:var(--grad-btn);color:#fff;font-weight:800;font-size:12px;display:grid;place-items:center">${n}</div><div style="font-size:13px;color:var(--gray);line-height:1.55">${t}</div></div>`;
+  const row = (a, b) => `<tr><td style="padding:6px 10px 6px 0;font-weight:700;white-space:nowrap;vertical-align:top">${a}</td><td style="padding:6px 0;line-height:1.5;word-break:break-word;overflow-wrap:anywhere">${b}</td></tr>`;
+  document.getElementById('sc-step').innerHTML = `<div style="max-width:640px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button onclick="restart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray);line-height:1;padding:0">←</button>
+      <div style="font-size:18px;font-weight:800">🔥 Workshops presenciales: Desbloquea tu split</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f0582a,#d6409a,#5b8cf0);border-radius:12px;padding:14px 18px;color:#fff;font-size:13px;margin-bottom:16px">
+      <div style="font-weight:800;font-size:15px;margin-bottom:6px">📋 Resumen para vender</div>
+      <table style="border-collapse:collapse;color:#fff;font-size:13px;width:100%;table-layout:fixed"><col style="width:84px"><col>
+        ${row('Qué es', 'Clase presencial 100% práctica con Camila Garay: la gente hace todos los ejercicios mientras ella explica')}
+        ${row('Fechas', 'Vie 27 nov → split sagital<br>Vie 4 dic → split frontal (middle)')}
+        ${row('Hora', '7:00 a 8:30 p. m.')}
+        ${row('Lugar', 'Acroflex · Av. Húsares de Junín 374, piso 6, Jesús María')}
+        ${row('Preventa', 'Hasta el dom 15 nov, 11:59 p. m.<br>1 workshop S/ 59 · pack los 2 S/ 99')}
+        ${row('Después', 'S/ 69 · pack S/ 119 (la web cambia sola)')}
+        ${row('Cupos', '15 por fecha (el pack ocupa uno en cada fecha)')}
+        ${row('Incluye', 'Certificado virtual de participación')}
+        ${row('Llevar', '2 bloques de yoga, liga de números, ropa cómoda, agua')}
+        ${row('Para', 'Bailarines, gimnastas, deportistas, entrenadores y cualquiera que quiera su split')}
+        ${row('Link', LINK)}
+      </table>
+    </div>
+    <div style="background:#e8f5e9;border-left:3px solid #2ECC80;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:12px;line-height:1.6">
+      💡 <b>Lo normal:</b> la persona paga sola en el link con tarjeta (en soles). Le llega el correo de confirmación y aparece sola en el panel. No tienes que hacer nada.<br>
+      📲 <b>Si paga por Yape, Plin o transferencia,</b> la inscribes tú en el panel (pasos abajo).
+    </div>
+    <div style="background:#fff7e6;border-left:3px solid #F0A020;border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--gray);margin-bottom:16px;line-height:1.6">
+      ⚠️ Di siempre <b>workshop</b>, nunca "masterclass". Nunca digas "gratis". Responde en menos de 5 minutos: los cupos se van.
+    </div>
+    ${html}
+    <div style="margin-top:26px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">🛠️ Cómo inscribir en el panel (pagó por Yape, Plin o transferencia)</div>
+    <div style="background:var(--surface,#f9f9f9);border-radius:12px;padding:16px 18px">
+      ${stepLi(1, 'Revisa que el pago <b>llegó de verdad</b> (app de Yape o banco) y que el monto es el correcto.')}
+      ${stepLi(2, 'Entra a <a href="https://cgc-reservas.vercel.app/admin/workshops" target="_blank" style="color:inherit"><b>Panel → Workshops</b></a>. Ahí ves cuántos cupos quedan y la lista de cada fecha.')}
+      ${stepLi(3, 'En <b>"Inscribir"</b> elige el workshop: sagital, frontal o pack.')}
+      ${stepLi(4, 'Escribe <b>nombre y apellido</b> y el <b>correo</b> tal cual te los dio.')}
+      ${stepLi(5, 'Toca <b>Inscribir</b>. Debe salir "Listo: … ya tiene su lugar". Se descuenta el cupo y le llega el correo con fecha, hora, dirección y qué llevar.')}
+      ${stepLi(6, 'Mándale el <b>mensaje 4</b> de arriba.')}
+    </div>
+    <div style="margin-top:18px;margin-bottom:10px;font-size:14px;font-weight:800;color:var(--dark)">⚠️ Ojo</div>
+    <div style="font-size:13px;color:var(--gray);line-height:1.7;background:#fff7e6;border-left:3px solid #F0A020;border-radius:0 8px 8px 0;padding:12px 16px">
+      • El pago del workshop <b>no se confirma en "Pagos por confirmar"</b> ni se carga como paquete: se inscribe en <b>Workshops</b>.<br>
+      • Inscribir no registra el pago: anótalo en el grupo de cierres de ventas como siempre.<br>
+      • Si el panel dice "ya tiene su lugar", esa persona ya estaba inscrita.<br>
+      • Si dice "ya no quedan cupos", ofrece la otra fecha.<br>
+      • Menores de edad: consulta con Cami antes de inscribir.<br>
+      • El certificado lo envía Cami después de cada workshop.
+    </div>
+    <div style="text-align:center;margin-top:24px;margin-bottom:80px">
+      <button onclick="restart()" style="background:var(--grad-btn);color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(232,48,42,.35)">🏠 Volver al inicio</button>
+    </div>
   </div>`;
   window.scrollTo(0, 0);
 }
