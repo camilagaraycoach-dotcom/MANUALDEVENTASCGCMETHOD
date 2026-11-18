@@ -616,7 +616,7 @@ function buildMsgs(rec) {
       {key:'tiempo', label:'⏰ Poco tiempo',
        f:'Y se adapta a tu agenda: clases de 1 hora, con horarios de mañana, tarde y noche, y si un día no llegas tienes la biblioteca de clases grabadas.'}
     ];
-    const EQUIPO = m('Entrena con un equipo de entrenadores formados por Cami: le corrigen la técnica en vivo y las clases son semi-personalizadas, porque el coach adapta cada ejercicio a lo que necesita 💪', 'Entrenas con un equipo de entrenadores formados por Cami: te corrigen la técnica en vivo y las clases son semi-personalizadas, porque el coach adapta cada ejercicio a lo que necesitas 💪');
+    const EQUIPO = m('Las clases son en vivo por Zoom con un equipo de entrenadores formados por Cami: le corrigen la técnica en vivo y, después de cada clase, le envían un feedback por nuestra plataforma con cómo le fue y qué trabajar en la siguiente 💪', 'Las clases son en vivo por Zoom con un equipo de entrenadores formados por Cami: te corrigen la técnica en vivo y, después de cada clase, te envían un feedback por nuestra plataforma con cómo te fue y qué trabajar en la siguiente 💪');
     const cierre1 = isExt
       ? `¿Desde qué país ${m('nos escriben','nos escribes')}? Así ${m('les','te')} paso el horario de ${m('su','tu')} zona 📍`
       : isLima
@@ -772,8 +772,8 @@ function buildMsgs(rec) {
             ? `Gracias por contarme 😊 Solo para entender bien — ¿por qué te parece elevado?`
             : `Gracias por comentarnos 😊 Solo para entender bien — ¿por qué te parece elevado?`,
           txt2: isCami
-            ? `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo te sale entre $8 y $10, con un coach que te corrige — y después de cada clase tu profe te deja un audio con qué mejorar. Además accedes a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podrías comprometerte?`
-            : `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo sale entre $8 y $10, con un coach que corrige en tiempo real — y después de cada clase el profe le deja un audio con qué mejorar. Además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
+            ? `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo te sale entre $8 y $10, con un coach que te corrige — y después de cada clase te envían un feedback por nuestra plataforma con qué mejorar. Además accedes a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podrías comprometerte?`
+            : `Entiendo perfectamente. Déjame explicarte cómo funciona para que lo veas con otra perspectiva.\n\nUna clase particular de flexibilidad cuesta entre $30 y $60. En el paquete cada clase en vivo sale entre $8 y $10, con un coach que corrige en tiempo real — y después de cada clase le envían un feedback por nuestra plataforma con qué mejorar. Además accede a los 3 cursos sin pagar extra.\n\nEs la opción más completa al menor costo por clase 🙌\n\n¿Con cuántas clases por semana podría comprometerse?`
         },
         {
           key:'gracias',
@@ -797,7 +797,7 @@ function buildMsgs(rec) {
           key:'consulta',
           label:'👥 "Lo consulto con mi pareja / familia"',
           txt:`¡Claro, me parece perfecto! 😊 ¿Te paso un resumen cortito para que se lo muestres?`,
-          txt2:`Aquí va 👇\n\n✨ CGC METHOD: clases en vivo por Zoom con un coach que corrige en tiempo real\n🎙 Después de cada clase, el profe deja un audio con cómo te fue y qué trabajar\n🎯 Para [objetivo]: [curso]\n📅 [2/3] veces por semana: [8/12] clases por [precio]\n🎁 Incluye la biblioteca de clases grabadas y los 3 cursos\n\nCualquier duda que tengan, ${v('aquí estoy','aquí estamos')} 💛`,
+          txt2:`Aquí va 👇\n\n✨ CGC METHOD: clases en vivo por Zoom con un coach que corrige en tiempo real\n🎙 Después de cada clase, feedback por nuestra plataforma con cómo te fue y qué trabajar\n🎯 Para [objetivo]: [curso]\n📅 [2/3] veces por semana: [8/12] clases por [precio]\n🎁 Incluye la biblioteca de clases grabadas y los 3 cursos\n\nCualquier duda que tengan, ${v('aquí estoy','aquí estamos')} 💛`,
           note:'Otra persona decide: dale algo fácil de reenviar. Completa los corchetes con lo que ya le recomendaste. Si no responde, escríbele a los 2 días: "¿Pudieron verlo juntos?".'
         },
         {
@@ -1517,12 +1517,12 @@ function showConsultivo(k) {
     { label: '3 · Diagnóstico: qué le frena', note: (k === 'splitab' ? 'En el split abierto trabaja la parte de adentro de los muslos (aductores): nunca le hables de la parte de atrás de la pierna. ' : '') + 'Escucha más de lo que hablas. Si ya lo contó, sáltate esta pregunta.', txt: d.p2 },
     { label: '4 · Solo si ya entrenó antes y no lo logró', note: 'Es la pregunta más importante: que la persona diga con sus palabras lo que le faltó. Si nunca entrenó, manda solo: "¡Ideal! Así empiezas con buena técnica desde el primer día".', txt: 'Te entiendo, llevas un tiempo intentándolo 💛 ¿Qué crees que te faltó para lograrlo?' },
     { label: '5 · Enseñar el método (según su objetivo)', note: 'Conecta con lo que contó. Siempre "nuestro equipo de profesores", nunca "la profe" ni nombres.',
-      txt: 'Eso que me cuentas pasa muchísimo, y tiene solución 💛\n\n' + d.metodo + '\n\nPor eso las clases son en vivo y en grupos pequeños: nuestro equipo de profesores te ve y te corrige en el momento. Y después de cada clase, tu profe te deja un audio con cómo te fue y qué trabajar en la siguiente 🎙' },
+      txt: 'Eso que me cuentas pasa muchísimo, y tiene solución 💛\n\n' + d.metodo + '\n\nPor eso las clases son en vivo y en grupos pequeños: nuestro equipo de profesores te ve y te corrige en el momento. Y después de cada clase te envían un feedback por nuestra plataforma, con cómo te fue y qué trabajar en la siguiente 🎙' },
     { label: '6 · Pedir permiso para el precio', note: '', txt: 'Con lo que me contaste, creo que las clases de ' + d.curso + ' te van a ayudar mucho con ' + d.obj + '. ¿Te paso los horarios para tu país y los precios?' },
     { label: '7 · Horario + 2 opciones (una recomendada)', note: 'Manda primero la imagen del horario de su país y la de precios. Solo 2 opciones: muchas hacen que la gente posponga. Fuera de Perú agrega el aproximado en su moneda.',
       txt: 'Te recomiendo 8 clases, 2 por semana, porque así tu cuerpo avanza sin perder lo que trabajaste: $80 USD (aprox. [monto en su moneda]; tu banco lo convierte a su tipo de cambio).\nSi prefieres empezar de a poco, también puedes tomar 4 clases: $45 USD.\nTu paquete empieza recién con tu primera clase. ¿Cuál te acomoda más?' },
     { label: '8 · Cuando elige: link en ese mismo mensaje', note: 'No hagas otra pregunta antes del link. Usa 2 días reales de su horario.', txt: '¡Genial! 🎉 Aquí está tu link para las 8 clases 👉 [link]\nApenas pagues, te llega el acceso para reservar. ¿Tu primera clase sería el [día] o el [día]?' },
-    { label: '9 · Si dice "lo voy a pensar"', note: 'Nunca bajes el precio. Si dice "está caro": "¿por qué te parece elevado?" y recuérdale que incluye el audio del profe después de cada clase. Si ahora no puede, mándale la comunidad CGC Flex & Acro.', txt: '¡Claro, tómate tu tiempo! 💛 ¿Hay algo que te haga dudar? Así te ayudo a resolverlo.' },
+    { label: '9 · Si dice "lo voy a pensar"', note: 'Nunca bajes el precio. Si dice "está caro": "¿por qué te parece elevado?" y recuérdale que incluye el feedback después de cada clase por la plataforma. Si ahora no puede, mándale la comunidad CGC Flex & Acro.', txt: '¡Claro, tómate tu tiempo! 💛 ¿Hay algo que te haga dudar? Así te ayudo a resolverlo.' },
   ];
   const html = msgs.map((m, i) => { const mi = sm(m.txt); return `<div class="msg-step">
       <div class="msg-head"><div class="msg-num">${i + 1}</div><div class="msg-lbl">${esc(m.label)}</div></div>
