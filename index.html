@@ -750,7 +750,7 @@ function buildMsgs(rec) {
           key:'lesion',
           label:'🩹 Tiene lesión, desgarro, hernia o dolor',
           txt:`¡Gracias por contarnos, [nombre]! 💛 ${v('Quiero','Queremos')} ${m('acompañarlos a que vuelva a moverse','acompañarte a volver a moverte')} con confianza.\n\nPara cuidar bien ${m('su','tu')} salud: nuestras clases son de flexibilidad con técnica y no reemplazan la rehabilitación con ${m('su','tu')} fisioterapeuta.\n\n¿${m('Ya tiene','Ya tienes')} el alta de ${m('su','tu')} médico o fisioterapeuta para volver a entrenar y estirar?`,
-          txt2:`¡Qué buena noticia! 🙌 Trabajamos con progresiones y fortalecimiento muscular, y el coach adapta cada ejercicio y corrige en vivo.\n\n${m('Tienen','Tienes')} dos opciones para empezar:\n• Una clase de prueba de las clases grupales, completamente gratis, para conocer el método (se reserva en cursos.camilagaraycoach.com con nombre y correo)\n• Una clase particular 1:1 con uno de nuestros entrenadores, para ver ${m('su','tu')} caso de cerca (Andrea o Sebastián $40 USD · Cami $60 USD)\n\n¿Qué ${m('prefieren','prefieres')}: la clase de prueba gratis o una clase particular?`,
+          txt2:`¡Qué buena noticia! 🙌 Trabajamos con progresiones y fortalecimiento muscular, y el coach adapta cada ejercicio y corrige en vivo.\n\n${m('Tienen','Tienes')} dos opciones para empezar:\n• El paquete de 4 clases grupales, 1 por semana, para conocer el método (la vigencia empieza con ${m('su','tu')} primera clase)\n• Una clase particular 1:1 con uno de nuestros entrenadores, para ver ${m('su','tu')} caso de cerca (Andrea o Sebastián $40 USD · Cami $60 USD)\n\n¿Qué ${m('prefieren','prefieres')}: el paquete de 4 clases o una clase particular?`,
           note:'Paso 1 (primer mensaje): pregunta SIEMPRE primero por el alta, sin recomendar curso ni paquete. Paso 2 (segundo mensaje): solo si dice que SÍ tiene el alta. Si NO la tiene o sigue en terapia, responde: "¡Mucho ánimo con tu recuperación! 💛 Lo primero es que tengas el alta para entrenar seguro. Cuando te la den, escríbenos y con gusto te ayudamos a empezar 😊" y no insistas. Nunca abras con "no somos rehabilitación" (suena cortante) ni des consejos médicos.'
         },
         {
@@ -834,14 +834,14 @@ function buildMsgs(rec) {
     steps.push({
       type:'branch',
       lbl:'¿El lead pregunta por clase de prueba gratis?',
-      note:'Responder solo si lo pregunta — si no, continuar al siguiente paso.',
+      note:'Desde el 28-oct ya NO hay clase de prueba gratis: nunca ofrezcas clases gratis. Responder solo si lo pregunta.',
       opts:[
         {
           key:'si',
           label:'🎁 "¿Hay clase de prueba?"',
           txt: isCami
-            ? `¡Sí, tenemos! Tu primera clase es gratis — sin tarjeta, sin compromiso. Entra a cursos.camilagaraycoach.com, la reservas tú ahí (nombre y correo, nada más) y eliges el curso y el horario que quieras 🎁\n\n¿Te paso el link?`
-            : `¡Sí, tenemos! Su primera clase es gratis — sin tarjeta, sin compromiso. Puede entrar a cursos.camilagaraycoach.com y reservarla ahí mismo (nombre y correo, nada más), eligiendo el curso y el horario que prefiera 🎁\n\n¿Le paso el link?`
+            ? `Por ahora no tenemos clase de prueba gratis, pero puedes empezar con el paquete de 4 clases, 1 por semana: la vigencia empieza con tu primera clase 💛\n\nAquí puedes ver cómo es una clase 👇\nhttps://cursos.camilagaraycoach.com/clases-en-vivo#clase\n\n¿Te paso los precios de tu país?`
+            : `Por ahora no tenemos clase de prueba gratis, pero puede empezar con el paquete de 4 clases, 1 por semana: la vigencia empieza con su primera clase 💛\n\nAquí puede ver cómo es una clase 👇\nhttps://cursos.camilagaraycoach.com/clases-en-vivo#clase\n\n¿Le paso los precios de su país?`
         }
       ]
     });
